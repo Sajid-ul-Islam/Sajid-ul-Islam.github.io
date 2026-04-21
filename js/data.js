@@ -9,7 +9,7 @@ const DATA = {
       id: "streamlit-hub",
       title: "[STREAMLIT_HUB]",
       description: "A centralized command center for 10+ operational data apps, including inventory trackers, sales dashboards, and automation tools.",
-      image: "img#projects/streamlit-hub.png",
+      image: "/img/projects/streamlit-hub.png",
       liveUrl: "https://share.streamlit.io/user/saajiidi",
       featured: true,
       technologies: ["Python", "Streamlit", "Automation", "Data Ops"],
@@ -32,7 +32,7 @@ const DATA = {
       id: "vscode-portfolio",
       title: "VS Code Themed Portfolio",
       description: "A high-performance portfolio built with Next.js 14, TypeScript, and Tailwind CSS, featuring a fully functional VS Code interface clone.",
-      image: "img#projects/vscode-portfolio.png",
+      image: "/img/projects/vscode-portfolio.png",
       liveUrl: "https://sajid-ul-islam.vercel.app/",
       featured: true,
       technologies: ["Next.js 14", "TypeScript", "Tailwind CSS", "React"],
@@ -56,8 +56,8 @@ const DATA = {
       id: "automation-pivot",
       title: "Automation Pivot",
       description: "Operations dashboard for DEEN Commerce, centralizing live order queues, historical sales analysis, and customer pulse tracking.",
-      image: "img#projects/automation-pivot.png",
-      liveUrl: "#",
+      image: "/img/projects/automation-pivot.png",
+      liveUrl: "https://automation-pivot.streamlit.app/",
       featured: true,
       technologies: ["Streamlit", "Python", "Pandas", "Google Sheets API"],
       category: "bi-viz",
@@ -80,7 +80,7 @@ const DATA = {
       id: "1",
       title: "ECommerce Dashboard",
       description: "A dashboard providing real-time data from 2021-2025, featuring analytics for total revenue, total orders, total customers, and average order value.",
-      image: "/img#projects/ecommerce.png",
+      image: "/img/projects/ecommerce.png",
       liveUrl: "https://e-com-dashborad.vercel.app/",
       featured: true,
       technologies: ["Dashboard", "React", "Analytics", "E-commerce"],
@@ -104,7 +104,7 @@ const DATA = {
       id: "2",
       title: "Sheet2WhatsApp",
       description: "Automates WhatsApp link generation from Excel/CSV files.",
-      image: "/img#projects/whatsapp.png",
+      image: "/img/projects/whatsapp.png",
       liveUrl: "https://sheet2whatsapp.streamlit.app/",
       featured: true,
       technologies: ["Streamlit", "Python", "Pandas", "Vercel"],
@@ -128,7 +128,7 @@ const DATA = {
       id: "3",
       title: "Sentinel Bangladesh",
       description: "An interactive security incident map for Bangladesh, featuring cluster analysis, heatmaps, and detailed incident tracking.",
-      image: "/img#projects/sentinel.png",
+      image: "/img/projects/sentinel.png",
       liveUrl: "https://sentinelbangladesh.streamlit.app/",
       featured: true,
       technologies: ["Streamlit", "Python", "Data Visualization", "Security Analysis"],
@@ -149,7 +149,7 @@ const DATA = {
       id: "4",
       title: "Order Process Automation",
       description: "Automates order processing and formatting from Excel files, featuring consolidation and categorization.",
-      image: "/img#projects/automation.png",
+      image: "/img/projects/automation.png",
       liveUrl: "https://order-process-automation.streamlit.app/",
       featured: true,
       technologies: ["Streamlit", "Python", "Automation", "Data Processing"],
@@ -170,8 +170,8 @@ const DATA = {
       id: "agentic-ai-assistant",
       title: "Agentic AI Research Assistant",
       description: "An intelligent AI agent system with RAG capabilities for automated research, document analysis, and knowledge synthesis.",
-      image: "/img#projects/agentic-ai.png",
-      liveUrl: "#",
+      image: "/img/projects/agentic-ai.png",
+      githubUrl: "https://github.com/saajiidi/",
       featured: true,
       technologies: ["Agentic AI", "RAG", "LangChain", "Vector DB", "Python"],
       category: "ml-ai",
@@ -196,7 +196,7 @@ const DATA = {
       id: "5",
       title: "Air Passenger Forecasting",
       description: "Time series analysis comparing multiple forecasting models (ARIMA, Exponential Smoothing) for airline passenger prediction.",
-      image: "",
+      image: "/img/projects/air-passengers.png",
       liveUrl: "https://saajiidi.github.io/Air_Passengers_Forecasting_Models/",
       featured: true,
       technologies: ["Machine Learning", "Time Series", "Python"],
@@ -214,7 +214,7 @@ const DATA = {
       id: "6",
       title: "Ramadan Compass",
       description: "A comprehensive Ramadan companion app featuring prayer times, Qibla compass, and daily goals tracking. Built with Next.js.",
-      image: "",
+      image: "/img/projects/ramadan-compass.png",
       liveUrl: "https://ramadancompass.vercel.app/",
       featured: true,
       technologies: ["Next.js", "Ramadan", "Prayer Times", "React", "PWA"],
@@ -235,7 +235,7 @@ const DATA = {
       id: "churn-analysis",
       title: "Customer Churn Analysis",
       description: "Predictive modeling using Python to identify at-risk customers. Implementation of Random Forest and XGBoost with 85%+ accuracy.",
-      image: "",
+      image: "/img/projects/churn-analysis.png",
       githubUrl: "https://github.com/saajiidi/Customer-Churn-Prediction/",
       featured: true,
       technologies: ["Python", "Machine Learning", "XGBoost", "Random Forest"],
@@ -256,7 +256,7 @@ const DATA = {
       id: "security-map",
       title: "Security Map Visualization",
       description: "Interactive map-based visualization of security events developed using R, Folium, and Leaflet with temporal sliders.",
-      image: "",
+      image: "/img/projects/security-map.png",
       liveUrl: "https://trr-bd.vercel.app",
       featured: true,
       technologies: ["R", "Folium", "Leaflet", "Data Viz"],
@@ -274,7 +274,7 @@ const DATA = {
       id: "gdp-debt",
       title: "Economic Analysis",
       description: "Analysis of GDP vs Debt Correlation across global economies.",
-      image: "",
+      image: "/img/projects/gdp-debt.png",
       liveUrl: "https://saajiidi.github.io/Economic-Analysis-GDP-vs-Debt-Correlation/",
       featured: true,
       technologies: ["Data Analysis", "Economics", "Python"],
@@ -292,7 +292,7 @@ const DATA = {
       id: "7",
       title: "E-Commerce Platform",
       description: "Modern e-commerce interface built with React.js featuring responsive design, product catalog, shopping cart functionality.",
-      image: "",
+      image: "/img/projects/ecommerce-platform.png",
       liveUrl: "https://gear-master.vercel.app/",
       featured: false,
       technologies: ["React", "E-commerce", "Frontend"],
@@ -310,7 +310,7 @@ const DATA = {
       id: "8",
       title: "Day Progress Plus",
       description: "A productivity focused application featuring day progress tracking, focus task management, and customizable settings.",
-      image: "",
+      image: "/img/projects/day-progress.png",
       liveUrl: "https://saajiidi.github.io/TimeTracker/",
       featured: false,
       technologies: ["Productivity", "React", "Utility"],
@@ -328,7 +328,7 @@ const DATA = {
       id: "9",
       title: "Growth Analysis Dashboard",
       description: "A comprehensive web development project showcasing modern web technologies and best practices.",
-      image: "",
+      image: "/img/projects/growth-dashboard.png",
       liveUrl: "https://saajiidi.github.io/Growth-Analysis-Dashboard/",
       featured: false,
       technologies: ["Web Dev", "React", "Analytics"],
@@ -346,7 +346,7 @@ const DATA = {
       id: "10",
       title: "Border Security Analysis",
       description: "Data visualization project analyzing border incident trends in Bangladesh using statistical methods.",
-      image: "",
+      image: "/img/projects/border-analysis.png",
       liveUrl: "https://saajiidi.github.io/Border-Killing-Trend-in-Bangladesh/",
       featured: false,
       technologies: ["Data Viz", "Statistics", "Social Impact"],
@@ -364,7 +364,7 @@ const DATA = {
       id: "11",
       title: "Image Scraper",
       description: "Versatile Python tool for downloading images from Pinterest with multiple interfaces including web UI and command line.",
-      image: "",
+      image: "/img/projects/img-scraper.png",
       liveUrl: "https://img-scraper.streamlit.app/",
       featured: false,
       technologies: ["Python", "Scraping", "Automation"],
@@ -382,7 +382,7 @@ const DATA = {
       id: "12",
       title: "Tableau Portfolio",
       description: "Demographics, economic analysis, and security incident maps.",
-      image: "",
+      image: "/img/projects/tableau-portfolio.png",
       liveUrl: "https://public.tableau.com/app/profile/sajid.islam4721/viz/MuslimPopulationbyEthinicity/Dashboard1",
       featured: false,
       technologies: ["Tableau", "Data Visualization"],
@@ -400,7 +400,7 @@ const DATA = {
       id: "13",
       title: "B2B StockLot E-Commerce",
       description: "Web development project for B2B e-commerce.",
-      image: "",
+      image: "/img/projects/b2b-ecommerce.png",
       liveUrl: "https://github.com/saajiidi/B2B-StockLot-E-Commerce-BD",
       featured: false,
       technologies: ["HTML/CSS", "JavaScript", "Web Dev"],
@@ -422,7 +422,7 @@ const DATA = {
       date: "Oct 12, 2024",
       excerpt: "Deep dive into how we increased partner acquisitions by 50% using automated funnel tracking.",
       tags: ["BI", "Case Study", "Growth"],
-      url: "#"
+      url: "https://www.linkedin.com/pulse/optimizing-retail-bi-daraz-case-study-sajid-islam/"
     },
     {
       id: "blog-2",
@@ -430,7 +430,7 @@ const DATA = {
       date: "Sep 05, 2024",
       excerpt: "Technical walkthrough of building mass-image downloaders for dataset creation.",
       tags: ["Python", "Automation", "NLP"],
-      url: "#"
+      url: "https://www.linkedin.com/pulse/python-automation-pinterest-scrapers-sajid-islam/"
     },
     {
         id: "blog-3",
@@ -438,7 +438,7 @@ const DATA = {
         date: "Aug 20, 2024",
         excerpt: "Why readability wins over flashy animations when building mission-critical tools.",
         tags: ["Data Viz", "UI/UX", "Analytics"],
-        url: "#"
+        url: "https://www.linkedin.com/pulse/modern-dashboards-beyond-aesthetics-sajid-islam/"
       }
   ],
   learningItems: [
@@ -462,12 +462,7 @@ const DATA = {
       { name: "Ghost of Tsushima", category: "Visuals" }
     ]
   },
-  favoriteMedia: [
-    { title: "Inception", subtitle: "Mind-bending logic and layer-depth.", image: "https://m.media-amazon.com/images/I/912AEWRu6mL._AC_SL1500_.jpg" },
-    { title: "The Martian", subtitle: "Strategic thinking and survival.", image: "https://m.media-amazon.com/images/I/9103C4pXvBL._AC_SY606_.jpg" },
-    { title: "Moneyball", subtitle: "The ultimate Data-Driven story.", image: "https://m.media-amazon.com/images/I/91f6MvXyUfL._AC_SL1500_.jpg" }
-  ],
-      fileTreeData: [
+  fileTreeData: [
     {
       id: "explorer",
       label: "EXPLORER",
@@ -721,77 +716,6 @@ const DATA = {
         "Managing inventory, sales growth strategies, and multi-channel customer engagement"
       ],
       technologies: ["Retail", "Business Management"],
-    }
-  ],
-  favoriteMedia: [
-    {
-      id: "1",
-      title: "Kingdom of Heaven",
-      subtitle: "Movie",
-      image: "/img/kingdom_of_heaven.png",
-    },
-    {
-      id: "2",
-      title: "Fatih 1453",
-      subtitle: "Movie",
-      image: "/img/fatih_1453.png",
-    },
-    {
-      id: "3",
-      title: "The Godfather",
-      subtitle: "Novel",
-      image: "/img/godfather.png",
-    },
-  ],
-  gaming: {
-    platforms: [{ name: "PC" }],
-    favorites: [
-      { name: "Valorant", category: "FPS", platform: "PC" },
-      { name: "Marvel Rivals", category: "FPS", platform: "PC" },
-      { name: "Forza Horizon 5", category: "Racing", platform: "PC" },
-      { name: "FIFA", category: "Sports", platform: "PC" },
-      { name: "Fortnite", category: "Battle Royale", platform: "PC" },
-    ],
-    stats: [
-      { label: "Years Gaming", value: "15+" },
-      { label: "Favorite Genre", value: "Action/Adventure/Racing" },
-      { label: "Current Game", value: "Marvel Rivals" },
-    ]
-  },
-  learningItems: [
-    { name: "Agentic AI Systems", category: "AI", progress: 78 },
-    { name: "RAG (Retrieval-Augmented Generation)", category: "AI", progress: 72 },
-    { name: "Machine Learning Engineering", category: "ML", progress: 80 },
-    { name: "Advanced System Design", category: "Architecture", progress: 70 },
-    { name: "Applied GenAI", category: "Programming", progress: 85 },
-    { name: "AI/ML Deep Dive", category: "AI", progress: 30 },
-    { name: "Product Engineering", category: "Engineering", progress: 50 },
-    { name: "Storytelling/Writing", category: "Communication", progress: 40 },
-  ],
-  blogPosts: [
-    {
-      id: "1",
-      title: "Building reliable data dashboards",
-      excerpt: "Insights on how to build reliable reporting dashboards.",
-      date: "2024-01-01",
-      url: "#",
-      tags: ["Analytics", "BI"]
-    },
-    {
-      id: "2",
-      title: "From messy data to actionable insight",
-      excerpt: "Strategy for cleaning and utilizing business data.",
-      date: "2024-02-01",
-      url: "#",
-      tags: ["Strategy", "Data"]
-    },
-    {
-      id: "3",
-      title: "Designing reporting that drives decisions",
-      excerpt: "Best practices to design reports that offer actionable insights.",
-      date: "2024-03-01",
-      url: "#",
-      tags: ["BI", "Reporting"]
     }
   ]
 };

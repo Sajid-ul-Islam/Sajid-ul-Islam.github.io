@@ -406,7 +406,31 @@ function renderGaming(data) {
     if (container) container.innerHTML = data.stats.map(s => `<span>${s.label}: ${s.value}</span>`).join(' | ');
 }
 
-function renderMedia(data) { }
+function renderMedia(data) {
+    const container = document.getElementById('media-list') || document.getElementById('favorites-list');
+    if (!container || !data) return;
+    
+    try {
+        container.innerHTML = data.map(item => `
+            <div class="media-card card-glass p-3 mb-3">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="${item.image || '/img/placeholder-media.png'}" 
+                         alt="${item.title}" 
+                         class="media-thumbnail rounded"
+                         style="width: 60px; height: 80px; object-fit: cover;"
+                         onerror="this.src='/img/placeholder-media.png'">
+                    <div>
+                        <h6 class="text-primary mb-1">${item.title}</h6>
+                        <span class="badge bg-secondary">${item.subtitle || 'Media'}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    } catch (err) {
+        console.error('[TACTICAL_DATA] renderMedia error:', err);
+        container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render media</div>';
+    }
+}
 
 function renderFileTree(data) {
     const container = document.querySelector('.file-tree-container');
