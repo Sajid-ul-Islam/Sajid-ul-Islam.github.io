@@ -4,6 +4,7 @@
 const autoprefixer = require("gulp-autoprefixer");
 const browsersync = require("browser-sync").create();
 const cleanCSS = require("gulp-clean-css");
+const concat = require("gulp-concat");
 const del = require("del");
 const gulp = require("gulp");
 const header = require("gulp-header");
@@ -47,6 +48,11 @@ function clean() {
   return del(["./vendor/"]);
 }
 
+// Clean bundled assets
+function cleanBundle() {
+  return del(["./dist/"]);
+}
+
 // Bring third party dependencies from node_modules into vendor directory
 function modules() {
   // Bootstrap
@@ -70,7 +76,7 @@ function modules() {
   return merge(bootstrap, fontAwesomeCSS, fontAwesomeWebfonts, jquery, jqueryEasing);
 }
 
-// CSS task
+// CSS task - compile SCSS
 function css() {
   return gulp
     .src("./scss/**/*.scss")
@@ -94,6 +100,41 @@ function css() {
     .pipe(cleanCSS())
     .pipe(gulp.dest("./css"))
     .pipe(browsersync.stream());
+}
+
+// CSS bundle task - concatenate and minify all custom CSS
+function cssBundle() {
+  return gulp
+    .src([
+      './css/modern-custom.css',
+      './css/tactical-hud.css',
+      './css/tactical-enhancements.css',
+      './css/floating-widgets.css',
+      './css/github-feed.css',
+      './css/deep-black-terminal.css'
+    ])
+    .pipe(plumber())
+    .pipe(concat('bundle.css'))
+    .pipe(gulp.dest('./dist/css'))
+    .pipe(cleanCSS({ level: 2 }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest('./dist/css'));
+}
+
+// JS bundle task - concatenate and minify all custom JS
+function jsBundle() {
+  return gulp
+    .src([
+      './js/data.js',
+      './js/tactical-core.js',
+      './js/tactical-data.js',
+      './js/pwa-loader.js'
+    ])
+    .pipe(concat('critical.js'))
+    .pipe(gulp.dest('./dist/js'))
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(gulp.dest('./dist/js'));
 }
 
 // JS task
@@ -124,13 +165,16 @@ function watchFiles() {
 // Define complex tasks
 const vendor = gulp.series(clean, modules);
 const build = gulp.series(vendor, gulp.parallel(css, js));
+const bundle = gulp.series(cleanBundle, cssBundle, jsBundle);
 const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
 // Export tasks
 exports.css = css;
 exports.js = js;
 exports.clean = clean;
+exports.cleanBundle = cleanBundle;
 exports.vendor = vendor;
 exports.build = build;
+exports.bundle = bundle;
 exports.watch = watch;
 exports.default = build;

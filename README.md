@@ -37,9 +37,18 @@ A high-performance, modular portfolio for a **Data Scientist & Business Analyst*
 3.  **Run**: `npm start` (opens BrowserSync on port 3000)
 
 ### Building Assets
-The project uses Gulp to manage SASS and JS minification:
+The project uses Gulp to manage SASS, JS minification, and asset bundling:
+- `npm start`: Live-reload development mode with BrowserSync.
 - `npm run build`: Compiles all assets for production.
-- `gulp watch`: Live-reload development mode.
+- `npm run bundle`: Bundles and minifies CSS/JS into `dist/` for optimal performance.
+- `npm run build:prod`: Full production build with bundling.
+
+### Performance Optimizations Implemented
+- **Preconnect hints**: DNS prefetch and preconnect to critical origins (fonts, CDNs)
+- **Deferred loading**: Non-critical JS loads with `defer` attribute
+- **Lazy-loaded Chart.js**: Chart library loads on-demand when skills section is visible
+- **CSS/JS bundling**: Use `npm run bundle` to create optimized `dist/bundle.min.css` and `dist/critical.min.js`
+- **Error boundaries**: Render functions have try-catch error handling with user-friendly error messages
 
 ### Static Data
 The `PortfolioData.xlsx` file in the `scripts/` folder contains the master copy of the portfolio data. Use `generate_spreadsheet.py` to regenerate values if needed.

@@ -4,7 +4,9 @@
     "version": "5.0.7",
     "scripts": {
         "start": "node_modules/.bin/gulp watch",
-        "build": "gulp"
+        "build": "gulp",
+        "bundle": "gulp bundle",
+        "build:prod": "gulp build && gulp bundle"
     },
     "description": "Resume is a simple, yet elegant resume and CV theme for Bootstrap 4.",
     "keywords": [
@@ -41,11 +43,12 @@
         "gulp": "4.0.2",
         "gulp-autoprefixer": "6.1.0",
         "gulp-clean-css": "4.2.0",
+        "gulp-concat": "2.6.1",
         "gulp-header": "2.0.7",
         "gulp-plumber": "^1.2.1",
         "gulp-rename": "1.4.0",
         "gulp-sass": "5.0.0",
-    "node-sass": "sass",
+        "node-sass": "sass",
         "gulp-uglify": "3.0.2",
         "merge-stream": "2.0.0"
     }

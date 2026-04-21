@@ -202,40 +202,60 @@ function renderInfo(info) {
 function renderExperience(data) {
     const container = document.getElementById('experience-list');
     if (!container) return;
+    if (!Array.isArray(data)) {
+        console.error('[TACTICAL_DATA] renderExperience: data is not an array', data);
+        container.innerHTML = '<div class="text-danger p-3">[ERROR] Invalid experience data format</div>';
+        return;
+    }
     container.innerHTML = '';
-    data.forEach(item => {
-        const highlights = item.highlights ? item.highlights.map(h => `<li class="mb-2"><i class="fas fa-microchip text-primary me-2"></i> ${h}</li>`).join('') : '';
-        container.insertAdjacentHTML('beforeend', `
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="resume-item mb-5">
-              <div class="resume-content">
-                <h3 class="mb-1 text-light">${item.title || item.Role}</h3>
-                <div class="subheading mb-3 text-primary">${item.company || item.Company}</div>
-                <ul class="list-unstyled text-secondary">${highlights}</ul>
+    try {
+        data.forEach(item => {
+            const highlights = item.highlights ? item.highlights.map(h => `<li class="mb-2"><i class="fas fa-microchip text-primary me-2"></i> ${h}</li>`).join('') : '';
+            container.insertAdjacentHTML('beforeend', `
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="resume-item mb-5">
+                  <div class="resume-content">
+                    <h3 class="mb-1 text-light">${item.title || item.Role}</h3>
+                    <div class="subheading mb-3 text-primary">${item.company || item.Company}</div>
+                    <ul class="list-unstyled text-secondary">${highlights}</ul>
+                  </div>
+                  <div class="resume-date"><span>${item.startDate || item.Date}${item.endDate ? ` — ${item.endDate}` : ''}</span></div>
+                </div>
               </div>
-              <div class="resume-date"><span>${item.startDate || item.Date}${item.endDate ? ` — ${item.endDate}` : ''}</span></div>
-            </div>
-          </div>
-        `);
-    });
+            `);
+        });
+    } catch (err) {
+        console.error('[TACTICAL_DATA] renderExperience error:', err);
+        container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render experience</div>';
+    }
 }
 
 function renderEducation(data) {
     const container = document.getElementById('education-list');
     if (!container) return;
+    if (!Array.isArray(data)) {
+        console.error('[TACTICAL_DATA] renderEducation: data is not an array', data);
+        container.innerHTML = '<div class="text-danger p-3">[ERROR] Invalid education data format</div>';
+        return;
+    }
     container.innerHTML = '';
-    data.forEach(item => {
-        container.insertAdjacentHTML('beforeend', `
-          <div class="timeline-item"><div class="timeline-dot"></div>
-            <div class="resume-item mb-4">
-              <h3 class="mb-0">${item.Institution}</h3>
-              <div class="subheading mb-2 text-primary">${item.Degree}</div>
-              <div class="resume-date"><span>${item.Date}</span></div>
-            </div>
-          </div>
-        `);
-    });
+    try {
+        data.forEach(item => {
+            container.insertAdjacentHTML('beforeend', `
+              <div class="timeline-item"><div class="timeline-dot"></div>
+                <div class="resume-item mb-4">
+                  <h3 class="mb-0">${item.Institution}</h3>
+                  <div class="subheading mb-2 text-primary">${item.Degree}</div>
+                  <div class="resume-date"><span>${item.Date}</span></div>
+                </div>
+              </div>
+            `);
+        });
+    } catch (err) {
+        console.error('[TACTICAL_DATA] renderEducation error:', err);
+        container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render education</div>';
+    }
 }
 
 function renderSkillGroups(groups) {
