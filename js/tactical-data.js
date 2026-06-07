@@ -115,6 +115,42 @@ async function initializeTacticalData() {
     const finalExperience = experience.length > 0 ? experience : (window.DATA ? window.DATA.experiences : []);
     const finalSkills = skills.length > 0 ? skills : (window.DATA ? window.DATA.skillGroups : []);
 
+    // Dynamically inject the Streamlit project
+    if (!finalProjects.find(p => p.liveUrl === 'https://global-economics.streamlit.app')) {
+        finalProjects.push({
+            id: 'global-eco',
+            title: 'Global Economics Dashboard',
+            description: 'An interactive Streamlit web application visualizing global economic indicators, providing strategic data analysis on worldwide market trends.',
+            technologies: ['Python', 'Streamlit', 'Pandas', 'Data Viz'],
+            category: 'dashboard',
+            liveUrl: 'https://global-economics.streamlit.app',
+            featured: true,
+            caseStudy: {
+                problem: 'Need for real-time visualization of complex global economic datasets.',
+                solution: 'Built a responsive Streamlit dashboard to aggregate and display key economic metrics interactively.',
+                impact: ['Improved data accessibility', 'Streamlined economic analysis workflow']
+            }
+        });
+    }
+
+    // Dynamically inject the Streamlit Hub project
+    if (!finalProjects.find(p => p.liveUrl === 'https://share.streamlit.io/user/saajiidi')) {
+        finalProjects.unshift({
+            id: 'streamlit-hub',
+            title: 'Streamlit App Hub',
+            description: 'A centralized command center for 10+ operational data apps, including inventory trackers, sales dashboards, and automation tools.',
+            technologies: ['Python', 'Streamlit', 'Data Ops', 'Automation'],
+            category: 'dashboard',
+            liveUrl: 'https://share.streamlit.io/user/saajiidi',
+            featured: true,
+            caseStudy: {
+                problem: 'Operational tools were scattered across different deployments, making it difficult for stakeholders to find the right dashboard.',
+                solution: 'Consolidated all active Streamlit tools into a single shared workspace with unified data connectors.',
+                impact: ['50% reduction in app discovery time', 'Standardized data ingestion']
+            }
+        });
+    }
+
     if (infoData.length > 0) {
         const info = {};
         infoData.forEach(item => { info[item.Key] = item.Value; });
@@ -177,6 +213,7 @@ function renderInfo(info) {
     if (info.Github) document.querySelectorAll('[title="GitHub"]').forEach(a => a.href = info.Github);
     if (info.LinkedIn) document.querySelectorAll('[title="LinkedIn"]').forEach(a => a.href = info.LinkedIn);
     if (info.Kaggle) document.querySelectorAll('[title="Kaggle"]').forEach(a => a.href = info.Kaggle);
+    if (info.HuggingFace || DEFAULT_INFO.HuggingFace) document.querySelectorAll('[title="Hugging Face"]').forEach(a => a.href = info.HuggingFace || DEFAULT_INFO.HuggingFace);
 
     const waSpan = document.getElementById('contact-details');
     if (waSpan && info.Whatsapp && info.Email) {
