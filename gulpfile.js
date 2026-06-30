@@ -42,38 +42,9 @@ function browserSyncReload(done) {
   browsersync.reload();
   done();
 }
-
-// Clean vendor
-function clean() {
-  return del(["./vendor/"]);
-}
-
 // Clean bundled assets
 function cleanBundle() {
   return del(["./dist/"]);
-}
-
-// Bring third party dependencies from node_modules into vendor directory
-function modules() {
-  // Bootstrap
-  var bootstrap = gulp.src('./node_modules/bootstrap/dist/**/*')
-    .pipe(gulp.dest('./vendor/bootstrap'));
-  // Font Awesome CSS
-  var fontAwesomeCSS = gulp.src('./node_modules/@fortawesome/fontawesome-free/css/**/*')
-    .pipe(gulp.dest('./vendor/fontawesome-free/css'));
-  // Font Awesome Webfonts
-  var fontAwesomeWebfonts = gulp.src('./node_modules/@fortawesome/fontawesome-free/webfonts/**/*')
-    .pipe(gulp.dest('./vendor/fontawesome-free/webfonts'));
-  // jQuery Easing
-  var jqueryEasing = gulp.src('./node_modules/jquery.easing/*.js')
-    .pipe(gulp.dest('./vendor/jquery-easing'));
-  // jQuery
-  var jquery = gulp.src([
-      './node_modules/jquery/dist/*',
-      '!./node_modules/jquery/dist/core.js'
-    ])
-    .pipe(gulp.dest('./vendor/jquery'));
-  return merge(bootstrap, fontAwesomeCSS, fontAwesomeWebfonts, jquery, jqueryEasing);
 }
 
 // CSS task - compile SCSS
@@ -163,17 +134,14 @@ function watchFiles() {
 }
 
 // Define complex tasks
-const vendor = gulp.series(clean, modules);
-const build = gulp.series(vendor, gulp.parallel(css, js));
+const build = gulp.parallel(css, js);
 const bundle = gulp.series(cleanBundle, cssBundle, jsBundle);
 const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 
 // Export tasks
 exports.css = css;
 exports.js = js;
-exports.clean = clean;
 exports.cleanBundle = cleanBundle;
-exports.vendor = vendor;
 exports.build = build;
 exports.bundle = bundle;
 exports.watch = watch;

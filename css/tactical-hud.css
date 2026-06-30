@@ -1541,3 +1541,29 @@ body {
     line-height: 1.4;
     padding: 20px;
 }
+
+/* --- MOBILE HUD ENHANCEMENTS --- */
+@media (max-width: 991px) {
+    .system-status-bar {
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+        padding: 8px 0;
+    }
+    
+    .status-left {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .status-label {
+        opacity: 0.7;
+    }
+    
+    .telemetry-overlay {
+        display: none !important; /* Hide background noise data on small screens */
+    }
+}
