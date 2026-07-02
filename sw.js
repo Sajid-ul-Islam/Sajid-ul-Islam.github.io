@@ -3,16 +3,34 @@
  * PWA Support for offline functionality with Network-First strategy for updates
  */
 
-const CACHE_NAME = 'tactical-intel-v2';
+const CACHE_NAME = 'tactical-intel-v3';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
+    '/resume.html',
     '/css/modern-custom.css',
     '/css/tactical-hud.css',
     '/css/tactical-enhancements.css',
+    '/css/deep-black-terminal.css',
+    '/css/floating-widgets.css',
+    '/css/github-feed.css',
+    '/css/file-tree.css',
+    '/js/data.js',
+    '/js/tactical-core.js',
     '/js/tactical-data.js',
+    '/js/pwa-loader.js',
+    '/js/tactical-widgets.js',
     '/js/tactical-enhancements.js',
-    '/img/profile.jpg'
+    '/js/widgets.js',
+    '/js/terminal.js',
+    '/js/ai-bot.js',
+    '/js/floating-widgets.js',
+    '/js/github-feed.js',
+    '/js/portfolio-bridge.js',
+    '/js/command-palette.js',
+    '/img/profile.jpg',
+    '/manifest.json',
+    '/sw.js'
 ];
 
 // Install: Cache static assets

@@ -645,14 +645,21 @@ class ScanlinePulse {
     }
 }
 
-// ===== 10. HOVER AUDIO EFFECTS =====
+// ===== 10. HOVER AUDIO EFFECTS (Delegated) =====
 class HoverAudio {
     static init() {
-        const interactiveElements = document.querySelectorAll('a, button, .card-glass, .nav-link');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => AudioEngine.play('hover'));
-            el.addEventListener('click', () => AudioEngine.play('click'));
-        });
+        // Single delegated listener replaces dozens/hundreds of per-element listeners
+        // Using mouseover (bubbles) instead of mouseenter (doesn't bubble) for proper delegation
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a, button, .card-glass, .nav-link')) {
+                AudioEngine.play('hover');
+            }
+        }, { passive: true });
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('a, button, .card-glass, .nav-link')) {
+                AudioEngine.play('click');
+            }
+        }, { passive: true });
     }
 }
 

@@ -51,32 +51,42 @@ function initProjectFilters() {
     });
 }
 
-// ===== HUD RESIZER ENGINE =====
+// ===== HUD RESIZER ENGINE (Delegated Drag) =====
 function initHudResizer() {
-    const widgets = document.querySelectorAll('.card-glass');
-    widgets.forEach(widget => {
+    // Add resize handles to all .card-glass elements
+    document.querySelectorAll('.card-glass').forEach(widget => {
         const handle = document.createElement('div');
         handle.className = 'hud-resize-handle';
         widget.appendChild(handle);
+    });
 
-        handle.addEventListener('mousedown', initResize, false);
+    // Single drag tracker shared across all widgets
+    let dragTarget = null;
+    let startX, startY, startW, startH;
 
-        function initResize(e) {
-            e.preventDefault();
-            window.addEventListener('mousemove', Resize, false);
-            window.addEventListener('mouseup', stopResize, false);
-        }
+    document.addEventListener('mousedown', (e) => {
+        const handle = e.target.closest('.hud-resize-handle');
+        if (!handle) return;
+        e.preventDefault();
+        
+        dragTarget = handle.parentElement;
+        const rect = dragTarget.getBoundingClientRect();
+        startX = e.clientX;
+        startY = e.clientY;
+        startW = rect.width;
+        startH = rect.height;
+    });
 
-        function Resize(e) {
-            widget.style.width = (e.clientX - widget.offsetLeft) + 'px';
-            widget.style.height = (e.clientY - widget.offsetTop) + 'px';
-        }
+    document.addEventListener('mousemove', (e) => {
+        if (!dragTarget) return;
+        dragTarget.style.width = (startW + e.clientX - startX) + 'px';
+        dragTarget.style.height = (startH + e.clientY - startY) + 'px';
+    });
 
-        function stopResize() {
-            window.removeEventListener('mousemove', Resize, false);
-            window.removeEventListener('mouseup', stopResize, false);
-            if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
-        }
+    document.addEventListener('mouseup', () => {
+        if (!dragTarget) return;
+        dragTarget = null;
+        if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
     });
 }
 
@@ -93,13 +103,15 @@ function initDigitalClock() {
     update();
 }
 
-// ===== SCROLL PROGRESS HUD =====
+// ===== SCROLL PROGRESS HUD (RAF-Debounced) =====
 function initScrollProgress() {
     const progressHUD = document.createElement('div');
     progressHUD.className = 'scroll-progress-hud';
     document.body.appendChild(progressHUD);
 
-    window.addEventListener('scroll', () => {
+    let ticking = false;
+
+    function updateScrollProgress() {
         const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPosition = window.pageYOffset;
         const progressPercentage = (scrollPosition / windowHeight) * 100;
@@ -116,7 +128,15 @@ function initScrollProgress() {
                 navbar.style.backdropFilter = 'none';
             }
         }
-    });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollProgress);
+            ticking = true;
+        }
+    }, { passive: true });
 }
 
 // ===== SYSTEM STATUS WIDGET =====

@@ -33,45 +33,10 @@ function updateThemeIcon(theme) {
 /**
  * MISSION_CRITICAL CORE v6.0
  * Hardware Diagnostics, Neural Voice, and Ambient Situational Audio
+ *
+ * NOTE: AudioEngine is defined in tactical-enhancements.js (loaded after this file).
+ * References to AudioEngine here are guarded by typeof checks or resolved at call time.
  */
-
-const AudioEngine = {
-    beep: () => { /* existing beep */ },
-    play: (id) => { /* existing logic */ },
-
-    // MISSION_AUDIO: Dark-Ambient Synthwave
-    track: new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'),
-    isPlaying: false,
-    toggleMusic: function () {
-        const btn = document.getElementById('musicToggle');
-        const label = document.getElementById('trackName');
-        if (this.isPlaying) {
-            this.track.pause();
-            this.isPlaying = false;
-            btn.innerHTML = '<i class="fas fa-play"></i>';
-            label.textContent = '[MISSION_AUDIO: OFFLINE]';
-        } else {
-            this.track.play();
-            this.track.loop = true;
-            this.track.volume = 0.3;
-            this.isPlaying = true;
-            btn.innerHTML = '<i class="fas fa-pause"></i>';
-            label.textContent = '[MISSION_AUDIO: PLAYING_SYNTH_01]';
-        }
-    },
-
-    // NEURAL_VOICE: AI Oracle TTS
-    speak: function (text) {
-        if (!window.speechSynthesis) return;
-        const msg = new SpeechSynthesisUtterance(text);
-        const voices = window.speechSynthesis.getVoices();
-        // Try to find a robotic sounding voice
-        msg.voice = voices.find(v => v.name.includes('Google UK English Male')) || voices[0];
-        msg.pitch = 0.8;
-        msg.rate = 1.1;
-        window.speechSynthesis.speak(msg);
-    }
-};
 
 function updateSystemHealth() {
     const batteryNode = document.getElementById('batteryNode');
@@ -131,12 +96,12 @@ function initTelemetryOverlay() {
         let leftText = '';
         let rightText = '';
         for (let i = 0; i < 35; i++) {
-            leftText += `[SYS_${Math.floor(Math.random() * 99)}] 0x${generateHex()}<br>`;
-            rightText += `MEM_${generateBin()}<br>`;
+            leftText += `[SYS_${Math.floor(Math.random() * 99)}] 0x${generateHex()}\n`;
+            rightText += `MEM_${generateBin()}\n`;
         }
-        colLeft.innerHTML = leftText;
-        colRight.innerHTML = rightText;
-    }, 2000);
+        colLeft.textContent = leftText;
+        colRight.textContent = rightText;
+    }, 5000);
 }
 
 // Initializer
@@ -170,9 +135,23 @@ const SkillsGlobe = {
             this.canvas.height = parent.offsetHeight;
         });
 
+        // Pause animation when off-screen or tab hidden
+        this._paused = false;
+        const observer = new IntersectionObserver((entries) => {
+            this._paused = !entries[0].isIntersecting;
+            if (!this._paused) this.animate();
+        }, { threshold: 0.1 });
+        observer.observe(this.canvas);
+
+        document.addEventListener('visibilitychange', () => {
+            this._paused = document.hidden;
+            if (!this._paused) this.animate();
+        });
+
         this.animate();
     },
     animate: function () {
+        if (this._paused) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.angleX += 0.003;
         this.angleY += 0.003;
@@ -216,7 +195,9 @@ const SkillsGlobe = {
         this.ctx.lineWidth = 0.5;
         this.ctx.stroke();
 
-        requestAnimationFrame(() => this.animate());
+        if (!this._paused) {
+            requestAnimationFrame(() => this.animate());
+        }
     }
 };
 
