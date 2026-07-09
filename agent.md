@@ -4,7 +4,8 @@
 > **Architecture**: Static Site with PWA capabilities  
 > **Aesthetic**: Tactical HUD / Terminal Interface  
 > **Primary Stack**: HTML5, CSS3, JavaScript (Vanilla), Bootstrap 5  
-> **Build Tool**: Gulp + SASS  
+> **Build Tool**: Vite (primary) / Gulp (legacy)  
+> **Linting**: ESLint flat config + Prettier  
 > **Deployment**: GitHub Pages
 
 ---
@@ -19,6 +20,8 @@ This is a high-performance, modular portfolio for a Data Scientist & Business An
 - Data-driven visualization with skill radar charts
 - Secure portfolio bridge for external projects
 - Responsive resume with PDF export capability
+- AI-powered chatbot with local knowledge base
+- Procedural audio engine for HUD interactions
 
 ---
 
@@ -28,10 +31,15 @@ This is a high-performance, modular portfolio for a Data Scientist & Business An
 Portfolio_Terminal/
 ├── index.html                 # Main operative interface (Tactical HUD)
 ├── resume.html               # Printable resume page
+├── theme-ironforge.html      # Alternative Ironforge theme
 ├── sw.js                     # Service Worker (PWA offline support)
 ├── manifest.json             # PWA manifest
 ├── package.json              # NPM dependencies & build scripts
-├── gulpfile.js               # Gulp build configuration
+├── vite.config.js            # Vite build configuration
+├── eslint.config.js          # ESLint flat config
+├── .prettierrc               # Prettier formatting config
+├── gulpfile.js               # Legacy Gulp build (preserved)
+├── main.js                   # Module load-order documentation
 │
 ├── css/                      # Stylesheets (modular architecture)
 │   ├── modern-custom.css     # Core styles + Bootstrap overrides
@@ -44,13 +52,14 @@ Portfolio_Terminal/
 │
 ├── js/                       # JavaScript modules (tactical architecture)
 │   ├── data.js               # CENTRAL DATA SOURCE - All portfolio content
-│   ├── tactical-core.js      # Core UI, theme management, audio engine
+│   ├── audio-engine.js       # Procedural sound effects (extracted module)
+│   ├── tactical-core.js      # Core UI, theme management, skills globe
 │   ├── tactical-data.js      # Data rendering & GitHub integration
-│   ├── tactical-enhancements.js # Advanced HUD effects & interactions
-│   ├── tactical-widgets.js   # HUD widgets (stats, charts)
+│   ├── tactical-enhancements.js # Keyboard shortcuts, command palette, animations
+│   ├── tactical-widgets.js   # HUD widgets (stats, geospatial map)
 │   ├── terminal.js           # Interactive CLI terminal
 │   ├── widgets.js            # UI widget utilities
-│   ├── ai-bot.js             # AI assistant integration
+│   ├── ai-bot.js             # AI assistant integration (secured)
 │   ├── command-palette.js    # Quick command palette
 │   ├── portfolio-bridge.js   # External project viewer
 │   ├── github-feed.js        # GitHub repo fetching
@@ -58,7 +67,7 @@ Portfolio_Terminal/
 │   ├── pwa-loader.js         # Service Worker registration
 │   └── debug-widgets.js      # Development debugging tools
 │
-│   Note: Bootstrap 5.3, Font Awesome 6.4 & jQuery are loaded via CDN.
+│   Note: Bootstrap 5.3 & Font Awesome 6.4 are loaded via CDN.
 │
 ├── img/                      # Portfolio images & assets
 ├── scripts/                  # Python utility scripts
@@ -83,9 +92,10 @@ Portfolio_Terminal/
 ### Build & Development
 | Tool | Purpose |
 |------|---------|
-| **Gulp** | Task runner (SASS compile, minification, live reload) |
-| **BrowserSync** | Development server with hot reload |
-| **SASS** | CSS preprocessing |
+| **Vite** | Primary build tool & dev server (ESM-native, fast HMR) |
+| **Gulp** | Legacy build tool (preserved for backward compatibility) |
+| **ESLint** | Code linting with flat config |
+| **Prettier** | Code formatting |
 | **GitHub Pages** | Static hosting & deployment |
 
 ### PWA Features
@@ -101,7 +111,7 @@ Portfolio_Terminal/
 
 ### Central Data Source (`js/data.js`)
 
-All content is stored in a single `DATA` object exported as a global constant:
+All content is stored in a single `DATA` object exposed as `window.DATA`:
 
 ```javascript
 const DATA = {
@@ -120,12 +130,13 @@ const DATA = {
 ### Data Flow
 
 ```
-1. data.js        → Exports DATA object (static content)
-2. tactical-data.js → Renders DATA into DOM elements
-3. index.html     → Displays rendered content
+1. data.js          → Exposes DATA object (window.DATA)
+2. tactical-data.js → Fetches Google Sheets data, falls back to DATA
+3. index.html       → Displays rendered content
 ```
 
 ### External Data Integration
+- **Google Sheets API**: Live data sync via CSV export URL
 - **GitHub API**: `fetchGithubRepos()` pulls public repositories
 - **Browser APIs**: Battery, Memory, Speech Synthesis, Geolocation
 
@@ -133,16 +144,23 @@ const DATA = {
 
 ## 5. Key Components
 
-### 5.1 Tactical Terminal (`js/terminal.js`)
+### 5.1 Audio Engine (`js/audio-engine.js`)
+- **Purpose**: Procedural sound effects for HUD interactions
+- **Extracted from**: `tactical-enhancements.js` (to break circular dependencies)
+- **Sounds**: beep, type, hover, click (all generated via Web Audio API)
+- **Global**: Exposed as `window.AudioEngine`
+- **Controls**: Toggle via keyboard `a` key or terminal
+
+### 5.2 Tactical Terminal (`js/terminal.js`)
 - **Purpose**: Interactive CLI for direct system interaction
 - **Features**:
-  - Command history & autocomplete
-  - System diagnostics (`status`, `health`)
-  - Cache management (`flush`, `reload`)
-  - Contact integration (`contact`, `email`)
-  - Easter eggs (`matrix`, `party`)
+  - Command history & autocomplete (Tab)
+  - System diagnostics (`status`, `neofetch`)
+  - Project browsing (`ls`, `cat`)
+  - Blog editor mode (`write`, `save`, `abort`)
+  - AI key management (`link_gemini`)
 
-**Available Commands (actual implementation in `terminal.js`):**
+**Available Commands:**
 ```
 help           Show this command directory
 neofetch       System summary & specs
@@ -160,24 +178,26 @@ clear          Reset shell
 exit           Terminate session (close terminal)
 ```
 
-### 5.2 HUD Widgets (`js/tactical-widgets.js`, `js/widgets.js`)
+### 5.3 HUD Widgets (`js/tactical-widgets.js`, `js/widgets.js`)
 - Session analytics (time on site, page views)
 - Real-time skill progress bars
 - Interactive radar charts for skill visualization
 - Floating system stats widgets
+- Geospatial impact map
 
-### 5.3 Portfolio Bridge (`js/portfolio-bridge.js`)
+### 5.4 Portfolio Bridge (`js/portfolio-bridge.js`)
 - Opens external projects in HUD-styled modal
 - Sandboxed iframe with security controls
-- Prevents navigation away from main site
+- Blocked domain list for external redirects
 
-### 5.4 AI Bot (`js/ai-bot.js`)
-- Conversational interface
+### 5.5 AI Bot (`js/ai-bot.js`)
+- Local knowledge-based responses (no API key required)
+- Optional Gemini/OpenAI integration via `link_gemini` / `link_openai`
+- **Security**: All API keys stored in `localStorage` only — never hardcoded
 - TTS (Text-to-Speech) integration via Web Speech API
-- Contextual responses based on portfolio content
 
-### 5.5 Command Palette (`js/command-palette.js`)
-- VS Code-style quick navigation (Ctrl+K)
+### 5.6 Command Palette (`js/command-palette.js`)
+- VS Code-style quick navigation (Ctrl+K or `/`)
 - Search projects, skills, sections
 - Keyboard-driven workflow
 
@@ -194,23 +214,23 @@ exit           Terminate session (close terminal)
 | `tactical-enhancements.css` | Animations: glitch effects, scanlines, cyberpunk elements |
 | `file-tree.css` | VS Code file explorer styling |
 | `floating-widgets.css` | HUD overlay widgets |
+| `github-feed.css` | GitHub activity feed styling |
+| `deep-black-terminal.css` | Terminal-specific dark styling |
 
 ### Theming Architecture (Multi-Page)
-The project supports full-page UX/UI replacements via distinct HTML files. For details on how to manage or add new themes, see [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
+The project supports full-page UX/UI replacements via distinct HTML files. For details, see [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
 
 ### Design System
 
 **Color Palette:**
-- Primary: `#007bff` (Bootstrap blue)
-- Dark Theme: `#0d1117` (GitHub dark)
-- Terminal Green: `#28a745`
-- Alert/Accent: `#dc3545`
-- HUD Cyan: `#00d4ff`
+- Primary: `#22c55e` (Terminal Green)
+- Dark Theme: `#051410` (Deep Black)
+- Accent: `#a3e635` (HUD Lime)
 
 **Typography:**
 - Headings: `Saira Extra Condensed` (Google Fonts)
 - Body: `Open Sans` (Google Fonts)
-- Mono: System monospace for terminal/code
+- Mono: `JetBrains Mono` for terminal/code
 
 **Effects:**
 - Glitch text animations
@@ -222,25 +242,33 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 
 ## 7. Build & Deployment
 
-### NPM Scripts
+### NPM Scripts (Vite — Primary)
 ```json
 {
-  "start": "gulp watch",      // Development with BrowserSync
-  "build": "gulp"              // Production build (compile SASS, minify)
+  "dev": "vite",              // Dev server with HMR
+  "build": "vite build",      // Production build
+  "preview": "vite preview",  // Preview production build
+  "lint": "eslint js/",       // Lint JS files
+  "lint:fix": "eslint js/ --fix",
+  "format": "prettier --write js/**/*.js"
 }
 ```
 
-### Gulp Tasks
-1. **SASS Compilation** → `scss/` to `css/`
-2. **CSS Minification** → `.min.css` production files
-3. **JS Minification** → `.min.js` production files
-4. **BrowserSync** → Local dev server on port 3000
+### Legacy Gulp Scripts (preserved)
+```json
+{
+  "legacy:start": "gulp watch",
+  "legacy:build": "gulp",
+  "legacy:bundle": "gulp bundle"
+}
+```
 
 ### Deployment Flow
-1. Develop locally: `npm start`
-2. Build for production: `npm run build`
-3. Push to GitHub: `git push origin main`
-4. GitHub Pages auto-deploys from `main` branch
+1. Develop locally: `npm run dev`
+2. Lint & format: `npm run lint` / `npm run format`
+3. Build for production: `npm run build`
+4. Push to GitHub: `git push origin master`
+5. GitHub Pages auto-deploys from `master` branch
 
 ---
 
@@ -249,7 +277,7 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 ### Service Worker Strategy (`sw.js`)
 
 **Cache Configuration:**
-- Cache Name: `tactical-intel-v2`
+- Cache Name: `tactical-intel-v4`
 - Static Assets: Core HTML, CSS, JS, images
 
 **Fetch Strategies:**
@@ -258,14 +286,34 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 
 ### Manifest (`manifest.json`)
 - App Name: "Tactical Intel Portfolio"
-- Short Name: "Portfolio"
-- Theme: Dark (#0d1117)
+- Short Name: "Tactical Intel"
+- Theme: Dark (#051410)
 - Display: Standalone
-- Icons: Multiple sizes for all platforms
 
 ---
 
-## 9. Extension Points
+## 9. Module Load Order
+
+Scripts load via `<script defer>` tags in `index.html`. The order matters:
+
+1. `data.js` → Exposes `window.DATA`
+2. `audio-engine.js` → Exposes `window.AudioEngine`
+3. `tactical-core.js` → Uses `AudioEngine` at call-time
+4. `tactical-data.js` → Uses `window.DATA` for rendering
+5. `pwa-loader.js` → Service Worker registration
+6. `tactical-widgets.js` → HUD stats & map
+7. `terminal.js` → CLI terminal
+8. `widgets.js` → UI utilities
+9. `ai-bot.js` → AI chatbot
+10. `tactical-enhancements.js` → Keyboard, palette, animations
+11. `floating-widgets.js` → Draggable widgets
+12. `github-feed.js` → GitHub activity
+13. `portfolio-bridge.js` → External project viewer
+14. `command-palette.js` → VS Code-style palette
+
+---
+
+## 10. Extension Points
 
 ### Adding New Projects
 Edit `js/data.js` → `DATA.projects` array:
@@ -282,61 +330,66 @@ Edit `js/data.js` → `DATA.projects` array:
 }
 ```
 
-### Adding Learning Items
-Edit `js/data.js` → `DATA.learningItems`:
-```javascript
-{ name: "New Skill", category: "AI|ML|Data Ops", progress: 75 }
-```
-
 ### Adding New Terminal Commands
 Edit `js/terminal.js` → `terminalCommands` object:
 ```javascript
-// Add a new entry to the terminalCommands object:
 mycommand: (args) => {
     return `Output: ${args.join(' ')}`;
 }
 ```
 
+### Adding New Themes
+See [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
+
 ---
 
-## 10. Browser APIs Used
+## 11. Browser APIs Used
 
 | API | Purpose | File |
 |-----|---------|------|
 | **Cache API** | PWA offline storage | `sw.js` |
 | **Battery API** | System health display | `tactical-core.js` |
 | **Device Memory** | RAM info display | `tactical-core.js` |
-| **Speech Synthesis** | AI bot voice | `tactical-core.js` |
-| **Geolocation** | Location-based features | `tactical-enhancements.js` |
-| **LocalStorage** | Theme preference, session data | `tactical-core.js` |
-| **Fetch API** | GitHub repos, external data | `github-feed.js` |
+| **Speech Synthesis** | AI bot voice | `ai-bot.js` |
+| **AudioContext** | Procedural sound effects | `audio-engine.js` |
+| **LocalStorage** | Theme preference, API keys | `tactical-core.js`, `ai-bot.js` |
+| **Fetch API** | GitHub repos, Google Sheets | `github-feed.js`, `tactical-data.js` |
 | **IntersectionObserver** | Scroll animations | `tactical-enhancements.js` |
 
 ---
 
-## 11. Development Guidelines
+## 12. Security
+
+- **No hardcoded API keys**: All AI provider keys are stored in browser `localStorage` only.
+- **Sandboxed iframes**: Portfolio Bridge uses sandboxed iframes for external viewing.
+- **Blocked domains**: WhatsApp, social media, and other restricted nodes open in new tabs.
+- **XSS awareness**: Template literals used for rendering from trusted data only.
+
+---
+
+## 13. Development Guidelines
 
 ### Code Style
 - **ES6+** syntax (arrow functions, destructuring, template literals)
-- **Modular architecture** - each file has a single responsibility
-- **JSDoc comments** for complex functions
-- **Global namespaces** minimized (`window.DATA`, `window.TACTICAL_INFO`)
+- **Modular architecture** — each file has a single responsibility
+- **Global namespace pattern**: Files expose via `window.*` for classic script loading
+- **ESLint + Prettier**: Enforced code quality (run `npm run lint` and `npm run format`)
 
 ### Performance Considerations
 - **Lazy loading**: Images load on scroll
-- **Debounced events**: Scroll/resize handlers
+- **Debounced events**: Scroll/resize handlers use RAF
 - **Minimal DOM manipulation**: Batch updates where possible
-- **Cached selectors**: Query DOM once, reference stored
+- **AudioEngine**: Procedural sounds (no audio file downloads)
 
 ### Accessibility
 - ARIA labels on interactive elements
-- Keyboard navigation support
+- Keyboard navigation support (j/k, Ctrl+K, /)
 - Focus indicators for terminal/palette
 - Semantic HTML5 structure
 
 ---
 
-## 12. Troubleshooting
+## 14. Troubleshooting
 
 ### Cache Not Updating
 1. Open Terminal (click terminal icon)
@@ -359,20 +412,30 @@ npm install
 npm run build
 ```
 
+### Lint Errors
+```bash
+# Auto-fix most issues
+npm run lint:fix
+
+# Format all files
+npm run format
+```
+
 ---
 
-## 13. Future Enhancements
+## 15. Future Enhancements
 
 - [ ] Blog content management system
 - [ ] Dynamic project loading from headless CMS
-- [ ] Dark/Light theme toggle refinement
+- [ ] Migrate to ES modules (add `type="module"` to script tags)
 - [ ] WebGL particle background effects
 - [ ] Real-time GitHub contribution graph
 - [ ] Contact form with serverless backend
+- [ ] Convert to TypeScript for type safety
 
 ---
 
-## 14. Credits & License
+## 16. Credits & License
 
 - **Original Template**: Start Bootstrap Resume (MIT License)
 - **Author**: Sajid Islam
