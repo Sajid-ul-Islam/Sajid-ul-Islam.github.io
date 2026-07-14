@@ -11,6 +11,13 @@ export default defineConfig({
         process.stdin.on('error', (err) => {
           console.warn('[VITE] Suppressed stdin error:', err.message);
         });
+        process.on('uncaughtException', (err) => {
+          if (err && (err.code === 'UNKNOWN' || err.syscall === 'read')) {
+            console.warn('[VITE] Suppressed filesystem read stream error:', err.message);
+          } else {
+            console.error('[VITE] Uncaught Exception:', err);
+          }
+        });
       }
     }
   ],

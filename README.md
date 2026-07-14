@@ -27,10 +27,12 @@ A high-performance, modular portfolio for a **Data Scientist & Business Analyst*
 │   └── deep-black-terminal.css
 ├── img/                    # Profile and project images
 ├── js/                     # Modular JavaScript
-│   ├── data.js             # Central data source — all portfolio content
+│   ├── data.js             # Local static backup data source
+│   ├── portfolio-data.js   # Global dynamic data hub (Google Sheets ingestion & fallback)
+│   ├── theme-switcher-ripple.js # Global teardrop ripple transition animation
 │   ├── audio-engine.js     # Procedural sound effects (extracted module)
 │   ├── tactical-core.js    # Core UI, theme management, skills globe
-│   ├── tactical-data.js    # Data rendering & Google Sheets integration
+│   ├── tactical-data.js    # Data rendering & mapping for Tactical HUD theme
 │   ├── tactical-enhancements.js # Audio, keyboard shortcuts, command palette
 │   ├── terminal.js         # Interactive CLI terminal
 │   ├── widgets.js          # UI widget utilities
@@ -52,9 +54,12 @@ A high-performance, modular portfolio for a **Data Scientist & Business Analyst*
 ├── eslint.config.js        # ESLint flat config
 ├── .prettierrc             # Prettier formatting config
 ├── main.js                 # Module load-order documentation
-├── index.html              # Main operative interface (Tactical HUD)
+├── index.html              # Theme Router (Gateway / Redirect Script)
+├── theme-sketchbook.html   # Sketchbook Ink theme (Tailwind HUD)
+├── theme-tactical.html     # Tactical HUD theme (Bootstrap HUD)
+├── theme-ironforge.html    # Ironforge Studio theme (Fitness Style HUD)
 ├── resume.html             # Printable resume page
-└── theme-ironforge.html    # Alternative Ironforge theme
+└── THEMING_ARCHITECTURE.md # Multi-Page Routing & Dynamic Data architecture docs
 ```
 
 > **Note:** Third-party libraries (Bootstrap 5.3, Font Awesome 6.4) are loaded via CDN — no local `vendor/` directory.

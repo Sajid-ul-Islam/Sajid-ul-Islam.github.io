@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sajid-ul-Islam — Portfolio (Ironforge Theme)</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="js/portfolio-data.js"></script>
+<script src="js/theme-switcher-ripple.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -634,7 +636,7 @@
           <div class="absolute right-0 mt-2 w-48 bg-[var(--bg-card)] border border-[var(--accent)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg">
             <a href="theme-tactical.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-terminal w-5"></i> Tactical HUD</a>
             <a href="theme-ironforge.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-fire w-5"></i> Ironforge Studio</a>
-            <a href="index.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
+            <a href="theme-sketchbook.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
           </div>
         </div>
       </div>
@@ -801,7 +803,7 @@
       </div>
       
       <!-- Program cards -->
-      <div class="reveal-stagger grid md:grid-cols-3 gap-6 lg:gap-8">
+      <div class="reveal-stagger grid md:grid-cols-3 gap-6 lg:gap-8" id="projects-container">
         
         <!-- PROJECT 1 -->
         <article class="program-card info-card notch-corner group flex flex-col">
@@ -884,7 +886,7 @@
       </div>
       
       <!-- Coach grid -->
-      <div class="reveal-stagger grid sm:grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="reveal-stagger grid sm:grid-cols-1 lg:grid-cols-3 gap-6" id="coaches-grid">
         
         <!-- EXPERIENCE 1 -->
         <div class="flip-card">
@@ -1084,7 +1086,7 @@
           <div class="booking-frame p-8 lg:p-12 h-full flex flex-col justify-center bg-[var(--bg-card)]">
             <div class="font-mono text-[11px] text-[var(--accent)] tracking-[0.2em] uppercase mb-8">// Academic Background</div>
             
-            <div class="space-y-8">
+            <div class="space-y-8" id="education-list">
               <!-- Degree 1 -->
               <div class="flex gap-6 border-b border-[var(--border-light)] pb-6 relative group">
                 <div class="w-12 h-12 bg-[var(--bg)] border border-[var(--border-light)] group-hover:border-[var(--accent)] transition-colors flex items-center justify-center shrink-0">
@@ -1362,9 +1364,9 @@
   </div>
   
   <script>
-    /* ============================
-       HERO REEL — cycling frames
-       ============================ */
+    // --- Lifecycle and Tracking ---
+    localStorage.setItem('portfolio-active-theme', 'theme-ironforge.html');
+
     const frames = document.querySelectorAll('.reel-frame');
     const chapterNum = document.getElementById('chapterNum');
     const reelProgress = document.getElementById('reelProgress');
@@ -1374,13 +1376,13 @@
     
     function showFrame(idx) {
       frames.forEach((f, i) => f.classList.toggle('active', i === idx));
-      chapterNum.textContent = String(idx + 1).padStart(2, '0');
+      if (chapterNum) chapterNum.textContent = String(idx + 1).padStart(2, '0');
     }
     
     function tickReel() {
       frameTimer += 50;
       const pct = (frameTimer / frameDuration) * 100;
-      reelProgress.style.width = pct + '%';
+      if (reelProgress) reelProgress.style.width = pct + '%';
       
       if (frameTimer >= frameDuration) {
         frameTimer = 0;
@@ -1389,7 +1391,9 @@
       }
       requestAnimationFrame(tickReel);
     }
-    requestAnimationFrame(tickReel);
+    if (frames.length > 0) {
+      requestAnimationFrame(tickReel);
+    }
     
     /* ============================
        MUTE TOGGLE
@@ -1399,14 +1403,18 @@
     const muteIcon = document.getElementById('muteIcon');
     let muted = true;
     
-    muteToggle.addEventListener('click', () => {
-      muted = !muted;
-      muteToggle.classList.toggle('unmuted', !muted);
-      muteLabel.textContent = muted ? 'Muted' : 'Sound On';
-      muteIcon.className = muted 
-        ? 'fas fa-volume-xmark text-xs text-[var(--muted)] group-hover:text-[var(--accent)]'
-        : 'fas fa-volume-high text-xs text-[var(--accent)]';
-    });
+    if (muteToggle) {
+      muteToggle.addEventListener('click', () => {
+        muted = !muted;
+        muteToggle.classList.toggle('unmuted', !muted);
+        if (muteLabel) muteLabel.textContent = muted ? 'Muted' : 'Sound On';
+        if (muteIcon) {
+          muteIcon.className = muted 
+            ? 'fas fa-volume-xmark text-xs text-[var(--muted)] group-hover:text-[var(--accent)]'
+            : 'fas fa-volume-high text-xs text-[var(--accent)]';
+        }
+      });
+    }
     
     /* ============================
        REVEAL ON SCROLL
@@ -1469,21 +1477,21 @@
     const heroSection = document.getElementById('hero');
     const bookingSection = document.getElementById('booking');
     
-    const stickyObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        // Show when hero is out of view
-        if (entry.target === heroSection) {
-          const showSticky = !entry.isIntersecting;
-          // Check if we're at booking section
-          const bookingRect = bookingSection.getBoundingClientRect();
-          const atBooking = bookingRect.top < window.innerHeight && bookingRect.bottom > 0;
-          stickyCta.classList.toggle('visible', showSticky && !atBooking);
-        }
-      });
-    }, { threshold: 0 });
-    
-    stickyObserver.observe(heroSection);
-    stickyObserver.observe(bookingSection);
+    if (stickyCta && heroSection && bookingSection) {
+      const stickyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.target === heroSection) {
+            const showSticky = !entry.isIntersecting;
+            const bookingRect = bookingSection.getBoundingClientRect();
+            const atBooking = bookingRect.top < window.innerHeight && bookingRect.bottom > 0;
+            stickyCta.classList.toggle('visible', showSticky && !atBooking);
+          }
+        });
+      }, { threshold: 0 });
+      
+      stickyObserver.observe(heroSection);
+      stickyObserver.observe(bookingSection);
+    }
     
     /* ============================
        GOAL SELECTOR
@@ -1510,16 +1518,17 @@
     const toastTitle = document.getElementById('toastTitle');
     const toastMsg = document.getElementById('toastMsg');
     
-    bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      toastTitle.textContent = 'Trial request received';
-      toastMsg.textContent = 'A coach will reach out within 24 hours to confirm your session.';
-      toast.classList.add('visible');
-      setTimeout(() => toast.classList.remove('visible'), 4500);
-      bookingForm.reset();
-      // Reset active states
-      document.querySelectorAll('#goalSelector .goal-pill').forEach((p, i) => p.classList.toggle('active', i === 0));
-    });
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (toastTitle) toastTitle.textContent = 'Trial request received';
+        if (toastMsg) toastMsg.textContent = 'A coach will reach out within 24 hours to confirm your session.';
+        if (toast) toast.classList.add('visible');
+        setTimeout(() => { if (toast) toast.classList.remove('visible'); }, 4500);
+        bookingForm.reset();
+        document.querySelectorAll('#goalSelector .goal-pill').forEach((p, i) => p.classList.toggle('active', i === 0));
+      });
+    }
     
     /* ============================
        GRAIN PARALLAX
@@ -1528,39 +1537,44 @@
     let targetGrainY = 0;
     let currentGrainY = 0;
     
-    window.addEventListener('scroll', () => {
-      targetGrainY = window.scrollY * 0.15;
-    }, { passive: true });
-    
-    function animateGrain() {
-      currentGrainY += (targetGrainY - currentGrainY) * 0.08;
-      grain.style.transform = `translateY(${currentGrainY}px)`;
-      requestAnimationFrame(animateGrain);
+    if (grain) {
+      window.addEventListener('scroll', () => {
+        targetGrainY = window.scrollY * 0.15;
+      }, { passive: true });
+      
+      function animateGrain() {
+        currentGrainY += (targetGrainY - currentGrainY) * 0.08;
+        grain.style.transform = `translateY(${currentGrainY}px)`;
+        requestAnimationFrame(animateGrain);
+      }
+      animateGrain();
     }
-    animateGrain();
     
     /* ============================
        SUBTLE PARALLAX ON HERO IMAGES
        ============================ */
     const heroSectionEl = document.getElementById('hero');
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      if (scrolled < window.innerHeight) {
-        const reelContainer = document.getElementById('reelContainer');
-        if (reelContainer) {
-          reelContainer.style.transform = `translateY(${scrolled * 0.3}px)`;
+    if (heroSectionEl) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < window.innerHeight) {
+          const reelContainer = document.getElementById('reelContainer');
+          if (reelContainer) {
+            reelContainer.style.transform = `translateY(${scrolled * 0.3}px)`;
+          }
         }
-      }
-    }, { passive: true });
-  </script>
-  <script>
+      }, { passive: true });
+    }
+
     // --- Theme Switching Ops ---
     const themeToggle = document.getElementById('theme-toggle');
     const root = document.documentElement;
 
     const applyTheme = (theme, accent) => {
         root.setAttribute('data-theme', theme);
-        root.setAttribute('data-accent', accent);
+        if (accent) {
+            root.setAttribute('data-accent', accent);
+        }
         document.body.setAttribute('data-theme', theme);
         
         // Update Icon
@@ -1576,14 +1590,13 @@
     const savedAccent = localStorage.getItem('tactical-accent') || 'orange'; // Ironforge defaults to orange
     applyTheme(savedTheme, savedAccent);
 
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = root.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme, root.getAttribute('data-accent'));
-            localStorage.setItem('tactical-theme', newTheme);
-        });
-    }
+    // Initialize Teardrop ripple switcher
+    window.initThemeToggleWithRipple({
+      buttonId: 'theme-toggle',
+      getTheme: () => root.getAttribute('data-theme') || 'dark',
+      applyTheme: (theme) => applyTheme(theme, root.getAttribute('data-accent')),
+      saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
+    });
 
     // --- Accent Color Switcher ---
     const colorSwatches = document.querySelectorAll('.color-swatch');
@@ -1595,6 +1608,164 @@
             localStorage.setItem('tactical-accent', newAccent);
         });
     });
+
+    /* ==================================
+       FUNCTION-BASED MODULAR DYNAMIC RENDERING
+       ================================== */
+    function renderProfile(info) {
+      document.title = `${info.name} — Portfolio (Ironforge Theme)`;
+      
+      const headlineEl = document.querySelector('h1.font-display');
+      if (headlineEl) {
+        headlineEl.innerHTML = `
+          <span class="headline-line"><span>DATA DRIVEN.</span></span>
+          <span class="headline-line"><span class="text-stroke">STRATEGIC.</span></span>
+          <span class="headline-line"><span>FORGED BY <span class="text-[var(--accent)]">${info.name.toUpperCase()}.</span></span></span>
+        `;
+      }
+      
+      const subheadlineEl = document.querySelector('#hero p.max-w-xl');
+      if (subheadlineEl) {
+        subheadlineEl.textContent = info.heroText;
+      }
+    }
+
+    function renderExperiences(experiences) {
+      const container = document.getElementById('coaches-grid');
+      if (!container) return;
+      container.innerHTML = '';
+      experiences.forEach((exp, idx) => {
+        const highlightsHTML = exp.highlights.map(hl => `
+          <li class="flex items-start gap-3">
+            <i class="fas fa-circle-check text-[var(--accent)] text-xs mt-1"></i>
+            <span class="leading-snug">${hl}</span>
+          </li>
+        `).join('');
+        const badgeText = idx === 0 ? '<div class="absolute top-4 right-4 px-2 py-1 bg-[var(--accent)] text-[var(--bg)] font-mono text-[10px] tracking-[0.15em]">CURRENT</div>' : '';
+        
+        let icon = 'fa-briefcase';
+        if (exp.title.toLowerCase().includes('co-founder') || exp.title.toLowerCase().includes('founder')) icon = 'fa-rocket';
+        else if (exp.title.toLowerCase().includes('it') || exp.title.toLowerCase().includes('system')) icon = 'fa-network-wired';
+        else if (exp.title.toLowerCase().includes('market') || exp.title.toLowerCase().includes('sales')) icon = 'fa-shopping-cart';
+        
+        container.insertAdjacentHTML('beforeend', `
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-face flip-front info-card flex flex-col">
+                <div class="coach-img-wrap flex items-center justify-center bg-[var(--bg-card)]">
+                  <i class="fas ${icon} text-7xl text-[var(--muted)]"></i>
+                  <div class="absolute top-4 left-4 font-mono text-[10px] text-[var(--accent)] tracking-[0.2em]">/ 0${idx + 1}</div>
+                  ${badgeText}
+                  <div class="absolute bottom-4 left-4 right-4">
+                    <div class="font-mono text-[10px] text-[var(--silver-dim)] tracking-[0.2em] uppercase">${exp.company}</div>
+                  </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-display text-3xl leading-none">${exp.title.toUpperCase()}</h3>
+                    <p class="text-[var(--muted)] text-xs mt-2 font-heading tracking-wider uppercase">${exp.company}</p>
+                  </div>
+                  <div class="flex items-center justify-between mt-4 pt-4 border-t border-[var(--border-light)]">
+                    <span class="font-mono text-[10px] text-[var(--muted)] tracking-[0.15em]">${exp.startDate.toUpperCase()}${exp.endDate ? ' - ' + exp.endDate.toUpperCase() : ' - PRESENT'}</span>
+                    <span class="font-mono text-[10px] text-[var(--accent)] tracking-[0.15em]">HOVER →</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-face flip-back info-card p-7 flex flex-col bg-[var(--bg-card)]">
+                <div class="font-mono text-[10px] text-[var(--accent)] tracking-[0.2em] uppercase mb-4">/ Role — Details</div>
+                <h3 class="font-display text-2xl mb-5">Key Contributions</h3>
+                <ul class="space-y-2.5 text-sm mb-6 flex-1">
+                  ${highlightsHTML}
+                </ul>
+                <div class="mt-auto pt-5 border-t border-[var(--border-light)]">
+                  <div class="font-mono text-[10px] text-[var(--muted)] tracking-[0.2em] uppercase mb-2">Location</div>
+                  <div class="font-display text-2xl text-[var(--accent)]">${exp.location ? exp.location.toUpperCase() : 'DHAKA, BD'}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+      });
+    }
+
+    function renderProjects(projects) {
+      const container = document.getElementById('projects-container');
+      if (!container) return;
+      container.innerHTML = '';
+      projects.forEach((proj, idx) => {
+        let icon = 'fa-code';
+        if (proj.category === 'automation') icon = 'fa-layer-group';
+        else if (proj.category === 'bi-viz') icon = 'fa-chart-line';
+        else if (proj.category === 'ml-ai') icon = 'fa-brain';
+        else if (proj.category === 'web-apps') icon = 'fa-window-maximize';
+        
+        const badgeText = proj.category.replace('-', ' ').toUpperCase();
+        const numLabel = String(idx + 1).padStart(2, '0');
+        
+        container.insertAdjacentHTML('beforeend', `
+          <article class="program-card info-card notch-corner group flex flex-col">
+            <div class="relative h-48 overflow-hidden bg-[var(--bg-card)] flex flex-col justify-center items-center border-b border-[var(--border-light)]">
+              <i class="fas ${icon} text-4xl text-[var(--accent)] mb-2 group-hover:scale-110 transition-transform"></i>
+              <h4 class="font-heading text-lg text-[var(--fg)] tracking-wider">${proj.title}</h4>
+              <div class="absolute top-4 left-4 font-mono text-[10px] text-[var(--accent)] tracking-[0.2em]">${numLabel} / ${badgeText}</div>
+            </div>
+            <div class="p-7 flex flex-col flex-1">
+              <h3 class="font-display text-3xl mb-3">${proj.title}</h3>
+              <p class="text-[var(--fg-dim)] text-sm leading-relaxed mb-6 flex-1">
+                ${proj.description}
+              </p>
+              <a href="${proj.liveUrl || proj.githubUrl || '#'}" target="_blank" class="flex items-center justify-between font-heading text-sm tracking-[0.15em] uppercase link-underline mt-auto">
+                <span>View Project</span>
+                <i class="fas fa-arrow-right text-[var(--accent)]"></i>
+              </a>
+            </div>
+          </article>
+        `);
+      });
+    }
+
+    function renderEducation(educationList) {
+      const container = document.getElementById('education-list');
+      if (!container) return;
+      container.innerHTML = '';
+      educationList.forEach((edu, idx) => {
+        let icon = 'fa-school';
+        if (edu.degree.includes('PGD')) icon = 'fa-graduation-cap';
+        else if (edu.degree.includes('BSc') || edu.degree.includes('Bachelor')) icon = 'fa-university';
+        else if (edu.degree.includes('SSC') || edu.degree.includes('HSC')) icon = 'fa-book';
+        
+        const isLast = idx === educationList.length - 1;
+        const borderClass = isLast ? '' : 'border-b border-[var(--border-light)] pb-6';
+        
+        container.insertAdjacentHTML('beforeend', `
+          <div class="flex gap-6 ${borderClass} relative group">
+            <div class="w-12 h-12 bg-[var(--bg)] border border-[var(--border-light)] group-hover:border-[var(--accent)] transition-colors flex items-center justify-center shrink-0">
+              <i class="fas ${icon} text-[var(--accent)] text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-display text-3xl mb-1">${edu.degree}</h3>
+              <div class="font-heading text-sm text-[var(--fg-dim)] tracking-wider mb-2">${edu.institution}</div>
+              <div class="font-mono text-[10px] text-[var(--muted)] tracking-[0.15em] uppercase">${edu.date}</div>
+            </div>
+          </div>
+        `);
+      });
+    }
+
+    // Dynamic Bootstrap Ingestion Flow
+    async function bootstrap() {
+      try {
+        const data = await window.PortfolioData.load();
+        renderProfile(data.info);
+        renderExperiences(data.experiences);
+        renderEducation(data.education);
+        renderProjects(data.projects);
+      } catch (err) {
+        console.error('[PORTFOLIO_BOOTSTRAP] Ironforge dynamic load failure', err);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', bootstrap);
   </script>
 </body>
 </html>
