@@ -241,13 +241,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
     window.speechSynthesis.getVoices();
 
+    // Update active theme tracker
+    localStorage.setItem('portfolio-active-theme', 'theme-tactical.html');
+
     // --- Theme Switching Ops ---
     const themeToggle = document.getElementById('theme-toggle');
     const root = document.documentElement;
 
     const applyTheme = (theme, accent) => {
         root.setAttribute('data-theme', theme);
-        root.setAttribute('data-accent', accent);
+        if (accent) {
+            root.setAttribute('data-accent', accent);
+        }
         document.body.setAttribute('data-theme', theme); // for backward compatibility
         updateThemeIcon(theme);
     };
@@ -256,14 +261,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const savedAccent = localStorage.getItem('tactical-accent') || 'green';
     applyTheme(savedTheme, savedAccent);
 
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = root.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme, root.getAttribute('data-accent'));
-            localStorage.setItem('tactical-theme', newTheme);
-        });
-    }
+    // Initialize Teardrop ripple switcher
+    window.initThemeToggleWithRipple({
+      buttonId: 'theme-toggle',
+      getTheme: () => root.getAttribute('data-theme') || 'dark',
+      applyTheme: (theme) => applyTheme(theme, root.getAttribute('data-accent')),
+      saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
+    });
 
     // --- Accent Color Switcher ---
     const colorSwatches = document.querySelectorAll('.color-swatch');
