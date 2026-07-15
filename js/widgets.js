@@ -1,24 +1,10 @@
 /**
  * WIDGETS & HUD ANALYTICS
  * Handles status bars, search, GitHub integration, and data visualization
+ * Now exported as ES module.
  */
 
-// Global Initialization
-window.addEventListener('DOMContentLoaded', () => {
-    initSystemStatus();
-    initDigitalClock();
-    initLiveSearch();
-    fetchGitHubActivity();
-    initPdfFab();
-    initZenMode();
-    initDataViz();
-    initSectionAnalytics();
-    initHudResizer();
-    initProjectFilters();
-});
-
-// ===== PROJECT FILTERS =====
-function initProjectFilters() {
+export function initProjectFilters() {
     const filters = document.querySelectorAll('#projectFilters .filter-btn');
     if (!filters.length) return;
 
@@ -46,21 +32,18 @@ function initProjectFilters() {
                 }
             });
 
-            if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+            if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
         });
     });
 }
 
-// ===== HUD RESIZER ENGINE (Delegated Drag) =====
-function initHudResizer() {
-    // Add resize handles to all .card-glass elements
+export function initHudResizer() {
     document.querySelectorAll('.card-glass').forEach(widget => {
         const handle = document.createElement('div');
         handle.className = 'hud-resize-handle';
         widget.appendChild(handle);
     });
 
-    // Single drag tracker shared across all widgets
     let dragTarget = null;
     let startX, startY, startW, startH;
 
@@ -86,12 +69,11 @@ function initHudResizer() {
     document.addEventListener('mouseup', () => {
         if (!dragTarget) return;
         dragTarget = null;
-        if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
     });
 }
 
-// ===== DIGITAL CLOCK HUD =====
-function initDigitalClock() {
+export function initDigitalClock() {
     const clock = document.getElementById('digitalClock');
     if (!clock) return;
 
@@ -103,8 +85,7 @@ function initDigitalClock() {
     update();
 }
 
-// ===== SCROLL PROGRESS HUD (RAF-Debounced) =====
-function initScrollProgress() {
+export function initScrollProgress() {
     const progressHUD = document.createElement('div');
     progressHUD.className = 'scroll-progress-hud';
     document.body.appendChild(progressHUD);
@@ -117,7 +98,6 @@ function initScrollProgress() {
         const progressPercentage = (scrollPosition / windowHeight) * 100;
         progressHUD.style.width = progressPercentage + '%';
 
-        // Dynamic fade on navbar if needed
         const navbar = document.querySelector('.navbar');
         if (navbar) {
             if (scrollPosition > 50) {
@@ -139,8 +119,7 @@ function initScrollProgress() {
     }, { passive: true });
 }
 
-// ===== SYSTEM STATUS WIDGET =====
-function initSystemStatus() {
+export function initSystemStatus() {
     const widget = document.getElementById('systemStatus');
     if (!widget) return;
 
@@ -159,17 +138,14 @@ function initSystemStatus() {
     });
 }
 
-// ===== LIVE SEARCH =====
-function initLiveSearch() {
+export function initLiveSearch() {
     const searchContainer = document.getElementById('liveSearch');
     const searchInput = document.getElementById('globalSearch');
     const results = document.getElementById('searchResults');
     if (!searchContainer || !searchInput || !results) return;
 
-    // Build search index
     const searchIndex = [];
 
-    // Add projects
     document.querySelectorAll('.project-item').forEach(item => {
         const title = item.querySelector('.card-title')?.textContent || '';
         const text = item.querySelector('.card-text')?.textContent || '';
@@ -182,7 +158,6 @@ function initLiveSearch() {
         });
     });
 
-    // Add experience
     document.querySelectorAll('.timeline-item').forEach(item => {
         const title = item.querySelector('h3')?.textContent || '';
         const company = item.querySelector('.subheading')?.textContent || '';
@@ -195,7 +170,6 @@ function initLiveSearch() {
         });
     });
 
-    // Add skills
     document.querySelectorAll('#skill-chips .badge').forEach(item => {
         searchIndex.push({
             type: 'Skill',
@@ -206,7 +180,6 @@ function initLiveSearch() {
         });
     });
 
-    // Keyboard shortcut (/)
     document.addEventListener('keydown', (e) => {
         if (e.key === '/' && !e.ctrlKey && !e.altKey && !e.metaKey) {
             if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
@@ -221,7 +194,6 @@ function initLiveSearch() {
         }
     });
 
-    // Search functionality
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
         results.innerHTML = '';
@@ -251,12 +223,9 @@ function initLiveSearch() {
     });
 }
 
-// ===== GITHUB ACTIVITY WIDGET =====
-// Handled by js/github-feed.js (GitHub-style commit/push feed)
-async function fetchGitHubActivity() { /* no-op — see github-feed.js */ }
+export function fetchGitHubActivity() { /* no-op — see github-feed.js */ }
 
-// ===== PDF DOWNLOAD FAB =====
-function initPdfFab() {
+export function initPdfFab() {
     const fab = document.getElementById('pdfFab');
     if (!fab) return;
 
@@ -272,8 +241,7 @@ function initPdfFab() {
     });
 }
 
-// ===== ZEN MODE =====
-function initZenMode() {
+export function initZenMode() {
     const toggle = document.getElementById('zenToggle');
     const body = document.body;
     if (!toggle) return;
@@ -290,8 +258,7 @@ function initZenMode() {
     });
 }
 
-// ===== LIVE DATA VISUALIZATION =====
-function initDataViz() {
+export function initDataViz() {
     const canvas = document.getElementById('liveMetricsChart');
     if (!canvas) return;
 
@@ -342,7 +309,6 @@ function initDataViz() {
         drawChart();
     }, 2000);
 
-    // Cleanup on page unload
     window.addEventListener('beforeunload', () => {
         clearInterval(chartInterval);
     });
@@ -350,8 +316,7 @@ function initDataViz() {
     drawChart();
 }
 
-// ===== SECTION ANALYTICS =====
-function initSectionAnalytics() {
+export function initSectionAnalytics() {
     const sections = ['about', 'experience', 'education', 'skills', 'projects', 'awards'];
     const viewCounts = JSON.parse(localStorage.getItem('sectionViews') || '{}');
 

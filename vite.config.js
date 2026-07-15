@@ -28,6 +28,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        themeTactical: 'theme-tactical.html',
+        themeIronforge: 'theme-ironforge.html',
+        themeSketchbook: 'theme-sketchbook.html',
+        resume: 'resume.html'
       },
     },
   },

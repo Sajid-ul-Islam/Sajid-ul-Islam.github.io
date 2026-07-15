@@ -1,13 +1,13 @@
 /**
  * GITHUB LIVE FEED — Reliable GitHub-style activity renderer
  * Fetches real data from GitHub API, falls back to simulated commits
- * Renders into #githubActivity with .activity-item elements
+ * Now exported as ES module.
  */
 
-const GH_USER   = 'Sajid-ul-Islam';
-const GH_API    = `https://api.github.com/users/${GH_USER}/events/public`;
+export const GH_USER   = 'Sajid-ul-Islam';
+export const GH_API    = `https://api.github.com/users/${GH_USER}/events/public`;
 
-const TYPE_MAP = {
+export const TYPE_MAP = {
     PushEvent:          { icon: 'fa-code-commit',      color: '#22c55e', verb: 'pushed to'    },
     CreateEvent:        { icon: 'fa-plus-circle',      color: '#3b82f6', verb: 'created'      },
     ForkEvent:          { icon: 'fa-code-branch',      color: '#8b5cf6', verb: 'forked'       },
@@ -18,7 +18,7 @@ const TYPE_MAP = {
     DeleteEvent:        { icon: 'fa-trash-alt',        color: '#ef4444', verb: 'deleted from' }
 };
 
-const FALLBACK_EVENTS = [
+export const FALLBACK_EVENTS = [
     { type: 'PushEvent',   repo: 'Sajid-ul-Islam.github.io',   branch: 'main',   msg: 'Fix portfolio bridge & restore feed',  sha: 'a3f1c28', ago: '8m ago'  },
     { type: 'PushEvent',   repo: 'Sajid-ul-Islam.github.io',   branch: 'main',   msg: 'Add Agentic AI to learning track',     sha: 'b8e2d14', ago: '42m ago' },
     { type: 'CreateEvent', repo: 'agentic-ai-assistant',     branch: 'feature/rag', msg: '',                                sha: '',        ago: '2h ago'  },
@@ -28,7 +28,7 @@ const FALLBACK_EVENTS = [
     { type: 'ForkEvent',   repo: 'vercel/next.js',           branch: '',       msg: '',                                     sha: '',        ago: '2d ago'  }
 ];
 
-function timeAgo(isoString) {
+export function timeAgo(isoString) {
     const s = Math.floor((Date.now() - new Date(isoString)) / 1000);
     if (s < 60)     return 'just now';
     if (s < 3600)   return `${Math.floor(s / 60)}m ago`;
@@ -36,11 +36,11 @@ function timeAgo(isoString) {
     return `${Math.floor(s / 86400)}d ago`;
 }
 
-function shortRepo(fullName) {
+export function shortRepo(fullName) {
     return (fullName || '').replace(`${GH_USER}/`, '');
 }
 
-function renderActivityItem(data) {
+export function renderActivityItem(data) {
     const cfg    = TYPE_MAP[data.type] || { icon: 'fa-circle', color: '#6b7280', verb: 'activity in' };
     const repo   = shortRepo(data.repo);
     const time   = data.ago || data.isoTime;
@@ -68,12 +68,12 @@ function renderActivityItem(data) {
         </div>`;
 }
 
-function renderFallback(container) {
+export function renderFallback(container) {
     container.innerHTML = FALLBACK_EVENTS.map(renderActivityItem).join('');
     animateItems(container);
 }
 
-function animateItems(container) {
+export function animateItems(container) {
     container.querySelectorAll('.activity-item').forEach((el, i) => {
         el.style.opacity   = '0';
         el.style.transform = 'translateX(-10px)';
@@ -85,11 +85,10 @@ function animateItems(container) {
     });
 }
 
-async function initGitHubFeed() {
+export async function initGitHubFeed() {
     const container = document.getElementById('githubActivity');
     if (!container) return;
 
-    // Update header with live dot
     const header = document.querySelector('#githubWidget .widget-header');
     if (header) {
         header.innerHTML = `<i class="fab fa-github"></i><span>LIVE_FEED</span><span class="gh-live-dot"></span>`;
@@ -124,7 +123,6 @@ async function initGitHubFeed() {
         renderFallback(container);
     }
 
-    // Live simulation: add new fake events every 30s
     setInterval(() => {
         const newEvents = [
             { type: 'PushEvent',  repo: 'Sajid-ul-Islam.github.io', branch: 'main', msg: 'Minor fix',             sha: Math.random().toString(36).slice(2,9), ago: 'just now' },
@@ -140,9 +138,6 @@ async function initGitHubFeed() {
             container.insertBefore(child, container.firstChild);
             setTimeout(() => { child.style.opacity = '1'; child.style.transform = 'translateX(0)'; }, 50);
         }
-        // Remove beyond 10
         while (container.children.length > 10) container.removeChild(container.lastChild);
     }, 30000);
 }
-
-document.addEventListener('DOMContentLoaded', initGitHubFeed);

@@ -1,33 +1,31 @@
 /**
  * PORTFOLIO BRIDGE
  * Handles the secure uplink to remote portfolio sites
+ * Now exported as ES module.
  */
 
-const EXTERNAL_BLOCK_LIST = [
+export const EXTERNAL_BLOCK_LIST = [
     'wa.me', 'whatsapp.com', 'api.whatsapp.com',
     'chatgpt.com', 'openai.com', 'chat.openai.com',
     'google.com', 'linkedin.com', 'facebook.com', 'instagram.com', 'twitter.com'
 ];
 
-function openPortfolioBridge(e, url) {
+export function openPortfolioBridge(e, url) {
     if (e) e.preventDefault();
     const bridge = document.getElementById('portfolioBridge');
     const iframe = document.getElementById('portfolioIframe');
-    const loader = bridge.querySelector('.bridge-loader');
+    const loader = bridge?.querySelector('.bridge-loader');
     const displayUrl = document.getElementById('bridgeDisplayUrl');
 
     const normalizedUrl = url.toLowerCase();
     const isBlocked = EXTERNAL_BLOCK_LIST.some(domain => normalizedUrl.includes(domain.toLowerCase()));
 
     if (isBlocked) {
-        // [BYPASS_ENGAGED] - Direct Tab/Window Popup for Restricted Nodes
-        console.log('[UPLINK_STATUS]: Restricted Node Detected. Shifting to Secure Direct Window.');
         const win = window.open(url, '_blank');
         if (!win || win.closed || typeof win.closed == 'undefined') {
-            // Popup blocker likely active - use direct location shift if it's the last resort
             window.location.assign(url);
         }
-        if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
+        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
         return;
     }
 
@@ -38,39 +36,39 @@ function openPortfolioBridge(e, url) {
            if (displayUrl) displayUrl.textContent = new URL(url).hostname;
         } catch(err) { if (displayUrl) displayUrl.textContent = "EXTERNAL_NODE"; }
     }
-    loader.style.display = 'flex';
+    if (loader) loader.style.display = 'flex';
 
     iframe.onload = () => {
-        loader.style.display = 'none';
-        if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+        if (loader) loader.style.display = 'none';
+        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
     };
 
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
 }
 
-function minimizePortfolioBridge() {
+export function minimizePortfolioBridge() {
     const bridge = document.getElementById('portfolioBridge');
     const taskbar = document.getElementById('bridgeTaskbar');
-    bridge.style.display = 'none';
-    taskbar.classList.add('active');
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+    if (bridge) bridge.style.display = 'none';
+    if (taskbar) taskbar.classList.add('active');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
 }
 
-function restorePortfolioBridge() {
+export function restorePortfolioBridge() {
     const bridge = document.getElementById('portfolioBridge');
     const taskbar = document.getElementById('bridgeTaskbar');
-    bridge.style.display = 'flex';
-    taskbar.classList.remove('active');
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+    if (bridge) bridge.style.display = 'flex';
+    if (taskbar) taskbar.classList.remove('active');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
 }
 
-function toggleMaximizeBridge() {
+export function toggleMaximizeBridge() {
     const win = document.getElementById('bridgeWindow');
-    win.classList.toggle('maximized');
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+    if (win) win.classList.toggle('maximized');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
 }
 
-function initResizableBridge() {
+export function initResizableBridge() {
     const win = document.getElementById('bridgeWindow');
     if (!win) return;
     const handle = win.querySelector('.bridge-resize-handle');
@@ -96,7 +94,7 @@ function initResizableBridge() {
     }
 }
 
-function closePortfolioBridge() {
+export function closePortfolioBridge() {
     const bridge = document.getElementById('portfolioBridge');
     const iframe = document.getElementById('portfolioIframe');
     if (!bridge || !iframe) return;
@@ -105,5 +103,5 @@ function closePortfolioBridge() {
     setTimeout(() => {
         iframe.src = '';
     }, 400);
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
 }

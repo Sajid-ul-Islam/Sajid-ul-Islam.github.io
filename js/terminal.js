@@ -1,38 +1,37 @@
 /**
  * TACTICAL SHELL v5.2
  * Multi-threaded interactive terminal for situational awareness
+ * Now exported as ES module.
  */
 
 let commandHistory = [];
 let historyIndex = -1;
 let telemetryIntervals = [];
 
-function toggleBottomTerminal() {
+export function toggleBottomTerminal() {
     const term = document.getElementById('bottomTerminal');
     if (term) term.classList.toggle('active');
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
 }
 
-window.switchTerminalTab = (tabId) => {
+export function switchTerminalTab(tabId) {
     document.querySelectorAll('.terminal-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.terminal-tab-content').forEach(c => c.classList.remove('active'));
     
-    // Find tab by content text or ID
     const tabs = document.querySelectorAll('.terminal-tab');
     const activeTab = Array.from(tabs).find(t => t.textContent.toLowerCase().includes(tabId));
     const activeContent = document.getElementById(`tab-${tabId}`);
     
     if (activeTab) activeTab.classList.add('active');
     if (activeContent) activeContent.classList.add('active');
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('click');
-};
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
+}
 
-function startTelemetryStreams() {
+export function startTelemetryStreams() {
     const debug = document.getElementById('debug-stream');
     const output = document.getElementById('output-stream');
     if (!debug || !output) return;
 
-    // Clear existing intervals to prevent memory leaks
     telemetryIntervals.forEach(interval => clearInterval(interval));
     telemetryIntervals = [];
 
@@ -73,13 +72,11 @@ function startTelemetryStreams() {
     telemetryIntervals.push(outputInterval);
 }
 
-// Cleanup function to prevent memory leaks
-function cleanupTerminal() {
+export function cleanupTerminal() {
     telemetryIntervals.forEach(interval => clearInterval(interval));
     telemetryIntervals = [];
 }
 
-// Add cleanup on page unload
 window.addEventListener('beforeunload', cleanupTerminal);
 
 const terminalCommands = {
@@ -120,7 +117,6 @@ const terminalCommands = {
         if (!args || args.length === 0) return "USAGE: cat [id]";
         const fileId = args[0].replace(/^\./, '');
         
-        // Check Mission Secrets first
         if (window.MISSION_SECRETS && window.MISSION_SECRETS[fileId]) {
             return `[LOCAL_DOSSIER]: ${fileId}\nINTEL: ${window.MISSION_SECRETS[fileId]}`;
         }
@@ -194,7 +190,7 @@ const terminalCommands = {
     }
 };
 
-function initTerminal() {
+export function initTerminal() {
     const input = document.getElementById('terminal-input');
     const output = document.getElementById('terminal-output');
     const bottomInput = document.getElementById('bottom-terminal-input');
@@ -271,7 +267,7 @@ function initTerminal() {
 
                 targetInput.value = '';
                 targetOutput.scrollTop = targetOutput.scrollHeight;
-                if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
+                if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
             }
         });
     };
@@ -285,5 +281,3 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
-
-document.addEventListener('DOMContentLoaded', initTerminal);

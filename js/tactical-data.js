@@ -1,30 +1,22 @@
 /**
  * TACTICAL DATA ENGINE - v2.0
- * Restoring original data and fixing filtering bugs.
+ * Data rendering and initialization
+ * Now exported as ES module.
  */
 
-const SHEET_ID = '1jRHTJ6rC4UMLoBt1o26mfOlOzDTnGJGv'; // Sajid's Portfolio Sheet
-const BASE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=`;
+import { 
+  DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS, 
+  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, 
+  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL, SHEET_CONFIG,
+  PortfolioData, parseCSV, fetchSheetData 
+} from './data/index.js';
 
-const SHEETS = {
-    INFO: 'Info',
-    EXPERIENCE: 'Experience',
-    EDUCATION: 'Education',
-    SKILLS: 'Skills',
-    PROJECTS: 'Projects',
-    AWARDS: 'Awards'
-};
+export const SHEET_ID = SHEET_CONFIG.SHEET_ID;
+export const BASE_URL = SHEET_CONFIG.BASE_URL;
+export const SHEETS = SHEET_CONFIG.SHEETS;
+export const DEFAULT_INFO = PROFILE_INFO;
 
-const DEFAULT_INFO = {
-    Name: 'Sajid Islam',
-    Role: 'Data Scientist & Business Analyst',
-    HeroText: 'A Data & Business Analyst specialized in turning complex datasets into strategic growth. Based in Bangladesh, I lead data-ops at DEEN Commerce and previously optimized performance at Daraz (Alibaba Group).'
-};
-
-/**
- * Typewriter Effect Class
- */
-class Typewriter {
+export class Typewriter {
     constructor(el, text, speed = 50) {
         this.el = el;
         this.text = text;
@@ -50,7 +42,7 @@ class Typewriter {
     }
 }
 
-function runTypewriter(info) {
+export function runTypewriter(info) {
     const tH1 = document.getElementById('typewriter-h1');
     const tP = document.getElementById('typewriter-p');
 
@@ -69,55 +61,23 @@ function runTypewriter(info) {
     }
 }
 
-async function fetchSheetData(sheetName) {
-    try {
-        const response = await fetch(`${BASE_URL}${sheetName}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const text = await response.text();
-        return parseCSV(text);
-    } catch (error) {
-        console.warn(`[DATA_FAIL] Using local fallback for ${sheetName}.`);
-        return [];
-    }
-}
-
-function parseCSV(csvText) {
-    const lines = csvText.split('\n');
-    if (lines.length < 1) return [];
-    const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
-    return lines.slice(1).filter(line => line.trim()).map(line => {
-        const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-        const obj = {};
-        headers.forEach((header, i) => {
-            let val = values[i] ? values[i].replace(/^"|"$/g, '').trim() : '';
-            val = val.replace(/""/g, '"');
-            obj[header] = val;
-        });
-        return obj;
-    });
-}
-
-async function initializeTacticalData() {
-    console.log('[SYNC] Connecting to Intel Grid via Unified Data Engine...');
-
+export async function initializeTacticalData() {
     runTypewriter(DEFAULT_INFO);
 
-    // Load dynamic data globally
-    const data = await window.PortfolioData.load();
+    const data = await PortfolioData.load();
     
-    const info = window.PortfolioData.getInfo();
-    const finalExperience = window.PortfolioData.getExperiences();
-    const finalEducation = window.PortfolioData.getEducation();
-    const finalSkillGroups = window.PortfolioData.getSkills();
-    const finalProjects = window.PortfolioData.getProjects();
-    const fileTree = window.PortfolioData.getFileTree();
-    const blogs = window.PortfolioData.getBlogPosts();
-    const learning = window.PortfolioData.getLearning();
-    const gaming = window.PortfolioData.getGaming();
+    const info = PortfolioData.getInfo();
+    const finalExperience = PortfolioData.getExperiences();
+    const finalEducation = PortfolioData.getEducation();
+    const finalSkillGroups = PortfolioData.getSkills();
+    const finalProjects = PortfolioData.getProjects();
+    const fileTree = PortfolioData.getFileTree();
+    const blogs = PortfolioData.getBlogPosts();
+    const learning = PortfolioData.getLearning();
+    const gaming = PortfolioData.getGaming();
 
     window.projectsList = finalProjects;
 
-    // Call renders
     renderInfo({
       Name: info.name,
       Role: info.role,
@@ -125,7 +85,8 @@ async function initializeTacticalData() {
       Github: info.github,
       Linkedin: info.linkedin,
       Kaggle: info.kaggle,
-      Whatsapp: info.whatsapp
+      Whatsapp: info.whatsapp,
+      Email: info.email
     });
 
     if (finalExperience.length > 0) renderExperience(finalExperience);
@@ -139,7 +100,6 @@ async function initializeTacticalData() {
         renderProjects(finalProjects);
         initializeProjectFilters();
         
-        // Dynamically add FEATURED_OPS folder to explorer file tree
         if (fileTree) {
             const projectsFolder = fileTree.find(f => f.id === 'portfolio');
             if (projectsFolder && !fileTree.some(f => f.id === 'featured-ops')) {
@@ -158,9 +118,9 @@ async function initializeTacticalData() {
     if (blogs) renderBlogs(blogs);
     if (learning) renderLearning(learning);
     if (gaming) renderGaming(gaming);
+    if (gaming && gaming.favorites) renderMedia(gaming.favorites);
     if (fileTree) renderFileTree(fileTree);
 
-    // Call github fetch
     const githubUser = info.github ? info.github.split('/').pop() : 'Sajid-ul-Islam';
     fetchGithubRepos(githubUser);
 
@@ -169,7 +129,7 @@ async function initializeTacticalData() {
     }, 500);
 }
 
-function renderInfo(info) {
+export function renderInfo(info) {
     if (!info.Name) return;
     runTypewriter(info);
     document.title = `${info.Name} || [TACTICAL_INTEL]`;
@@ -180,7 +140,7 @@ function renderInfo(info) {
     if (info.Github) document.querySelectorAll('[title="GitHub"]').forEach(a => a.href = info.Github);
     if (info.LinkedIn) document.querySelectorAll('[title="LinkedIn"]').forEach(a => a.href = info.LinkedIn);
     if (info.Kaggle) document.querySelectorAll('[title="Kaggle"]').forEach(a => a.href = info.Kaggle);
-    if (info.HuggingFace || DEFAULT_INFO.HuggingFace) document.querySelectorAll('[title="Hugging Face"]').forEach(a => a.href = info.HuggingFace || DEFAULT_INFO.HuggingFace);
+    if (info.HuggingFace || PROFILE_INFO.huggingface) document.querySelectorAll('[title="Hugging Face"]').forEach(a => a.href = info.HuggingFace || PROFILE_INFO.huggingface);
 
     const waSpan = document.getElementById('contact-details');
     if (waSpan && info.Whatsapp && info.Email) {
@@ -203,11 +163,10 @@ function renderInfo(info) {
     }
 }
 
-function renderExperience(data) {
+export function renderExperience(data) {
     const container = document.getElementById('experience-list');
     if (!container) return;
     if (!Array.isArray(data)) {
-        console.error('[TACTICAL_DATA] renderExperience: data is not an array', data);
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Invalid experience data format</div>';
         return;
     }
@@ -230,16 +189,14 @@ function renderExperience(data) {
             `);
         });
     } catch (err) {
-        console.error('[TACTICAL_DATA] renderExperience error:', err);
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render experience</div>';
     }
 }
 
-function renderEducation(data) {
+export function renderEducation(data) {
     const container = document.getElementById('education-list');
     if (!container) return;
     if (!Array.isArray(data)) {
-        console.error('[TACTICAL_DATA] renderEducation: data is not an array', data);
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Invalid education data format</div>';
         return;
     }
@@ -257,13 +214,11 @@ function renderEducation(data) {
             `);
         });
     } catch (err) {
-        console.error('[TACTICAL_DATA] renderEducation error:', err);
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render education</div>';
     }
 }
 
-function renderSkillGroups(groups) {
-    const pbContainer = document.getElementById('skill-progress-bars');
+export function renderSkillGroups(groups) {
     const chartLabels = [];
     const chartValues = [];
 
@@ -294,12 +249,12 @@ function renderSkillGroups(groups) {
     if (window.skillsRadarChart && chartLabels.length > 0) {
         window.skillsRadarChart.data.labels = chartLabels;
         window.skillsRadarChart.data.datasets[0].data = chartValues;
-        window.chartBaseData = [...chartValues]; // Retain dynamic baseline for hover effects
+        window.chartBaseData = [...chartValues];
         window.skillsRadarChart.update();
     }
 }
 
-function renderSkills(data) {
+export function renderSkills(data) {
     const chipContainer = document.getElementById('skill-chips');
     if (chipContainer) {
         chipContainer.innerHTML = '';
@@ -309,7 +264,7 @@ function renderSkills(data) {
     }
 }
 
-function renderProjects(data) {
+export function renderProjects(data) {
     const container = document.getElementById('project-list');
     if (!container) return;
     container.innerHTML = '';
@@ -348,28 +303,28 @@ function renderProjects(data) {
     });
 }
 
-window.decryptDossier = (id, el, force = false) => {
+export function decryptDossier(id, el, force = false) {
     const descEl = document.getElementById(`desc-${id}`);
     const dossier = document.getElementById(`dossier-${id}`);
     if (!descEl || (!force && descEl.classList.contains('decrypted'))) return;
     const project = window.projectsList ? window.projectsList.find(p => p.id == id) : ((window.DATA && window.DATA.projects) ? window.DATA.projects.find(p => p.id == id) : null);
     const actualText = project ? project.description : "DATA_RECOVERY_FAILED.";
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('type');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('type');
     descEl.classList.add('decrypting');
     dossier.classList.add('scanning');
     let i = 0;
     const interval = setInterval(() => {
         if (i < actualText.length) { descEl.textContent = actualText.substring(0, i) + '█'; i++; }
-        else { descEl.textContent = actualText; descEl.classList.remove('decrypting'); descEl.classList.add('decrypted'); dossier.classList.remove('scanning'); clearInterval(interval); if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep'); }
+        else { descEl.textContent = actualText; descEl.classList.remove('decrypting'); descEl.classList.add('decrypted'); dossier.classList.remove('scanning'); clearInterval(interval); if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep'); }
     }, 20);
 };
 
-function toggleCaseStudy(id, btn) {
+export function toggleCaseStudy(id, btn) {
     const el = document.getElementById(`case-${id}`);
     if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
 }
 
-function renderAwards(data) {
+export function renderAwards(data) {
     const container = document.getElementById('awards-list');
     if (!container) return;
     container.innerHTML = data.map(item => `
@@ -381,7 +336,7 @@ function renderAwards(data) {
           </div>`).join('');
 }
 
-function initializeProjectFilters() {
+export function initializeProjectFilters() {
     const filters = document.querySelectorAll('.filter-btn');
     filters.forEach(btn => {
         btn.onclick = () => {
@@ -396,22 +351,22 @@ function initializeProjectFilters() {
     });
 }
 
-function renderBlogs(data) {
+export function renderBlogs(data) {
     const container = document.getElementById('blog-list');
     if (container) container.innerHTML = data.map(p => `<div class="col-md-4 card-glass p-3 m-2"><h6 class="text-primary">${p.title}</h6><p class="small text-secondary">${p.excerpt}</p></div>`).join('');
 }
 
-function renderLearning(data) {
+export function renderLearning(data) {
     const container = document.getElementById('learning-list');
     if (container) container.innerHTML = data.map(l => `<div class="col-md-6 mb-2"><span>${l.name}</span><div class="progress" style="height:4px"><div class="progress-bar bg-success" style="width:${l.progress}%"></div></div></div>`).join('');
 }
 
-function renderGaming(data) {
+export function renderGaming(data) {
     const container = document.getElementById('gaming-stats');
     if (container) container.innerHTML = data.stats.map(s => `<span>${s.label}: ${s.value}</span>`).join(' | ');
 }
 
-function renderMedia(data) {
+export function renderMedia(data) {
     const container = document.getElementById('media-list') || document.getElementById('favorites-list');
     if (!container || !data) return;
 
@@ -432,12 +387,11 @@ function renderMedia(data) {
             </div>
         `).join('');
     } catch (err) {
-        console.error('[TACTICAL_DATA] renderMedia error:', err);
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render media</div>';
     }
 }
 
-function renderFileTree(data) {
+export function renderFileTree(data) {
     const container = document.querySelector('.file-tree-container');
     if (!container) return;
     container.innerHTML = data.map(section => `
@@ -449,7 +403,7 @@ function renderFileTree(data) {
         </div>`).join('');
 }
 
-async function fetchGithubRepos(username) {
+export async function fetchGithubRepos(username) {
     const container = document.getElementById('githubActivity');
     if (!container) return;
     try {
@@ -459,8 +413,7 @@ async function fetchGithubRepos(username) {
     } catch (e) { container.innerHTML = 'OFFLINE'; }
 }
 
-// PORTFOLIO BRIDGE (Project Deep Dives HUD)
-window.openPortfolioBridge = function (e, projectId) {
+export function openPortfolioBridge(e, projectId) {
     e.preventDefault();
     const project = (window.DATA && window.DATA.projects) ? window.DATA.projects.find(p => p.id === projectId) : null;
     if (!project) return;
@@ -508,9 +461,9 @@ window.openPortfolioBridge = function (e, projectId) {
         </div>
     `;
     setTimeout(() => overlay.classList.add('active'), 10);
-};
+}
 
-window.closePortfolioBridge = function () {
+export function closePortfolioBridge() {
     const overlay = document.getElementById('portfolioBridgeOverlay');
     if (overlay) {
         overlay.classList.remove('active');
@@ -518,14 +471,17 @@ window.closePortfolioBridge = function () {
     }
 }
 
-function toggleTreeSection(id) {
+export function toggleTreeSection(id) {
     const el = document.querySelector(`#tree-sec-${id} .file-tree-items`);
     if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
-function toggleMobileSidebar() { document.getElementById('fileTreeSidebar').classList.toggle('open'); }
+export function toggleMobileSidebar() { 
+    const sidebar = document.getElementById('fileTreeSidebar');
+    if (sidebar) sidebar.classList.toggle('open'); 
+}
 
-function handleTreeClick(e, id) {
+export function handleTreeClick(e, id) {
     const href = e.currentTarget.getAttribute('href');
     if (href && href.startsWith('#')) {
         e.preventDefault();

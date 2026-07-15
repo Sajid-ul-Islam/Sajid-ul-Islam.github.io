@@ -1,10 +1,10 @@
 /**
  * AUDIO ENGINE MODULE
  * Procedural sound effects for the Tactical HUD interface.
- * Extracted from tactical-enhancements.js to break circular dependencies.
+ * Now exported as ES module.
  */
 
-class AudioEngineClass {
+export class AudioEngineClass {
   constructor() {
     this.enabled = localStorage.getItem('tactical-audio') !== 'disabled';
     this.sounds = {};
@@ -93,11 +93,10 @@ class AudioEngineClass {
     return this.enabled;
   }
 
-  // Alias used by KeyboardNavigator (Alt+M handler)
   toggleMusic() {
     return this.toggle();
   }
 }
 
-// Expose globally for classic script loading
-window.AudioEngine = new AudioEngineClass();
+// Create singleton instance
+export const AudioEngine = new AudioEngineClass();

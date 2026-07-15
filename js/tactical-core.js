@@ -1,11 +1,12 @@
 /**
  * TACTICAL CORE
  * Core UI interactions, theme management, and base effects
+ * Now exported as ES module.
  */
 
-const GLITCH_CHARS = 'ABCDEFGHIKLMNOPQRSTUVWXYZ0123456789§$#@*&';
+export const GLITCH_CHARS = 'ABCDEFGHIKLMNOPQRSTUVWXYZ0123456789§$#@*&';
 
-function glitchEffect(el) {
+export function glitchEffect(el) {
     if (!el) return;
     const originalText = el.getAttribute('data-original') || el.innerText;
     if (!el.getAttribute('data-original')) el.setAttribute('data-original', originalText);
@@ -21,7 +22,7 @@ function glitchEffect(el) {
     }, 30);
 }
 
-function updateThemeIcon(theme) {
+export function updateThemeIcon(theme) {
     const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;
     const themeIcon = themeToggle.querySelector('i');
@@ -30,44 +31,35 @@ function updateThemeIcon(theme) {
     }
 }
 
-/**
- * MISSION_CRITICAL CORE v6.0
- * Hardware Diagnostics, Neural Voice, and Ambient Situational Audio
- *
- * NOTE: AudioEngine is defined in tactical-enhancements.js (loaded after this file).
- * References to AudioEngine here are guarded by typeof checks or resolved at call time.
- */
-
-function updateSystemHealth() {
+export function updateSystemHealth() {
     const batteryNode = document.getElementById('batteryNode');
     const memoryNode = document.getElementById('memoryNode');
     const osNode = document.getElementById('osNode');
 
     if (navigator.getBattery) {
         navigator.getBattery().then(bat => {
-            const updateBat = () => { batteryNode.textContent = `${Math.round(bat.level * 100)}%`; };
+            const updateBat = () => { if (batteryNode) batteryNode.textContent = `${Math.round(bat.level * 100)}%`; };
             updateBat();
             bat.onlevelchange = updateBat;
         });
     }
 
     if (navigator.deviceMemory) {
-        memoryNode.textContent = `${navigator.deviceMemory}GB_RAM`;
+        if (memoryNode) memoryNode.textContent = `${navigator.deviceMemory}GB_RAM`;
     } else {
-        memoryNode.textContent = "DETECT_FAILED";
+        if (memoryNode) memoryNode.textContent = "DETECT_FAILED";
     }
 
     const platform = navigator.userAgentData ? navigator.userAgentData.platform : "LEGACY_OS";
-    osNode.textContent = platform.toUpperCase();
+    if (osNode) osNode.textContent = platform.toUpperCase();
 }
 
-// SECRET_DOSSIERS
-window.MISSION_SECRETS = {
+export const MISSION_SECRETS = {
     "secrets.txt": "TOP_SECRET: Project Antigravity is a success. Codename: Sajid_Islam. Origin: Dhaka_Grid_02.",
     "access_codes.md": "ACCESS_GRANTED: Use 'sudo clearance' to elevate your situational awareness."
 };
 
-function copyEmail(email, event) {
+export function copyEmail(email, event) {
     navigator.clipboard.writeText(email);
     const btn = event.target;
     const originalText = btn.innerText;
@@ -75,8 +67,7 @@ function copyEmail(email, event) {
     setTimeout(() => { btn.innerText = originalText; }, 2000);
 }
 
-// BACKGROUND MOCK TELEMETRY (Fills Blank Screen Space)
-function initTelemetryOverlay() {
+export function initTelemetryOverlay() {
     const overlay = document.createElement('div');
     overlay.className = 'telemetry-overlay d-none d-xl-flex';
 
@@ -104,9 +95,7 @@ function initTelemetryOverlay() {
     }, 5000);
 }
 
-// Initializer
-// 3D_SKILL_GLOBE_CORE
-const SkillsGlobe = {
+export const SkillsGlobe = {
     canvas: null, ctx: null, tags: [],
     radius: 140, angleX: 0, angleY: 0,
     init: function () {
@@ -127,6 +116,7 @@ const SkillsGlobe = {
         });
 
         const parent = document.getElementById('canvasParent');
+        if (!parent) return;
         this.canvas.width = parent.offsetWidth;
         this.canvas.height = parent.offsetHeight;
 
@@ -135,7 +125,6 @@ const SkillsGlobe = {
             this.canvas.height = parent.offsetHeight;
         });
 
-        // Pause animation when off-screen or tab hidden
         this._paused = false;
         const observer = new IntersectionObserver((entries) => {
             this._paused = !entries[0].isIntersecting;
@@ -159,10 +148,8 @@ const SkillsGlobe = {
         const projectedPoints = [];
 
         this.tags.forEach(tag => {
-            // Rotate around X
             let y1 = tag.y * Math.cos(this.angleX) - tag.z * Math.sin(this.angleX);
             let z1 = tag.y * Math.sin(this.angleX) + tag.z * Math.cos(this.angleX);
-            // Rotate around Y
             let x1 = tag.x * Math.cos(this.angleY) + z1 * Math.sin(this.angleY);
             let z2 = -tag.x * Math.sin(this.angleY) + z1 * Math.cos(this.angleY);
 
@@ -180,12 +167,11 @@ const SkillsGlobe = {
             }
         });
 
-        // Neural Network Connection Lines
         this.ctx.beginPath();
         for (let i = 0; i < projectedPoints.length; i++) {
             for (let j = i + 1; j < projectedPoints.length; j++) {
                 const dist = Math.hypot(projectedPoints[i].x - projectedPoints[j].x, projectedPoints[i].y - projectedPoints[j].y);
-                if (dist < 60) { // Connect nodes if they are close
+                if (dist < 60) {
                     this.ctx.moveTo(projectedPoints[i].x, projectedPoints[i].y);
                     this.ctx.lineTo(projectedPoints[j].x, projectedPoints[j].y);
                 }
@@ -201,13 +187,15 @@ const SkillsGlobe = {
     }
 };
 
-window.replayProject = (projectId) => {
+export function replayProject(projectId) {
     const term = document.getElementById('bottomTerminal');
     const output = document.getElementById('bottom-terminal-output');
     if (!term || !output) return;
 
     term.classList.add('active');
-    switchTerminalTab('terminal');
+    if (typeof window.switchTerminalTab === 'function') {
+        window.switchTerminalTab('terminal');
+    }
     output.innerHTML = '';
 
     const logs = [
@@ -226,151 +214,7 @@ window.replayProject = (projectId) => {
             line.textContent = log;
             output.appendChild(line);
             output.scrollTop = output.scrollHeight;
-            if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
+            if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
         }, i * 800);
     });
-};
-
-window.addEventListener('DOMContentLoaded', () => {
-    updateSystemHealth();
-    SkillsGlobe.init();
-    initTelemetryOverlay();
-
-    const musicBtn = document.getElementById('musicToggle');
-    if (musicBtn) musicBtn.addEventListener('click', () => AudioEngine.toggleMusic());
-
-    window.speechSynthesis.getVoices();
-
-    // Update active theme tracker
-    localStorage.setItem('portfolio-active-theme', 'theme-tactical.html');
-
-    // --- Theme Switching Ops ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const root = document.documentElement;
-
-    const applyTheme = (theme, accent) => {
-        root.setAttribute('data-theme', theme);
-        if (accent) {
-            root.setAttribute('data-accent', accent);
-        }
-        document.body.setAttribute('data-theme', theme); // for backward compatibility
-        updateThemeIcon(theme);
-    };
-
-    const savedTheme = localStorage.getItem('tactical-theme') || 'dark';
-    const savedAccent = localStorage.getItem('tactical-accent') || 'green';
-    applyTheme(savedTheme, savedAccent);
-
-    // Initialize Teardrop ripple switcher
-    window.initThemeToggleWithRipple({
-      buttonId: 'theme-toggle',
-      getTheme: () => root.getAttribute('data-theme') || 'dark',
-      applyTheme: (theme) => applyTheme(theme, root.getAttribute('data-accent')),
-      saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
-    });
-
-    // --- Accent Color Switcher ---
-    const colorSwatches = document.querySelectorAll('.color-swatch');
-    colorSwatches.forEach(swatch => {
-        swatch.addEventListener('click', (e) => {
-            const newAccent = e.target.getAttribute('data-color');
-            const currentTheme = root.getAttribute('data-theme');
-            applyTheme(currentTheme, newAccent);
-            localStorage.setItem('tactical-accent', newAccent);
-        });
-    });
-
-    // --- Glitch Effect Initializer ---
-    document.querySelectorAll('.section-label, h2:not(.display-2)').forEach(el => {
-        el.addEventListener('mouseenter', () => glitchEffect(el));
-        setTimeout(() => glitchEffect(el), 500);
-    });
-
-    // --- Initial Sync ---
-    if (typeof initializeProjectFilters !== 'undefined') {
-        initializeProjectFilters();
-    }
-
-    // --- Skills Radar Chart ---
-    const canvas = document.getElementById('skillsChart');
-    const skillMap = { 'PYTHON': 0, 'SQL': 1, 'POWER_BI': 2, 'TABLEAU': 2, 'EXCEL': 1, 'PYTHON_ML': 3, 'ML': 3, 'REACT': 4, 'NODE.JS': 4, 'GOOGLE_ANALYTICS': 5 }; // Map pills to indices
-    const baseData = [90, 85, 95, 70, 75, 80];
-    window.chartBaseData = [...baseData]; // Setup global baseline
-
-    if (canvas && typeof Chart !== 'undefined') {
-        const ctx = canvas.getContext('2d');
-        window.skillsRadarChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['Python', 'SQL', 'BI Tools', 'ML', 'Web Dev', 'Analytics'],
-                datasets: [{
-                    label: '[SKILL_POWER_LEVEL]',
-                    data: [...baseData],
-                    backgroundColor: 'rgba(163, 230, 53, 0.2)',
-                    borderColor: '#a3e635',
-                    borderWidth: 1,
-                    pointBackgroundColor: '#a3e635'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: { duration: 400 },
-                // Backward compatibility for Chart.js v2
-                scale: {
-                    angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                    gridLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                    pointLabels: { fontColor: '#94a3b8', fontFamily: 'JetBrains Mono' },
-                    ticks: { display: false, min: 0, max: 100 }
-                },
-                // Compatibility for Chart.js v3+
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        pointLabels: { color: '#94a3b8', font: { family: 'JetBrains Mono' } },
-                        ticks: { display: false },
-                        suggestedMin: 0,
-                        suggestedMax: 100
-                    }
-                },
-                plugins: {
-                    legend: { display: false }
-                },
-                legend: { display: false } // Legacy v2 config
-            }
-        });
-
-        // Gamify connections using Event Delegation (fixes missing async DOM elements)
-        document.addEventListener('mouseover', (e) => {
-            const badge = e.target.closest('.skill-pill-tactical, .tech-chip');
-            if (badge && window.skillsRadarChart) {
-                badge.style.cursor = 'pointer';
-                const skill = badge.textContent.trim().toUpperCase();
-                let index = skillMap[skill];
-
-                if (index === undefined) {
-                    const labels = window.skillsRadarChart.data.labels.map(l => l.toUpperCase());
-                    index = labels.indexOf(skill);
-                }
-
-                if (index !== undefined && index !== -1) {
-                    const currentData = window.chartBaseData || baseData;
-                    const newData = currentData.map((v, i) => i === index ? 100 : v * 0.4);
-                    window.skillsRadarChart.data.datasets[0].data = newData;
-                    window.skillsRadarChart.update('none');
-                    badge.classList.add('pulse');
-                }
-            }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-            const badge = e.target.closest('.skill-pill-tactical, .tech-chip');
-            if (badge && window.skillsRadarChart) {
-                window.skillsRadarChart.data.datasets[0].data = [...(window.chartBaseData || baseData)];
-                window.skillsRadarChart.update('none');
-                badge.classList.remove('pulse');
-            }
-        });
-    }
-});
+}

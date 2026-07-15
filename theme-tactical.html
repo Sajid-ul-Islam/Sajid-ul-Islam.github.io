@@ -1074,233 +1074,25 @@ print(f"Filtered Results: {filtered}")
         <iframe id="portfolioIframe" src="" loading="lazy"></iframe>
       </div>
       <div class="bridge-resize-handle"></div>
-        <div class="terminal-controls ms-2">
-          <button class="btn-terminal-min" onclick="toggleBottomTerminal()">_</button>
-          <button class="btn-terminal-close" onclick="toggleBottomTerminal()">×</button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Tab Content: TERMINAL -->
-    <div class="terminal-tab-content active" id="tab-terminal">
-      <!-- Live Systems Diagnostics -->
-      <div class="terminal-diag-strip p-2 border-bottom border-secondary border-opacity-10 d-flex gap-4 small font-mono">
-        <span class="text-primary">[SYS_TELEMETRY]:</span>
-        <span class="text-secondary">BAT: <span id="batteryNode" class="text-success">--%</span></span>
-        <span class="text-secondary">MEM: <span id="memoryNode" class="text-success">----</span></span>
-        <span class="text-secondary">OS: <span id="osNode" class="text-success">----</span></span>
-      </div>
-      <div class="terminal-body" id="bottom-terminal-output">
-        <div class="terminal-line"><span class="terminal-prompt">PS C:\Users\Sajid></span> <span class="terminal-cmd">init_tactical_shell</span></div>
-        <div class="terminal-line terminal-response">[UPLINK_SUCCESSFUL]: Mission environment 5.1 initialized.</div>
-      </div>
-      <div class="terminal-input-line">
-        <span class="terminal-prompt">PS C:\Users\Sajid></span>
-        <input type="text" class="terminal-input" id="bottom-terminal-input" placeholder="Enter command..." autocomplete="off">
-        <span class="block-cursor"></span>
-      </div>
-    </div>
-
-    <!-- Tab Content: PROBLEMS -->
-    <div class="terminal-tab-content" id="tab-problems">
-      <div class="terminal-body p-3">
-        <div class="terminal-line text-danger"><i class="fas fa-times-circle me-2"></i> [ERROR] Neural Bridge latency exceeds stable threshold (145ms). [Line 42: ai-bot.js]</div>
-        <div class="terminal-line text-warning"><i class="fas fa-exclamation-triangle me-2"></i> [WARN] Deprecated API call to 'GEMINI_V1_LEGACY' detected. [Line 112: terminal.js]</div>
-        <div class="terminal-line text-info"><i class="fas fa-info-circle me-2"></i> [HINT] Optimization: Memory footprint for DataViz node can be reduced by 14%.</div>
-      </div>
-    </div>
-
-    <!-- Tab Content: DEBUG -->
-    <div class="terminal-tab-content" id="tab-debug">
-      <div class="terminal-body p-3" id="debug-stream">
-        <div class="terminal-line small opacity-50">[09:22:14] REQUESTing neural uplink to Gemini:1.5_flash...</div>
-        <div class="terminal-line small opacity-50">[09:22:15] HANDSHAKE_SUCCESS: Protocol 4.5 active.</div>
-      </div>
-    </div>
-
-    <!-- Tab Content: OUTPUT -->
-    <div class="terminal-tab-content" id="tab-output">
-      <div class="terminal-body p-3" id="output-stream">
-        <div class="terminal-line small opacity-50">Checking for tactical updates... (git fetch origin master)</div>
-        <div class="terminal-line small text-success">UP_TO_DATE: Mission dashboard v5.0 deployed successfully.</div>
-      </div>
     </div>
   </div>
 
-  <!-- Live Search Bar -->
-  <div class="live-search-container" id="liveSearch">
-    <div class="search-wrapper">
-      <i class="fas fa-search search-icon"></i>
-      <input type="text" class="search-input" id="globalSearch" placeholder="Search projects, skills, experience... [Press /]">
-      <span class="search-shortcut">/</span>
-    </div>
-    <div class="search-results" id="searchResults"></div>
+  <!-- Bridge Taskbar (for minimized state) -->
+  <div class="bridge-taskbar" id="bridgeTaskbar">
+    <button class="bridge-taskbar-btn" onclick="restorePortfolioBridge()">
+      <i class="fas fa-window-restore"></i>
+      <span>RESTORE_UPLINK</span>
+    </button>
   </div>
 
-  <!-- GitHub Activity Widget -->
-  <div class="github-widget resizable-widget" id="githubWidget">
-    <div class="widget-header">
-      <i class="fab fa-github"></i>
-      <span>LIVE_FEED</span>
-    </div>
-    <div class="widget-content" id="githubActivity">
-      <div class="activity-loading">Fetching telemetry...</div>
-    </div>
-    <div class="widget-resize-handle"></div>
-  </div>
-
-  <!-- PDF Download FAB -->
-  <div class="pdf-fab" id="pdfFab" title="Download Resume PDF">
-    <i class="fas fa-file-pdf"></i>
-    <span class="pdf-label">RESUME.pdf</span>
-  </div>
-
-  <!-- Zen Mode Toggle -->
-  <button class="zen-toggle" id="zenToggle" title="Toggle Zen Mode (Minimal Animations)">
-    <i class="fas fa-leaf"></i>
-  </button>
-
-  <!-- Live Data Viz Widget -->
-  <div class="data-viz-widget resizable-widget" id="dataVizWidget">
-    <div class="viz-header">
-      <span>REAL_TIME_METRICS</span>
-      <span class="live-indicator"><span class="pulse"></span> LIVE</span>
-    </div>
-    <div class="flex-grow-1 overflow-hidden">
-        <canvas id="liveMetricsChart" width="300" height="150"></canvas>
-    </div>
-    <div class="viz-stats">
-      <div class="viz-stat">
-        <span class="viz-value" id="pageViews">0</span>
-        <span class="viz-label">SESSION_VIEWS</span>
-      </div>
-      <div class="viz-stat">
-        <span class="viz-value" id="activeTime">0m</span>
-        <span class="viz-label">ACTIVE_TIME</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- AI Chat Bot FAB -->
-  <button class="ai-chat-toggle" id="aiChatToggle" title="Query AI Oracle">
-    <i class="fas fa-robot"></i>
-    <span class="ping-dot"></span>
-  </button>
-
-  <!-- AI Chat Container -->
-  <div class="ai-chat-container card-glass" id="aiChatContainer">
-    <div class="ai-chat-header d-flex justify-content-between align-items-center">
-      <span>[AI_ORACLE_UPLINK]</span>
-      <button class="btn-close btn-close-white btn-sm" id="closeAiChat"></button>
-    </div>
-    <div class="ai-chat-body" id="aiChatBody">
-      <div class="ai-message system">Secure connection established...</div>
-      <div class="ai-message bot">Greetings, Operative. I am the portfolio oracle. How can I assist with your intel gathering?</div>
-    </div>
-    <div class="ai-chat-input-wrapper">
-      <div class="ai-suggestions" id="aiSuggestions">
-        <button class="suggestion-chip" onclick="handleSuggestion('Who is Sajid?')">[SHOW_DOSSIER]</button>
-        <button class="suggestion-chip" onclick="handleSuggestion('Tell me about his experience at Daraz')">[EXPERIENCE_LOG]</button>
-        <button class="suggestion-chip" onclick="handleSuggestion('What are his top technical skills?')">[TECH_STACK]</button>
-        <button class="suggestion-chip" onclick="handleSuggestion('Show me his latest projects')">[LATEST_PROJECTS]</button>
-      </div>
-      <div class="d-flex align-items-center">
-        <input type="text" id="aiChatInput" placeholder="Enter query..." autocomplete="off">
-        <button id="sendAiMessage" class="btn-ai-send"><i class="fas fa-paper-plane"></i></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contact Modal -->
-  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content card-glass border-primary">
-        <div class="modal-header border-secondary border-opacity-25">
-          <h5 class="modal-title text-primary" id="contactModalLabel">[ESTABLISH_COMM_LINK]</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-secondary" id="contact-details">
-          <div class="mb-4">
-            <label class="section-label small mb-2">ENCRYPTED_EMAIL</label>
-            <div class="d-flex align-items-center justify-content-between p-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25">
-              <span>sajid.islam.chowdhury@gmail.com</span>
-              <button class="btn btn-sm btn-outline-primary" aria-label="Copy Email" onclick="copyEmail('sajid.islam.chowdhury@gmail.com', event)">COPY</button>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="section-label small mb-2">DIRECT_SIGNAL</label>
-            <div class="d-flex align-items-center justify-content-between p-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25">
-              <span>+880 182 452 6054</span>
-              <a href="https://wa.me/+8801824526054" target="_blank" class="btn btn-sm btn-primary" aria-label="WhatsApp Contact">WHATSAPP</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Keyboard Shortcuts Hint -->
-  <div class="keyboard-hint d-none d-lg-block">
-    <kbd>Ctrl</kbd>+<kbd>K</kbd> for command palette • <kbd>j</kbd>/<kbd>k</kbd> to navigate • <kbd>a</kbd> toggle audio
-  </div>
-
-  <!-- Portfolio Bridge Overlay -->
-  <div class="portfolio-bridge-overlay" id="portfolioBridge">
-    <div class="bridge-backdrop" onclick="closePortfolioBridge()"></div>
-    <div class="bridge-window card-glass" id="bridgeWindow">
-      <div class="bridge-header" id="bridgeHeader">
-        <div class="d-flex align-items-center gap-3">
-          <div class="pulse-indicator"></div>
-          <span class="bridge-title">[REMOTE_UPLINK_SECURE]</span>
-          <span class="bridge-url d-none d-md-inline" id="bridgeDisplayUrl">sajid-ul-islam.vercel.app</span>
-        </div>
-        <div class="bridge-controls">
-          <span class="telemetry-data d-none d-lg-inline">LATENCY: 12ms // SIG_STRENGTH: 99%</span>
-          <button class="btn-bridge-ctrl" onclick="minimizePortfolioBridge()" title="Minimize"><i class="fas fa-window-minimize"></i></button>
-          <button class="btn-bridge-ctrl" onclick="toggleMaximizeBridge()" title="Maximize/Restore"><i class="fas fa-expand-alt"></i></button>
-          <button class="btn-bridge-ctrl btn-exit" onclick="closePortfolioBridge()" title="Terminate Link"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="bridge-content">
-        <div class="bridge-loader">
-          <div class="hud-spinner"></div>
-          <div class="mt-3 small text-primary tracking-widest uppercase">Initializing Stream...</div>
-        </div>
-        <iframe id="portfolioIframe" src="" loading="lazy"></iframe>
-      </div>
-      <div class="bridge-resize-handle"></div>
-    </div>
-  </div>
-
-  <!-- HUD Taskbar for Minimized Link -->
-  <div class="bridge-taskbar" id="bridgeTaskbar" onclick="restorePortfolioBridge()">
-    <i class="fas fa-link me-2"></i> [RESTORE_ACTIVE_UPLINK]
-  </div>
-
-
-  <!-- Bootstrap JS (critical - needed for modals/nav) -->
+  <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Critical JS (defer preserves order, unblocks HTML parsing) -->
-  <script src="js/portfolio-data.js" defer></script>
-  <script src="js/theme-switcher-ripple.js" defer></script>
-  <script src="js/audio-engine.js" defer></script>
-  <script src="js/tactical-core.js" defer></script>
-  <script src="js/tactical-data.js" defer></script>
-  <script src="js/pwa-loader.js" defer></script>
+  <!-- ES Module Entry Point -->
+  <script type="module" src="js/main.js"></script>
 
-  <!-- Deferred JS (non-critical, loads after HTML parse) -->
-  <script src="js/tactical-widgets.js" defer></script>
-  <script src="js/terminal.js" defer></script>
-  <script src="js/widgets.js" defer></script>
+  <!-- AI Bot (loaded separately due to localStorage API key handling) -->
   <script src="js/ai-bot.js" defer></script>
-  <script src="js/tactical-enhancements.js" defer></script>
-  <script src="js/floating-widgets.js" defer></script>
-  <script src="js/github-feed.js" defer></script>
-  <script src="js/portfolio-bridge.js" defer></script>
-  <script src="js/command-palette.js" defer></script>
-
-
 </body>
 
 </html>

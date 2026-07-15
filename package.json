@@ -1,27 +1,26 @@
 {
     "title": "Sajid Islam Portfolio",
     "name": "sajid-islam-portfolio",
-    "version": "1.0.0",
+    "version": "2.0.0",
+    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
         "lint": "eslint js/",
         "lint:fix": "eslint js/ --fix",
-        "format": "prettier --write js/**/*.js css/**/*.css",
+        "format": "prettier --write js/**/*.js css/**/*.css scss/**/*.scss",
         "start": "vite",
-        "legacy:start": "node_modules/.bin/gulp watch",
-        "legacy:build": "gulp",
-        "legacy:bundle": "gulp bundle",
-        "legacy:build:prod": "gulp build && gulp bundle"
+        "typecheck": "tsc --noEmit"
     },
-    "description": "High-performance personal portfolio for Sajid Islam, Data Scientist & Business Analyst. Features a Tactical HUD aesthetic, interactive terminal, PWA support, and AI-powered chatbot.",
+    "description": "High-performance personal portfolio for Sajid Islam, Data Scientist & Business Analyst. Features a Tactical HUD aesthetic, interactive terminal, PWA support, and AI-powered chatbot. Now with ES module architecture.",
     "keywords": [
         "portfolio",
         "data-science",
         "tactical-hud",
         "pwa",
-        "terminal"
+        "terminal",
+        "es-modules"
     ],
     "homepage": "https://sajid-ul-islam.github.io/",
     "license": "MIT",
@@ -32,22 +31,11 @@
     },
     "devDependencies": {
         "@types/node": "^26.1.1",
-        "browser-sync": "2.26.7",
-        "del": "4.1.1",
         "eslint": "^10.6.0",
         "eslint-config-prettier": "^10.1.8",
-        "gulp": "4.0.2",
-        "gulp-autoprefixer": "6.1.0",
-        "gulp-clean-css": "4.2.0",
-        "gulp-concat": "2.6.1",
-        "gulp-header": "2.0.7",
-        "gulp-plumber": "^1.2.1",
-        "gulp-rename": "1.4.0",
-        "gulp-sass": "^5.1.0",
-        "gulp-terser": "^2.1.0",
-        "merge-stream": "2.0.0",
         "prettier": "^3.9.4",
         "sass": "^1.73.0",
+        "typescript": "^5.5.0",
         "vite": "^8.1.4"
     }
 }

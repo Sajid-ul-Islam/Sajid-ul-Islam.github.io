@@ -1,10 +1,10 @@
 /**
  * FLOATING WIDGET MANAGER v3.0
  * Draggable + Resizable for: GitHub Feed, KPI, Real-Time Metrics
- * Chatbot intentionally excluded — it uses its own CSS toggle system
+ * Now exported as ES module.
  */
 
-class FloatingWidget {
+export class FloatingWidget {
     constructor(element, options = {}) {
         if (!element) return;
         this.element = element;
@@ -21,10 +21,10 @@ class FloatingWidget {
         this._dragging  = false;
         this._resizing  = false;
         this._resizeDir = null;
-        this._dsx = 0; this._dsy = 0; // drag start mouse
-        this._del = 0; this._det = 0; // drag start element pos
-        this._rsw = 0; this._rsh = 0; // resize start size
-        this._rsl = 0; this._rst = 0; // resize start pos
+        this._dsx = 0; this._dsy = 0;
+        this._del = 0; this._det = 0;
+        this._rsw = 0; this._rsh = 0;
+        this._rsl = 0; this._rst = 0;
 
         this._onMove = this._move.bind(this);
         this._onUp   = this._up.bind(this);
@@ -37,7 +37,6 @@ class FloatingWidget {
 
         e.classList.add('floating-widget');
 
-        // ── inject fw-header ──
         if (!e.querySelector('.fw-header')) {
             const h = document.createElement('div');
             h.className = 'fw-header';
@@ -51,7 +50,6 @@ class FloatingWidget {
             e.insertBefore(h, e.firstChild);
         }
 
-        // ── resize handles ──
         ['nw','n','ne','e','se','s','sw','w'].forEach(d => {
             const r = document.createElement('div');
             r.className = `fw-resize fw-resize-${d}`;
@@ -60,7 +58,6 @@ class FloatingWidget {
             r.addEventListener('mousedown', ev => this._startResize(ev));
         });
 
-        // ── size + position ──
         e.style.cssText += `
             position: fixed !important;
             width:  ${this.opts.defW}px;
@@ -71,18 +68,15 @@ class FloatingWidget {
             overflow: hidden;
         `;
 
-        // ── drag via header ──
         const header = e.querySelector('.fw-header');
         if (header) {
             header.addEventListener('mousedown', ev => this._startDrag(ev));
         }
 
-        // ── control buttons ──
         e.querySelector('.fw-min')  ?.addEventListener('click', () => this._minimize());
         e.querySelector('.fw-max')  ?.addEventListener('click', () => this._maximize());
         e.querySelector('.fw-close')?.addEventListener('click', () => { e.style.display = 'none'; });
 
-        // ── bring to front on click ──
         e.addEventListener('mousedown', () => this._toFront());
 
         document.addEventListener('mousemove', this._onMove);
@@ -173,13 +167,10 @@ class FloatingWidget {
     }
 }
 
-// ── Init specific widgets ──────────────────────────────
-
-function initFloatingWidgets() {
+export function initFloatingWidgets() {
     if (window._fwDone) return;
     window._fwDone = true;
 
-    // GitHub Live Feed widget
     const ghWidget = document.getElementById('githubWidget');
     if (ghWidget) {
         new FloatingWidget(ghWidget, {
@@ -192,7 +183,6 @@ function initFloatingWidgets() {
         });
     }
 
-    // Operational KPI (rendered by tactical-widgets.js into body)
     const kpi = document.getElementById('metricsWidget');
     if (kpi) {
         new FloatingWidget(kpi, {
@@ -205,7 +195,6 @@ function initFloatingWidgets() {
         });
     }
 
-    // Real-Time Metrics chart widget
     const dataViz = document.getElementById('dataVizWidget');
     if (dataViz) {
         new FloatingWidget(dataViz, {
@@ -218,6 +207,3 @@ function initFloatingWidgets() {
         });
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => setTimeout(initFloatingWidgets, 500));
-window.addEventListener('load', () => setTimeout(initFloatingWidgets, 800));

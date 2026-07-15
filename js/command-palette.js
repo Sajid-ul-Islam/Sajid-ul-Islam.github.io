@@ -1,30 +1,29 @@
 /**
  * STRATEGIC COMMAND PALETTE - [v1.0]
  * Global navigation and mission search hub
+ * Now exported as ES module.
  */
 
 let paletteActive = false;
 let selectedIndex = -1;
 
-function initCommandPalette() {
+export function initCommandPalette() {
     const palette = document.getElementById('commandPalette');
     const input = document.getElementById('paletteInput');
     const results = document.getElementById('paletteResults');
 
-    // --- Keyboard Event Matrix ---
+    if (!palette || !input || !results) return;
+
     document.addEventListener('keydown', (e) => {
-        // Toggle (Ctrl+K or /)
         if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
             e.preventDefault();
             togglePalette();
         }
 
-        // Close (Esc)
         if (e.key === 'Escape' && paletteActive) {
             togglePalette();
         }
 
-        // Navigation
         if (paletteActive) {
             const items = results.querySelectorAll('.palette-result-item');
             if (e.key === 'ArrowDown') {
@@ -42,7 +41,6 @@ function initCommandPalette() {
         }
     });
 
-    // --- Search Stream ---
     input.addEventListener('input', (e) => {
         const query = e.target.value.trim().toLowerCase();
         if (!query) {
@@ -52,15 +50,15 @@ function initCommandPalette() {
         performSearch(query);
     });
 
-    // --- Station Clock Sync ---
     setInterval(updateStationClock, 1000);
 }
 
-function togglePalette() {
+export function togglePalette() {
     const palette = document.getElementById('commandPalette');
     const input = document.getElementById('paletteInput');
-    paletteActive = !paletteActive;
+    if (!palette || !input) return;
     
+    paletteActive = !paletteActive;
     palette.classList.toggle('active');
     if (paletteActive) {
         input.value = '';
@@ -69,7 +67,7 @@ function togglePalette() {
         document.getElementById('paletteResults').innerHTML = '<div class="palette-hint p-4 text-center text-secondary small">SEARCH_INDEX_ACTIVE: Type keywords...</div>';
     }
     
-    if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
+    if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
 }
 
 function updateSelection(items) {
@@ -83,7 +81,6 @@ function performSearch(query) {
     const resultsDiv = document.getElementById('paletteResults');
     let searchIndex = [];
 
-    // Map Portfolio DATA to search index
     if (window.DATA) {
         window.DATA.projects.forEach(p => searchIndex.push({ type: 'PROJECT', label: p.title, url: p.liveUrl || p.githubUrl, icon: 'project-diagram' }));
         window.DATA.experiences.forEach(e => searchIndex.push({ type: 'EXPERIENCE', label: e.title + ' @ ' + e.company, id: 'experience', icon: 'briefcase' }));
@@ -91,7 +88,6 @@ function performSearch(query) {
         if (window.DATA.blogPosts) window.DATA.blogPosts.forEach(b => searchIndex.push({ type: 'BLOG', label: b.title, url: b.url, icon: 'file-alt' }));
     }
 
-    // Filter results
     const filtered = searchIndex.filter(item => 
         item.label.toLowerCase().includes(query) || 
         item.type.toLowerCase().includes(query)
@@ -113,11 +109,11 @@ function performSearch(query) {
     updateSelection(resultsDiv.querySelectorAll('.palette-result-item'));
 }
 
-function executeCommand(url, id) {
+window.executeCommand = function(url, id) {
     togglePalette();
     if (url && url !== 'undefined') {
-        if (typeof openPortfolioBridge !== 'undefined') {
-            openPortfolioBridge(null, url);
+        if (typeof window.openPortfolioBridge !== 'undefined') {
+            window.openPortfolioBridge(null, url);
         } else {
             window.open(url, '_blank');
         }
@@ -125,13 +121,12 @@ function executeCommand(url, id) {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
-}
+};
 
 function updateStationClock() {
     const node = document.getElementById('stationTime');
     if (!node) return;
     
-    // Dhaka is UTC+6
     const now = new Date();
     const dhakaOffset = 6 * 60;
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -143,5 +138,3 @@ function updateStationClock() {
     
     node.textContent = `STATION_TIME: ${h}:${m}:${s}`;
 }
-
-document.addEventListener('DOMContentLoaded', initCommandPalette);
