@@ -126,6 +126,12 @@ export async function initializeTacticalData() {
     setTimeout(() => {
         document.querySelectorAll('.skeleton').forEach(el => el.classList.add('fade-out'));
     }, 500);
+
+    return {
+        projects: finalProjects,
+        experience: finalExperience,
+        skills: finalSkillGroups
+    };
 }
 
 export function renderInfo(info) {
@@ -467,4 +473,3 @@ export function handleTreeClick(e, id) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initializeTacticalData);

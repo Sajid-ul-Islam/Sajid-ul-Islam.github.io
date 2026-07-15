@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSkillsRadarChart();
 
   // Render dynamic content before widgets that snapshot the DOM.
-  await initializeTacticalData();
+  const tacticalData = await initializeTacticalData();
   
   // Initialize all widget modules
   initTerminal();
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initDigitalClock();
   initScrollProgress();
   initSystemStatus();
-  initLiveSearch();
+  initLiveSearch(tacticalData);
   initPdfFab();
   initZenMode();
   initDataViz();

@@ -87,45 +87,41 @@ export function initSystemStatus() {
     });
 }
 
-export function initLiveSearch() {
+export function initLiveSearch(tacticalData) {
     const searchContainer = document.getElementById('liveSearch');
     const searchInput = document.getElementById('globalSearch');
     const results = document.getElementById('searchResults');
     if (!searchContainer || !searchInput || !results) return;
 
     const searchIndex = [];
+    const { projects = [], experience = [], skills = [] } = tacticalData || {};
 
-    document.querySelectorAll('.project-item').forEach(item => {
-        const title = item.querySelector('.card-title')?.textContent || '';
-        const text = item.querySelector('.card-text')?.textContent || '';
+    projects.forEach(item => {
         searchIndex.push({
             type: 'Project',
-            title: title.replace(/\[|\]/g, ''),
-            text: text,
-            element: item,
+            title: item.title.replace(/\[|\]/g, ''),
+            text: item.description,
             section: 'projects'
         });
     });
 
-    document.querySelectorAll('.timeline-item').forEach(item => {
-        const title = item.querySelector('h3')?.textContent || '';
-        const company = item.querySelector('.subheading')?.textContent || '';
+    experience.forEach(item => {
         searchIndex.push({
             type: 'Experience',
-            title: title,
-            text: company,
-            element: item,
+            title: item.title || item.Role,
+            text: item.company || item.Company,
             section: 'experience'
         });
     });
 
-    document.querySelectorAll('#skill-chips .badge').forEach(item => {
-        searchIndex.push({
-            type: 'Skill',
-            title: item.textContent,
-            text: '',
-            element: item,
-            section: 'skills'
+    skills.forEach(group => {
+        group.skills.forEach(skill => {
+            searchIndex.push({
+                type: 'Skill',
+                title: skill.name,
+                text: group.name,
+                section: 'skills'
+            });
         });
     });
 
@@ -151,7 +147,7 @@ export function initLiveSearch() {
 
         const matches = searchIndex.filter(item =>
             item.title.toLowerCase().includes(query) ||
-            item.text.toLowerCase().includes(query)
+            (item.text && item.text.toLowerCase().includes(query))
         ).slice(0, 8);
 
         matches.forEach(match => {
@@ -163,7 +159,10 @@ export function initLiveSearch() {
           `;
             resultItem.addEventListener('click', () => {
                 const target = document.getElementById(match.section);
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    // Optional: Highlight the item, though we don't have a direct element reference anymore
+                }
                 searchContainer.classList.remove('active');
                 searchInput.value = '';
             });
