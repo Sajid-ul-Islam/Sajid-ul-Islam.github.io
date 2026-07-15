@@ -1251,49 +1251,54 @@ kbd {
     }
 }
 
-/* Adjustments for Status Bar & Bangladesh Army Woodland Camouflage Background */
+/* Adjustments for Status Bar & Bangladesh Army Woodland Camouflage Background (High Performance) */
 body {
     padding-top: 30px;
-    background-color: #030704; /* Dark military charcoal base */
+    background-color: #050805; /* Dark military charcoal base */
     background-image:
-        /* 1. Technical Grid Overlay */
-        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.012) 1px, transparent 0),
+        /* 1. Dynamic Accent Glow (Single Fixed Layer) */
+        radial-gradient(circle 800px at 50% 20%, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 80%),
         
-        /* 2. Bangladesh Army Woodland Camo Blobs - Olive Drab & Forest Green */
-        radial-gradient(ellipse 350px 220px at 15% 20%, rgba(85, 107, 47, 0.14) 25%, transparent 75%),
-        radial-gradient(ellipse 400px 300px at 75% 15%, rgba(27, 67, 50, 0.18) 30%, transparent 80%),
-        radial-gradient(circle 380px at 45% 75%, rgba(53, 79, 46, 0.15) 25%, transparent 75%),
-        radial-gradient(ellipse 450px 350px at 85% 80%, rgba(85, 107, 47, 0.16) 20%, transparent 75%),
+        /* 2. Technical Grid Overlay (20px scrollable) */
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.01) 1px, transparent 0),
         
-        /* 3. Bangladesh Army Woodland Camo Blobs - Earth Brown */
-        radial-gradient(ellipse 320px 240px at 35% 30%, rgba(75, 56, 42, 0.16) 25%, transparent 75%),
-        radial-gradient(circle 360px at 80% 45%, rgba(58, 44, 32, 0.18) 20%, transparent 75%),
-        radial-gradient(ellipse 380px 280px at 20% 85%, rgba(70, 50, 35, 0.15) 22%, transparent 75%),
-        radial-gradient(circle 400px at 60% 90%, rgba(47, 30, 22, 0.2) 25%, transparent 80%),
+        /* 3. Bangladesh Army Woodland Camo Blotches (Tiled 300px x 300px) */
+        /* Olive Drab (#4B5320) */
+        radial-gradient(circle at 30% 25%, rgba(75, 83, 32, 0.15) 18%, transparent 19%),
+        radial-gradient(circle at 80% 75%, rgba(75, 83, 32, 0.15) 20%, transparent 21%),
         
-        /* 4. Bangladesh Army Woodland Camo Blobs - Sandy Khaki Highlights */
-        radial-gradient(circle 180px at 30% 10%, rgba(141, 129, 100, 0.1) 15%, transparent 60%),
-        radial-gradient(circle 150px at 90% 60%, rgba(172, 160, 130, 0.08) 15%, transparent 65%),
-        radial-gradient(circle 190px at 10% 50%, rgba(141, 129, 100, 0.12) 20%, transparent 70%),
-        radial-gradient(circle 160px at 55% 55%, rgba(172, 160, 130, 0.1) 15%, transparent 60%),
+        /* Earth Brown (#4b382a) */
+        radial-gradient(circle at 20% 70%, rgba(75, 56, 42, 0.13) 16%, transparent 17%),
+        radial-gradient(circle at 75% 30%, rgba(75, 56, 42, 0.13) 18%, transparent 19%),
         
-        /* 5. Deep Forest Green Ambient Blending */
-        radial-gradient(circle 700px at 50% 50%, rgba(27, 67, 50, 0.12) 30%, transparent 80%),
+        /* Forest Green (#1b4332) */
+        radial-gradient(circle at 55% 45%, rgba(27, 67, 50, 0.14) 22%, transparent 23%),
+        radial-gradient(circle at 10% 10%, rgba(27, 67, 50, 0.14) 16%, transparent 17%),
+        radial-gradient(circle at 90% 90%, rgba(27, 67, 50, 0.14) 16%, transparent 17%),
         
-        /* 6. Active Accent Glow Overlay - integrates HUD color indicator subtly */
-        radial-gradient(circle 500px at 50% 20%, rgba(var(--primary-color-rgb), 0.03) 40%, transparent 95%),
-        radial-gradient(circle 500px at 50% 80%, rgba(var(--primary-color-rgb), 0.03) 40%, transparent 95%);
+        /* Khaki Tan (#8d8164) */
+        radial-gradient(circle at 45% 85%, rgba(141, 129, 100, 0.1) 12%, transparent 13%),
+        radial-gradient(circle at 90% 20%, rgba(141, 129, 100, 0.1) 10%, transparent 11%),
+        radial-gradient(circle at 10% 45%, rgba(141, 129, 100, 0.1) 11%, transparent 12%);
 
     background-size:
-        20px 20px,
-        100% 100%, 100% 100%, 100% 100%, 100% 100%,
-        100% 100%, 100% 100%, 100% 100%, 100% 100%,
-        100% 100%, 100% 100%, 100% 100%, 100% 100%,
         100% 100%,
-        100% 100%, 100% 100%;
+        20px 20px,
+        300px 300px, 300px 300px,
+        300px 300px, 300px 300px,
+        300px 300px, 300px 300px, 300px 300px,
+        300px 300px, 300px 300px, 300px 300px;
         
-    background-attachment: scroll, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed;
-    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-position:
+        0 0,
+        0 0,
+        0 0, 150px 150px,
+        50px 80px, 200px 220px,
+        120px 40px, 250px 180px, 0px 280px,
+        80px 180px, 220px 50px, 10px 120px;
+        
+    background-attachment: fixed, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll;
+    background-repeat: no-repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat;
 }
 
 /* Animated background blobs matching Bangladesh Army Woodland colors */
