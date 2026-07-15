@@ -203,7 +203,7 @@
 
           <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-4 mb-4 text-secondary small">
             <span><i class="fas fa-map-marker-alt me-2 text-primary"></i>DHAKA, BANGLADESH</span>
-            <span class="text-success"><i class="fas fa-circle me-2 animate-pulse small"></i>AVAILABLE FOR OPS</span>
+            <span style="color: var(--primary-light);"><i class="fas fa-circle me-2 animate-pulse small"></i>AVAILABLE FOR OPS</span>
           </div>
 
           <div class="social-icons-modern d-flex justify-content-center justify-content-lg-start gap-4 mb-5">
@@ -509,7 +509,7 @@
                 <div class="mb-4">
                    <div class="small text-primary font-mono mb-2">SIGNAL_ORIGIN</div>
                    <div class="p-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
-                      <span class="font-mono small">sajid.islam.chowdhury@gmail.com</span>
+                      <span class="font-mono small" data-field="email">sajid.islam.chowdhury@gmail.com</span>
                       <button class="btn btn-sm btn-link text-primary p-0" onclick="copyEmail('sajid.islam.chowdhury@gmail.com', event)"><i class="far fa-copy"></i></button>
                    </div>
                 </div>
@@ -824,14 +824,14 @@ print(f"Filtered Results: {filtered}")
           <div class="mb-4">
             <label class="section-label small mb-2">ENCRYPTED_EMAIL</label>
             <div class="d-flex align-items-center justify-content-between p-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25">
-              <span>sajid.islam.chowdhury@gmail.com</span>
+              <span data-field="email">sajid.islam.chowdhury@gmail.com</span>
               <button class="btn btn-sm btn-outline-primary" onclick="copyEmail('sajid.islam.chowdhury@gmail.com', event)">COPY</button>
             </div>
           </div>
           <div class="mb-4">
             <label class="section-label small mb-2">DIRECT_SIGNAL</label>
             <div class="d-flex align-items-center justify-content-between p-3 bg-dark bg-opacity-50 border border-secondary border-opacity-25">
-              <span>+880 182 452 6054</span>
+              <span data-field="whatsapp">+880 182 452 6054</span>
               <a href="https://wa.me/+8801824526054" target="_blank" class="btn btn-sm btn-primary">WHATSAPP</a>
             </div>
           </div>
@@ -883,6 +883,9 @@ print(f"Filtered Results: {filtered}")
 
   <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Theme Initializer (universal data patch from index.js) -->
+  <script type="module" src="js/theme-init.js"></script>
 
   <!-- ES Module Entry Point -->
   <script type="module" src="js/main.js"></script>

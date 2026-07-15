@@ -2227,7 +2227,7 @@ h2 {
 :focus-visible {
     outline: 2px solid var(--primary-color) !important;
     outline-offset: 2px;
-    box-shadow: 0 0 8px var(--primary-color), 0 0 16px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 0 8px var(--primary-color), 0 0 16px rgba(var(--primary-color-rgb), 0.3);
 }
 
 /* --- MOBILE UI/UX ENHANCEMENTS --- */

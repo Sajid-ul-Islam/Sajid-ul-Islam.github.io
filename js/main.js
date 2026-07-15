@@ -6,7 +6,7 @@
 // ===== DATA IMPORTS =====
 import { 
   DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS, 
-  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, 
+  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
   FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL, SHEET_CONFIG,
   PortfolioData, parseCSV, fetchSheetData 
 } from './data/index.js';
@@ -81,6 +81,7 @@ import { initPWA } from './pwa-loader.js';
 // ===== MAKE GLOBALS AVAILABLE =====
 // Expose all needed globals for backward compatibility
 window.DATA = DATA;
+window.STATS = STATS;
 window.AudioEngine = AudioEngine;
 window.MISSION_SECRETS = MISSION_SECRETS;
 window.PortfolioData = PortfolioData;
@@ -275,7 +276,7 @@ function initSkillsRadarChart() {
 // ===== EXPORT FOR MODULE USAGE =====
 export {
   DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS,
-  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING,
+  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
   FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL, SHEET_CONFIG,
   PortfolioData, parseCSV, fetchSheetData,
   AudioEngine, glitchEffect, updateThemeIcon, updateSystemHealth,

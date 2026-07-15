@@ -197,34 +197,22 @@ export const PROJECTS = [
 // ===== SKILL GROUPS =====
 export const SKILL_GROUPS = [
   {
-    name: 'Business & Strategy',
+    name: 'BI & Product Strategy',
     skills: [
-      { name: 'Market Research', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/search--v1.png', level: 90 },
-      { name: 'Product Development', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/product--v1.png', level: 85 },
-      { name: 'Business Development', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/conference-call.png', level: 88 },
-      { name: 'Business Intelligence', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/business-report.png', level: 92 }
+      { name: 'Business Intelligence', category: 'BI', icon: 'https://img.icons8.com/color/48/000000/business-report.png', level: 92 },
+      { name: 'Data Visualization', category: 'BI', icon: 'https://img.icons8.com/color/48/000000/combo-chart.png', level: 92 },
+      { name: 'Product Management', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/product--v1.png', level: 85 },
+      { name: 'Market Research', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/search--v1.png', level: 90 }
     ]
   },
   {
-    name: 'Analytical & Technical',
+    name: 'Data Science & AI Engineering',
     skills: [
       { name: 'Data Analytics & ML', category: 'Data', icon: 'https://img.icons8.com/color/48/null/python--v1.png', level: 85 },
       { name: 'Agentic AI Systems', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/robot-intellectual.png', level: 82 },
-      { name: 'RAG (Retrieval-Augmented Generation)', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/artificial-intelligence.png', level: 78 },
+      { name: 'RAG (Retrieval-Augmented Generation)', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/artificial-intelligence.png', level: 85 },
       { name: 'Machine Learning Engineering', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/neural-network.png', level: 85 },
-      { name: 'Python & R', category: 'Data', icon: 'https://img.icons8.com/color/48/000000/python.png', level: 85 },
-      { name: 'Data Visualization', category: 'BI', icon: 'https://img.icons8.com/color/48/000000/combo-chart.png', level: 92 },
-      { name: 'Prompt Engineering', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/robot-intellectual.png', level: 88 },
-      { name: 'Agentic RAG', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/artificial-intelligence.png', level: 85 }
-    ]
-  },
-  {
-    name: 'Web Development',
-    skills: [
-      { name: 'React', category: 'Frontend', icon: 'https://img.icons8.com/color/144/000000/react-native.png', level: 75 },
-      { name: 'JavaScript', category: 'Frontend', icon: 'https://img.icons8.com/color/144/000000/javascript--v1.png', level: 80 },
-      { name: 'HTML5 & CSS3', category: 'Frontend', icon: 'https://img.icons8.com/color/144/000000/html-5--v1.png', level: 90 },
-      { name: 'Basic Web Dev', category: 'Frontend', icon: 'https://img.icons8.com/color/48/000000/source-code.png', level: 70 }
+      { name: 'Python & SQL', category: 'Data', icon: 'https://img.icons8.com/color/48/000000/python.png', level: 85 }
     ]
   }
 ];
@@ -265,6 +253,14 @@ export const LEARNING_ITEMS = [
   { name: 'Modern Data Stack (dbt & Snowflake)', category: 'Data Ops', progress: 70 },
   { name: 'Real-Time Streaming Analytics', category: 'BI', progress: 60 },
   { name: 'MLOps & Model Deployment', category: 'ML', progress: 75 }
+];
+
+// ===== STATS =====
+export const STATS = [
+  { label: 'Years Experience', value: 4, suffix: '+', accent: false },
+  { label: 'Projects Completed', value: 15, suffix: '+', accent: true },
+  { label: 'Publications', value: 3, suffix: '+', accent: false },
+  { label: 'Certifications', value: 10, suffix: '+', accent: false }
 ];
 
 // ===== GAMING DATA =====
@@ -371,7 +367,8 @@ export const DATA = {
   fileTreeData: FILE_TREE,
   socialLinks: SOCIAL_LINKS,
   skillGroups: SKILL_GROUPS,
-  experiences: EXPERIENCES
+  experiences: EXPERIENCES,
+  stats: STATS
 };
 
 // ===== HELPER FUNCTIONS =====

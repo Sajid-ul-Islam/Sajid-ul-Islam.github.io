@@ -8,7 +8,7 @@
 
 .feed-header {
     padding: 16px;
-    border-bottom: 1px solid rgba(163, 230, 53, 0.2);
+    border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,7 +25,7 @@
 }
 
 .feed-title i {
-    color: #22c55e;
+    color: var(--primary-color);
 }
 
 .feed-filters {
@@ -45,12 +45,12 @@
 }
 
 .feed-filter:hover {
-    background: rgba(163, 230, 53, 0.1);
+    background: rgba(var(--primary-color-rgb), 0.1);
     color: var(--text-primary);
 }
 
 .feed-filter.active {
-    background: rgba(163, 230, 53, 0.2);
+    background: rgba(var(--primary-color-rgb), 0.2);
     color: var(--text-highlight);
     font-weight: 500;
 }
@@ -66,7 +66,7 @@
     display: flex;
     gap: 12px;
     padding: 12px 0;
-    border-bottom: 1px solid rgba(163, 230, 53, 0.1);
+    border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.1);
     opacity: 0;
     transform: translateX(-20px);
 }
@@ -136,10 +136,10 @@
     gap: 4px;
     font-size: 0.75rem;
     color: var(--text-secondary);
-    background: rgba(163, 230, 53, 0.05);
+    background: rgba(var(--primary-color-rgb), 0.05);
     padding: 2px 6px;
     border-radius: 4px;
-    border: 1px solid rgba(163, 230, 53, 0.1);
+    border: 1px solid rgba(var(--primary-color-rgb), 0.1);
 }
 
 .repo-name i,
@@ -150,16 +150,16 @@
 
 .feed-footer {
     padding: 16px;
-    border-top: 1px solid rgba(163, 230, 53, 0.2);
+    border-top: 1px solid rgba(var(--primary-color-rgb), 0.2);
     text-align: center;
     flex-shrink: 0;
 }
 
 .load-more-btn {
     padding: 8px 16px;
-    background: rgba(163, 230, 53, 0.1);
+    background: rgba(var(--primary-color-rgb), 0.1);
     color: var(--text-highlight);
-    border: 1px solid rgba(163, 230, 53, 0.2);
+    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.85rem;
@@ -167,13 +167,13 @@
 }
 
 .load-more-btn:hover {
-    background: rgba(163, 230, 53, 0.2);
+    background: rgba(var(--primary-color-rgb), 0.2);
     transform: translateY(-1px);
 }
 
 /* Activity type specific colors */
 .feed-item[data-type="commit"] .feed-item-icon {
-    background-color: #22c55e;
+    background-color: var(--primary-color);
 }
 
 .feed-item[data-type="project"] .feed-item-icon {
@@ -214,17 +214,17 @@
 }
 
 .feed-timeline::-webkit-scrollbar-track {
-    background: rgba(163, 230, 53, 0.05);
+    background: rgba(var(--primary-color-rgb), 0.05);
     border-radius: 3px;
 }
 
 .feed-timeline::-webkit-scrollbar-thumb {
-    background: rgba(163, 230, 53, 0.2);
+    background: rgba(var(--primary-color-rgb), 0.2);
     border-radius: 3px;
 }
 
 .feed-timeline::-webkit-scrollbar-thumb:hover {
-    background: rgba(163, 230, 53, 0.3);
+    background: rgba(var(--primary-color-rgb), 0.3);
 }
 
 /* Responsive adjustments */
@@ -260,13 +260,13 @@
 
 /* Dark theme adjustments */
 [data-theme="dark"] .feed-item-meta {
-    background: rgba(163, 230, 53, 0.08);
-    border-color: rgba(163, 230, 53, 0.15);
+    background: rgba(var(--primary-color-rgb), 0.08);
+    border-color: rgba(var(--primary-color-rgb), 0.15);
 }
 
 [data-theme="light"] .feed-item-meta {
-    background: rgba(22, 101, 52, 0.05);
-    border-color: rgba(22, 101, 52, 0.1);
+    background: rgba(var(--primary-color-rgb), 0.05);
+    border-color: rgba(var(--primary-color-rgb), 0.1);
 }
 
 /* Loading state */
@@ -281,7 +281,7 @@
     left: 50%;
     width: 20px;
     height: 20px;
-    border: 2px solid rgba(163, 230, 53, 0.2);
+    border: 2px solid rgba(var(--primary-color-rgb), 0.2);
     border-top: 2px solid var(--text-highlight);
     border-radius: 50%;
     animation: spin 1s linear infinite;
