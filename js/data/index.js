@@ -307,9 +307,9 @@ export const FILE_TREE = [
     label: 'HOBBIES',
     isOpen: false,
     items: [
-      { id: 'favorites', label: 'Favorites', href: '/Favorites', icon: 'star', extension: 'tsx' },
-      { id: 'gaming', label: 'Gaming', href: '/Gaming', icon: 'gamepad-2', extension: 'tsx' },
-      { id: 'blogs', label: 'Blogs', href: '/Blogs', icon: 'book-open', extension: 'md' },
+      { id: 'favorites', label: 'Favorites', href: '#hobbies', icon: 'star', extension: 'tsx' },
+      { id: 'gaming', label: 'Gaming', href: '#hobbies', icon: 'gamepad-2', extension: 'tsx' },
+      { id: 'blogs', label: 'Blogs', href: '#blogs', icon: 'book-open', extension: 'md' },
     ],
   },
   {
@@ -317,8 +317,8 @@ export const FILE_TREE = [
     label: 'MORE',
     isOpen: false,
     items: [
-      { id: 'learning', label: 'Learning', href: '/Learning', icon: 'graduation-cap', extension: 'tsx' },
-      { id: 'startup', label: 'Startup', href: '/Startup', icon: 'rocket', extension: 'tsx' },
+      { id: 'learning', label: 'Learning', href: '#learning', icon: 'graduation-cap', extension: 'tsx' },
+      { id: 'startup', label: 'Startup', href: '#projects', icon: 'rocket', extension: 'tsx' },
     ],
   },
 ];
@@ -331,22 +331,6 @@ export const SOCIAL_LINKS = [
   { id: 'resume', name: 'Resume', url: 'https://sajid-ul-islam.github.io/resume.html', icon: 'file-text', color: '#da552f' },
   { id: 'huggingface', name: 'Hugging Face', url: 'https://huggingface.co/Sajid-ul-Islam', icon: 'robot', color: '#FFD21E' },
 ];
-
-// ===== GOOGLE SHEETS CONFIG =====
-export const SHEET_CONFIG = {
-  SHEET_ID: '1jRHTJ6rC4UMLoBt1o26mfOlOzDTnGJGv',
-  get BASE_URL() {
-    return `https://docs.google.com/spreadsheets/d/${this.SHEET_ID}/gviz/tq?tqx=out:csv&sheet=`;
-  },
-  SHEETS: {
-    INFO: 'Info',
-    EXPERIENCE: 'Experience',
-    EDUCATION: 'Education',
-    SKILLS: 'Skills',
-    PROJECTS: 'Projects',
-    AWARDS: 'Awards'
-  }
-};
 
 // ===== AI BOT LOCAL INTEL =====
 export const LOCAL_INTEL = {
@@ -371,32 +355,8 @@ export const DATA = {
   stats: STATS
 };
 
-// ===== HELPER FUNCTIONS =====
-export function parseCSV(csvText) {
-  const lines = csvText.split('\n');
-  if (lines.length < 1) return [];
-  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
-  return lines.slice(1).filter(line => line.trim()).map(line => {
-    const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-    const obj = {};
-    headers.forEach((header, i) => {
-      let val = values[i] ? values[i].replace(/^"|"$/g, '').trim() : '';
-      val = val.replace(/""/g, '"');
-      obj[header] = val;
-    });
-    return obj;
-  });
-}
-
-export async function fetchSheetData(sheetName) {
-  try {
-    const response = await fetch(`${SHEET_CONFIG.BASE_URL}${sheetName}`);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const text = await response.text();
-    return parseCSV(text);
-  } catch (error) {
-    return [];
-  }
+function cloneData(value) {
+  return JSON.parse(JSON.stringify(value));
 }
 
 // ===== PORTFOLIO DATA PROVIDER =====
@@ -405,87 +365,24 @@ export const PortfolioData = {
   
   async load() {
     if (this._data) return this._data;
-    
-    const cached = localStorage.getItem('portfolio-data-cache');
-    if (cached) {
-      try {
-        this._data = JSON.parse(cached);
-        return this._data;
-      } catch (e) {
-        // Cache corrupted, rebuild
-      }
+
+    try {
+      localStorage.removeItem('portfolio-data-cache');
+    } catch {
+      // Storage can be unavailable in restricted browser modes.
     }
     
     this._data = {
-      info: PROFILE_INFO,
-      education: EDUCATION,
-      experiences: EXPERIENCES,
-      projects: PROJECTS,
-      skills: SKILL_GROUPS,
-      blogs: BLOG_POSTS,
-      learning: LEARNING_ITEMS,
-      gaming: GAMING,
-      fileTree: FILE_TREE
+      info: { ...PROFILE_INFO },
+      education: cloneData(EDUCATION),
+      experiences: cloneData(EXPERIENCES),
+      projects: cloneData(PROJECTS),
+      skills: cloneData(SKILL_GROUPS),
+      blogs: cloneData(BLOG_POSTS),
+      learning: cloneData(LEARNING_ITEMS),
+      gaming: cloneData(GAMING),
+      fileTree: cloneData(FILE_TREE)
     };
-    
-    // Try to fetch from Google Sheets
-    try {
-      const [infoData, expData, eduData, skillData, projData] = await Promise.allSettled([
-        fetchSheetData(SHEET_CONFIG.SHEETS.INFO),
-        fetchSheetData(SHEET_CONFIG.SHEETS.EXPERIENCE),
-        fetchSheetData(SHEET_CONFIG.SHEETS.EDUCATION),
-        fetchSheetData(SHEET_CONFIG.SHEETS.SKILLS),
-        fetchSheetData(SHEET_CONFIG.SHEETS.PROJECTS)
-      ]);
-      
-      // Merge remote data if available
-      if (infoData.status === 'fulfilled' && infoData.value.length > 0) {
-        const remoteInfo = infoData.value[0];
-        this._data.info = {
-          ...PROFILE_INFO,
-          name: remoteInfo.Name || PROFILE_INFO.name,
-          role: remoteInfo.Role || PROFILE_INFO.role,
-          heroText: remoteInfo.HeroText || PROFILE_INFO.heroText,
-          email: remoteInfo.Email || PROFILE_INFO.email,
-          whatsapp: remoteInfo.Whatsapp || PROFILE_INFO.whatsapp,
-          github: remoteInfo.Github || PROFILE_INFO.github,
-          linkedin: remoteInfo.LinkedIn || PROFILE_INFO.linkedin
-        };
-      }
-      
-      if (expData.status === 'fulfilled' && expData.value.length > 0) {
-        this._data.experiences = expData.value.map(item => ({
-          id: item.id || item.ID || Math.random().toString(36).substr(2, 9),
-          title: item.title || item.Role || item.Position,
-          company: item.company || item.Company,
-          location: item.location || item.Location,
-          startDate: item.startDate || item.Date,
-          endDate: item.endDate || '',
-          description: item.description || item.Description || '',
-          highlights: item.highlights ? (typeof item.highlights === 'string' ? item.highlights.split('|') : item.highlights) : [],
-          technologies: item.technologies ? (typeof item.technologies === 'string' ? item.technologies.split(',') : item.technologies) : []
-        }));
-      }
-      
-      if (eduData.status === 'fulfilled' && eduData.value.length > 0) {
-        this._data.education = eduData.value.map(item => ({
-          id: item.id || item.ID || Math.random().toString(36).substr(2, 9),
-          institution: item.institution || item.Institution,
-          degree: item.degree || item.Degree,
-          date: item.date || item.Date,
-          location: item.location || item.Location
-        }));
-      }
-    } catch (e) {
-      // Google Sheets unavailable, use local data
-    }
-    
-    // Cache the data
-    try {
-      localStorage.setItem('portfolio-data-cache', JSON.stringify(this._data));
-    } catch (e) {
-      // Storage full, ignore
-    }
     
     return this._data;
   },

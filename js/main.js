@@ -7,8 +7,8 @@
 import { 
   DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS, 
   SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
-  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL, SHEET_CONFIG,
-  PortfolioData, parseCSV, fetchSheetData 
+  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL,
+  PortfolioData
 } from './data/index.js';
 
 // ===== AUDIO ENGINE =====
@@ -77,6 +77,9 @@ import { initThemeToggleWithRipple } from './theme-switcher-ripple.js';
 
 // ===== PWA LOADER =====
 import { initPWA } from './pwa-loader.js';
+
+// ===== AI CHAT =====
+import { initAiChat } from './ai-bot.js';
 
 // ===== BOOT SEQUENCE LOGIC =====
 const bootMessages = [
@@ -179,7 +182,7 @@ window.handleSuggestion = null; // Will be set by ai-bot
 window.glitchEffect = glitchEffect;
 
 // ===== INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initBootSequence(); // Initialize boot sequence first
 
   // Core initialization
@@ -240,11 +243,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize skills radar chart
   initSkillsRadarChart();
+
+  // Render dynamic content before widgets that snapshot the DOM.
+  await initializeTacticalData();
   
   // Initialize all widget modules
   initTerminal();
   initCommandPalette();
-  initializeProjectFilters();
   initDigitalClock();
   initScrollProgress();
   initSystemStatus();
@@ -262,6 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize PWA
   initPWA();
+
+  // Initialize AI chat
+  initAiChat();
   
   // Initialize enhancement classes
   new KeyboardNavigator();
@@ -350,8 +358,8 @@ function initSkillsRadarChart() {
 export {
   DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS,
   SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
-  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL, SHEET_CONFIG,
-  PortfolioData, parseCSV, fetchSheetData,
+  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL,
+  PortfolioData,
   AudioEngine, glitchEffect, updateThemeIcon, updateSystemHealth,
   copyEmail, initTelemetryOverlay, SkillsGlobe,
   initializeTacticalData, renderInfo, renderExperience,
@@ -368,5 +376,5 @@ export {
   initDigitalClock, initScrollProgress, initSystemStatus,
   initLiveSearch, initPdfFab, initZenMode, initDataViz,
   initSectionAnalytics, TacticalWidgets, initThemeToggleWithRipple,
-  initPWA, runTypewriter
+  initPWA, initAiChat, runTypewriter
 };
