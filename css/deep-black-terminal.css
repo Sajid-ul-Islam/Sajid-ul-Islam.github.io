@@ -42,8 +42,8 @@
 }
 
 .bottom-terminal .block-cursor {
-    background: var(--primary-color) !important;
-    animation: blink 1s infinite !important;
+    background: var(--primary-color);
+    animation: pulse-blink 1s step-end infinite;
 }
 
 /* Terminal tabs with deep black */

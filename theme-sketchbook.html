@@ -1,18 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark" data-accent="blue">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sajid Islam - Data Scientist & Business Analyst specializing in Python, SQL, Power BI, and machine learning.">
+  <meta name="description"
+    content="Sajid Islam - Data Scientist & Business Analyst specializing in Python, SQL, Power BI, and machine learning.">
   <meta name="author" content="Sajid Islam">
-  <title>Sajid Islam — Sketchbook Ink Theme</title>
+  <title>Sajid Islam â€” Sketchbook Ink Theme</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Caveat:wght@400;700&display=swap"
+    rel="stylesheet">
+
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -34,11 +38,13 @@
   <style>
     /* THEME VARIABLES & OVERRIDES */
     :root {
-      --bg: #FAF9F6; /* Alabaster warm light background */
+      --bg: #FAF9F6;
+      /* Alabaster warm light background */
       --fg: #121212;
       --fg-dim: #3a3a3a;
       --muted: #7a7a7a;
-      --accent: #3b82f6; /* Blue accent */
+      --accent: #3b82f6;
+      /* Blue accent */
       --accent-hover: #2563eb;
       --ink: rgba(18, 18, 18, 0.45);
       --ink-faint: rgba(18, 18, 18, 0.15);
@@ -46,11 +52,13 @@
     }
 
     :root[data-theme="dark"] {
-      --bg: #0F0F0F; /* Deep charcoal dark background */
+      --bg: #0F0F0F;
+      /* Deep charcoal dark background */
       --fg: #F5F5F5;
       --fg-dim: #C0C0C0;
       --muted: #6A6A6A;
-      --accent: #38bdf8; /* Light blue accent */
+      --accent: #38bdf8;
+      /* Light blue accent */
       --accent-hover: #0ea5e9;
       --ink: rgba(245, 245, 245, 0.4);
       --ink-faint: rgba(245, 245, 245, 0.18);
@@ -62,22 +70,27 @@
       --accent: #22c55e;
       --accent-hover: #16a34a;
     }
+
     :root[data-accent="orange"] {
       --accent: #f97316;
       --accent-hover: #ea580c;
     }
+
     :root[data-accent="yellow"] {
       --accent: #eab308;
       --accent-hover: #ca8a04;
     }
+
     :root[data-accent="blue"] {
       --accent: #3b82f6;
       --accent-hover: #2563eb;
     }
+
     :root[data-theme="dark"][data-accent="blue"] {
       --accent: #38bdf8;
       --accent-hover: #0ea5e9;
     }
+
     :root[data-accent="red"] {
       --accent: #ef4444;
       --accent-hover: #dc2626;
@@ -87,10 +100,12 @@
     * {
       box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 6rem;
     }
+
     body {
       background-color: var(--bg);
       color: var(--fg);
@@ -103,11 +118,13 @@
     .sk-text {
       filter: url(#sk-rough-text);
     }
-    
+
     .sk-box {
       position: relative;
     }
-    .sk-box::before, .sk-box::after {
+
+    .sk-box::before,
+    .sk-box::after {
       content: "";
       border-radius: inherit;
       border: 1.5px solid var(--ink);
@@ -115,9 +132,11 @@
       position: absolute;
       inset: 0;
     }
+
     .sk-box::before {
       filter: url(#sk-rough-1);
     }
+
     .sk-box::after {
       border-width: 1.2px;
       border-color: var(--ink-faint);
@@ -126,10 +145,15 @@
     }
 
     /* Sketchy rules */
-    .sk-rule-t, .sk-rule-b {
+    .sk-rule-t,
+    .sk-rule-b {
       position: relative;
     }
-    .sk-rule-t::before, .sk-rule-t::after, .sk-rule-b::before, .sk-rule-b::after {
+
+    .sk-rule-t::before,
+    .sk-rule-t::after,
+    .sk-rule-b::before,
+    .sk-rule-b::after {
       content: "";
       background: var(--ink);
       pointer-events: none;
@@ -138,22 +162,39 @@
       left: 0;
       right: 0;
     }
-    .sk-rule-t::before, .sk-rule-b::before {
+
+    .sk-rule-t::before,
+    .sk-rule-b::before {
       filter: url(#sk-rough-1);
     }
-    .sk-rule-t::after, .sk-rule-b::after {
+
+    .sk-rule-t::after,
+    .sk-rule-b::after {
       background: var(--ink-faint);
       filter: url(#sk-rough-2);
     }
-    .sk-rule-t::before { top: 0; }
-    .sk-rule-t::after { top: 1.5px; }
-    .sk-rule-b::before { bottom: 0; }
-    .sk-rule-b::after { bottom: -1.5px; }
+
+    .sk-rule-t::before {
+      top: 0;
+    }
+
+    .sk-rule-t::after {
+      top: 1.5px;
+    }
+
+    .sk-rule-b::before {
+      bottom: 0;
+    }
+
+    .sk-rule-b::after {
+      bottom: -1.5px;
+    }
 
     @media (min-width: 768px) {
       .sk-rule-l-md {
         position: relative;
       }
+
       .sk-rule-l-md::before {
         content: "";
         background: var(--ink);
@@ -182,6 +223,7 @@
       position: fixed;
       inset: 0;
     }
+
     :root[data-theme="dark"] .sk-grain {
       opacity: 0.12;
       mix-blend-mode: screen;
@@ -195,31 +237,54 @@
     }
 
     @keyframes sk-draw-down {
-      0% { clip-path: inset(-8px -8px 100%); }
-      100% { clip-path: inset(-8px); }
+      0% {
+        clip-path: inset(-8px -8px 100%);
+      }
+
+      100% {
+        clip-path: inset(-8px);
+      }
     }
+
     @keyframes sk-draw-right {
-      0% { clip-path: inset(-8px 100% -8px -8px); }
-      100% { clip-path: inset(-8px); }
+      0% {
+        clip-path: inset(-8px 100% -8px -8px);
+      }
+
+      100% {
+        clip-path: inset(-8px);
+      }
     }
+
     @keyframes sk-sweep {
-      0% { --sk-sweep: 0%; }
-      100% { --sk-sweep: 100%; }
+      0% {
+        --sk-sweep: 0%;
+      }
+
+      100% {
+        --sk-sweep: 100%;
+      }
     }
 
     .sk-draw-v {
       animation: sk-draw-down 0.9s ease-out var(--sk-draw-delay, 0s) both;
     }
+
     .sk-draw-h {
       animation: sk-draw-right 0.6s ease-out var(--sk-draw-delay, 0s) both;
     }
-    .sk-draw-rule::before, .sk-draw-rule::after {
+
+    .sk-draw-rule::before,
+    .sk-draw-rule::after {
       animation: sk-draw-right 1.1s ease-out var(--sk-draw-delay, 0s) both;
     }
+
     .sk-draw-box {
       animation: sk-sweep 1.1s ease-in-out var(--sk-draw-delay, 0s) both;
     }
-    .sk-draw-box::before, .sk-draw-box::after {
+
+    .sk-draw-box::before,
+    .sk-draw-box::after {
       -webkit-mask-image: conic-gradient(#000 var(--sk-sweep), #0000 0);
       mask-image: conic-gradient(#000 var(--sk-sweep), #0000 0);
     }
@@ -230,6 +295,7 @@
       background: transparent;
       transition: transform 0.15s ease-out;
     }
+
     .btn-sketch::before {
       content: "";
       border-radius: inherit;
@@ -240,9 +306,11 @@
       inset: 0;
       transition: border-color 0.15s ease-out;
     }
+
     .btn-sketch:active {
       transform: scale(0.97);
     }
+
     .btn-sketch:hover::before {
       border-color: var(--accent);
     }
@@ -259,6 +327,7 @@
       stroke-dashoffset: 1000;
       animation: sign 3s ease-out forwards;
     }
+
     @keyframes sign {
       to {
         stroke-dashoffset: 0;
@@ -273,21 +342,25 @@
       position: fixed;
       inset: 0;
     }
+
     .theme-drop {
       will-change: transform;
-      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25));
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
       width: 30px;
       height: 42px;
       position: absolute;
       top: 0;
     }
+
     .theme-drop path {
       fill: var(--bg);
     }
+
     .theme-drop ellipse {
       fill: #fff;
       opacity: 0.35;
     }
+
     .theme-drop-bead {
       background: var(--bg);
       opacity: 0;
@@ -295,166 +368,421 @@
       width: 10px;
       height: 10px;
       position: absolute;
-      box-shadow: inset 0 2px 2px rgba(255,255,255,0.6), inset 0 -1px 2px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
+      box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
     }
+
     .theme-splash-drop {
       opacity: 0.95;
       position: absolute;
     }
+
     .theme-splash-drop i {
       background: var(--bg);
       border-radius: 50%;
       width: 100%;
       height: 100%;
       display: block;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.65), inset 0 -1px 1px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.65), inset 0 -1px 1px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.3);
     }
+
     .theme-water {
       width: 100%;
       height: 100%;
       position: absolute;
       inset: 0;
     }
+
     ::view-transition {
       pointer-events: none;
     }
+
     @media (prefers-reduced-motion: no-preference) {
       ::view-transition-old(root) {
         animation: none;
       }
+
       ::view-transition-new(root) {
         animation: 2.2s cubic-bezier(0.12, 0.72, 0.28, 1) both theme-ripple-reveal;
       }
+
       :root.theme-rippling::view-transition-new(root) {
         filter: url(#theme-water-warp);
       }
+
       ::view-transition-old(theme-drop) {
         display: none;
       }
+
       ::view-transition-new(theme-drop) {
         animation: none;
       }
     }
+
     @keyframes theme-ripple-reveal {
       0% {
         clip-path: ellipse(0px 0px at var(--ripple-x, 50vw) var(--ripple-y, 40vh));
       }
+
       to {
         clip-path: ellipse(var(--ripple-rx, 160vmax) var(--ripple-ry, 90vmax) at var(--ripple-x, 50vw) var(--ripple-y, 40vh));
       }
     }
   </style>
+  <style>
+    /* PAGE PROGRESS BAR */
+    #sk-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      width: 0%;
+      z-index: 100;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    /* NAV ACTIVE LINK */
+    .sk-nav-link {
+      position: relative;
+    }
+
+    .sk-nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: url(#sk-rough-1);
+    }
+
+    .sk-nav-link.active::after,
+    .sk-nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* SCROLL REVEAL */
+    .sk-reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .sk-reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* STAT COUNTER */
+    .sk-stat-num {
+      display: inline-block;
+      transition: color 0.3s;
+    }
+
+    /* SKILL PROGRESS BAR */
+    .sk-skill-bar-wrap {
+      width: 100%;
+      height: 2px;
+      background: var(--ink-faint);
+      border-radius: 1px;
+      overflow: hidden;
+      margin-top: 6px;
+      filter: url(#sk-rough-1);
+    }
+
+    .sk-skill-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 1px;
+    }
+
+    .sk-skill-bar-wrap.animated .sk-skill-bar {
+      width: var(--skill-level);
+    }
+
+    /* PROFILE TILT */
+    .sk-profile-wrap {
+      transition: transform 0.12s ease-out;
+      will-change: transform;
+    }
+
+    /* TECH MARQUEE */
+    .sk-marquee-outer {
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .sk-marquee-track {
+      display: flex;
+      gap: 0.75rem;
+      animation: sk-marquee-scroll 28s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes sk-marquee-scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .sk-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border: 1px solid var(--ink-faint);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .sk-chip:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* MOBILE HAMBURGER */
+    .sk-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      background: transparent;
+      border: none;
+    }
+
+    @media (max-width: 1023px) {
+      .sk-hamburger {
+        display: flex;
+      }
+
+      .sk-mobile-nav {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border-color);
+        z-index: 40;
+        padding: 1rem 1.5rem;
+      }
+
+      .sk-mobile-nav.open {
+        display: flex;
+      }
+
+      .sk-mobile-nav a {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--muted);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        transition: color 0.2s;
+      }
+
+      .sk-mobile-nav a:hover {
+        color: var(--accent);
+      }
+    }
+
+    .sk-hamburger-bar {
+      width: 20px;
+      height: 1.5px;
+      background: var(--fg);
+      transition: transform 0.3s, opacity 0.3s;
+      filter: url(#sk-rough-1);
+    }
+  </style>
+
   <script type="module" src="js/data/index.js"></script>
   <script type="module" src="js/theme-switcher-ripple.js"></script>
   <script type="module" src="js/theme-init.js"></script>
 </head>
+
 <body class="relative isolate flex min-h-screen flex-col font-sans">
 
   <!-- SVG Displacement Filters for Sketchy Aesthetics -->
   <svg aria-hidden="true" width="0" height="0" class="pointer-events-none absolute">
     <filter id="sk-rough-1" x="-25%" y="-25%" width="150%" height="150%">
       <feTurbulence type="fractalNoise" baseFrequency="0.019" numOctaves="4" seed="11" result="n"></feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="5.6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5.6" xChannelSelector="R" yChannelSelector="G">
+      </feDisplacementMap>
     </filter>
     <filter id="sk-rough-2" x="-25%" y="-25%" width="150%" height="150%">
       <feTurbulence type="fractalNoise" baseFrequency="0.023" numOctaves="4" seed="19" result="n"></feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="6.4" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="6.4" xChannelSelector="R" yChannelSelector="G">
+      </feDisplacementMap>
     </filter>
     <filter id="sk-rough-text" x="-10%" y="-10%" width="120%" height="120%">
       <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="7" result="n"></feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G">
+      </feDisplacementMap>
     </filter>
   </svg>
 
   <!-- Grain overlay -->
   <div class="sk-grain" aria-hidden="true"></div>
 
+  <!-- Page progress bar -->
+  <div id="sk-progress" aria-hidden="true"></div>
+
   <!-- NAVIGATION BAR -->
-  <nav class="relative z-50 flex items-center justify-center px-4 py-4 lg:py-8 border-b border-[var(--border-color)] bg-[var(--bg)]/90 backdrop-blur-md sticky top-0">
+  <nav
+    class="relative z-50 flex items-center justify-center px-4 py-4 lg:py-8 border-b border-[var(--border-color)] bg-[var(--bg)]/90 backdrop-blur-md sticky top-0"
+    id="main-nav">
     <div class="flex w-full max-w-6xl items-center justify-between gap-4">
       <span class="flex items-center font-mono text-xl font-bold tracking-wider">
-        <a href="/" class="sk-text text-[var(--fg)] hover:text-[var(--accent)] transition-colors">SAJID ISLAM</a>
+        <a href="/" class="sk-text text-[var(--fg)] hover:text-[var(--accent)] transition-colors owner-name"></a>
       </span>
-      
+
       <!-- Desktop Links -->
       <div class="hidden items-center gap-8 lg:flex font-mono text-xs font-medium uppercase tracking-wider">
-        <a href="#about" class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">Home</a>
-        <a href="#experience" class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">Experience</a>
-        <a href="#projects" class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">Projects</a>
-        <a href="#skills" class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">Skills</a>
-        <a href="#education" class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">Education</a>
+        <a href="#about" class="sk-nav-link text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
+          data-section="about">Home</a>
+        <a href="#experience" class="sk-nav-link text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
+          data-section="experience">Experience</a>
+        <a href="#projects" class="sk-nav-link text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
+          data-section="projects">Projects</a>
+        <a href="#skills" class="sk-nav-link text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
+          data-section="skills">Skills</a>
+        <a href="#education" class="sk-nav-link text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
+          data-section="education">Education</a>
       </div>
 
       <!-- Action Panel -->
       <div class="flex items-center gap-3">
         <!-- Color Swatches -->
         <div class="hidden sm:flex items-center gap-1.5 mx-2">
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#22c55e] border-0 cursor-pointer transition-transform hover:scale-110" data-color="green" title="Green"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#f97316] border-0 cursor-pointer transition-transform hover:scale-110" data-color="orange" title="Orange"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#eab308] border-0 cursor-pointer transition-transform hover:scale-110" data-color="yellow" title="Yellow"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#3b82f6] border-0 cursor-pointer transition-transform hover:scale-110" data-color="blue" title="Blue"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#ef4444] border-0 cursor-pointer transition-transform hover:scale-110" data-color="red" title="Red"></button>
+          <button
+            class="color-swatch rounded-full w-4 h-4 bg-[#22c55e] border-0 cursor-pointer transition-transform hover:scale-110"
+            data-color="green" title="Green"></button>
+          <button
+            class="color-swatch rounded-full w-4 h-4 bg-[#f97316] border-0 cursor-pointer transition-transform hover:scale-110"
+            data-color="orange" title="Orange"></button>
+          <button
+            class="color-swatch rounded-full w-4 h-4 bg-[#eab308] border-0 cursor-pointer transition-transform hover:scale-110"
+            data-color="yellow" title="Yellow"></button>
+          <button
+            class="color-swatch rounded-full w-4 h-4 bg-[#3b82f6] border-0 cursor-pointer transition-transform hover:scale-110"
+            data-color="blue" title="Blue"></button>
+          <button
+            class="color-swatch rounded-full w-4 h-4 bg-[#ef4444] border-0 cursor-pointer transition-transform hover:scale-110"
+            data-color="red" title="Red"></button>
         </div>
 
         <!-- Light/Dark Mode Button -->
-        <button type="button" id="themeToggle" aria-label="Switch theme" class="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--fg)]">
+        <button type="button" id="themeToggle" aria-label="Switch theme"
+          class="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--fg)]">
           <i class="fas fa-moon" id="themeToggleIcon"></i>
         </button>
 
         <!-- Theme Switcher Dropdown -->
         <div class="relative group">
-          <button class="font-mono text-xs tracking-wider uppercase text-[var(--fg)] border border-[var(--ink)] px-4 py-2 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors flex items-center gap-2 rounded-lg btn-sketch">
+          <button
+            class="font-mono text-xs tracking-wider uppercase text-[var(--fg)] border border-[var(--ink)] px-4 py-2 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors flex items-center gap-2 rounded-lg btn-sketch">
             <i class="fas fa-layer-group"></i> THEMES
           </button>
-          <div class="absolute right-0 mt-2 w-48 bg-[var(--bg)] border border-[var(--ink)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg rounded-lg overflow-hidden">
-            <a href="theme-tactical.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i class="fas fa-terminal w-5"></i> Tactical HUD</a>
-            <a href="theme-ironforge.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i class="fas fa-fire w-5"></i> Ironforge Studio</a>
-            <a href="theme-sketchbook.html" class="px-4 py-3 text-xs font-mono text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
+          <div
+            class="absolute right-0 mt-2 w-48 bg-[var(--bg)] border border-[var(--ink)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg rounded-lg overflow-hidden">
+            <a href="theme-tactical.html"
+              class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+                class="fas fa-terminal w-5"></i> Tactical HUD</a>
+            <a href="theme-ironforge.html"
+              class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+                class="fas fa-fire w-5"></i> Ironforge Studio</a>
+            <a href="theme-sketchbook.html"
+              class="px-4 py-3 text-xs font-mono text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+                class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
           </div>
         </div>
       </div>
+
+      <!-- Mobile hamburger -->
+      <button class="sk-hamburger lg:hidden" id="sk-ham" aria-label="Menu">
+        <span class="sk-hamburger-bar"></span>
+        <span class="sk-hamburger-bar"></span>
+        <span class="sk-hamburger-bar"></span>
+      </button>
     </div>
+   
   </nav>
 
   <div class="flex-1">
     <main class="relative focus:outline-none">
-      
+
       <!-- HERO / INTRO SECTION -->
       <section class="relative py-12 md:py-24 mx-auto max-w-4xl px-4 sm:px-6" id="about">
         <!-- Framing Corner brackets (Ink lines) -->
-        <div class="sk-ink sk-draw-v pointer-events-none absolute inset-y-16 -left-12 hidden w-px lg:block" aria-hidden="true" style="--sk-draw-delay: 0.2s"></div>
-        <div class="sk-ink sk-draw-h pointer-events-none absolute top-16 -left-12 hidden h-px w-10 lg:block" aria-hidden="true" style="--sk-draw-delay: 0.6s"></div>
-        <div class="sk-ink sk-draw-h pointer-events-none absolute bottom-16 -left-12 hidden h-px w-10 lg:block" aria-hidden="true" style="--sk-draw-delay: 0.7s"></div>
-        
-        <div class="sk-ink sk-draw-v pointer-events-none absolute inset-y-16 -right-12 hidden w-px lg:block" aria-hidden="true" style="--sk-draw-delay: 0.3s"></div>
-        <div class="sk-ink sk-draw-h pointer-events-none absolute top-16 -right-12 hidden h-px w-10 lg:block" aria-hidden="true" style="--sk-draw-delay: 0.8s"></div>
-        <div class="sk-ink sk-draw-h pointer-events-none absolute bottom-16 -right-12 hidden h-px w-10 lg:block" aria-hidden="true" style="--sk-draw-delay: 0.9s"></div>
+        <div class="sk-ink sk-draw-v pointer-events-none absolute inset-y-16 -left-12 hidden w-px lg:block"
+          aria-hidden="true" style="--sk-draw-delay: 0.2s"></div>
+        <div class="sk-ink sk-draw-h pointer-events-none absolute top-16 -left-12 hidden h-px w-10 lg:block"
+          aria-hidden="true" style="--sk-draw-delay: 0.6s"></div>
+        <div class="sk-ink sk-draw-h pointer-events-none absolute bottom-16 -left-12 hidden h-px w-10 lg:block"
+          aria-hidden="true" style="--sk-draw-delay: 0.7s"></div>
+
+        <div class="sk-ink sk-draw-v pointer-events-none absolute inset-y-16 -right-12 hidden w-px lg:block"
+          aria-hidden="true" style="--sk-draw-delay: 0.3s"></div>
+        <div class="sk-ink sk-draw-h pointer-events-none absolute top-16 -right-12 hidden h-px w-10 lg:block"
+          aria-hidden="true" style="--sk-draw-delay: 0.8s"></div>
+        <div class="sk-ink sk-draw-h pointer-events-none absolute bottom-16 -right-12 hidden h-px w-10 lg:block"
+          aria-hidden="true" style="--sk-draw-delay: 0.9s"></div>
 
         <div class="flex flex-col items-center text-center">
           <!-- Profile Pic with Sketched Double-Border -->
-          <div class="sk-box sk-draw-box rounded-2xl p-1 mb-6" style="--sk-draw-delay: 0.1s">
-            <img src="img/profile.jpg" alt="Sajid Islam" class="size-28 rounded-xl object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+          <div class="sk-box sk-draw-box rounded-2xl p-1 mb-6 sk-profile-wrap" style="--sk-draw-delay: 0.1s"
+            id="sk-profile-img">
+            <img src="img/profile.jpg" alt="Sajid Islam"
+              class="size-28 rounded-xl object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500"
+              loading="lazy">
           </div>
 
           <!-- Handwritten / Sketch name (using Cursive CAVEAT Font & Filter) -->
-          <div class="font-hand text-5xl md:text-6xl text-[var(--fg)] tracking-wide mb-2 sk-text select-none animate-pulse owner-name">
+          <div
+            class="font-hand text-5xl md:text-6xl text-[var(--fg)] tracking-wide mb-2 sk-text select-none animate-pulse owner-name">
           </div>
-          
+
           <h1 class="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl leading-[1.15] font-normal text-balance">
             I engineer <s class="text-[var(--muted)] decoration-[0.05em]">raw data</s><br>
             <em class="text-[var(--accent)] font-serif italic">decisions</em> that scale.
           </h1>
-          
+
           <p class="mt-6 max-w-xl text-base text-[var(--fg-dim)] sm:text-lg leading-relaxed" id="hero-text">
-            Data Scientist & Business Analyst specializing in turning complex datasets into strategic growth. Expert in <strong class="font-semibold text-[var(--fg)]">Python, SQL, Power BI</strong>, and machine learning. Lately building <strong class="font-semibold text-[var(--accent)]">agentic workflows</strong> and business intelligence systems.
+            Data Scientist & Business Analyst specializing in turning complex datasets into strategic growth. Expert in
+            <strong class="font-semibold text-[var(--fg)]">Python, SQL, Power BI</strong>, and machine learning. Lately
+            building <strong class="font-semibold text-[var(--accent)]">agentic workflows</strong> and business
+            intelligence systems.
           </p>
 
           <!-- Action Buttons / Links -->
           <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a href="resume.html" target="_blank" class="px-6 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-[var(--fg)] border border-[var(--ink)] rounded-full hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all btn-sketch">
+            <a href="resume.html" target="_blank"
+              class="px-6 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-[var(--fg)] border border-[var(--ink)] rounded-full hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all btn-sketch">
               <i class="fas fa-file-pdf mr-2"></i> Download Resume
             </a>
-            <a href="#" target="_blank" rel="noopener" class="px-6 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-[var(--bg)] bg-[var(--fg)] border border-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:border-[var(--accent)] hover:text-[var(--bg)] transition-all">
+            <a href="#" target="_blank" rel="noopener"
+              class="px-6 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-[var(--bg)] bg-[var(--fg)] border border-[var(--fg)] rounded-full hover:bg-[var(--accent)] hover:border-[var(--accent)] hover:text-[var(--bg)] transition-all">
               <i class="fab fa-whatsapp mr-2"></i> Let's Connect
             </a>
           </div>
@@ -462,17 +790,31 @@
           <!-- Social links list -->
           <ul class="mt-8 flex items-center gap-4">
             <li>
-              <a href="#" target="_blank" rel="noopener" class="inline-flex size-10 items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--accent)]" title="GitHub">
-                <svg fill="currentColor" viewBox="0 0 24 24" class="size-5"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 22 12 10 10 0 0 0 12 2Z"></path></svg>
+              <a href="#" target="_blank" rel="noopener"
+                class="inline-flex size-10 items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--accent)]"
+                title="GitHub">
+                <svg fill="currentColor" viewBox="0 0 24 24" class="size-5">
+                  <path
+                    d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 22 12 10 10 0 0 0 12 2Z">
+                  </path>
+                </svg>
               </a>
             </li>
             <li>
-              <a href="#" target="_blank" rel="noopener" class="inline-flex size-10 items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--accent)]" title="LinkedIn">
-                <svg fill="currentColor" viewBox="0 0 24 24" class="size-5"><path d="M6.94 8.5v10.56H3.42V8.5h3.52ZM7.17 5.18a1.83 1.83 0 0 1-1.98 1.83h-.02a1.83 1.83 0 1 1 .04-3.66 1.83 1.83 0 0 1 1.96 1.83Zm5.34 4.9c.47-.73 1.3-1.76 3.17-1.76 2.31 0 4.05 1.51 4.05 4.77v5.97h-3.52v-5.56c0-1.42-.51-2.4-1.79-2.4-.97 0-1.55.66-1.81 1.29-.09.23-.11.55-.11.87v5.8H9.02s.05-9.41 0-10.38h3.5v1.4Z"></path></svg>
+              <a href="#" target="_blank" rel="noopener"
+                class="inline-flex size-10 items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--accent)]"
+                title="LinkedIn">
+                <svg fill="currentColor" viewBox="0 0 24 24" class="size-5">
+                  <path
+                    d="M6.94 8.5v10.56H3.42V8.5h3.52ZM7.17 5.18a1.83 1.83 0 0 1-1.98 1.83h-.02a1.83 1.83 0 1 1 .04-3.66 1.83 1.83 0 0 1 1.96 1.83Zm5.34 4.9c.47-.73 1.3-1.76 3.17-1.76 2.31 0 4.05 1.51 4.05 4.77v5.97h-3.52v-5.56c0-1.42-.51-2.4-1.79-2.4-.97 0-1.55.66-1.81 1.29-.09.23-.11.55-.11.87v5.8H9.02s.05-9.41 0-10.38h3.5v1.4Z">
+                  </path>
+                </svg>
               </a>
             </li>
             <li>
-              <a href="#" target="_blank" rel="noopener" class="inline-flex size-10 items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--accent)]" title="Kaggle">
+              <a href="#" target="_blank" rel="noopener"
+                class="inline-flex size-10 items-center justify-center rounded-full bg-neutral-500/10 text-[var(--fg-dim)] transition-colors hover:bg-neutral-500/20 hover:text-[var(--accent)]"
+                title="Kaggle">
                 <i class="fab fa-kaggle text-lg"></i>
               </a>
             </li>
@@ -483,22 +825,49 @@
       <!-- STATS SECTION -->
       <section class="sk-rule-t sk-rule-b py-12 bg-neutral-500/5 overflow-hidden" id="stats">
         <div class="mx-auto max-w-4xl px-4 sm:px-6">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="sk-rule-l-md pl-6 md:first:border-none">
-              <h3 class="font-hand text-5xl text-[var(--accent)] font-bold mb-1">4+</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="stats-grid">
+            <div class="sk-rule-l-md pl-6 md:first:border-none sk-reveal">
+              <h3 class="font-hand text-5xl text-[var(--accent)] font-bold mb-1"><span class="sk-counter"
+                  data-target="4" data-suffix="+">0</span></h3>
               <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Years Experience</p>
             </div>
-            <div class="sk-rule-l-md pl-6">
-              <h3 class="font-hand text-5xl text-[var(--fg)] font-bold mb-1">15+</h3>
+            <div class="sk-rule-l-md pl-6 sk-reveal" style="--reveal-delay:0.1s">
+              <h3 class="font-hand text-5xl text-[var(--fg)] font-bold mb-1"><span class="sk-counter" data-target="15"
+                  data-suffix="+">0</span></h3>
               <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Completed Projects</p>
             </div>
-            <div class="sk-rule-l-md pl-6">
-              <h3 class="font-hand text-5xl text-[var(--fg)] font-bold mb-1">3+</h3>
+            <div class="sk-rule-l-md pl-6 sk-reveal" style="--reveal-delay:0.2s">
+              <h3 class="font-hand text-5xl text-[var(--fg)] font-bold mb-1"><span class="sk-counter" data-target="3"
+                  data-suffix="+">0</span></h3>
               <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Research Papers</p>
             </div>
-            <div class="sk-rule-l-md pl-6">
-              <h3 class="font-hand text-5xl text-[var(--fg)] font-bold mb-1">10+</h3>
+            <div class="sk-rule-l-md pl-6 sk-reveal" style="--reveal-delay:0.3s">
+              <h3 class="font-hand text-5xl text-[var(--fg)] font-bold mb-1"><span class="sk-counter" data-target="10"
+                  data-suffix="+">0</span></h3>
               <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Certifications</p>
+            </div>
+          </div>
+
+          <!-- Tech Marquee -->
+          <div class="sk-marquee-outer mt-10" aria-hidden="true">
+            <div class="sk-marquee-track">
+              <span class="sk-chip"><i class="fas fa-chart-bar"></i> Power BI</span>
+              <span class="sk-chip"><i class="fab fa-python"></i> Python</span>
+              <span class="sk-chip"><i class="fas fa-database"></i> SQL</span>
+              <span class="sk-chip"><i class="fas fa-robot"></i> RAG / LLMs</span>
+              <span class="sk-chip"><i class="fas fa-brain"></i> Machine Learning</span>
+              <span class="sk-chip"><i class="fas fa-lightbulb"></i> Product Strategy</span>
+              <span class="sk-chip"><i class="fas fa-table"></i> Data Analytics</span>
+              <span class="sk-chip"><i class="fas fa-sitemap"></i> Agentic AI</span>
+              <!-- Duplicate for seamless loop -->
+              <span class="sk-chip"><i class="fas fa-chart-bar"></i> Power BI</span>
+              <span class="sk-chip"><i class="fab fa-python"></i> Python</span>
+              <span class="sk-chip"><i class="fas fa-database"></i> SQL</span>
+              <span class="sk-chip"><i class="fas fa-robot"></i> RAG / LLMs</span>
+              <span class="sk-chip"><i class="fas fa-brain"></i> Machine Learning</span>
+              <span class="sk-chip"><i class="fas fa-lightbulb"></i> Product Strategy</span>
+              <span class="sk-chip"><i class="fas fa-table"></i> Data Analytics</span>
+              <span class="sk-chip"><i class="fas fa-sitemap"></i> Agentic AI</span>
             </div>
           </div>
         </div>
@@ -507,12 +876,14 @@
       <!-- WORK EXPERIENCE SECTION -->
       <section class="relative py-16 md:py-24 mx-auto max-w-4xl px-4 sm:px-6" id="experience">
         <div class="grid md:grid-cols-3 gap-8">
-          
-          <div class="md:col-span-1">
-            <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Career Journey</span>
+
+          <div class="md:col-span-1 sk-reveal">
+            <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Career
+              Journey</span>
             <h2 class="mt-3 font-serif text-3xl md:text-4xl font-normal leading-tight">Work<br>Experience</h2>
             <p class="mt-4 text-sm text-[var(--muted)] leading-relaxed">
-              Consistently transforming businesses by engineering automation workflows, standardizing KPI dashboards, and designing analytics pipelines.
+              Consistently transforming businesses by engineering automation workflows, standardizing KPI dashboards,
+              and designing analytics pipelines.
             </p>
           </div>
 
@@ -523,13 +894,15 @@
       <!-- PROJECTS SECTION -->
       <section class="sk-rule-t py-16 md:py-24 bg-neutral-500/5" id="projects">
         <div class="mx-auto max-w-4xl px-4 sm:px-6">
-          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4 mb-12">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4 mb-12 sk-reveal">
             <div>
-              <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Portfolio Showcase</span>
+              <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Portfolio
+                Showcase</span>
               <h2 class="mt-3 font-serif text-3xl md:text-4xl font-normal">Featured Works</h2>
             </div>
-            <a href="https://github.com/Sajid-ul-Islam" target="_blank" class="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] uppercase tracking-wider transition-colors">
-              All Repositories →
+            <a href="#" target="_blank"
+              class="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] uppercase tracking-wider transition-colors github-link">
+              All Repositories â†’
             </a>
           </div>
 
@@ -541,16 +914,18 @@
       <!-- SKILLS SECTION -->
       <section class="relative py-16 md:py-24 mx-auto max-w-4xl px-4 sm:px-6" id="skills">
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="md:col-span-1">
-            <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Technical Arsenal</span>
+          <div class="md:col-span-1 sk-reveal">
+            <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Technical
+              Arsenal</span>
             <h2 class="mt-3 font-serif text-3xl md:text-4xl font-normal">Core Skills</h2>
             <p class="mt-4 text-sm text-[var(--muted)] leading-relaxed">
-              A carefully developed stack geared towards scripting operational solutions, data classification, and structured dashboard viz.
+              A carefully developed stack geared towards scripting operational solutions, data classification, and
+              structured dashboard viz.
             </p>
           </div>
 
           <div class="md:col-span-2">
-            <div class="grid grid-cols-2 gap-4" id="skills-grid"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="skills-grid"></div>
           </div>
         </div>
       </section>
@@ -560,7 +935,8 @@
         <div class="mx-auto max-w-4xl px-4 sm:px-6">
           <div class="grid md:grid-cols-3 gap-8">
             <div class="md:col-span-1">
-              <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">// Credentials</span>
+              <span class="font-mono text-xs font-semibold tracking-wider text-[var(--accent)] uppercase">//
+                Credentials</span>
               <h2 class="mt-3 font-serif text-3xl md:text-4xl font-normal">Education</h2>
               <p class="mt-4 text-sm text-[var(--muted)] leading-relaxed">
                 Academic credentials and specialized business analytics degrees.
@@ -577,7 +953,8 @@
 
   <!-- FOOTER -->
   <footer class="sk-rule-t mt-16 flex justify-center bg-neutral-500/5">
-    <div class="flex w-full max-w-4xl flex-col items-center justify-between gap-4 px-4 py-8 text-xs sm:flex-row font-mono text-[var(--muted)]">
+    <div
+      class="flex w-full max-w-4xl flex-col items-center justify-between gap-4 px-4 py-8 text-xs sm:flex-row font-mono text-[var(--muted)]">
       <p class="uppercase tracking-wider footer-copyright"></p>
       <div class="flex gap-6 uppercase tracking-wider">
         <a href="#" class="hover:text-[var(--accent)] transition-colors footer-email">Email</a>
@@ -589,214 +966,292 @@
 
   <!-- SCRIPT BLOCK -->
   <script type="module">
-    // Update active theme tracker
+    // â”€â”€ Theme bookkeeping â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     localStorage.setItem('portfolio-active-theme', 'theme-sketchbook.html');
 
     const root = document.documentElement;
-    const themeToggleBtn = document.getElementById('themeToggle');
     const themeToggleIcon = document.getElementById('themeToggleIcon');
 
-    // Basic functions
     const s = () => root.getAttribute('data-theme') || 'dark';
-    
     const applyTheme = (theme) => {
       root.setAttribute('data-theme', theme);
       document.body.setAttribute('data-theme', theme);
-      if (themeToggleIcon) {
-        themeToggleIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-      }
+      if (themeToggleIcon) themeToggleIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     };
+    const applyAccent = (accent) => root.setAttribute('data-accent', accent);
 
-    const applyAccent = (accent) => {
-      root.setAttribute('data-accent', accent);
-    };
-
-    // Load initial configurations from local storage
     const savedTheme = localStorage.getItem('tactical-theme') || 'dark';
     const savedAccent = localStorage.getItem('tactical-accent') || 'blue';
     applyTheme(savedTheme);
     applyAccent(savedAccent);
 
-    // Accent swatch interaction
     document.querySelectorAll('.color-swatch').forEach(swatch => {
-      swatch.addEventListener('click', (e) => {
-        const newAccent = e.target.getAttribute('data-color');
-        applyAccent(newAccent);
-        localStorage.setItem('tactical-accent', newAccent);
+      swatch.addEventListener('click', e => {
+        applyAccent(e.target.getAttribute('data-color'));
+        localStorage.setItem('tactical-accent', e.target.getAttribute('data-color'));
       });
     });
 
-    // Initialize Teardrop ripple switcher
     window.initThemeToggleWithRipple({
       buttonId: 'themeToggle',
       getTheme: s,
-      applyTheme: applyTheme,
-      saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
+      applyTheme,
+      saveTheme: theme => localStorage.setItem('tactical-theme', theme)
     });
 
-    /* ==================================
-       WIGGLING SKETCH EFFECTS (DYNAMIC SEED SHIFT)
-       ================================== */
-    const turbulenceFilter1 = document.getElementById('sk-rough-1')?.querySelector('feTurbulence');
-    const turbulenceFilter2 = document.getElementById('sk-rough-2')?.querySelector('feTurbulence');
-    const turbulenceTextFilter = document.getElementById('sk-rough-text')?.querySelector('feTurbulence');
+    // â”€â”€ Mobile hamburger â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const ham = document.getElementById('sk-ham');
+    const mobileNav = document.getElementById('sk-mobile-nav');
+    if (ham && mobileNav) {
+      ham.addEventListener('click', () => {
+        mobileNav.classList.toggle('open');
+        ham.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+      });
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => mobileNav.classList.remove('open'));
+      });
+    }
 
+    // â”€â”€ Page scroll progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const progressBar = document.getElementById('sk-progress');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const total = document.body.scrollHeight - window.innerHeight;
+        progressBar.style.width = `${(scrolled / total) * 100}%`;
+      }, { passive: true });
+    }
+
+    // â”€â”€ Active nav link tracker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const navLinks = document.querySelectorAll('.sk-nav-link[data-section]');
+    const sectionIds = [...navLinks].map(a => a.dataset.section);
+    const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    function updateActiveNav() {
+      const scrollMid = window.scrollY + window.innerHeight * 0.35;
+      let active = sectionEls[0];
+      sectionEls.forEach(el => { if (el.offsetTop <= scrollMid) active = el; });
+      navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === active?.id));
+    }
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    // â”€â”€ Sketch turbulence wiggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const t1 = document.getElementById('sk-rough-1')?.querySelector('feTurbulence');
+    const t2 = document.getElementById('sk-rough-2')?.querySelector('feTurbulence');
+    const t3 = document.getElementById('sk-rough-text')?.querySelector('feTurbulence');
     setInterval(() => {
-      const newSeed = Math.floor(Math.random() * 100);
-      if (turbulenceFilter1) turbulenceFilter1.setAttribute('seed', newSeed);
-      if (turbulenceFilter2) turbulenceFilter2.setAttribute('seed', newSeed + 5);
-      if (turbulenceTextFilter) turbulenceTextFilter.setAttribute('seed', newSeed + 10);
+      const seed = Math.floor(Math.random() * 100);
+      if (t1) t1.setAttribute('seed', seed);
+      if (t2) t2.setAttribute('seed', seed + 5);
+      if (t3) t3.setAttribute('seed', seed + 10);
     }, 160);
 
-    /* ==================================
-       FUNCTION-BASED MODULAR DYNAMIC RENDERING
-       ================================== */
+    // â”€â”€ Scroll reveal (IntersectionObserver) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          // Animate skill bars inside
+          e.target.querySelectorAll('.sk-skill-bar-wrap').forEach(bar => bar.classList.add('animated'));
+          // Animate counters inside
+          e.target.querySelectorAll('.sk-counter').forEach(c => animateCounter(c));
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    // â”€â”€ Stats counter observer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const statsObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.sk-counter').forEach(c => animateCounter(c));
+          statsObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    const statsSection = document.getElementById('stats');
+    if (statsSection) statsObserver.observe(statsSection);
+
+    function animateCounter(el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const dur = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(ease * target) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // â”€â”€ Profile photo parallax tilt â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const profileWrap = document.getElementById('sk-profile-img');
+    if (profileWrap) {
+      profileWrap.addEventListener('mousemove', e => {
+        const r = profileWrap.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const rx = ((e.clientY - cy) / r.height) * 12;
+        const ry = ((e.clientX - cx) / r.width) * -12;
+        profileWrap.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.04)`;
+      });
+      profileWrap.addEventListener('mouseleave', () => {
+        profileWrap.style.transform = '';
+      });
+    }
+
+    // â”€â”€ Dynamic renderers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function renderProfile(info) {
-      document.title = `${info.name} — Sketchbook Ink Theme`;
+      document.title = `${info.name} â€” Sketchbook Ink Theme`;
       document.querySelectorAll('.owner-name').forEach(el => el.textContent = info.name);
-      
+      document.querySelectorAll('.github-link').forEach(a => a.href = info.github || '#');
+
       const heroText = document.getElementById('hero-text');
       if (heroText) {
-        // Build customized layout if using default info, otherwise use sheet text directly
-        if (info.heroText.includes("complex datasets")) {
-          heroText.innerHTML = `Data Scientist & Business Analyst specializing in turning complex datasets into strategic growth. Expert in <strong class="font-semibold text-[var(--fg)]">Python, SQL, Power BI</strong>, and machine learning. Lately building <strong class="font-semibold text-[var(--accent)]">agentic workflows</strong> and business intelligence systems.`;
+        if (info.heroText.includes('complex datasets')) {
+          heroText.innerHTML = `Data Scientist &amp; Business Analyst specializing in turning complex datasets into strategic growth. Expert in <strong class="font-semibold text-[var(--fg)]">Python, SQL, Power BI</strong>, and machine learning. Lately building <strong class="font-semibold text-[var(--accent)]">agentic workflows</strong> and business intelligence systems.`;
         } else {
           heroText.textContent = info.heroText;
         }
       }
-      
+
       const profileImg = document.querySelector('img[alt="Sajid Islam"]');
       if (profileImg) profileImg.src = info.photo;
-      
-      const emailLink = document.querySelector('a[href^="mailto:"]');
+
+      const emailLink = document.querySelector('a.footer-email');
       if (emailLink) emailLink.href = `mailto:${info.email}`;
-      const waLink = document.querySelector('a[href*="wa.me"]');
-      if (waLink) waLink.href = `https://wa.me/${info.whatsapp.replace(/\s+/g, '')}`;
+      document.querySelectorAll('a[href*="wa.me"], a.footer-whatsapp').forEach(a => {
+        a.href = `https://wa.me/${info.whatsapp.replace(/\s+/g, '')}`;
+      });
     }
 
     function renderExperiences(experiences) {
-      const expContainer = document.getElementById('experience-container');
-      if (!expContainer) return;
-      expContainer.innerHTML = '';
+      const c = document.getElementById('experience-container');
+      if (!c) return;
+      c.innerHTML = '';
       experiences.forEach((exp, idx) => {
-        const highlightsHTML = exp.highlights.map(hl => `<li>${hl}</li>`).join('');
-        const bulletClass = idx === 0 ? 'border-[var(--accent)]' : 'border-[var(--ink)]';
-        const innerBulletClass = idx === 0 ? 'bg-[var(--accent)]' : 'bg-[var(--fg)]';
-        expContainer.insertAdjacentHTML('beforeend', `
-          <div class="relative pl-8 border-l-2 border-[var(--ink)]">
-            <div class="absolute -left-2.5 top-1.5 size-4 rounded-full bg-[var(--bg)] border-2 ${bulletClass} flex items-center justify-center">
-              <span class="size-1.5 rounded-full ${innerBulletClass}"></span>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-              <h3 class="font-serif text-2xl font-normal text-[var(--fg)]">${exp.title}</h3>
-              <span class="font-mono text-[10px] text-[var(--muted)] uppercase tracking-wider mt-1 sm:mt-0">${exp.startDate}${exp.endDate ? ' - ' + exp.endDate : ' - Present'}</span>
-            </div>
-            <p class="font-mono text-xs text-[var(--accent)] font-semibold uppercase tracking-widest mt-1">${exp.company}</p>
-            <ul class="mt-4 space-y-2 text-sm text-[var(--fg-dim)] list-disc pl-4 leading-relaxed">
-              ${highlightsHTML}
-            </ul>
+        const hl = exp.highlights.map(h => `<li>${h}</li>`).join('');
+        const bc = idx === 0 ? 'border-[var(--accent)]' : 'border-[var(--ink)]';
+        const ic = idx === 0 ? 'bg-[var(--accent)]' : 'bg-[var(--fg)]';
+        const el = document.createElement('div');
+        el.className = 'relative pl-8 border-l-2 border-[var(--ink)] sk-reveal';
+        el.style.setProperty('--reveal-delay', `${idx * 0.12}s`);
+        el.innerHTML = `
+          <div class="absolute -left-2.5 top-1.5 size-4 rounded-full bg-[var(--bg)] border-2 ${bc} flex items-center justify-center">
+            <span class="size-1.5 rounded-full ${ic}"></span>
           </div>
-        `);
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-serif text-2xl font-normal text-[var(--fg)]">${exp.title}</h3>
+            <span class="font-mono text-[10px] text-[var(--muted)] uppercase tracking-wider mt-1 sm:mt-0">${exp.startDate}${exp.endDate ? ' - ' + exp.endDate : ' - Present'}</span>
+          </div>
+          <p class="font-mono text-xs text-[var(--accent)] font-semibold uppercase tracking-widest mt-1">${exp.company}</p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--fg-dim)] list-disc pl-4 leading-relaxed">${hl}</ul>`;
+        c.appendChild(el);
+        revealObserver.observe(el);
       });
     }
 
     function renderEducation(educationList) {
-      const eduContainer = document.getElementById('education-container');
-      if (!eduContainer) return;
-      eduContainer.innerHTML = '';
-      educationList.forEach(edu => {
+      const c = document.getElementById('education-container');
+      if (!c) return;
+      c.innerHTML = '';
+      educationList.forEach((edu, idx) => {
         const icon = edu.degree.includes('PGD') ? 'fa-graduation-cap' : (edu.degree.includes('BSc') || edu.degree.includes('Bachelor') ? 'fa-university' : 'fa-school');
-        eduContainer.insertAdjacentHTML('beforeend', `
-          <div class="sk-box rounded-xl p-6 bg-[var(--bg)]">
-            <div class="flex items-start gap-4">
-              <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-neutral-500/10 text-[var(--accent)] shrink-0">
-                <i class="fas ${icon} text-lg"></i>
-              </div>
-              <div>
-                <h3 class="font-serif text-xl font-normal text-[var(--fg)]">${edu.degree}</h3>
-                <p class="text-sm text-[var(--fg-dim)] mt-1">${edu.institution}</p>
-                <div class="flex items-center gap-3 mt-2 text-xs font-mono text-[var(--muted)]">
-                  <span>Graduated: ${edu.date}</span>
-                  <span>•</span>
-                  <span>${edu.location || 'Dhaka, BD'}</span>
-                </div>
+        const el = document.createElement('div');
+        el.className = 'sk-box rounded-xl p-6 bg-[var(--bg)] sk-reveal';
+        el.style.setProperty('--reveal-delay', `${idx * 0.1}s`);
+        el.innerHTML = `
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-neutral-500/10 text-[var(--accent)] shrink-0">
+              <i class="fas ${icon} text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-serif text-xl font-normal text-[var(--fg)]">${edu.degree}</h3>
+              <p class="text-sm text-[var(--fg-dim)] mt-1">${edu.institution}</p>
+              <div class="flex items-center gap-3 mt-2 text-xs font-mono text-[var(--muted)]">
+                <span>Graduated: ${edu.date}</span>
+                <span>â€¢</span>
+                <span>${edu.location || 'Dhaka, BD'}</span>
               </div>
             </div>
-          </div>
-        `);
+          </div>`;
+        c.appendChild(el);
+        revealObserver.observe(el);
       });
     }
 
     function renderProjects(projects) {
-      const projContainer = document.getElementById('projects-container');
-      if (!projContainer) return;
-      projContainer.innerHTML = '';
-      projects.forEach(proj => {
-        const tagsHTML = proj.technologies.map(tech => `<span class="font-mono text-[10px] text-[var(--muted)]">#${tech}</span>`).join('\n');
+      const c = document.getElementById('projects-container');
+      if (!c) return;
+      c.innerHTML = '';
+      projects.forEach((proj, idx) => {
+        const tags = proj.technologies.map(t => `<span class="font-mono text-[10px] text-[var(--muted)]">#${t}</span>`).join('\n');
         const isApp = proj.category === 'automation' || proj.category === 'web-apps';
-        const badgeText = isApp ? 'App' : (proj.category === 'bi-viz' ? 'BI Viz' : (proj.category === 'ml-ai' ? 'ML AI' : 'Project'));
-        const launchText = proj.liveUrl ? 'Launch App' : 'View Project';
-        const linkUrl = proj.liveUrl || proj.githubUrl || '#';
-        const linkIcon = proj.liveUrl ? 'fa-external-link-alt' : 'fa-code';
-        
-        projContainer.insertAdjacentHTML('beforeend', `
-          <div class="sk-box rounded-xl p-6 bg-[var(--bg)] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300">
-            <div>
-              <div class="flex items-center justify-between gap-3">
-                <h3 class="font-serif text-2xl font-normal text-[var(--fg)] hover:text-[var(--accent)] transition-colors">${proj.title}</h3>
-                <span class="font-mono text-[9px] uppercase px-2 py-0.5 border border-[var(--ink-faint)] rounded-full text-[var(--muted)]">${badgeText}</span>
-              </div>
-              <p class="mt-3 text-sm text-[var(--fg-dim)] leading-relaxed">
-                ${proj.description}
-              </p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                ${tagsHTML}
-              </div>
+        const badge = isApp ? 'App' : (proj.category === 'bi-viz' ? 'BI Viz' : (proj.category === 'ml-ai' ? 'ML AI' : 'Project'));
+        const url = proj.liveUrl || proj.githubUrl || '#';
+        const icon = proj.liveUrl ? 'fa-external-link-alt' : 'fa-code';
+        const el = document.createElement('div');
+        el.className = 'sk-box rounded-xl p-6 bg-[var(--bg)] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300 sk-reveal';
+        el.style.setProperty('--reveal-delay', `${idx * 0.12}s`);
+        el.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="font-serif text-2xl font-normal text-[var(--fg)] hover:text-[var(--accent)] transition-colors">${proj.title}</h3>
+              <span class="font-mono text-[9px] uppercase px-2 py-0.5 border border-[var(--ink-faint)] rounded-full text-[var(--muted)]">${badge}</span>
             </div>
-            <a href="${linkUrl}" target="_blank" class="mt-6 inline-flex items-center gap-2 font-mono text-xs text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors">
-              ${launchText} <i class="fas ${linkIcon} text-[10px]"></i>
-            </a>
+            <p class="mt-3 text-sm text-[var(--fg-dim)] leading-relaxed">${proj.description}</p>
+            <div class="mt-4 flex flex-wrap gap-2">${tags}</div>
           </div>
-        `);
+          <a href="${url}" target="_blank" class="mt-6 inline-flex items-center gap-2 font-mono text-xs text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors">
+            Launch App <i class="fas ${icon} text-[10px]"></i>
+          </a>`;
+        c.appendChild(el);
+        revealObserver.observe(el);
       });
     }
 
     function renderSkills(skillGroups) {
-      const skillsContainer = document.getElementById('skills-grid');
-      if (!skillsContainer) return;
-      skillsContainer.innerHTML = '';
-      
-      const flatSkills = [];
-      skillGroups.forEach(group => {
-        group.skills.forEach(skill => {
-          flatSkills.push(skill);
-        });
-      });
-      
-      flatSkills.forEach(skill => {
+      const c = document.getElementById('skills-grid');
+      if (!c) return;
+      c.innerHTML = '';
+      const flat = skillGroups.flatMap(g => g.skills);
+      flat.forEach((skill, idx) => {
         let iconClass = 'fa-code';
-        if (skill.name.toLowerCase().includes('python')) iconClass = 'fab fa-python';
-        else if (skill.name.toLowerCase().includes('sql')) iconClass = 'fas fa-database';
-        else if (skill.name.toLowerCase().includes('bi') || skill.name.toLowerCase().includes('tableau') || skill.name.toLowerCase().includes('viz')) iconClass = 'fas fa-chart-bar';
-        else if (skill.name.toLowerCase().includes('ai') || skill.name.toLowerCase().includes('ml') || skill.name.toLowerCase().includes('rag')) iconClass = 'fas fa-robot';
-        else if (skill.name.toLowerCase().includes('react') || skill.name.toLowerCase().includes('javascript') || skill.name.toLowerCase().includes('html')) iconClass = 'fab fa-react';
-        else if (skill.name.toLowerCase().includes('market') || skill.name.toLowerCase().includes('strategy') || skill.name.toLowerCase().includes('product')) iconClass = 'fas fa-lightbulb';
+        const n = skill.name.toLowerCase();
+        if (n.includes('python')) iconClass = 'fab fa-python';
+        else if (n.includes('sql')) iconClass = 'fas fa-database';
+        else if (n.includes('bi') || n.includes('viz')) iconClass = 'fas fa-chart-bar';
+        else if (n.includes('ai') || n.includes('ml') || n.includes('rag') || n.includes('machine')) iconClass = 'fas fa-robot';
+        else if (n.includes('market') || n.includes('strategy') || n.includes('product')) iconClass = 'fas fa-lightbulb';
 
-        skillsContainer.insertAdjacentHTML('beforeend', `
-          <div class="sk-box rounded-xl p-4 flex items-center gap-4 bg-[var(--bg)]">
-            <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-neutral-500/10 text-[var(--accent)]">
-              <i class="${iconClass} text-xl"></i>
+        const level = skill.level || 80;
+        const el = document.createElement('div');
+        el.className = 'sk-box rounded-xl p-4 bg-[var(--bg)] sk-reveal hover:-translate-y-0.5 transition-transform duration-200';
+        el.style.setProperty('--reveal-delay', `${idx * 0.07}s`);
+        el.innerHTML = `
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center bg-neutral-500/10 text-[var(--accent)] shrink-0">
+              <i class="${iconClass} text-lg"></i>
             </div>
-            <div>
-              <h4 class="font-serif text-lg font-normal">${skill.name}</h4>
+            <div class="flex-1 min-w-0">
+              <h4 class="font-serif text-base font-normal truncate">${skill.name}</h4>
               <p class="font-mono text-[9px] text-[var(--muted)]">${skill.category || 'Expertise'}</p>
             </div>
           </div>
-        `);
+          <div class="sk-skill-bar-wrap" title="${level}%">
+            <div class="sk-skill-bar" style="--skill-level: ${level}%"></div>
+          </div>`;
+        c.appendChild(el);
+        revealObserver.observe(el);
       });
     }
 
-    // Dynamic Bootstrap Ingestion Flow
+    // â”€â”€ Bootstrap â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     async function bootstrap() {
       try {
         const data = await window.PortfolioData.load();
@@ -805,12 +1260,15 @@
         renderEducation(data.education);
         renderProjects(data.projects);
         renderSkills(data.skills);
+        // Observe all static sk-reveal elements
+        document.querySelectorAll('.sk-reveal').forEach(el => revealObserver.observe(el));
       } catch (err) {
-        console.error('[PORTFOLIO_BOOTSTRAP] Dynamic render failure', err);
+        console.error('[SKETCHBOOK] Bootstrap failure', err);
       }
     }
 
     window.addEventListener('DOMContentLoaded', bootstrap);
   </script>
 </body>
+
 </html>

@@ -6,12 +6,29 @@
 
 
 export function initDigitalClock() {
-    const clock = document.getElementById('digitalClock');
-    if (!clock) return;
+    const clockContainer = document.getElementById('digitalClock');
+    if (!clockContainer) return;
+
+    const hoursMinutesSpan = clockContainer.querySelector('.clock-hours-minutes');
+    const secondsSpan = clockContainer.querySelector('.clock-seconds');
 
     function update() {
         const now = new Date();
-        clock.textContent = now.toTimeString().split(' ')[0];
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        if (hoursMinutesSpan) {
+            hoursMinutesSpan.textContent = `${hours}:${minutes}`;
+        }
+
+        if (secondsSpan) {
+            // Apply animation class
+            secondsSpan.classList.remove('animate-second'); // Remove to re-trigger animation
+            void secondsSpan.offsetWidth; // Trigger reflow
+            secondsSpan.textContent = seconds;
+            secondsSpan.classList.add('animate-second');
+        }
     }
     setInterval(update, 1000);
     update();

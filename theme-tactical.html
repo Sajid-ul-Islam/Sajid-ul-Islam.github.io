@@ -101,6 +101,12 @@
 </head>
 
 <body id="page-top">
+  <!-- Boot Sequence Overlay -->
+  <div id="boot-sequence">
+    <pre class="boot-log"></pre>
+    <span class="boot-cursor">_</span>
+  </div>
+
   <!-- HUD Background Elements -->
   <div class="scanlines"></div>
   <div class="system-status-bar">
@@ -116,7 +122,7 @@
       <div class="status-right d-none d-md-flex align-items-center gap-3">
         <span class="status-label">SYSTEM_INTEGRITY:</span> <span class="status-value status-online">OPTIMAL</span>
         <span class="status-sep">|</span>
-        <div class="digital-clock" id="digitalClock">10:09:13</div>
+        <div class="digital-clock" id="digitalClock"><span class="clock-hours-minutes"></span>:<span class="clock-seconds"></span></div>
       </div>
     </div>
   </div>
@@ -224,6 +230,7 @@
         </div>
         <div class="col-lg-4 order-1 order-lg-2">
           <div class="hero-image-wrapper mx-auto">
+            <div class="profile-pulse-ring"></div>
             <div class="scanner-line"></div>
             <div class="frame-corner corner-tl"></div>
             <div class="frame-corner corner-tr"></div>

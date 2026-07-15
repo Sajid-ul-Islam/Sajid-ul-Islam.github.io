@@ -78,6 +78,77 @@ import { initThemeToggleWithRipple } from './theme-switcher-ripple.js';
 // ===== PWA LOADER =====
 import { initPWA } from './pwa-loader.js';
 
+// ===== BOOT SEQUENCE LOGIC =====
+const bootMessages = [
+  "BIOS: Initializing boot sequence...",
+  "CPU: Intel Core i9-12900K @ 5.2GHz [OK]",
+  "MEM: 64GB DDR5-5600MHz [OK]",
+  "GPU: NVIDIA RTX 4090 [OK]",
+  "STORAGE: NVMe SSD 4TB [OK]",
+  "NET: Ethernet 2.5G [OK]",
+  "OS: Tactical-OS v5.1.0 (Build 2077) booting...",
+  "STATUS: All systems nominal.",
+  "LOADING_MODULE: Core data structures...",
+  "LOADING_MODULE: UI framework components...",
+  "LOADING_MODULE: Neural network interface...",
+  "LOADING_MODULE: Skill matrix visualization...",
+  "LOADING_MODULE: Encrypted comms protocols...",
+  "LOADING_MODULE: AI Oracle uplink...",
+  "INIT: Portfolio rendering engine...",
+  "INIT: User authentication module...",
+  "INIT: Local telemetry services...",
+  "INIT: Experience timeline processing...",
+  "INIT: Project analysis algorithms...",
+  "INIT: Blog content parser...",
+  "INIT: Learning path optimizer...",
+  "INIT: Gamification engine...",
+  "INIT: Social link encryption...",
+  "BOOT_COMPLETE: Welcome, Operative. Mission environment initialized.",
+  "ACCESS_GRANTED: Proceed with caution."
+];
+
+async function typeWriter(bootLogElement, bootCursorElement, messages) {
+  for (let i = 0; i < messages.length; i++) {
+    const message = messages[i];
+    const line = document.createElement('span');
+    bootLogElement.appendChild(line);
+    bootLogElement.scrollTop = bootLogElement.scrollHeight; // Auto-scroll
+    for (let j = 0; j < message.length; j++) {
+      line.textContent += message[j];
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 5 + 10)); // Fast typing speed
+    }
+    bootLogElement.appendChild(document.createTextNode('\n')); // Add newline
+    await new Promise(resolve => setTimeout(resolve, 50)); // Delay between lines
+  }
+  bootCursorElement.remove(); // Remove cursor after typing
+  await new Promise(resolve => setTimeout(resolve, 500)); // Short pause after all messages
+}
+
+async function initBootSequence() {
+  const bootSequence = document.getElementById('boot-sequence');
+  const bootLog = bootSequence.querySelector('.boot-log');
+  const bootCursor = bootSequence.querySelector('.boot-cursor');
+
+  // Only run boot sequence on first visit of the session
+  if (sessionStorage.getItem('bootSequencePlayed') === 'true') {
+    bootSequence.classList.add('hidden');
+    document.body.style.overflow = ''; // Restore scroll
+    return;
+  }
+
+  document.body.style.overflow = 'hidden'; // Prevent scrolling during boot
+  await typeWriter(bootLog, bootCursor, bootMessages);
+
+  bootSequence.classList.add('hidden');
+  bootSequence.addEventListener('transitionend', () => {
+    bootSequence.remove();
+    document.body.style.overflow = ''; // Restore scroll after hidden
+  }, { once: true });
+
+  sessionStorage.setItem('bootSequencePlayed', 'true');
+}
+
+
 // ===== MAKE GLOBALS AVAILABLE =====
 // Expose all needed globals for backward compatibility
 window.DATA = DATA;
@@ -109,6 +180,8 @@ window.glitchEffect = glitchEffect;
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+  initBootSequence(); // Initialize boot sequence first
+
   // Core initialization
   updateSystemHealth();
   SkillsGlobe.init();

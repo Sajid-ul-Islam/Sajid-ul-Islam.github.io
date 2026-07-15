@@ -109,20 +109,33 @@ function initAiChat() {
     toggle.addEventListener('click', () => container.classList.toggle('active'));
     if (closeBtn) closeBtn.addEventListener('click', () => container.classList.remove('active'));
 
-    const addMessage = (text, sender, isSystem = false) => {
+    const addMessage = async (text, sender, isSystem = false) => {
         const msg = document.createElement('div');
         msg.className = `ai-message ${sender} ${isSystem ? 'system' : ''}`;
-        msg.textContent = text;
         body.appendChild(msg);
         body.scrollTop = body.scrollHeight;
 
         if (sender === 'bot') {
+            await typeWriterEffect(msg, text); // Use typewriter effect for bot messages
             if (typeof AudioEngine !== 'undefined' && AudioEngine.speak) {
                 AudioEngine.speak(text);
             }
+        } else {
+            msg.textContent = text; // Direct text for user and system messages
         }
+        body.scrollTop = body.scrollHeight; // Ensure scroll to bottom after message
         return msg;
     };
+
+    async function typeWriterEffect(element, text) {
+        let i = 0;
+        while (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            body.scrollTop = body.scrollHeight; // Keep scrolling to the bottom
+            await new Promise(resolve => setTimeout(resolve, Math.random() * 20 + 30)); // Typing speed
+        }
+    }
 
     function showManualFallback() {
         const btnContainer = document.createElement('div');
