@@ -23,21 +23,21 @@ import {
 
 // ===== TACTICAL ENHANCEMENTS =====
 import { 
-  EnhancedTypewriter, ScrollGlitchEffect, KeyboardNavigator,
-  CommandPaletteClass, AnimatedCounters, SkillProgressBars,
-  TestimonialsCarousel, ScanlinePulse, HoverAudio, DraggableHUDElement
+  ScrollGlitchEffect, KeyboardNavigator,
+  AnimatedCounters, SkillProgressBars,
+  TestimonialsCarousel, ScanlinePulse
 } from './tactical-enhancements.js';
 
 // ===== TACTICAL DATA =====
 import { 
   initializeTacticalData, renderInfo, renderExperience, 
-  renderEducation, renderSkillGroups, renderSkills, 
+  renderEducation, renderSkillGroups,
   renderProjects, renderBlogs, renderLearning, renderGaming,
   renderMedia, renderFileTree, fetchGithubRepos,
   decryptDossier, toggleCaseStudy, initializeProjectFilters,
-  openPortfolioBridge, closePortfolioBridge,
+  openCaseStudy, closeCaseStudy,
   toggleTreeSection, toggleMobileSidebar, handleTreeClick,
-  Typewriter, runTypewriter
+  runTypewriter
 } from './tactical-data.js';
 
 // ===== TERMINAL =====
@@ -55,7 +55,7 @@ import { FloatingWidget, initFloatingWidgets } from './floating-widgets.js';
 // ===== GITHUB FEED =====
 import { initGitHubFeed } from './github-feed.js';
 
-// ===== PORTFOLIO BRIDGE =====
+// ===== PORTFOLIO BRIDGE (iframe uplink) =====
 import { 
   openPortfolioBridge as openBridge, closePortfolioBridge as closeBridge,
   minimizePortfolioBridge, restorePortfolioBridge, toggleMaximizeBridge,
@@ -64,9 +64,8 @@ import {
 
 // ===== WIDGETS =====
 import { 
-  initProjectFilters, initHudResizer, initDigitalClock,
-  initScrollProgress, initSystemStatus, initLiveSearch,
-  fetchGitHubActivity, initPdfFab, initZenMode, initDataViz,
+  initDigitalClock, initScrollProgress, initSystemStatus,
+  initLiveSearch, initPdfFab, initZenMode, initDataViz,
   initSectionAnalytics
 } from './widgets.js';
 
@@ -89,13 +88,14 @@ window.projectsList = null;
 window.skillsRadarChart = null;
 window.chartBaseData = null;
 window.TACTICAL_INFO = null;
-window.CommandPalette = null;
 window.TestimonialsCarousel = TestimonialsCarousel;
 window.replayProject = replayProject;
 window.decryptDossier = decryptDossier;
 window.toggleCaseStudy = toggleCaseStudy;
-window.openPortfolioBridge = openPortfolioBridge;
-window.closePortfolioBridge = closePortfolioBridge;
+window.openCaseStudy = openCaseStudy;
+window.closeCaseStudy = closeCaseStudy;
+window.openPortfolioBridge = openBridge;
+window.closePortfolioBridge = closeBridge;
 window.toggleTreeSection = toggleTreeSection;
 window.toggleMobileSidebar = toggleMobileSidebar;
 window.handleTreeClick = handleTreeClick;
@@ -105,7 +105,6 @@ window.togglePalette = togglePalette;
 window.copyEmail = copyEmail;
 window.handleSuggestion = null; // Will be set by ai-bot
 window.glitchEffect = glitchEffect;
-window.initThemeToggleWithRipple = initThemeToggleWithRipple;
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -126,14 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme management
   localStorage.setItem('portfolio-active-theme', 'theme-tactical.html');
   
-  const themeToggle = document.getElementById('theme-toggle');
   const root = document.documentElement;
   
   const applyTheme = (theme, accent) => {
     root.setAttribute('data-theme', theme);
-    if (accent) {
-      root.setAttribute('data-accent', accent);
-    }
+    if (accent) root.setAttribute('data-accent', accent);
     document.body.setAttribute('data-theme', theme);
     updateThemeIcon(theme);
   };
@@ -153,8 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Accent color switcher
-  const colorSwatches = document.querySelectorAll('.color-swatch');
-  colorSwatches.forEach(swatch => {
+  document.querySelectorAll('.color-swatch').forEach(swatch => {
     swatch.addEventListener('click', (e) => {
       const newAccent = e.target.getAttribute('data-color');
       const currentTheme = root.getAttribute('data-theme');
@@ -175,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize all widget modules
   initTerminal();
   initCommandPalette();
-  initProjectFilters();
+  initializeProjectFilters();
   initDigitalClock();
   initScrollProgress();
   initSystemStatus();
@@ -184,9 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initZenMode();
   initDataViz();
   initSectionAnalytics();
-  initHudResizer();
   
-  // Initialize floating widgets
+  // Initialize floating widgets (handles drag + resize)
   setTimeout(initFloatingWidgets, 500);
   
   // Initialize tactical widgets
@@ -195,27 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize PWA
   initPWA();
   
-  // Initialize keyboard navigator
+  // Initialize enhancement classes
   new KeyboardNavigator();
   new ScrollGlitchEffect().init();
   ScanlinePulse.init();
   AnimatedCounters.init();
   SkillProgressBars.init();
   TestimonialsCarousel.init();
-  HoverAudio.init();
-  
-  // Initialize draggable HUD elements
-  const githubWidget = document.getElementById('githubWidget');
-  if (githubWidget) {
-    new DraggableHUDElement(githubWidget);
-  }
-  const dataVizWidget = document.getElementById('dataVizWidget');
-  if (dataVizWidget) {
-    new DraggableHUDElement(dataVizWidget);
-  }
-  
-  // Initialize command palette (new version)
-  window.CommandPalette = new CommandPaletteClass();
 });
 
 // ===== SKILLS RADAR CHART =====
@@ -244,12 +224,6 @@ function initSkillsRadarChart() {
         responsive: true,
         maintainAspectRatio: false,
         animation: { duration: 400 },
-        scale: {
-          angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-          gridLines: { color: 'rgba(255, 255, 255, 0.1)' },
-          pointLabels: { fontColor: '#94a3b8', fontFamily: 'JetBrains Mono' },
-          ticks: { display: false, min: 0, max: 100 }
-        },
         scales: {
           r: {
             angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
@@ -260,10 +234,7 @@ function initSkillsRadarChart() {
             suggestedMax: 100
           }
         },
-        plugins: {
-          legend: { display: false }
-        },
-        legend: { display: false }
+        plugins: { legend: { display: false } }
       }
     });
     
@@ -310,18 +281,18 @@ export {
   AudioEngine, glitchEffect, updateThemeIcon, updateSystemHealth,
   copyEmail, initTelemetryOverlay, SkillsGlobe,
   initializeTacticalData, renderInfo, renderExperience,
-  renderEducation, renderSkillGroups, renderSkills,
+  renderEducation, renderSkillGroups,
   renderProjects, renderBlogs, renderLearning, renderGaming,
   renderMedia, renderFileTree, fetchGithubRepos,
   decryptDossier, toggleCaseStudy, initializeProjectFilters,
+  openCaseStudy, closeCaseStudy,
   toggleBottomTerminal, switchTerminalTab, startTelemetryStreams,
   cleanupTerminal, initTerminal, initCommandPalette, togglePalette,
   FloatingWidget, initFloatingWidgets, initGitHubFeed,
   openBridge, closeBridge, minimizePortfolioBridge, restorePortfolioBridge,
   toggleMaximizeBridge, initResizableBridge, EXTERNAL_BLOCK_LIST,
-  initProjectFilters, initHudResizer, initDigitalClock,
-  initScrollProgress, initSystemStatus, initLiveSearch,
-  fetchGitHubActivity, initPdfFab, initZenMode, initDataViz,
+  initDigitalClock, initScrollProgress, initSystemStatus,
+  initLiveSearch, initPdfFab, initZenMode, initDataViz,
   initSectionAnalytics, TacticalWidgets, initThemeToggleWithRipple,
-  initPWA, Typewriter, runTypewriter
+  initPWA, runTypewriter
 };

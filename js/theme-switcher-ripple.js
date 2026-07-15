@@ -109,7 +109,7 @@ const solveBezier = (t) => {
   const getPt = (p, p1, p2) => 3 * (1 - p) * (1 - p) * p * p1 + 3 * (1 - p) * p * p * p2 + p * p * p;
   let left = 0, right = 1;
   for (let i = 0; i < 24; i++) {
-    let mid = (left + right) / 2;
+    const mid = (left + right) / 2;
     if (getPt(mid, bezierControl.x1, bezierControl.x2) < t) {
       left = mid;
     } else {
@@ -174,21 +174,21 @@ const fragmentShaderSrc = `
 
 const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
   return new Promise(resolve => {
-    let gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
+    const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
     if (!gl) return resolve();
     
-    let ratio = Math.min(devicePixelRatio || 1, isIOS ? 1 : 1.5);
+    const ratio = Math.min(devicePixelRatio || 1, isIOS ? 1 : 1.5);
     canvas.width = Math.round(innerWidth * ratio);
     canvas.height = Math.round(innerHeight * ratio);
 
-    let compile = (type, source) => {
-      let s = gl.createShader(type);
+    const compile = (type, source) => {
+      const s = gl.createShader(type);
       gl.shaderSource(s, source);
       gl.compileShader(s);
       return s;
     };
 
-    let prog = gl.createProgram();
+    const prog = gl.createProgram();
     gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertexShaderSrc));
     gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragmentShaderSrc));
     gl.linkProgram(prog);
@@ -198,7 +198,7 @@ const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     
-    let positionLoc = gl.getAttribLocation(prog, 'p');
+    const positionLoc = gl.getAttribLocation(prog, 'p');
     gl.enableVertexAttribArray(positionLoc);
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
     
@@ -206,24 +206,24 @@ const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    let getUniform = name => gl.getUniformLocation(prog, name);
+    const getUniform = name => gl.getUniformLocation(prog, name);
     gl.uniform2f(getUniform('u_res'), canvas.width, canvas.height);
     gl.uniform2f(getUniform('u_center'), cX * ratio, cY * ratio);
     gl.uniform1f(getUniform('u_spread'), maxRadius * ratio);
     gl.uniform1f(getUniform('u_flatten'), flattenFactor);
 
-    let uFront = getUniform('u_front');
-    let uTime = getUniform('u_time');
-    let uFade = getUniform('u_fade');
+    const uFront = getUniform('u_front');
+    const uTime = getUniform('u_time');
+    const uFade = getUniform('u_fade');
     
-    let durationTotal = 4200;
-    let start = performance.now();
+    const durationTotal = 4200;
+    const start = performance.now();
     
-    let frame = (now) => {
-      let elapsed = now - start;
+    const frame = (now) => {
+      const elapsed = now - start;
       gl.uniform1f(uFront, solveBezier(elapsed / durationRipple) * maxRadius * ratio);
       gl.uniform1f(uTime, elapsed / 1000);
-      let fadeVal = elapsed < durationRipple ? 1 : Math.max(0, 1 - (elapsed - durationRipple) / (durationTotal - durationRipple));
+      const fadeVal = elapsed < durationRipple ? 1 : Math.max(0, 1 - (elapsed - durationRipple) / (durationTotal - durationRipple));
       gl.uniform1f(uFade, fadeVal * fadeVal);
       
       gl.clearColor(0, 0, 0, 0);
@@ -241,15 +241,15 @@ const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
 };
 
 const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyThemeCallback) => {
-  let width = visualViewport?.width ?? innerWidth;
-  let height = visualViewport?.height ?? innerHeight;
-  let btnRect = btnElement.getBoundingClientRect();
+  const width = visualViewport?.width ?? innerWidth;
+  const height = visualViewport?.height ?? innerHeight;
+  const btnRect = btnElement.getBoundingClientRect();
   
-  let startX = btnRect.left + btnRect.width / 2;
-  let startY = btnRect.bottom - 8;
+  const startX = btnRect.left + btnRect.width / 2;
+  const startY = btnRect.bottom - 8;
   
-  let splashY = Math.min(Math.max(height * 0.42, startY + 180), height - 60);
-  let maxDist = Math.hypot(Math.max(startX, width - startX), Math.max(splashY, height - splashY) / flattenFactor) + 40;
+  const splashY = Math.min(Math.max(height * 0.42, startY + 180), height - 60);
+  const maxDist = Math.hypot(Math.max(startX, width - startX), Math.max(splashY, height - splashY) / flattenFactor) + 40;
 
   const root = document.documentElement;
   root.style.setProperty('--ripple-x', `${startX}px`);
@@ -257,8 +257,9 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   root.style.setProperty('--ripple-rx', `${maxDist}px`);
   root.style.setProperty('--ripple-ry', `${maxDist * flattenFactor}px`);
 
-  let overlay = document.createElement('div');
+  const overlay = document.createElement('div');
   overlay.className = 'theme-drop-overlay';
+  overlay.style.colorScheme = targetTheme;
   overlay.innerHTML = `
     <canvas class="theme-water" aria-hidden="true"></canvas>
     <svg class="theme-drop" viewBox="0 0 40 56" aria-hidden="true">
@@ -278,7 +279,7 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   document.body.appendChild(overlay);
   activeObj.overlay = overlay;
 
-  let teardrop = overlay.querySelector('.theme-drop');
+  const teardrop = overlay.querySelector('.theme-drop');
   teardrop.style.left = `${startX}px`;
   teardrop.style.transformOrigin = '50% 0%';
   const transformKeyframes = (yVal) => `translate(-50%, ${yVal}px)`;
@@ -294,8 +295,8 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     fill: 'forwards'
   }).finished;
 
-  let endY = splashY - 42;
-  let fallDistance = Math.max(60, endY - startY);
+  const endY = splashY - 42;
+  const fallDistance = Math.max(60, endY - startY);
   teardrop.style.transformOrigin = '50% 100%';
   
   await teardrop.animate([
@@ -307,6 +308,10 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     easing: 'cubic-bezier(0.33, 0, 0.67, 0.33)',
     fill: 'forwards'
   }).finished;
+
+  if (window.AudioEngine) {
+    window.AudioEngine.play('waterDrop');
+  }
 
   teardrop.animate([
     { transform: `${transformKeyframes(endY)} scale(0.95, 1.1)`, opacity: 1 },
@@ -321,12 +326,19 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     root.classList.add('theme-rippling');
   }
 
-  let transition = document.startViewTransition(() => applyThemeCallback(targetTheme));
-  activeObj.transition = transition;
+  // Apply theme with View Transition if available, otherwise directly
+  let transition;
+  if (document.startViewTransition) {
+    transition = document.startViewTransition(() => applyThemeCallback(targetTheme));
+    activeObj.transition = transition;
+    await transition.ready.catch(() => {});
+  } else {
+    applyThemeCallback(targetTheme);
+    transition = { ready: Promise.resolve(), finished: Promise.resolve() };
+    activeObj.transition = transition;
+  }
 
-  await transition.ready.catch(() => {});
-
-  let tasks = [];
+  const tasks = [];
   if (useWebgl) {
     try {
       overlay.querySelector('#theme-warp-anim')?.beginElement();
@@ -343,8 +355,8 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     { dx: 35, rise: 16, size: 3, duration: 490 }
   ];
 
-  for (let cfg of splashConfigs) {
-    let drop = document.createElement('div');
+  for (const cfg of splashConfigs) {
+    const drop = document.createElement('div');
     drop.className = 'theme-splash-drop';
     drop.style.left = `${startX - cfg.size / 2}px`;
     drop.style.top = `${splashY - cfg.size}px`;
@@ -367,7 +379,7 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     );
   }
 
-  let bead = overlay.querySelector('.theme-drop-bead');
+  const bead = overlay.querySelector('.theme-drop-bead');
   bead.style.left = `${startX}px`;
   bead.style.top = `${splashY - 5}px`;
   
@@ -397,7 +409,7 @@ const cleanupTransition = (activeObj, getThemeCallback, applyThemeCallback) => {
 };
 
 const toggleThemeWithAnimation = (btnElement, nextTheme, getThemeCallback, applyThemeCallback) => {
-  let activeObj = { next: nextTheme };
+  const activeObj = { next: nextTheme };
   activeTransition = activeObj;
   
   runTeardropTransition(activeObj, btnElement, nextTheme, applyThemeCallback)
@@ -428,25 +440,35 @@ export function initThemeToggleWithRipple({
     return;
   }
 
+  btn.addEventListener('mouseenter', () => {
+    if (window.AudioEngine) {
+      window.AudioEngine._loadWaterDropSound();
+    }
+  });
+
   btn.addEventListener('click', () => {
+    if (window.AudioEngine) {
+      window.AudioEngine._loadWaterDropSound();
+    }
     const currentTheme = getTheme();
     const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-    // Fallback if ViewTransition or Reduced Motion is active
-    if (!document.startViewTransition || isReduced.matches) {
+    // Only skip animation for reduced motion preference
+    if (isReduced.matches) {
       applyTheme(nextTheme);
       saveTheme(nextTheme);
       return;
     }
 
     if (activeTransition) {
-      let prev = activeTransition;
+      const prev = activeTransition;
       activeTransition = null;
       if (!prev.revealed) {
-        prev.transition?.skipTransition();
+        prev.transition?.skipTransition?.();
         prev.overlay?.remove();
         document.documentElement.classList.remove('theme-rippling');
         applyTheme(nextTheme);
+        saveTheme(nextTheme);
         return;
       }
       prev.overlay?.remove();
@@ -457,3 +479,8 @@ export function initThemeToggleWithRipple({
     saveTheme(nextTheme);
   });
 }
+
+if (typeof window !== 'undefined') {
+  window.initThemeToggleWithRipple = initThemeToggleWithRipple;
+}
+

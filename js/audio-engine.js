@@ -9,6 +9,8 @@ export class AudioEngineClass {
     this.enabled = localStorage.getItem('tactical-audio') !== 'disabled';
     this.sounds = {};
     this.ctx = null;
+    this.waterDropBuffer = null;
+    this.waterDropPromise = null;
     this._init();
   }
 
@@ -22,6 +24,25 @@ export class AudioEngineClass {
     if (!this.ctx) {
       this.ctx = new (window.AudioContext || window.webkitAudioContext)();
     }
+  }
+
+  async _loadWaterDropSound() {
+    this._ensureContext();
+    if (!this.ctx || this.waterDropPromise) return this.waterDropPromise;
+    
+    this.waterDropPromise = fetch('sounds/water-drop.m4a')
+      .then(res => res.arrayBuffer())
+      .then(arrayBuffer => this.ctx.decodeAudioData(arrayBuffer))
+      .then(buffer => {
+        this.waterDropBuffer = buffer;
+        return buffer;
+      })
+      .catch(err => {
+        console.warn('[AudioEngine] Failed to load water drop sound:', err);
+        this.waterDropPromise = null;
+      });
+      
+    return this.waterDropPromise;
   }
 
   _generateSounds() {
@@ -78,6 +99,41 @@ export class AudioEngineClass {
       gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
       osc.start(this.ctx.currentTime);
       osc.stop(this.ctx.currentTime + 0.08);
+    };
+
+    this.sounds.waterDrop = () => {
+      if (!this.enabled) return;
+      this._ensureContext();
+      if (!this.ctx) return;
+      
+      if (this.waterDropBuffer) {
+        try {
+          if (this.ctx.state === 'suspended') this.ctx.resume();
+          const source = this.ctx.createBufferSource();
+          source.buffer = this.waterDropBuffer;
+          const gain = this.ctx.createGain();
+          gain.gain.value = 0.6;
+          source.connect(gain).connect(this.ctx.destination);
+          source.start();
+        } catch (e) {
+          console.warn('[AudioEngine] Failed to play water drop sound:', e);
+        }
+      } else {
+        // Fallback: Lazy load and play if context becomes active
+        this._loadWaterDropSound().then(() => {
+          if (this.waterDropBuffer) {
+            try {
+              if (this.ctx.state === 'suspended') this.ctx.resume();
+              const source = this.ctx.createBufferSource();
+              source.buffer = this.waterDropBuffer;
+              const gain = this.ctx.createGain();
+              gain.gain.value = 0.6;
+              source.connect(gain).connect(this.ctx.destination);
+              source.start();
+            } catch (e) {}
+          }
+        });
+      }
     };
   }
 

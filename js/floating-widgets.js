@@ -109,8 +109,8 @@ export class FloatingWidget {
         if (this._dragging) {
             const dx = e.clientX - this._dsx;
             const dy = e.clientY - this._dsy;
-            this.element.style.left = Math.max(0, this._del + dx) + 'px';
-            this.element.style.top  = Math.max(0, this._det + dy) + 'px';
+            this.element.style.left = `${Math.max(0, this._del + dx)  }px`;
+            this.element.style.top  = `${Math.max(0, this._det + dy)  }px`;
         }
         if (this._resizing) {
             const { minW, minH, maxW, maxH } = this.opts;
@@ -124,10 +124,10 @@ export class FloatingWidget {
             if (d.includes('w')) { w = Math.min(maxW, Math.max(minW, this._rsw - dx)); l = this._rsl + (this._rsw - w); }
             if (d.includes('n')) { h = Math.min(maxH, Math.max(minH, this._rsh - dy)); t = this._rst + (this._rsh - h); }
 
-            this.element.style.width  = w + 'px';
-            this.element.style.height = h + 'px';
-            this.element.style.left   = l + 'px';
-            this.element.style.top    = t + 'px';
+            this.element.style.width  = `${w  }px`;
+            this.element.style.height = `${h  }px`;
+            this.element.style.left   = `${l  }px`;
+            this.element.style.top    = `${t  }px`;
         }
     }
 
@@ -151,10 +151,10 @@ export class FloatingWidget {
     _maximize() {
         if (this.element.classList.contains('fw-maximized')) {
             this.element.classList.remove('fw-maximized');
-            this.element.style.width  = this.opts.defW + 'px';
-            this.element.style.height = this.opts.defH + 'px';
-            this.element.style.left   = (window.innerWidth  - this.opts.defW - 24) + 'px';
-            this.element.style.top    = (window.innerHeight - this.opts.defH - 110) + 'px';
+            this.element.style.width  = `${this.opts.defW  }px`;
+            this.element.style.height = `${this.opts.defH  }px`;
+            this.element.style.left   = `${window.innerWidth  - this.opts.defW - 24  }px`;
+            this.element.style.top    = `${window.innerHeight - this.opts.defH - 110  }px`;
         } else {
             this.element.classList.add('fw-maximized');
             Object.assign(this.element.style, { width:'88vw', height:'85vh', left:'6vw', top:'8vh' });

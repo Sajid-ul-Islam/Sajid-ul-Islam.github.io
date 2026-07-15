@@ -344,8 +344,8 @@
       }
     }
   </style>
-  <script src="js/portfolio-data.js"></script>
-  <script src="js/theme-switcher-ripple.js"></script>
+  <script type="module" src="js/data/index.js"></script>
+  <script type="module" src="js/theme-switcher-ripple.js"></script>
 </head>
 <body class="relative isolate flex min-h-screen flex-col font-sans">
 
@@ -886,7 +886,7 @@
   </footer>
 
   <!-- SCRIPT BLOCK -->
-  <script>
+  <script type="module">
     // Update active theme tracker
     localStorage.setItem('portfolio-active-theme', 'theme-sketchbook.html');
 
@@ -1102,7 +1102,7 @@
         renderExperiences(data.experiences);
         renderEducation(data.education);
         renderProjects(data.projects);
-        renderSkills(data.skillGroups);
+        renderSkills(data.skills);
       } catch (err) {
         console.error('[PORTFOLIO_BOOTSTRAP] Dynamic render failure', err);
       }

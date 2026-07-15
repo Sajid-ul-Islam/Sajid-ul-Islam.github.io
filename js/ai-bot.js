@@ -4,14 +4,14 @@
  * SECURITY: All API keys are provided via localStorage only.
  */
 
-let userTelemetry = { ip: "UNKNOWN", os: "DETECTION_FAILED" };
+const userTelemetry = { ip: "UNKNOWN", os: "DETECTION_FAILED" };
 
 async function fetchUserTelemetry() {
     try {
         const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
         userTelemetry.ip = data.ip;
-    } catch (e) { console.log('IP_FETCH_BYPASS_DETECTED'); }
+    } catch (e) { /* IP fetch bypassed */ }
 
     const osMatch = navigator.userAgent.match(/\(([^)]+)\)/);
     if (osMatch) userTelemetry.os = osMatch[1];
@@ -170,7 +170,7 @@ function initAiChat() {
         const statusMsg = addMessage("[INITIATING_NEURAL_UPLINK]...", 'system');
         statusMsg.classList.add('loading');
         
-        let statusInterval = setInterval(() => {
+        const statusInterval = setInterval(() => {
             const lines = ["SIGNAL_PROCESSING...", "ANALYZING_INTEL_STREAMS...", "DECRYPTING_NEURAL_PACKETS..."];
             statusMsg.textContent = lines[Math.floor(Math.random() * lines.length)];
         }, 1500);
@@ -199,7 +199,7 @@ function initAiChat() {
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
                 return;
             }
-        } catch (err) { console.warn("[GEMINI_OFFLINE] " + err.message); }
+        } catch (err) { /* Gemini offline, trying OpenAI */ }
 
         // --- Try OpenAI Secondary ---
         try {
@@ -226,7 +226,7 @@ function initAiChat() {
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
                 return;
             }
-        } catch (err) { console.error("[OPENAI_OFFLINE] " + err.message); }
+        } catch (err) { /* OpenAI offline, showing fallback */ }
 
         clearInterval(statusInterval);
         statusMsg.remove();

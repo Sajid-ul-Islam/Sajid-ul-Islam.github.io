@@ -43,6 +43,16 @@ export default [
         isNaN: 'readonly',
         isFinite: 'readonly',
         Chart: 'readonly',
+        // Additional browser globals
+        matchMedia: 'readonly',
+        devicePixelRatio: 'readonly',
+        innerWidth: 'readonly',
+        innerHeight: 'readonly',
+        visualViewport: 'readonly',
+        confirm: 'readonly',
+        location: 'readonly',
+        history: 'readonly',
+        globalThis: 'readonly',
         // Project globals
         DATA: 'writable',
         AudioEngine: 'writable',

@@ -740,7 +740,7 @@ export const SHEET_CONFIG = {
 
 // ===== AI BOT LOCAL INTEL =====
 export const LOCAL_INTEL = {
-  profile: PROFILE_INFO.role + ' based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.',
+  profile: `${PROFILE_INFO.role  } based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.`,
   experience: EXPERIENCES.slice(0, 3).map(exp => `${exp.title} @ ${exp.company} (${exp.startDate} - Present)`),
   education: EDUCATION.slice(0, 2).map(edu => `${edu.degree} @ ${edu.institution} (${edu.date})`),
   skills: 'Python, SQL, Power BI, Machine Learning, Data Automation, Strategic Business Analysis.',
@@ -889,3 +889,8 @@ export const PortfolioData = {
   getGaming() { return this._data?.gaming || GAMING; },
   getFileTree() { return this._data?.fileTree || FILE_TREE; }
 };
+
+if (typeof window !== 'undefined') {
+  window.PortfolioData = PortfolioData;
+}
+

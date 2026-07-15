@@ -4,7 +4,7 @@
  * Now exported as ES module.
  */
 
-let commandHistory = [];
+const commandHistory = [];
 let historyIndex = -1;
 let telemetryIntervals = [];
 

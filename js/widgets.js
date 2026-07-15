@@ -4,74 +4,6 @@
  * Now exported as ES module.
  */
 
-export function initProjectFilters() {
-    const filters = document.querySelectorAll('#projectFilters .filter-btn');
-    if (!filters.length) return;
-
-    filters.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filterValue = btn.getAttribute('data-filter');
-            
-            filters.forEach(f => f.classList.remove('active'));
-            btn.classList.add('active');
-
-            const items = document.querySelectorAll('#project-list > div');
-            items.forEach(item => {
-                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-
-            if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
-        });
-    });
-}
-
-export function initHudResizer() {
-    document.querySelectorAll('.card-glass').forEach(widget => {
-        const handle = document.createElement('div');
-        handle.className = 'hud-resize-handle';
-        widget.appendChild(handle);
-    });
-
-    let dragTarget = null;
-    let startX, startY, startW, startH;
-
-    document.addEventListener('mousedown', (e) => {
-        const handle = e.target.closest('.hud-resize-handle');
-        if (!handle) return;
-        e.preventDefault();
-        
-        dragTarget = handle.parentElement;
-        const rect = dragTarget.getBoundingClientRect();
-        startX = e.clientX;
-        startY = e.clientY;
-        startW = rect.width;
-        startH = rect.height;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (!dragTarget) return;
-        dragTarget.style.width = (startW + e.clientX - startX) + 'px';
-        dragTarget.style.height = (startH + e.clientY - startY) + 'px';
-    });
-
-    document.addEventListener('mouseup', () => {
-        if (!dragTarget) return;
-        dragTarget = null;
-        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
-    });
-}
 
 export function initDigitalClock() {
     const clock = document.getElementById('digitalClock');
@@ -96,7 +28,7 @@ export function initScrollProgress() {
         const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPosition = window.pageYOffset;
         const progressPercentage = (scrollPosition / windowHeight) * 100;
-        progressHUD.style.width = progressPercentage + '%';
+        progressHUD.style.width = `${progressPercentage  }%`;
 
         const navbar = document.querySelector('.navbar');
         if (navbar) {
@@ -223,8 +155,6 @@ export function initLiveSearch() {
     });
 }
 
-export function fetchGitHubActivity() { /* no-op — see github-feed.js */ }
-
 export function initPdfFab() {
     const fab = document.getElementById('pdfFab');
     if (!fab) return;
@@ -267,8 +197,8 @@ export function initDataViz() {
     const activeTimeEl = document.getElementById('activeTime');
 
     let pageViews = parseInt(sessionStorage.getItem('pageViews') || '0');
-    let startTime = Date.now();
-    let dataPoints = Array(20).fill(0);
+    const startTime = Date.now();
+    const dataPoints = Array(20).fill(0);
 
     pageViews++;
     sessionStorage.setItem('pageViews', pageViews);
@@ -300,7 +230,7 @@ export function initDataViz() {
         ctx.stroke();
 
         const elapsed = Math.floor((Date.now() - startTime) / 60000);
-        if (activeTimeEl) activeTimeEl.textContent = elapsed + 'm';
+        if (activeTimeEl) activeTimeEl.textContent = `${elapsed  }m`;
     }
 
     const chartInterval = setInterval(() => {

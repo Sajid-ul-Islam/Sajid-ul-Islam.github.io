@@ -11,10 +11,7 @@ import {
   PortfolioData, parseCSV, fetchSheetData 
 } from './data/index.js';
 
-export const SHEET_ID = SHEET_CONFIG.SHEET_ID;
-export const BASE_URL = SHEET_CONFIG.BASE_URL;
-export const SHEETS = SHEET_CONFIG.SHEETS;
-export const DEFAULT_INFO = PROFILE_INFO;
+const DEFAULT_INFO = PROFILE_INFO;
 
 export class Typewriter {
     constructor(el, text, speed = 50) {
@@ -46,17 +43,19 @@ export function runTypewriter(info) {
     const tH1 = document.getElementById('typewriter-h1');
     const tP = document.getElementById('typewriter-p');
 
-    if (tH1) {
+    const name = info.Name || info.name || '';
+    const heroText = info.HeroText || info.heroText || "Analyzing data for strategic growth.";
+
+    if (tH1 && name) {
         tH1.parentElement.style.opacity = '1';
-        const h1Text = `Hi, I'm ${info.Name.split(' ')[0]} 👋`;
+        const h1Text = `Hi, I'm ${name.split(' ')[0]} 👋`;
         new Typewriter(tH1, h1Text, 120).type();
     }
 
     if (tP) {
-        const pText = info.HeroText || "Analyzing data for strategic growth.";
         setTimeout(() => {
             tP.parentElement.style.opacity = '1';
-            new Typewriter(tP, pText, 60).type();
+            new Typewriter(tP, heroText, 60).type();
         }, 2200);
     }
 }
@@ -254,16 +253,6 @@ export function renderSkillGroups(groups) {
     }
 }
 
-export function renderSkills(data) {
-    const chipContainer = document.getElementById('skill-chips');
-    if (chipContainer) {
-        chipContainer.innerHTML = '';
-        data.forEach(item => {
-            if (item.Skill) chipContainer.insertAdjacentHTML('beforeend', `<span class="badge border border-primary text-primary m-1">${item.Skill.toUpperCase()}</span>`);
-        });
-    }
-}
-
 export function renderProjects(data) {
     const container = document.getElementById('project-list');
     if (!container) return;
@@ -293,7 +282,7 @@ export function renderProjects(data) {
                 </div>
                 ${caseStudyHtml}
                 <div class="d-flex gap-2 mt-auto">
-                    <a href="${item.liveUrl || '#'}" onclick="openPortfolioBridge(event, '${item.id}')" class="btn btn-sm btn-primary">UPLINK</a>
+                    <a href="${item.liveUrl || '#'}" onclick="openCaseStudy(event, '${item.id}')" class="btn btn-sm btn-primary">UPLINK</a>
                     <button class="btn btn-sm btn-outline-primary ms-auto" onclick="decryptDossier('${item.id}', this, true)"><i class="fas fa-sync-alt"></i></button>
                 </div>
               </div>
@@ -307,14 +296,14 @@ export function decryptDossier(id, el, force = false) {
     const descEl = document.getElementById(`desc-${id}`);
     const dossier = document.getElementById(`dossier-${id}`);
     if (!descEl || (!force && descEl.classList.contains('decrypted'))) return;
-    const project = window.projectsList ? window.projectsList.find(p => p.id == id) : ((window.DATA && window.DATA.projects) ? window.DATA.projects.find(p => p.id == id) : null);
+    const project = window.projectsList ? window.projectsList.find(p => p.id === id) : ((window.DATA && window.DATA.projects) ? window.DATA.projects.find(p => p.id === id) : null);
     const actualText = project ? project.description : "DATA_RECOVERY_FAILED.";
     if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('type');
     descEl.classList.add('decrypting');
     dossier.classList.add('scanning');
     let i = 0;
     const interval = setInterval(() => {
-        if (i < actualText.length) { descEl.textContent = actualText.substring(0, i) + '█'; i++; }
+        if (i < actualText.length) { descEl.textContent = `${actualText.substring(0, i)  }█`; i++; }
         else { descEl.textContent = actualText; descEl.classList.remove('decrypting'); descEl.classList.add('decrypted'); dossier.classList.remove('scanning'); clearInterval(interval); if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep'); }
     }, 20);
 };
@@ -322,18 +311,6 @@ export function decryptDossier(id, el, force = false) {
 export function toggleCaseStudy(id, btn) {
     const el = document.getElementById(`case-${id}`);
     if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
-}
-
-export function renderAwards(data) {
-    const container = document.getElementById('awards-list');
-    if (!container) return;
-    container.innerHTML = data.map(item => `
-          <div class="timeline-item"><div class="timeline-dot"></div>
-            <div class="resume-item mb-4">
-              <h3 class="mb-0">${item.Title}</h3>
-              <div class="subheading mb-3 text-primary">${item.Subheading}</div>
-            </div>
-          </div>`).join('');
 }
 
 export function initializeProjectFilters() {
@@ -413,7 +390,7 @@ export async function fetchGithubRepos(username) {
     } catch (e) { container.innerHTML = 'OFFLINE'; }
 }
 
-export function openPortfolioBridge(e, projectId) {
+export function openCaseStudy(e, projectId) {
     e.preventDefault();
     const project = (window.DATA && window.DATA.projects) ? window.DATA.projects.find(p => p.id === projectId) : null;
     if (!project) return;
@@ -431,11 +408,11 @@ export function openPortfolioBridge(e, projectId) {
     const tech = project.technologies ? project.technologies.map(t => `<span class="tag-tactical">#${t}</span>`).join('') : '';
 
     overlay.innerHTML = `
-        <div class="bridge-backdrop" onclick="closePortfolioBridge()"></div>
+        <div class="bridge-backdrop" onclick="closeCaseStudy()"></div>
         <div class="bridge-window">
             <div class="bridge-header">
                 <div class="d-flex align-items-center gap-2"><div class="pulse-indicator"></div><span class="bridge-title">[CASE_STUDY: ${project.title}]</span></div>
-                <div class="d-flex align-items-center"><span class="telemetry-data d-none d-md-block">STATUS: DECRYPTED</span><button class="btn-bridge-ctrl btn-exit" onclick="closePortfolioBridge()">ABORT</button></div>
+                <div class="d-flex align-items-center"><span class="telemetry-data d-none d-md-block">STATUS: DECRYPTED</span><button class="btn-bridge-ctrl btn-exit" onclick="closeCaseStudy()">ABORT</button></div>
             </div>
             <div class="bridge-content p-4 overflow-auto" style="background: var(--bg-page) !important;">
                 <div class="row">
@@ -463,7 +440,7 @@ export function openPortfolioBridge(e, projectId) {
     setTimeout(() => overlay.classList.add('active'), 10);
 }
 
-export function closePortfolioBridge() {
+export function closeCaseStudy() {
     const overlay = document.getElementById('portfolioBridgeOverlay');
     if (overlay) {
         overlay.classList.remove('active');

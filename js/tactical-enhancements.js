@@ -1,55 +1,8 @@
 /**
  * TACTICAL ENHANCEMENTS - v3.0
- * Advanced HUD features: cursor effects, keyboard shortcuts, command palette, audio, animations
+ * Scroll reveal effects, keyboard navigation, counters, skill bars, testimonials, scanlines
  * Now exported as ES module.
  */
-
-export class EnhancedTypewriter {
-    constructor(el, text, speed = 50) {
-        this.el = el;
-        this.text = text;
-        this.speed = speed;
-        this.index = 0;
-        this.cursorVisible = true;
-        this.el.innerHTML = '';
-        this.el.classList.add('enhanced-typewriter');
-        
-        const sessionID = Math.random().toString(36).substr(2, 9);
-        this.el.setAttribute('data-session', sessionID);
-        this.sessionID = sessionID;
-        
-        this.cursorEl = document.createElement('span');
-        this.cursorEl.className = 'terminal-cursor';
-        this.el.appendChild(this.cursorEl);
-        
-        this.cursorInterval = setInterval(() => this.blinkCursor(), 530);
-    }
-    
-    blinkCursor() {
-        this.cursorVisible = !this.cursorVisible;
-        this.cursorEl.style.opacity = this.cursorVisible ? '1' : '0';
-    }
-    
-    type() {
-        if (this.el.getAttribute('data-session') !== this.sessionID) {
-            clearInterval(this.cursorInterval);
-            return;
-        }
-
-        if (this.index < this.text.length) {
-            this.cursorEl.before(this.text.charAt(this.index));
-            this.index++;
-            if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('type');
-            setTimeout(() => this.type(), this.speed);
-        } else {
-            this.el.classList.add('typing-complete');
-        }
-    }
-    
-    stop() {
-        clearInterval(this.cursorInterval);
-    }
-}
 
 export class ScrollGlitchEffect {
     constructor() {
@@ -102,12 +55,12 @@ export class KeyboardNavigator {
         
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
-            if (window.CommandPalette) window.CommandPalette.toggle();
+            if (typeof window.togglePalette === 'function') window.togglePalette();
             return;
         }
         
         if (e.key === 'Escape' && this.commandPaletteOpen) {
-            if (window.CommandPalette) window.CommandPalette.close();
+            if (typeof window.togglePalette === 'function') window.togglePalette();
             return;
         }
         
@@ -127,7 +80,7 @@ export class KeyboardNavigator {
             this.goToBottom();
         } else if (e.key === '/') {
             e.preventDefault();
-            if (window.CommandPalette) window.CommandPalette.open();
+            if (typeof window.togglePalette === 'function') window.togglePalette();
         } else if (e.altKey && e.key === 't') {
             e.preventDefault();
             const term = document.getElementById('bottomTerminal');
@@ -191,158 +144,6 @@ export class KeyboardNavigator {
         notif.textContent = text;
         document.body.appendChild(notif);
         setTimeout(() => notif.remove(), 2000);
-    }
-}
-
-export class CommandPaletteClass {
-    constructor() {
-        this.isOpen = false;
-        this.commands = [
-            { id: 'about', label: 'About', icon: 'fa-user', shortcut: '1' },
-            { id: 'experience', label: 'Experience', icon: 'fa-briefcase', shortcut: '2' },
-            { id: 'education', label: 'Education', icon: 'fa-graduation-cap', shortcut: '3' },
-            { id: 'skills', label: 'Skills', icon: 'fa-microchip', shortcut: '4' },
-            { id: 'projects', label: 'Projects', icon: 'fa-code', shortcut: '5' },
-            { id: 'awards', label: 'Awards', icon: 'fa-trophy', shortcut: '6' },
-            { type: 'separator' },
-            { id: 'theme', label: 'Toggle Theme', icon: 'fa-moon', action: () => document.getElementById('theme-toggle')?.click() },
-            { id: 'audio', label: 'Toggle Audio', icon: 'fa-volume-up', action: () => { if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.toggle(); } },
-            { id: 'top', label: 'Go to Top', icon: 'fa-arrow-up', shortcut: 'g', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) }
-        ];
-        this.filteredCommands = [...this.commands];
-        this.selectedIndex = 0;
-        this.init();
-    }
-    
-    init() {
-        this.createPalette();
-        this.setupKeyboard();
-    }
-    
-    createPalette() {
-        this.palette = document.createElement('div');
-        this.palette.className = 'command-palette';
-        this.palette.innerHTML = `
-            <div class="command-palette-overlay"></div>
-            <div class="command-palette-modal card-glass">
-                <div class="command-palette-header">
-                    <i class="fas fa-terminal"></i>
-                    <input type="text" class="command-palette-input" placeholder="Type a command or search..." autocomplete="off">
-                    <span class="command-palette-shortcut">ESC to close</span>
-                </div>
-                <div class="command-palette-commands"></div>
-            </div>
-        `;
-        document.body.appendChild(this.palette);
-        
-        this.input = this.palette.querySelector('.command-palette-input');
-        this.commandsContainer = this.palette.querySelector('.command-palette-commands');
-        this.overlay = this.palette.querySelector('.command-palette-overlay');
-        
-        this.input.addEventListener('input', (e) => this.filter(e.target.value));
-        this.input.addEventListener('keydown', (e) => this.handleInputKeydown(e));
-        this.overlay.addEventListener('click', () => this.close());
-        
-        this.renderCommands();
-    }
-    
-    setupKeyboard() {
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                this.toggle();
-            }
-        });
-    }
-    
-    filter(query) {
-        if (!query) {
-            this.filteredCommands = [...this.commands];
-        } else {
-            const lower = query.toLowerCase();
-            this.filteredCommands = this.commands.filter(cmd => 
-                cmd.type !== 'separator' && 
-                (cmd.label?.toLowerCase().includes(lower) || 
-                 cmd.id?.toLowerCase().includes(lower))
-            );
-        }
-        this.selectedIndex = 0;
-        this.renderCommands();
-    }
-    
-    handleInputKeydown(e) {
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            this.selectedIndex = (this.selectedIndex + 1) % this.filteredCommands.length;
-            this.renderCommands();
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            this.selectedIndex = (this.selectedIndex - 1 + this.filteredCommands.length) % this.filteredCommands.length;
-            this.renderCommands();
-        } else if (e.key === 'Enter') {
-            e.preventDefault();
-            const cmd = this.filteredCommands[this.selectedIndex];
-            if (cmd) this.execute(cmd);
-        } else if (e.key === 'Escape') {
-            this.close();
-        }
-    }
-    
-    renderCommands() {
-        this.commandsContainer.innerHTML = this.filteredCommands.map((cmd, i) => {
-            if (cmd.type === 'separator') {
-                return '<div class="command-palette-separator"></div>';
-            }
-            const selected = i === this.selectedIndex ? 'selected' : '';
-            return `
-                <div class="command-palette-item ${selected}" data-index="${i}">
-                    <i class="fas ${cmd.icon}"></i>
-                    <span class="command-palette-label">${cmd.label}</span>
-                    ${cmd.shortcut ? `<span class="command-palette-key">${cmd.shortcut}</span>` : ''}
-                </div>
-            `;
-        }).join('');
-        
-        this.commandsContainer.querySelectorAll('.command-palette-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const cmd = this.filteredCommands[parseInt(item.dataset.index)];
-                this.execute(cmd);
-            });
-            item.addEventListener('mouseenter', () => {
-                this.selectedIndex = parseInt(item.dataset.index);
-                this.renderCommands();
-            });
-        });
-    }
-    
-    execute(cmd) {
-        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
-        if (cmd.action) {
-            cmd.action();
-        } else if (cmd.id && document.getElementById(cmd.id)) {
-            document.getElementById(cmd.id).scrollIntoView({ behavior: 'smooth' });
-        }
-        this.close();
-    }
-    
-    open() {
-        this.isOpen = true;
-        this.palette.classList.add('open');
-        this.input.value = '';
-        this.filter('');
-        setTimeout(() => this.input.focus(), 100);
-        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
-    }
-    
-    close() {
-        this.isOpen = false;
-        this.palette.classList.remove('open');
-        this.input.blur();
-    }
-    
-    toggle() {
-        if (this.isOpen) this.close();
-        else this.open();
     }
 }
 
@@ -451,7 +252,7 @@ export class TestimonialsCarousel {
             }
         ];
         
-        let current = 0;
+        const current = 0;
         
         const render = () => {
             const t = testimonials[current];
@@ -511,102 +312,3 @@ export class ScanlinePulse {
     }
 }
 
-export class HoverAudio {
-    static init() {
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('a, button, .card-glass, .nav-link')) {
-                if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('hover');
-            }
-        }, { passive: true });
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('a, button, .card-glass, .nav-link')) {
-                if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
-            }
-        }, { passive: true });
-    }
-}
-
-export class DraggableHUDElement {
-    constructor(el, handle = null) {
-        this.el = el;
-        this.handle = handle || el.querySelector('.widget-header, .viz-header, .bridge-header') || el;
-        this.isDragging = false;
-        this.offsetX = 0;
-        this.offsetY = 0;
-        
-        this.init();
-    }
-    
-    init() {
-        this.handle.style.cursor = 'grab';
-        
-        this.handle.addEventListener('mousedown', (e) => this.dragStart(e));
-        document.addEventListener('mousemove', (e) => this.drag(e));
-        document.addEventListener('mouseup', () => this.dragEnd());
-        
-        this.handle.addEventListener('touchstart', (e) => this.dragStart(e), { passive: false });
-        document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
-        document.addEventListener('touchend', () => this.dragEnd());
-        
-        const savedPos = localStorage.getItem(`pos-${this.el.id}`);
-        if (savedPos) {
-            const { x, y } = JSON.parse(savedPos);
-            this.el.style.left = x;
-            this.el.style.top = y;
-            this.el.style.right = 'auto';
-            this.el.style.bottom = 'auto';
-        }
-    }
-    
-    dragStart(e) {
-        if (e.target.closest('button, a')) return;
-        
-        this.isDragging = true;
-        this.handle.style.cursor = 'grabbing';
-        this.el.classList.add('is-dragging');
-        
-        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-        
-        const rect = this.el.getBoundingClientRect();
-        this.offsetX = clientX - rect.left;
-        this.offsetY = clientY - rect.top;
-        
-        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('click');
-        if (e.type === 'touchstart') e.preventDefault();
-    }
-    
-    drag(e) {
-        if (!this.isDragging) return;
-        
-        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-        
-        let x = clientX - this.offsetX;
-        let y = clientY - this.offsetY;
-        
-        x = Math.max(10, Math.min(x, window.innerWidth - this.el.offsetWidth - 10));
-        y = Math.max(10, Math.min(y, window.innerHeight - this.el.offsetHeight - 10));
-        
-        this.el.style.left = `${x}px`;
-        this.el.style.top = `${y}px`;
-        this.el.style.right = 'auto';
-        this.el.style.bottom = 'auto';
-        
-        if (e.type === 'touchmove') e.preventDefault();
-    }
-    
-    dragEnd() {
-        if (!this.isDragging) return;
-        this.isDragging = false;
-        this.handle.style.cursor = 'grab';
-        this.el.classList.remove('is-dragging');
-        
-        localStorage.setItem(`pos-${this.el.id}`, JSON.stringify({
-            x: this.el.style.left,
-            y: this.el.style.top
-        }));
-        
-        if (typeof window.AudioEngine !== 'undefined') window.AudioEngine.play('beep');
-    }
-}

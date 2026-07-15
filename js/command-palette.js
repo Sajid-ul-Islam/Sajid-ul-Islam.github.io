@@ -79,11 +79,11 @@ function updateSelection(items) {
 
 function performSearch(query) {
     const resultsDiv = document.getElementById('paletteResults');
-    let searchIndex = [];
+    const searchIndex = [];
 
     if (window.DATA) {
         window.DATA.projects.forEach(p => searchIndex.push({ type: 'PROJECT', label: p.title, url: p.liveUrl || p.githubUrl, icon: 'project-diagram' }));
-        window.DATA.experiences.forEach(e => searchIndex.push({ type: 'EXPERIENCE', label: e.title + ' @ ' + e.company, id: 'experience', icon: 'briefcase' }));
+        window.DATA.experiences.forEach(e => searchIndex.push({ type: 'EXPERIENCE', label: `${e.title  } @ ${  e.company}`, id: 'experience', icon: 'briefcase' }));
         window.DATA.skillGroups.forEach(sg => sg.skills.forEach(s => searchIndex.push({ type: 'SKILL', label: s.name, id: 'skills', icon: 'microchip' })));
         if (window.DATA.blogPosts) window.DATA.blogPosts.forEach(b => searchIndex.push({ type: 'BLOG', label: b.title, url: b.url, icon: 'file-alt' }));
     }

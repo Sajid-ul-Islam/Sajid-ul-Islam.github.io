@@ -148,10 +148,10 @@ export const SkillsGlobe = {
         const projectedPoints = [];
 
         this.tags.forEach(tag => {
-            let y1 = tag.y * Math.cos(this.angleX) - tag.z * Math.sin(this.angleX);
-            let z1 = tag.y * Math.sin(this.angleX) + tag.z * Math.cos(this.angleX);
-            let x1 = tag.x * Math.cos(this.angleY) + z1 * Math.sin(this.angleY);
-            let z2 = -tag.x * Math.sin(this.angleY) + z1 * Math.cos(this.angleY);
+            const y1 = tag.y * Math.cos(this.angleX) - tag.z * Math.sin(this.angleX);
+            const z1 = tag.y * Math.sin(this.angleX) + tag.z * Math.cos(this.angleX);
+            const x1 = tag.x * Math.cos(this.angleY) + z1 * Math.sin(this.angleY);
+            const z2 = -tag.x * Math.sin(this.angleY) + z1 * Math.cos(this.angleY);
 
             const scale = 300 / (300 - z2);
             const x2 = x1 * scale + this.canvas.width / 2;
