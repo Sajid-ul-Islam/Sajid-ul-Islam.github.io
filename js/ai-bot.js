@@ -252,4 +252,4 @@ function initAiChat() {
 }
 
 // Remove duplicate initAiChat from tactical-data.js by not re-defining here
-window.addEventListener('DOMContentLoaded', initAiChat);
+
