@@ -1251,9 +1251,49 @@ kbd {
     }
 }
 
-/* Adjustments for Status Bar */
+/* Adjustments for Status Bar & Tactical Camouflage Background */
 body {
     padding-top: 30px;
+    background-color: var(--bg-page);
+    background-image:
+        /* 1. Technical Grid Overlay */
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.012) 1px, transparent 0),
+        
+        /* 2. Repeating Tactical Camouflage Pattern (Tiled) */
+        linear-gradient(45deg, rgba(var(--primary-color-rgb), 0.02) 25%, transparent 25%, transparent 75%, rgba(var(--primary-color-rgb), 0.02) 75%, rgba(var(--primary-color-rgb), 0.02)),
+        linear-gradient(-45deg, rgba(15, 23, 42, 0.15) 25%, transparent 25%, transparent 75%, rgba(15, 23, 42, 0.15) 75%, rgba(15, 23, 42, 0.15)),
+        linear-gradient(45deg, rgba(30, 41, 59, 0.08) 25%, transparent 25%, transparent 75%, rgba(30, 41, 59, 0.08) 75%, rgba(30, 41, 59, 0.08)),
+        linear-gradient(-45deg, rgba(var(--primary-color-rgb), 0.01) 25%, transparent 25%, transparent 75%, rgba(var(--primary-color-rgb), 0.01) 75%, rgba(var(--primary-color-rgb), 0.01)),
+        
+        /* 3. Large Viewport-Fixed Camouflage Ambient Blobs */
+        radial-gradient(ellipse 400px 250px at 15% 20%, rgba(var(--primary-color-rgb), 0.04) 20%, transparent 80%),
+        radial-gradient(ellipse 500px 350px at 85% 15%, rgba(30, 41, 59, 0.2) 30%, transparent 85%),
+        radial-gradient(circle 400px at 75% 70%, rgba(var(--primary-color-rgb), 0.02) 25%, transparent 75%),
+        radial-gradient(circle 500px at 20% 50%, rgba(15, 23, 42, 0.75) 35%, transparent 90%),
+        radial-gradient(ellipse 450px 300px at 25% 85%, rgba(var(--primary-color-rgb), 0.03) 20%, transparent 80%),
+        radial-gradient(circle 400px at 80% 85%, rgba(15, 23, 42, 0.8) 30%, transparent 90%);
+        
+    background-size:
+        20px 20px,
+        120px 120px, 120px 120px, 120px 120px, 120px 120px,
+        100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+        
+    background-position:
+        0 0,
+        0 0, 0 60px, 60px -60px, -60px 0,
+        0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+        
+    background-attachment: scroll, scroll, scroll, scroll, scroll, fixed, fixed, fixed, fixed, fixed, fixed;
+    background-repeat: repeat, repeat, repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* Animated background blobs matching the active accent dynamically */
+.bg-blobs .blob {
+    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.05) 0%, transparent 70%);
+}
+
+.bg-blobs .blob-2 {
+    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 70%);
 }
 
 #sideNav {

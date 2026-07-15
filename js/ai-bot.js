@@ -87,7 +87,7 @@ function fuzzyMatch(input, keys) {
 
 let exchangeCount = 0;
 
-window.handleSuggestion = (text) => {
+export const handleSuggestion = (text) => {
     const input = document.getElementById('aiChatInput');
     if (input) {
         input.value = text;
