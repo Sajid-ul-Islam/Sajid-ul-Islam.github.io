@@ -96,7 +96,7 @@ export const handleSuggestion = (text) => {
     }
 };
 
-function initAiChat() {
+export function initAiChat() {
     const toggle    = document.getElementById('aiChatToggle');
     const container = document.getElementById('aiChatContainer');
     const closeBtn  = document.getElementById('closeAiChat');
