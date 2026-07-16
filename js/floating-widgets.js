@@ -171,38 +171,15 @@ export function initFloatingWidgets() {
     if (window._fwDone) return;
     window._fwDone = true;
 
-    const ghWidget = document.getElementById('githubWidget');
-    if (ghWidget) {
-        new FloatingWidget(ghWidget, {
-            title: '[LIVE_FEED]',
-            defW: 380, defH: 360,
-            minW: 280, minH: 240,
-            defX: 24,
-            defY: window.innerHeight - 430,
-            zBase: 1500
-        });
-    }
-
-    const kpi = document.getElementById('metricsWidget');
-    if (kpi) {
-        new FloatingWidget(kpi, {
-            title: '[OPERATIONAL_KPI]',
-            defW: 240, defH: 210,
-            minW: 200, minH: 180,
-            defX: window.innerWidth - 280,
-            defY: 90,
-            zBase: 1500
-        });
-    }
-
-    const dataViz = document.getElementById('dataVizWidget');
-    if (dataViz) {
-        new FloatingWidget(dataViz, {
-            title: '[REAL_TIME_METRICS]',
-            defW: 330, defH: 260,
-            minW: 260, minH: 200,
-            defX: window.innerWidth - 370,
-            defY: 315,
+    // Unified Command Center Widget
+    const cmdCenter = document.getElementById('commandCenterWidget');
+    if (cmdCenter) {
+        new FloatingWidget(cmdCenter, {
+            title: '[COMMAND_CENTER]',
+            defW: 300, defH: 400,
+            minW: 260, minH: 300,
+            defX: window.innerWidth - 340,
+            defY: 80,
             zBase: 1500
         });
     }

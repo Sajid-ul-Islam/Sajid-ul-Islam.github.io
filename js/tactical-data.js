@@ -341,7 +341,7 @@ export function renderBlogs(data) {
 
 export function renderLearning(data) {
     const container = document.getElementById('learning-list');
-    if (container) container.innerHTML = data.map(l => `<div class="col-md-6 mb-2"><span>${l.name}</span><div class="progress" style="height:4px"><div class="progress-bar bg-success" style="width:${l.progress}%"></div></div></div>`).join('');
+    if (container) container.innerHTML = data.map(l => `<div class="col-md-6 mb-2"><span>${l.name}</span><div class="progress" style="height:4px; background: rgba(var(--primary-color-rgb), 0.08)"><div class="progress-bar" style="width:${l.progress}%; background: var(--primary-color); box-shadow: 0 0 6px var(--primary-color);"></div></div></div>`).join('');
 }
 
 export function renderGaming(data) {

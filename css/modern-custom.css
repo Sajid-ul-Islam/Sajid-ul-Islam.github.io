@@ -78,7 +78,7 @@
 
 /* Base Tactical Styles */
 html {
-    font-size: 72%;
+    font-size: 74%;
 }
 
 body {
@@ -90,7 +90,7 @@ body {
     overflow-x: hidden;
     position: relative;
     padding: 0 !important;
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     line-height: 1.7;
     /* Subtle Data Grid Background */
     background-image:
@@ -637,22 +637,22 @@ a:hover {
 }
 
 [data-theme="light"] .md-fab {
-    background: #fff !important;
+    background: var(--bg-card) !important;
     color: var(--primary-color) !important;
 }
 
 [data-theme="light"] .card-glass {
-    background: #fff !important;
-    border-color: #e2e8f0 !important;
+    background: var(--bg-card) !important;
+    border-color: var(--border-color, rgba(var(--primary-color-rgb), 0.15)) !important;
 }
 
 [data-theme="light"] .resume-item {
-    background: #fff !important;
-    border-color: #e2e8f0 !important;
+    background: var(--bg-card) !important;
+    border-color: var(--border-color, rgba(var(--primary-color-rgb), 0.15)) !important;
 }
 
 [data-theme="light"] .timeline-dot {
-    background: #fff !important;
+    background: var(--bg-card) !important;
 }
 
 [data-theme="light"] #sideNav {
@@ -696,8 +696,7 @@ a:hover {
 .resume-section {
     max-width: var(--max-content-width);
     margin: 0 auto;
-    padding: 3rem 1.5rem 2rem !important;
-    /* Shrunk for scale fix */
+    padding: 4rem 2rem 2.5rem !important;
     min-height: 80vh;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;

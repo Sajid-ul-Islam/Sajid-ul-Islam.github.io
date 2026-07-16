@@ -228,7 +228,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Accent color switcher (shared module)
-  initAccentSwitcher({ defaultAccent: 'green' });
+  initAccentSwitcher({
+    defaultAccent: 'green',
+    onChange: () => {
+      // Update chart colors when accent changes
+      if (typeof window.updateChartColors === 'function') {
+        window.updateChartColors();
+      }
+    }
+  });
   
   // Glitch effect initializer
   document.querySelectorAll('.section-label, h2:not(.display-2)').forEach(el => {
@@ -260,7 +268,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // Initialize floating widgets (handles drag + resize)
   setTimeout(initFloatingWidgets, 500);
-  
+
+  // Initialize GitHub live feed
+  initGitHubFeed();
+
   // Initialize tactical widgets
   TacticalWidgets.init();
   
@@ -282,29 +293,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ===== SKILLS RADAR CHART =====
 function initSkillsRadarChart() {
   const canvas = document.getElementById('skillsChart');
-  const skillMap = { 'PYTHON': 0, 'SQL': 1, 'POWER_BI': 2, 'TABLEAU': 2, 'EXCEL': 1, 'PYTHON_ML': 3, 'ML': 3, 'REACT': 4, 'NODE.JS': 4, 'GOOGLE_ANALYTICS': 5 };
-  const baseData = [90, 85, 95, 70, 75, 80];
+  const skillMap = { 'PYTHON': 0, 'SQL': 1, 'PANDAS': 2, 'SCIKIT-LEARN': 3, 'JAVASCRIPT': 4, 'AI/RAG': 5 };
+  const baseData = [90, 88, 88, 80, 78, 78];
   window.chartBaseData = [...baseData];
-
-  // Read accent color from CSS variables for Chart.js
-  const cs = getComputedStyle(document.documentElement);
-  const chartColor = cs.getPropertyValue('--primary-color').trim() || '#4ade80';
-  const chartColorRGB = cs.getPropertyValue('--primary-color-rgb').trim() || '74, 222, 128';
-  const textSec = cs.getPropertyValue('--text-secondary').trim() || '#a3b89c';
 
   if (canvas && typeof Chart !== 'undefined') {
     const ctx = canvas.getContext('2d');
     window.skillsRadarChart = new Chart(ctx, {
       type: 'radar',
       data: {
-        labels: ['Python', 'SQL', 'BI Tools', 'ML', 'Web Dev', 'Analytics'],
+        labels: ['Python', 'SQL', 'Pandas', 'ML', 'JavaScript', 'AI/RAG'],
         datasets: [{
           label: '[SKILL_POWER_LEVEL]',
           data: [...baseData],
-          backgroundColor: `rgba(${chartColorRGB}, 0.2)`,
-          borderColor: chartColor,
+          backgroundColor: 'rgba(74, 222, 128, 0.2)',
+          borderColor: '#4ade80',
           borderWidth: 1,
-          pointBackgroundColor: chartColor
+          pointBackgroundColor: '#4ade80'
         }]
       },
       options: {
@@ -313,9 +318,9 @@ function initSkillsRadarChart() {
         animation: { duration: 400 },
         scales: {
           r: {
-            angleLines: { color: `rgba(${chartColorRGB}, 0.1)` },
-            grid: { color: `rgba(${chartColorRGB}, 0.1)` },
-            pointLabels: { color: textSec, font: { family: 'JetBrains Mono' } },
+            angleLines: { color: 'rgba(74, 222, 128, 0.1)' },
+            grid: { color: 'rgba(74, 222, 128, 0.1)' },
+            pointLabels: { color: '#a3b89c', font: { family: 'JetBrains Mono' } },
             ticks: { display: false },
             suggestedMin: 0,
             suggestedMax: 100
@@ -324,6 +329,27 @@ function initSkillsRadarChart() {
         plugins: { legend: { display: false } }
       }
     });
+
+    // Expose update function for accent changes
+    window.updateChartColors = function() {
+      const chart = window.skillsRadarChart;
+      if (!chart) return;
+      const cs = getComputedStyle(document.documentElement);
+      const color = cs.getPropertyValue('--primary-color').trim() || '#4ade80';
+      const rgb = cs.getPropertyValue('--primary-color-rgb').trim() || '74, 222, 128';
+      const textSec = cs.getPropertyValue('--text-secondary').trim() || '#a3b89c';
+
+      chart.data.datasets[0].backgroundColor = `rgba(${rgb}, 0.2)`;
+      chart.data.datasets[0].borderColor = color;
+      chart.data.datasets[0].pointBackgroundColor = color;
+      chart.options.scales.r.angleLines.color = `rgba(${rgb}, 0.1)`;
+      chart.options.scales.r.grid.color = `rgba(${rgb}, 0.1)`;
+      chart.options.scales.r.pointLabels.color = textSec;
+      chart.update('none');
+    };
+
+    // Initial color read
+    window.updateChartColors();
     
     // Gamify connections using Event Delegation
     document.addEventListener('mouseover', (e) => {

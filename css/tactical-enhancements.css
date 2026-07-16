@@ -330,19 +330,19 @@ a:hover, button:hover, .nav-link:hover, .btn:hover,
 }
 
 [data-theme="light"] .command-palette-modal > div {
-    background: #fff !important;
-    border-color: #e2e8f0 !important;
+    background: var(--bg-card) !important;
+    border-color: var(--border-color, rgba(var(--primary-color-rgb), 0.15)) !important;
 }
 
 [data-theme="light"] .command-palette-input {
-    background: #f8fafc !important;
-    border-color: #e2e8f0 !important;
-    color: #0f172a !important;
+    background: var(--bg-page) !important;
+    border-color: var(--border-color, rgba(var(--primary-color-rgb), 0.15)) !important;
+    color: var(--text-primary) !important;
 }
 
 [data-theme="light"] .command-palette-item:hover,
 [data-theme="light"] .command-palette-item.selected {
-    background: #f1f5f9 !important;
+    background: rgba(var(--primary-color-rgb), 0.08) !important;
 }
 
 .command-palette-key {
@@ -620,7 +620,7 @@ a:hover, button:hover, .btn:hover {
 }
 
 [data-theme="light"] .terminal-modal {
-    background: #1a1a1a !important;
+    background: var(--bg-card) !important;
     border-color: var(--primary-color) !important;
 }
 

@@ -89,12 +89,7 @@ export async function initGitHubFeed() {
     const container = document.getElementById('githubActivity');
     if (!container) return;
 
-    const header = document.querySelector('#githubWidget .widget-header');
-    if (header) {
-        header.innerHTML = `<i class="fab fa-github"></i><span>LIVE_FEED</span><span class="gh-live-dot"></span>`;
-    }
-
-    container.innerHTML = `<div class="activity-item" style="color:#64748b;font-size:0.75rem;padding:8px 12px">Fetching commits...</div>`;
+    container.innerHTML = `<div class="activity-item" style="color: var(--text-secondary); font-size:0.75rem;padding:8px 12px">Fetching commits...</div>`;
 
     try {
         const res = await fetch(GH_API, { headers: { 'Accept': 'application/vnd.github.v3+json' } });

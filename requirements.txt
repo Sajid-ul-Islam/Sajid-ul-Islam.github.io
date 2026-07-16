@@ -1,7 +1,0 @@
-# Python dependencies for portfolio utility scripts
-pandas>=1.5.0
-openpyxl>=3.0.0
-# Add other dependencies if you expand the analytical tools
-# numpy
-# matplotlib
-# scikit-learn

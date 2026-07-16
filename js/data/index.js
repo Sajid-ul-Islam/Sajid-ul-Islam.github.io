@@ -7,12 +7,12 @@
 // ===== PROFILE INFO =====
 export const PROFILE_INFO = {
   name: 'Sajid Islam',
-  role: 'Data Scientist & Business Analyst',
-  heroText: 'A Data & Business Analyst specialized in turning complex datasets into strategic growth. Based in Bangladesh, I lead data-ops at DEEN Commerce and previously optimized performance at Daraz (Alibaba Group).',
+  role: 'Product & Data Professional',
+  heroText: 'A Product & Data professional with a background in Computer Science, passionate about building products, automating workflows, and solving business problems with technology. Specializing in Data Analytics, AI/ML, and Process Automation.',
   photo: 'img/profile.jpg',
   email: 'sajid.islam.chowdhury@gmail.com',
   whatsapp: '+880 182 452 6054',
-  github: 'https://github.com/saajiidi',
+  github: 'https://github.com/Sajid-ul-Islam',
   linkedin: 'https://www.linkedin.com/in/sajidislamchowdhury/',
   huggingface: 'https://huggingface.co/Sajid-ul-Islam',
   kaggle: 'https://www.kaggle.com/saajiidi'
@@ -197,22 +197,42 @@ export const PROJECTS = [
 // ===== SKILL GROUPS =====
 export const SKILL_GROUPS = [
   {
-    name: 'BI & Product Strategy',
+    name: 'Data Analytics & BI',
     skills: [
-      { name: 'Business Intelligence', category: 'BI', icon: 'https://img.icons8.com/color/48/000000/business-report.png', level: 92 },
-      { name: 'Data Visualization', category: 'BI', icon: 'https://img.icons8.com/color/48/000000/combo-chart.png', level: 92 },
-      { name: 'Product Management', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/product--v1.png', level: 85 },
-      { name: 'Market Research', category: 'Strategy', icon: 'https://img.icons8.com/color/48/000000/search--v1.png', level: 90 }
+      { name: 'Python', category: 'Language', icon: 'fab fa-python', level: 90 },
+      { name: 'SQL', category: 'Language', icon: 'fas fa-database', level: 88 },
+      { name: 'Pandas', category: 'Data', icon: 'fas fa-table', level: 88 },
+      { name: 'NumPy', category: 'Data', icon: 'fas fa-square-root-alt', level: 82 },
+      { name: 'Plotly', category: 'Visualization', icon: 'fas fa-chart-line', level: 85 },
+      { name: 'Dash', category: 'Visualization', icon: 'fas fa-tachometer-alt', level: 82 }
     ]
   },
   {
-    name: 'Data Science & AI Engineering',
+    name: 'AI & Machine Learning',
     skills: [
-      { name: 'Data Analytics & ML', category: 'Data', icon: 'https://img.icons8.com/color/48/null/python--v1.png', level: 85 },
-      { name: 'Agentic AI Systems', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/robot-intellectual.png', level: 82 },
-      { name: 'RAG (Retrieval-Augmented Generation)', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/artificial-intelligence.png', level: 85 },
-      { name: 'Machine Learning Engineering', category: 'AI', icon: 'https://img.icons8.com/color/48/000000/neural-network.png', level: 85 },
-      { name: 'Python & SQL', category: 'Data', icon: 'https://img.icons8.com/color/48/000000/python.png', level: 85 }
+      { name: 'Scikit-learn', category: 'ML', icon: 'fas fa-brain', level: 80 },
+      { name: 'LLMs', category: 'AI', icon: 'fas fa-robot', level: 78 },
+      { name: 'RAG', category: 'AI', icon: 'fas fa-project-diagram', level: 75 },
+      { name: 'AI Agents', category: 'AI', icon: 'fas fa-microchip', level: 72 }
+    ]
+  },
+  {
+    name: 'Development & Tools',
+    skills: [
+      { name: 'JavaScript', category: 'Language', icon: 'fab fa-js', level: 78 },
+      { name: 'HTML/CSS', category: 'Web', icon: 'fab fa-html5', level: 85 },
+      { name: 'Git/GitHub', category: 'DevOps', icon: 'fab fa-git-alt', level: 85 },
+      { name: 'Docker', category: 'DevOps', icon: 'fab fa-docker', level: 72 },
+      { name: 'Linux', category: 'OS', icon: 'fab fa-linux', level: 80 },
+      { name: 'Flask', category: 'Framework', icon: 'fas fa-fire', level: 75 }
+    ]
+  },
+  {
+    name: 'Databases',
+    skills: [
+      { name: 'PostgreSQL', category: 'DB', icon: 'fas fa-database', level: 80 },
+      { name: 'MySQL', category: 'DB', icon: 'fas fa-database', level: 78 },
+      { name: 'SQLite', category: 'DB', icon: 'fas fa-database', level: 82 }
     ]
   }
 ];
@@ -247,12 +267,12 @@ export const BLOG_POSTS = [
 
 // ===== LEARNING ITEMS =====
 export const LEARNING_ITEMS = [
-  { name: 'Agentic Workflows (LangGraph/CrewAI)', category: 'AI', progress: 82 },
-  { name: 'Advanced RAG & Vector DBs', category: 'AI', progress: 85 },
-  { name: 'LLM Fine-Tuning (LoRA/QLoRA)', category: 'ML', progress: 65 },
-  { name: 'Modern Data Stack (dbt & Snowflake)', category: 'Data Ops', progress: 70 },
-  { name: 'Real-Time Streaming Analytics', category: 'BI', progress: 60 },
-  { name: 'MLOps & Model Deployment', category: 'ML', progress: 75 }
+  { name: 'Large Language Models (LLMs)', category: 'AI', progress: 78 },
+  { name: 'AI Agents & Agentic Workflows', category: 'AI', progress: 75 },
+  { name: 'Retrieval-Augmented Generation (RAG)', category: 'AI', progress: 80 },
+  { name: 'Product Analytics & Management', category: 'Product', progress: 70 },
+  { name: 'Cloud Technologies', category: 'DevOps', progress: 65 },
+  { name: 'System Design', category: 'Engineering', progress: 60 }
 ];
 
 // ===== STATS =====
@@ -298,7 +318,6 @@ export const FILE_TREE = [
       { id: 'skills', label: 'Skills', href: '#skills', icon: 'code', extension: 'json' },
       { id: 'projects', label: 'Projects', href: '#projects', icon: 'folder', extension: 'tsx' },
       { id: 'education', label: 'Education', href: '#education', icon: 'graduation-cap', extension: 'tsx' },
-      { id: 'family', label: 'Family', href: '#family', icon: 'users', extension: 'tsx' },
       { id: 'contact', label: 'Contact', href: '#contact', icon: 'mail', extension: 'tsx' },
     ],
   },

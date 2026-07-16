@@ -247,3 +247,77 @@
         transform: none !important;
     }
 }
+
+/* ── Mobile: ≤576px ───────────────────────────────────────── */
+@media (max-width: 576px) {
+    .section-label {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+        letter-spacing: 1px;
+    }
+
+    .skill-pill-tactical {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .skill-pill-tactical i {
+        font-size: 1rem;
+    }
+
+    .tech-chip {
+        padding: 8px 10px;
+    }
+
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+    }
+
+    .tag-tactical {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+
+    .suggestion-chip {
+        padding: 5px 10px;
+        font-size: 0.65rem;
+    }
+
+    .progress-tactical {
+        height: 3px;
+    }
+}
+
+/* ── Mobile: ≤768px ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .project-filters {
+        gap: 8px;
+        padding-bottom: 1.5rem;
+    }
+
+    .skill-pill-tactical {
+        flex: 0 0 auto;
+    }
+
+    .tech-chip {
+        flex: 0 0 calc(50% - 4px);
+    }
+}
+
+/* ── Touch devices ────────────────────────────────────────── */
+@media (hover: none) {
+    .skill-pill-tactical:hover,
+    .tech-chip:hover,
+    .filter-btn:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .skill-pill-tactical:active,
+    .tech-chip:active,
+    .filter-btn:active {
+        transform: scale(0.97) !important;
+    }
+}
