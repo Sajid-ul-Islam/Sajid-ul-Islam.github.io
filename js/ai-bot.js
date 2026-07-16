@@ -18,10 +18,6 @@ async function fetchUserTelemetry() {
 }
 
 // SECURITY: No default API keys are stored here.
-// To enable AI responses, use terminal commands:
-//   link_gemini YOUR_GEMINI_KEY
-//   link_openai YOUR_OPENAI_KEY
-// Keys are stored only in browser localStorage.
 const DEFAULT_GEMINI_KEY = null;
 const DEFAULT_OPENAI_KEY = null;
 
@@ -29,55 +25,115 @@ const DEFAULT_OPENAI_KEY = null;
 const LOCAL_INTEL = {
     profile: "Sajid Islam. Data Scientist & Business Analyst based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.",
     experience: [
-        "Executive — Business @ DEEN Commerce (Jan 2025 - Present)",
-        "Co-Founder @ Gear Master (Jun 2024 - Present)",
-        "Marketplace Analyst @ Daraz [Alibaba Group] (Jan 2020 - Jan 2022)"
+        "Business Analyst @ DEEN Commerce (Jun 2025 - Present) — CRM, Business Strategy, Dashboards",
+        "Co-Founder @ Gear Master (Jun 2024 - Present) — Retail Operations, Inventory, Multi-channel",
+        "IT Executive @ NZ TEX GROUP (Feb 2024 - May 2024) — R&D, Reporting",
+        "Associate @ Thriving Skills (Oct 2023 - Jan 2024) — Sales, CRM, Market Analysis",
+        "Jr. Executive Marketplace @ Daraz Bangladesh (Jan 2020 - Jan 2022) — 50% partner growth",
+        "Associate Home Kitchen @ HungryNaki (Jul 2021 - Jan 2022) — 25% network growth"
     ],
     education: [
-        "PGD in Data Science & Business Analytics @ ABP (2025)",
-        "BSc in Computer Science & Engineering @ North South University (2019)"
+        "PGD in Data Science & Business Analytics @ Academy of Business Professionals (2025)",
+        "BSc in Computer Science & Engineering @ North South University (2019)",
+        "HSC (Science) @ BAF Shaheen College Dhaka (2013)",
+        "SSC (Science) @ Uttara High School & College (2011)"
     ],
-    skills: "Python, SQL, Power BI, Machine Learning, Data Automation, Strategic Business Analysis.",
-    projects: "E-Commerce Dashboards, Sheet2WhatsApp, Sentinel Bangladesh, Customer Churn Analysis."
+    skills: "Python, SQL, Power BI, Pandas, NumPy, Plotly, Dash, Scikit-learn, LLMs, RAG, AI Agents, JavaScript, HTML/CSS, Git/GitHub, Docker, Linux, Flask, PostgreSQL, MySQL, SQLite.",
+    projects: [
+        "Streamlit Prototype Hub — Centralized command center for 10+ data apps",
+        "Hugging Face EconVision Space — Global economic analytics visualizer",
+        "E-Commerce Dashboards — BI visualization for retail analytics",
+        "Sheet2WhatsApp — Automated messaging tool",
+        "Sentinel Bangladesh — Data monitoring system",
+        "Customer Churn Analysis — ML-powered retention insights"
+    ],
+    certifications: "Data Science & Business Analytics (PGD), Python for Data Science, Power BI Desktop, SQL Fundamentals, Machine Learning Basics.",
+    learning: [
+        "Large Language Models (LLMs) — 78% progress",
+        "AI Agents & Agentic Workflows — 75% progress",
+        "Retrieval-Augmented Generation (RAG) — 80% progress",
+        "Product Analytics & Management — 70% progress",
+        "Cloud Technologies — 65% progress",
+        "System Design — 60% progress"
+    ],
+    contact: {
+        email: "sajid.islam.chowdhury@gmail.com",
+        whatsapp: "+880 182 452 6054",
+        telegram: "https://t.me/+8801824526054",
+        github: "https://github.com/Sajid-ul-Islam",
+        linkedin: "https://www.linkedin.com/in/sajidislamchowdhury/",
+        kaggle: "https://www.kaggle.com/saajiidi",
+        huggingface: "https://huggingface.co/Sajid-ul-Islam"
+    },
+    availability: "Available for full-time roles, freelance projects, consulting, and collaboration. Open to remote and on-site opportunities in Dhaka.",
+    gaming: "Favorite games: Red Dead Redemption 2, God of War Ragnarok, FC24/FIFA, Ghost of Tsushima. 2400+ hours logged."
 };
 
 const KNOWLEDGE_GROUPS = {
-    "hi": { 
-        keys: ["hi", "hello", "hey", "greetings", "yo", "u there"], 
-        response: () => `Signal Stable. Mission Oracle [LIVE]. I have full dossiers on Sajid's career at Daraz and DEEN Commerce. How can I assist with your intel gathering?` 
+    "hi": {
+        keys: ["hi", "hello", "hey", "greetings", "yo", "u there", "sup", "good morning", "good evening"],
+        response: () => `Hey there! I'm Sajid's AI Oracle. I have intel on his career, skills, projects, and more. What would you like to know?`
     },
-    "edu": { 
-        keys: ["education", "study", "university", "school", "degree", "acad", "grad", "edu", "qualification"], 
-        response: () => `[ACADEMIC_INTEL]: ${LOCAL_INTEL.education.join(' || ')}` 
+    "bye": {
+        keys: ["bye", "goodbye", "see you", "thanks", "thank you", "thx"],
+        response: () => `Mission complete. Feel free to reach out anytime — Sajid is always open to new connections and opportunities. Have a great day!`
     },
-    "exp": { 
-        keys: ["experience", "work", "job", "career", "history", "position", "company", "exp", "past", "track record"], 
-        response: () => `[FIELD_REPORTS]: ${LOCAL_INTEL.experience.join(' || ')}` 
+    "edu": {
+        keys: ["education", "study", "university", "school", "degree", "acad", "grad", "edu", "qualification", "college"],
+        response: () => `📚 ACADEMIC DOSSIER:\n\n${LOCAL_INTEL.education.join('\n')}`
     },
-    "who": { 
-        keys: ["who", "identity", "sajid", "himself", "profile"], 
-        response: `[TARGET_PROFILE]: ${LOCAL_INTEL.profile}` 
+    "exp": {
+        keys: ["experience", "work", "job", "career", "history", "position", "company", "exp", "past", "track record", "resume"],
+        response: () => `💼 CAREER HISTORY:\n\n${LOCAL_INTEL.experience.join('\n')}`
     },
-    "skill": { 
-        keys: ["skill", "tech", "stack", "know", "tool", "language", "python", "sql", "powerbi", "tableau"], 
-        response: `[TECH_STACK_CORE]: ${LOCAL_INTEL.skills}` 
+    "who": {
+        keys: ["who", "identity", "sajid", "himself", "profile", "about", "introduce"],
+        response: `🎯 TARGET PROFILE:\n\n${LOCAL_INTEL.profile}\n\nHe's passionate about building products, automating workflows, and solving business problems with technology.`
     },
-    "project": { 
-        keys: ["project", "work", "featured", "ops", "made", "build", "portfolio"], 
-        response: () => `[OPERATIONS_LOG]: ${LOCAL_INTEL.projects}` 
+    "skill": {
+        keys: ["skill", "tech", "stack", "know", "tool", "language", "python", "sql", "powerbi", "tableau", "technologies", "proficiency"],
+        response: `⚡ TECHNICAL ARSENAL:\n\n${LOCAL_INTEL.skills}`
+    },
+    "project": {
+        keys: ["project", "work", "featured", "ops", "made", "build", "portfolio", "app", "application"],
+        response: () => `🚀 OPERATIONS LOG:\n\n${LOCAL_INTEL.projects.map((p, i) => `${i + 1}. ${p}`).join('\n')}`
+    },
+    "contact": {
+        keys: ["contact", "email", "phone", "whatsapp", "reach", "connect", "linkedin", "github", "social"],
+        response: () => `📞 COMM UPLINK:\n\n📧 Email: ${LOCAL_INTEL.contact.email}\n📱 WhatsApp: ${LOCAL_INTEL.contact.whatsapp}\n✈️ Telegram: ${LOCAL_INTEL.contact.telegram}\n💼 LinkedIn: ${LOCAL_INTEL.contact.linkedin}\n🐙 GitHub: ${LOCAL_INTEL.contact.github}\n📊 Kaggle: ${LOCAL_INTEL.contact.kaggle}\n🤗 HuggingFace: ${LOCAL_INTEL.contact.huggingface}`
+    },
+    "cert": {
+        keys: ["certificate", "certification", "cert", "course", "training", "credential"],
+        response: () => `🏆 CERTIFICATIONS:\n\n${LOCAL_INTEL.certifications}`
+    },
+    "learn": {
+        keys: ["learning", "learning track", "currently learning", "study", "upskill", "course"],
+        response: () => `📖 CURRENT LEARNING TRACK:\n\n${LOCAL_INTEL.learning.join('\n')}`
+    },
+    "hire": {
+        keys: ["hire", "hiring", "available", "freelance", "opportunity", "collaboration", "job", "role", "remote"],
+        response: () => `🤝 AVAILABILITY STATUS:\n\n${LOCAL_INTEL.availability}\n\nBest way to connect:\n📱 WhatsApp: ${LOCAL_INTEL.contact.whatsapp}\n✈️ Telegram: ${LOCAL_INTEL.contact.telegram}\n📧 Email: ${LOCAL_INTEL.contact.email}`
+    },
+    "game": {
+        keys: ["game", "gaming", "hobby", "hobbies", "play", "favorite game", "free time"],
+        response: () => `🎮 OFF-DUTY LOGS:\n\n${LOCAL_INTEL.gaming}`
+    },
+    "help": {
+        keys: ["help", "what can you do", "features", "commands", "options"],
+        response: () => `🤖 I can help you with:\n\n• Profile info — "Who is Sajid?"\n• Experience — "Work history"\n• Skills — "Technical skills"\n• Projects — "Show projects"\n• Education — "Education"\n• Certifications — "Certificates"\n• Contact — "How to reach him?"\n• Availability — "Is he available for hire?"\n• Learning — "What is he learning?"\n• Hobbies — "Gaming interests"\n\nOr just ask anything about Sajid's professional background!`
     }
 };
 
-// Fuzzy Matching Helper (Levenshtein-ish)
+// Fuzzy Matching Helper
 function fuzzyMatch(input, keys) {
-    const threshold = 0.7; // Sensitivity
+    const threshold = 0.7;
     input = input.toLowerCase();
     for (const key of keys) {
         if (input.includes(key)) return true;
         if (key.length > 3) {
             let matches = 0;
-            for(let i=0; i<input.length; i++) {
-                if(key.includes(input[i])) matches++;
+            for (let i = 0; i < input.length; i++) {
+                if (key.includes(input[i])) matches++;
             }
             if (matches / key.length > threshold) return true;
         }
@@ -86,6 +142,7 @@ function fuzzyMatch(input, keys) {
 }
 
 let exchangeCount = 0;
+let chatHistory = [];
 
 export const handleSuggestion = (text) => {
     const input = document.getElementById('aiChatInput');
@@ -96,56 +153,129 @@ export const handleSuggestion = (text) => {
     }
 };
 
+function getThemeAccent() {
+    const root = document.documentElement;
+    const bg = getComputedStyle(root).getPropertyValue('--bg-page').trim();
+    if (bg && bg.startsWith('#f')) return 'light';
+    return 'dark';
+}
+
 export function initAiChat() {
-    const toggle    = document.getElementById('aiChatToggle');
+    const toggle = document.getElementById('aiChatToggle');
     const container = document.getElementById('aiChatContainer');
-    const closeBtn  = document.getElementById('closeAiChat');
-    const input     = document.getElementById('aiChatInput');
-    const sendBtn   = document.getElementById('sendAiMessage');
-    const body      = document.getElementById('aiChatBody');
+    const closeBtn = document.getElementById('closeAiChat');
+    const input = document.getElementById('aiChatInput');
+    const sendBtn = document.getElementById('sendAiMessage');
+    const body = document.getElementById('aiChatBody');
+    const clearBtn = document.getElementById('clearAiChat');
 
     if (!toggle || !container) return;
 
-    toggle.addEventListener('click', () => container.classList.toggle('active'));
+    toggle.addEventListener('click', () => {
+        container.classList.toggle('active');
+        if (container.classList.contains('active')) {
+            setTimeout(() => input?.focus(), 300);
+        }
+    });
     if (closeBtn) closeBtn.addEventListener('click', () => container.classList.remove('active'));
 
+    // Clear chat
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            body.innerHTML = '';
+            chatHistory = [];
+            exchangeCount = 0;
+            const sug = document.getElementById('aiSuggestions');
+            if (sug) sug.style.display = '';
+            addMessage("Chat cleared. How can I assist you?", 'bot');
+        });
+    }
+
+    function formatTime() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
     const addMessage = async (text, sender, isSystem = false) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = `ai-msg-wrapper ai-msg-${sender}`;
+
         const msg = document.createElement('div');
         msg.className = `ai-message ${sender} ${isSystem ? 'system' : ''}`;
-        body.appendChild(msg);
+        wrapper.appendChild(msg);
+
+        const time = document.createElement('span');
+        time.className = 'ai-msg-time';
+        time.textContent = formatTime();
+        wrapper.appendChild(time);
+
+        body.appendChild(wrapper);
         body.scrollTop = body.scrollHeight;
 
-        if (sender === 'bot') {
-            await typeWriterEffect(msg, text); // Use typewriter effect for bot messages
+        if (sender === 'bot' && !isSystem) {
+            await typeWriterEffect(msg, text);
             if (typeof AudioEngine !== 'undefined' && AudioEngine.speak) {
                 AudioEngine.speak(text);
             }
         } else {
-            msg.textContent = text; // Direct text for user and system messages
+            msg.textContent = text;
         }
-        body.scrollTop = body.scrollHeight; // Ensure scroll to bottom after message
+        body.scrollTop = body.scrollHeight;
+
+        chatHistory.push({ text, sender, time: formatTime() });
         return msg;
     };
+
+    function showTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'ai-msg-wrapper ai-msg-bot';
+        indicator.id = 'typingIndicator';
+        indicator.innerHTML = `
+            <div class="ai-message bot typing-indicator">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            </div>
+        `;
+        body.appendChild(indicator);
+        body.scrollTop = body.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const indicator = document.getElementById('typingIndicator');
+        if (indicator) indicator.remove();
+    }
 
     async function typeWriterEffect(element, text) {
         let i = 0;
         while (i < text.length) {
             element.textContent += text.charAt(i);
             i++;
-            body.scrollTop = body.scrollHeight; // Keep scrolling to the bottom
-            await new Promise(resolve => setTimeout(resolve, Math.random() * 20 + 30)); // Typing speed
+            body.scrollTop = body.scrollHeight;
+            await new Promise(resolve => setTimeout(resolve, Math.random() * 15 + 20));
         }
     }
 
-    function showManualFallback() {
-        const btnContainer = document.createElement('div');
-        btnContainer.className = 'ai-message bot-action d-flex flex-column gap-2';
-        btnContainer.innerHTML = `
-            <button class="btn-theme-toggle w-100" onclick="window.open('https://wa.me/+8801824526054', '_blank')">
-                <i class="fab fa-whatsapp me-2"></i> [HUMAN_COMMAND_UPLINK]
+    function showQuickActions() {
+        const actions = document.createElement('div');
+        actions.className = 'ai-quick-actions';
+        actions.innerHTML = `
+            <button class="ai-quick-btn" onclick="window.open('resume.html', '_blank')">
+                <i class="fas fa-file-pdf"></i> Resume
+            </button>
+            <button class="ai-quick-btn" onclick="window.open('https://wa.me/+8801824526054?text=Hi%20Sajid%2C%20I%20found%20your%20portfolio.', '_blank')">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button class="ai-quick-btn" onclick="window.open('https://t.me/+8801824526054', '_blank')">
+                <i class="fab fa-telegram"></i> Telegram
+            </button>
+            <button class="ai-quick-btn" onclick="window.open('https://github.com/Sajid-ul-Islam', '_blank')">
+                <i class="fab fa-github"></i> GitHub
+            </button>
+            <button class="ai-quick-btn" onclick="window.open('https://www.linkedin.com/in/sajidislamchowdhury/', '_blank')">
+                <i class="fab fa-linkedin"></i> LinkedIn
             </button>
         `;
-        body.appendChild(btnContainer);
+        body.appendChild(actions);
         body.scrollTop = body.scrollHeight;
     }
 
@@ -162,6 +292,11 @@ export function initAiChat() {
             if (sug) sug.style.display = 'none';
         }
 
+        // Show quick actions after first message
+        if (exchangeCount === 1) {
+            setTimeout(() => showQuickActions(), 600);
+        }
+
         // 1. LOCAL_INTEL_CHECK
         let localResponse = null;
         for (const group in KNOWLEDGE_GROUPS) {
@@ -172,42 +307,37 @@ export function initAiChat() {
         }
 
         if (localResponse) {
+            showTypingIndicator();
             setTimeout(() => {
+                removeTypingIndicator();
                 addMessage(localResponse, 'bot');
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
-            }, 400);
+            }, 600 + Math.random() * 400);
             return;
         }
 
         // 2. MULTI_MODEL_FALLBACK
-        const statusMsg = addMessage("[INITIATING_NEURAL_UPLINK]...", 'system');
-        statusMsg.classList.add('loading');
-        
-        const statusInterval = setInterval(() => {
-            const lines = ["SIGNAL_PROCESSING...", "ANALYZING_INTEL_STREAMS...", "DECRYPTING_NEURAL_PACKETS..."];
-            statusMsg.textContent = lines[Math.floor(Math.random() * lines.length)];
-        }, 1500);
+        showTypingIndicator();
 
         // --- Try Gemini Primary ---
         try {
             const geminiKey = localStorage.getItem('GEMINI_UPLINK_KEY') || DEFAULT_GEMINI_KEY;
             if (!geminiKey) throw new Error("NO_GEMINI_KEY");
-            
+
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: `System Context: You are the AI Oracle for Sajid Islam. Profile: ${LOCAL_INTEL.profile}. Respond tactical/professional hacker tone. Query: ${text}` }] }]
+                    contents: [{ parts: [{ text: `System Context: You are the AI Oracle for Sajid Islam. Profile: ${LOCAL_INTEL.profile}. Skills: ${LOCAL_INTEL.skills}. Respond in a professional, helpful tone. Keep responses concise. Query: ${text}` }] }]
                 })
             });
-            
-            clearInterval(statusInterval);
+
+            removeTypingIndicator();
             if (response.status === 403 || response.status === 429) throw new Error("NEURAL_SYNC_LEVEL_EXCEEDED");
-            
+
             const data = await response.json();
             const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
             if (aiResponse) {
-                statusMsg.remove();
                 addMessage(aiResponse, 'bot');
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
                 return;
@@ -218,14 +348,14 @@ export function initAiChat() {
         try {
             const oaiKey = localStorage.getItem('OPENAI_UPLINK_KEY') || DEFAULT_OPENAI_KEY;
             if (!oaiKey) throw new Error("NO_OPENAI_KEY");
-            
+
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${oaiKey}` },
                 body: JSON.stringify({
                     model: "gpt-3.5-turbo",
                     messages: [
-                        { role: "system", content: `Identity: Sajid Islam's AI Oracle. Dossier: ${LOCAL_INTEL.profile}. Tone: Tactical.` },
+                        { role: "system", content: `Identity: Sajid Islam's AI Oracle. Dossier: ${LOCAL_INTEL.profile}. Skills: ${LOCAL_INTEL.skills}. Tone: Professional.` },
                         { role: "user", content: text }
                     ]
                 })
@@ -233,23 +363,30 @@ export function initAiChat() {
             const data = await response.json();
             const aiResponse = data.choices?.[0]?.message?.content;
             if (aiResponse) {
-                clearInterval(statusInterval);
-                statusMsg.remove();
+                removeTypingIndicator();
                 addMessage(aiResponse, 'bot');
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
                 return;
             }
         } catch (err) { /* OpenAI offline, showing fallback */ }
 
-        clearInterval(statusInterval);
-        statusMsg.remove();
-        addMessage("[ERROR]: Neural Uplink unstable. Selecting primary contact protocol...", 'system');
-        showManualFallback();
+        removeTypingIndicator();
+        addMessage("I don't have a specific answer for that. Here are some things I can help with:", 'bot');
+        setTimeout(() => {
+            const helpText = document.createElement('div');
+            helpText.className = 'ai-message bot';
+            helpText.innerHTML = `
+                <div class="ai-help-list">
+                    <div>Ask about his <strong>experience</strong>, <strong>skills</strong>, or <strong>projects</strong></div>
+                    <div>Want to <strong>connect</strong>? Try "contact info"</div>
+                    <div>Curious about <strong>availability</strong>? Ask "is he hiring?"</div>
+                </div>
+            `;
+            body.appendChild(helpText);
+            body.scrollTop = body.scrollHeight;
+        }, 300);
     };
 
     if (sendBtn) sendBtn.addEventListener('click', sendMessage);
     if (input) input.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
 }
-
-// Remove duplicate initAiChat from tactical-data.js by not re-defining here
-

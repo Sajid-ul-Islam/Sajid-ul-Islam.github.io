@@ -12,6 +12,7 @@ export const PROFILE_INFO = {
   photo: 'img/profile.jpg',
   email: 'sajid.islam.chowdhury@gmail.com',
   whatsapp: '+880 182 452 6054',
+  telegram: 'https://t.me/+8801824526054',
   github: 'https://github.com/Sajid-ul-Islam',
   linkedin: 'https://www.linkedin.com/in/sajidislamchowdhury/',
   huggingface: 'https://huggingface.co/Sajid-ul-Islam',
@@ -347,6 +348,7 @@ export const SOCIAL_LINKS = [
   { id: 'linkedin', name: 'LinkedIn', url: 'https://www.linkedin.com/in/sajidislamchowdhury/', icon: 'linkedin', color: '#0077b5' },
   { id: 'github', name: 'GitHub', url: 'https://github.com/Sajid-ul-Islam', icon: 'github', color: '#333333' },
   { id: 'whatsapp', name: 'WhatsApp', url: 'https://wa.me/+8801824526054?text=', icon: 'message-circle', color: '#25D366' },
+  { id: 'telegram', name: 'Telegram', url: 'https://t.me/+8801824526054', icon: 'send', color: '#0088cc' },
   { id: 'resume', name: 'Resume', url: 'https://sajid-ul-islam.github.io/resume.html', icon: 'file-text', color: '#da552f' },
   { id: 'huggingface', name: 'Hugging Face', url: 'https://huggingface.co/Sajid-ul-Islam', icon: 'robot', color: '#FFD21E' },
 ];

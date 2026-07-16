@@ -87,11 +87,11 @@
   --pal-slate-glow:   rgba(148, 163, 184, 0.45);
 
   /* ── Black ────────────────────────────────── */
-  --pal-black:        #e2e8f0;
-  --pal-black-rgb:    226, 232, 240;
-  --pal-black-light:  #f1f5f9;
-  --pal-black-dim:    #94a3b8;
-  --pal-black-glow:   rgba(226, 232, 240, 0.45);
+  --pal-black:        #1a1a1a;
+  --pal-black-rgb:    26, 26, 26;
+  --pal-black-light:  #404040;
+  --pal-black-dim:    #111111;
+  --pal-black-glow:   rgba(26, 26, 26, 0.45);
 
   /* ── White ────────────────────────────────── */
   --pal-white:        #f8fafc;

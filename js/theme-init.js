@@ -88,6 +88,11 @@ function patchLinks() {
   // WhatsApp — href on any wa.me links or .footer-whatsapp
   document.querySelectorAll('a[href*="wa.me"], a.footer-whatsapp').forEach(a => { a.href = wa; });
 
+  // Telegram — href on any t.me links
+  if (PROFILE_INFO.telegram) {
+    document.querySelectorAll('a[href*="t.me"]').forEach(a => { a.href = PROFILE_INFO.telegram; });
+  }
+
   // Email — mailto: links or .footer-email
   document.querySelectorAll('a[href^="mailto:"], a.footer-email').forEach(a => { a.href = `mailto:${PROFILE_INFO.email}`; });
 

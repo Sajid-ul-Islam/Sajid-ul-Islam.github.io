@@ -1128,6 +1128,32 @@
     box-shadow: 0 0 15px rgba(37, 211, 102, 0.4) !important;
 }
 
+/* Telegram header button */
+.chat-tg-btn {
+    background: rgba(0, 136, 204, 0.15);
+    border-color: rgba(0, 136, 204, 0.25);
+    color: #0088cc;
+}
+
+.chat-tg-btn:hover {
+    background: #0088cc;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(0, 136, 204, 0.4);
+}
+
+/* Telegram suggestion chip */
+.suggestion-tg {
+    background: rgba(0, 136, 204, 0.1) !important;
+    border-color: rgba(0, 136, 204, 0.3) !important;
+    color: #0088cc !important;
+}
+
+.suggestion-tg:hover {
+    background: #0088cc !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.4) !important;
+}
+
 .ai-message.bot::before {
     content: "INTEL_FETCHED // RESPONSE_SECURE";
     display: block;
