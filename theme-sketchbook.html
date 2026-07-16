@@ -156,6 +156,24 @@
       --accent-hover: var(--pal-slate);
     }
 
+    :root[data-accent="black"] {
+      --accent: var(--pal-black);
+      --accent-hover: var(--pal-black-dim);
+    }
+    :root[data-theme="dark"][data-accent="black"] {
+      --accent: var(--pal-black-light);
+      --accent-hover: var(--pal-black);
+    }
+
+    :root[data-accent="white"] {
+      --accent: var(--pal-white);
+      --accent-hover: var(--pal-white-dim);
+    }
+    :root[data-theme="dark"][data-accent="white"] {
+      --accent: var(--pal-white-light);
+      --accent-hover: var(--pal-white);
+    }
+
     /* BASE STYLES */
     * {
       box-sizing: border-box;
@@ -745,6 +763,8 @@
           <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="teal" title="Teal" style="background: var(--pal-teal);"></button>
           <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="pink" title="Pink" style="background: var(--pal-pink);"></button>
           <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="slate" title="Slate" style="background: var(--pal-slate);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="black" title="Black" style="background: var(--pal-black);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="white" title="White" style="background: var(--pal-white);"></button>
         </div>
 
         <!-- Light/Dark Mode Button -->
@@ -1021,6 +1041,7 @@
 
   <!-- SCRIPT BLOCK -->
   <script type="module">
+    import { initAccentSwitcher } from './js/theme-accent.js';
     // â”€â”€ Theme bookkeeping â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     localStorage.setItem('portfolio-active-theme', 'theme-sketchbook.html');
 

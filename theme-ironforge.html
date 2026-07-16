@@ -116,6 +116,20 @@
     --accent-dim: var(--pal-slate-dim);
     --accent-glow: var(--pal-slate-glow);
   }
+
+  :root[data-accent="black"] {
+    --accent: var(--pal-black);
+    --accent-bright: var(--pal-black-light);
+    --accent-dim: var(--pal-black-dim);
+    --accent-glow: var(--pal-black-glow);
+  }
+
+  :root[data-accent="white"] {
+    --accent: var(--pal-white);
+    --accent-bright: var(--pal-white-light);
+    --accent-dim: var(--pal-white-dim);
+    --accent-glow: var(--pal-white-glow);
+  }
   
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -671,6 +685,8 @@
           <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="teal" title="Teal" style="background: var(--pal-teal);"></button>
           <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="pink" title="Pink" style="background: var(--pal-pink);"></button>
           <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="slate" title="Slate" style="background: var(--pal-slate);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="black" title="Black" style="background: var(--pal-black);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="white" title="White" style="background: var(--pal-white);"></button>
         </div>
 
         <!-- Theme Switcher Dropdown -->

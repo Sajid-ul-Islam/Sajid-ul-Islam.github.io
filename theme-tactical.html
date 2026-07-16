@@ -186,6 +186,8 @@
               <button class="color-swatch rounded-circle border-0 p-0" data-color="teal" style="width: 18px; height: 18px; background-color: var(--pal-teal);" title="Teal"></button>
               <button class="color-swatch rounded-circle border-0 p-0" data-color="pink" style="width: 18px; height: 18px; background-color: var(--pal-pink);" title="Pink"></button>
               <button class="color-swatch rounded-circle border-0 p-0" data-color="slate" style="width: 18px; height: 18px; background-color: var(--pal-slate);" title="Slate"></button>
+              <button class="color-swatch rounded-circle border-0 p-0" data-color="black" style="width: 18px; height: 18px; background-color: var(--pal-black); border: 1px solid rgba(255,255,255,0.2);" title="Black"></button>
+              <button class="color-swatch rounded-circle border-0 p-0" data-color="white" style="width: 18px; height: 18px; background-color: var(--pal-white); border: 1px solid rgba(255,255,255,0.2);" title="White"></button>
             </div>
 
             <!-- Theme Dropdown -->
@@ -804,7 +806,13 @@ print(f"Filtered Results: {filtered}")
 
   <!-- AI Chat Bot FAB -->
   <button class="ai-chat-toggle" id="aiChatToggle" title="Query AI Oracle">
-    <i class="fas fa-robot"></i>
+    <span class="chat-pulse-ring"></span>
+    <svg class="chat-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+      <circle cx="9.5" cy="11.5" r="1" fill="currentColor" stroke="none" class="typing-dot td-1"/>
+      <circle cx="12.5" cy="11.5" r="1" fill="currentColor" stroke="none" class="typing-dot td-2"/>
+      <circle cx="15.5" cy="11.5" r="1" fill="currentColor" stroke="none" class="typing-dot td-3"/>
+    </svg>
     <span class="ping-dot"></span>
   </button>
 
@@ -812,7 +820,12 @@ print(f"Filtered Results: {filtered}")
   <div class="ai-chat-container card-glass" id="aiChatContainer">
     <div class="ai-chat-header d-flex justify-content-between align-items-center">
       <span>[AI_ORACLE_UPLINK]</span>
-      <button class="btn-close btn-close-white btn-sm" id="closeAiChat"></button>
+      <div class="d-flex align-items-center gap-2">
+        <a href="https://wa.me/+8801824526054?text=Hi%20Sajid%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener" class="chat-wa-btn" title="DM on WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <button class="btn-close btn-close-white btn-sm" id="closeAiChat"></button>
+      </div>
     </div>
     <div class="ai-chat-body" id="aiChatBody">
       <div class="ai-message system">Secure connection established...</div>
@@ -824,6 +837,9 @@ print(f"Filtered Results: {filtered}")
         <button class="suggestion-chip" onclick="handleSuggestion('Tell me about his experience at Daraz')">[EXPERIENCE_LOG]</button>
         <button class="suggestion-chip" onclick="handleSuggestion('What are his top technical skills?')">[TECH_STACK]</button>
         <button class="suggestion-chip" onclick="handleSuggestion('Show me his latest projects')">[LATEST_PROJECTS]</button>
+        <a href="https://wa.me/+8801824526054?text=Hi%20Sajid%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener" class="suggestion-chip suggestion-wa">
+          <i class="fab fa-whatsapp"></i> [DM_VIA_WHATSAPP]
+        </a>
       </div>
       <div class="d-flex align-items-center">
         <input type="text" id="aiChatInput" placeholder="Enter query..." autocomplete="off">
@@ -1006,6 +1022,9 @@ print(f"Filtered Results: {filtered}")
     new MutationObserver(syncPalette).observe(document.documentElement, { attributes: true, attributeFilter: ['data-accent'] });
 
     let w = 0, h = 0;
+    function isLightMode() {
+      return document.documentElement.getAttribute('data-theme') === 'light';
+    }
     function resize() {
       const rect = canvas.parentElement.getBoundingClientRect();
       w = rect.width;
@@ -1015,19 +1034,145 @@ print(f"Filtered Results: {filtered}")
       canvas.style.width = w + 'px';
       canvas.style.height = h + 'px';
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgb(' + MASK_R + ',' + MASK_G + ',' + MASK_B + ')';
-      ctx.fillRect(0, 0, w, h);
+      if (!isLightMode()) {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgb(' + MASK_R + ',' + MASK_G + ',' + MASK_B + ')';
+        ctx.fillRect(0, 0, w, h);
+      }
     }
     resize();
     window.addEventListener('resize', resize);
+    new MutationObserver(resize).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
+    // ── Light mode: Data Science / Business Analytics themed particles ──
+    const DATA_COLORS = [
+      { r: 34, g: 197, b: 94 }, { r: 59, g: 130, b: 246 },
+      { r: 6, g: 182, b: 212 }, { r: 168, g: 85, b: 247 },
+      { r: 20, g: 184, b: 166 }, { r: 234, g: 179, b: 8 },
+      { r: 239, g: 68, b: 68 }, { r: 148, g: 163, b: 184 }
+    ];
+    const DATA_WORDS = ['SELECT', 'AVG()', 'SUM()', 'JOIN', 'GROUP BY', 'Python', 'Pandas', 'SQL', 'Power BI', 'ML', 'R²', 'p<0.05', 'N=1000', 'R²=0.94', 'F1', 'AUC'];
+    const dataParticles = [];
+
+    function spawnDataParticles(x, y, count) {
+      for (let i = 0; i < count; i++) {
+        const color = DATA_COLORS[Math.floor(Math.random() * DATA_COLORS.length)];
+        const types = ['scatter', 'scatter', 'bar', 'line', 'grid', 'text'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        dataParticles.push({
+          x: x + (Math.random() - 0.5) * 40,
+          y: y + (Math.random() - 0.5) * 40,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6 - 0.15,
+          life: 1,
+          decay: 0.004 + Math.random() * 0.004,
+          size: 3 + Math.random() * 12,
+          color: color,
+          type: type,
+          seed: Math.random() * Math.PI * 2,
+          word: type === 'text' ? DATA_WORDS[Math.floor(Math.random() * DATA_WORDS.length)] : null
+        });
+      }
+    }
+
+    function updateDataParticles() {
+      for (let i = dataParticles.length - 1; i >= 0; i--) {
+        const p = dataParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.995;
+        p.vy *= 0.995;
+        p.life -= p.decay;
+        if (p.life <= 0) dataParticles.splice(i, 1);
+      }
+    }
+
+    function drawDataParticles() {
+      ctx.save();
+      for (const p of dataParticles) {
+        const a = p.life * 0.5;
+        const c = p.color;
+        const rgba = 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + a + ')';
+        const rgbaFaint = 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + (a * 0.3) + ')';
+
+        switch (p.type) {
+          case 'scatter': {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+            ctx.fillStyle = rgba;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.strokeStyle = rgbaFaint;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            break;
+          }
+          case 'bar': {
+            const bw = p.size * 0.3;
+            for (let i = 0; i < 4; i++) {
+              const bh = (0.3 + 0.7 * Math.abs(Math.sin(p.seed + i * 1.7))) * p.size * 1.5;
+              ctx.fillStyle = 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + (a * (0.3 + i * 0.15)) + ')';
+              ctx.fillRect(p.x + i * (bw + 2), p.y - bh, bw, bh);
+            }
+            break;
+          }
+          case 'line': {
+            ctx.beginPath();
+            ctx.strokeStyle = rgba;
+            ctx.lineWidth = 1.5;
+            const pts = 5;
+            for (let i = 0; i < pts; i++) {
+              const lx = p.x + (i / (pts - 1)) * p.size * 2.5;
+              const ly = p.y + Math.sin(p.seed + i * 0.9) * p.size * 0.6;
+              if (i === 0) ctx.moveTo(lx, ly);
+              else ctx.lineTo(lx, ly);
+            }
+            ctx.stroke();
+            for (let i = 0; i < pts; i++) {
+              const lx = p.x + (i / (pts - 1)) * p.size * 2.5;
+              const ly = p.y + Math.sin(p.seed + i * 0.9) * p.size * 0.6;
+              ctx.beginPath();
+              ctx.arc(lx, ly, 1.5, 0, Math.PI * 2);
+              ctx.fillStyle = rgba;
+              ctx.fill();
+            }
+            break;
+          }
+          case 'grid': {
+            ctx.fillStyle = rgba;
+            for (let gx = 0; gx < 3; gx++) {
+              for (let gy = 0; gy < 3; gy++) {
+                ctx.beginPath();
+                ctx.arc(p.x + gx * 5, p.y + gy * 5, 1.2, 0, Math.PI * 2);
+                ctx.fill();
+              }
+            }
+            break;
+          }
+          case 'text': {
+            ctx.globalAlpha = a * 0.45;
+            ctx.font = '9px "JetBrains Mono", monospace';
+            ctx.fillStyle = rgba;
+            ctx.fillText(p.word, p.x, p.y);
+            ctx.globalAlpha = 1;
+            break;
+          }
+        }
+      }
+      ctx.restore();
+    }
+
+    // ── Dark mode: Camo stamp system ──
     const stamps = [];
     let lastX = null, lastY = null;
 
     function addStamp(x, y) {
+      if (isLightMode()) {
+        spawnDataParticles(x, y, 2 + Math.floor(Math.random() * 3));
+        return;
+      }
       if (stamps.length >= MAX_STAMPS) stamps.shift();
-      // 3-4 camo blobs per stamp
       const blobCount = 3 + Math.floor(Math.random() * 2);
       const blobs = [];
       for (let i = 0; i < blobCount; i++) {
@@ -1062,7 +1207,6 @@ print(f"Filtered Results: {filtered}")
       lastX = x; lastY = y;
     }
 
-    // MiMo-style smooth organic ink shape — 32 segments, gentle wobble
     function carveInk(x, y, r, alpha, seed) {
       const g = ctx.createRadialGradient(x, y, r * 0.2, x, y, r);
       g.addColorStop(0, 'rgba(0,0,0,' + (0.95 * alpha) + ')');
@@ -1084,7 +1228,6 @@ print(f"Filtered Results: {filtered}")
       ctx.fill();
     }
 
-    // Draw a solid camo blob with smooth rounded edges
     function drawCamoBlob(cx, cy, r, color, alpha, seed) {
       ctx.save();
       ctx.globalCompositeOperation = 'source-over';
@@ -1119,34 +1262,39 @@ print(f"Filtered Results: {filtered}")
       ctx.restore();
     }
 
-    // Full stamp: punch hole + overlay camo blobs
     function renderStamp(x, y, r, alpha, stamp) {
-      // 1. Punch transparent hole through mask (MiMo-style)
       carveInk(x, y, r, alpha, stamp.blobs[0]?.seed || 0);
-
-      // 2. Overlay camo-colored blobs inside the revealed area
       for (const blob of stamp.blobs) {
         drawCamoBlob(x + blob.ox, y + blob.oy, r * blob.sizeFactor, blob.color, alpha * 0.85, blob.seed);
       }
     }
 
+    // ── Animation loop ──
     let running = false;
     function loop() {
       const now = performance.now();
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgb(' + MASK_R + ',' + MASK_G + ',' + MASK_B + ')';
-      ctx.fillRect(0, 0, w, h);
 
-      for (let i = stamps.length - 1; i >= 0; i--) {
-        const t = (now - stamps[i].born) / LIFETIME;
-        if (t >= 1) { stamps.splice(i, 1); continue; }
-        const ease = 1 - Math.pow(1 - t, 3);
-        const r = R_START + (stamps[i].rmax - R_START) * ease;
-        const alpha = 1 - t * t;
-        renderStamp(stamps[i].x, stamps[i].y, r, alpha, stamps[i]);
+      if (isLightMode()) {
+        // Light mode: clear + draw data science particles
+        ctx.clearRect(0, 0, w, h);
+        updateDataParticles();
+        drawDataParticles();
+      } else {
+        // Dark mode: redraw mask + camo stamps
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgb(' + MASK_R + ',' + MASK_G + ',' + MASK_B + ')';
+        ctx.fillRect(0, 0, w, h);
+        for (let i = stamps.length - 1; i >= 0; i--) {
+          const t = (now - stamps[i].born) / LIFETIME;
+          if (t >= 1) { stamps.splice(i, 1); continue; }
+          const ease = 1 - Math.pow(1 - t, 3);
+          const r = R_START + (stamps[i].rmax - R_START) * ease;
+          const alpha = 1 - t * t;
+          renderStamp(stamps[i].x, stamps[i].y, r, alpha, stamps[i]);
+        }
       }
 
-      if (stamps.length) {
+      if ((isLightMode() && dataParticles.length) || (!isLightMode() && stamps.length)) {
         requestAnimationFrame(loop);
       } else {
         running = false;

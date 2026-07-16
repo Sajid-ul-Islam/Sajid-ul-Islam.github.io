@@ -299,6 +299,11 @@ function initSkillsRadarChart() {
 
   if (canvas && typeof Chart !== 'undefined') {
     const ctx = canvas.getContext('2d');
+    const cs = getComputedStyle(document.documentElement);
+    const initColor = cs.getPropertyValue('--primary-color').trim() || '#4ade80';
+    const initRGB = cs.getPropertyValue('--primary-color-rgb').trim() || '74, 222, 128';
+    const initText = cs.getPropertyValue('--text-secondary').trim() || '#a3b89c';
+
     window.skillsRadarChart = new Chart(ctx, {
       type: 'radar',
       data: {
@@ -306,10 +311,10 @@ function initSkillsRadarChart() {
         datasets: [{
           label: '[SKILL_POWER_LEVEL]',
           data: [...baseData],
-          backgroundColor: 'rgba(74, 222, 128, 0.2)',
-          borderColor: '#4ade80',
+          backgroundColor: `rgba(${initRGB}, 0.2)`,
+          borderColor: initColor,
           borderWidth: 1,
-          pointBackgroundColor: '#4ade80'
+          pointBackgroundColor: initColor
         }]
       },
       options: {
@@ -318,9 +323,9 @@ function initSkillsRadarChart() {
         animation: { duration: 400 },
         scales: {
           r: {
-            angleLines: { color: 'rgba(74, 222, 128, 0.1)' },
-            grid: { color: 'rgba(74, 222, 128, 0.1)' },
-            pointLabels: { color: '#a3b89c', font: { family: 'JetBrains Mono' } },
+            angleLines: { color: `rgba(${initRGB}, 0.1)` },
+            grid: { color: `rgba(${initRGB}, 0.1)` },
+            pointLabels: { color: initText, font: { family: 'JetBrains Mono' } },
             ticks: { display: false },
             suggestedMin: 0,
             suggestedMax: 100

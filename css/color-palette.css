@@ -85,4 +85,18 @@
   --pal-slate-light:  #cbd5e1;
   --pal-slate-dim:    #64748b;
   --pal-slate-glow:   rgba(148, 163, 184, 0.45);
+
+  /* ── Black ────────────────────────────────── */
+  --pal-black:        #e2e8f0;
+  --pal-black-rgb:    226, 232, 240;
+  --pal-black-light:  #f1f5f9;
+  --pal-black-dim:    #94a3b8;
+  --pal-black-glow:   rgba(226, 232, 240, 0.45);
+
+  /* ── White ────────────────────────────────── */
+  --pal-white:        #f8fafc;
+  --pal-white-rgb:    248, 250, 252;
+  --pal-white-light:  #ffffff;
+  --pal-white-dim:    #cbd5e1;
+  --pal-white-glow:   rgba(248, 250, 252, 0.45);
 }
