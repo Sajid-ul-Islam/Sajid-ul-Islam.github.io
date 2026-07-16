@@ -728,20 +728,7 @@ a:hover {
 
 /* skill-pill-tactical → shared-components.css */
 
-/* Tactical Progress Bars */
-.progress-tactical {
-    height: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-bar-tactical {
-    height: 100%;
-    background: var(--primary-color);
-    box-shadow: 0 0 8px var(--primary-color);
-    transition: width 1.5s cubic-bezier(0.1, 0, 0, 1);
-}
+/* progress-tactical, progress-bar-tactical → shared-components.css */
 
 .skill-progress-item {
     margin-bottom: 1.5rem;

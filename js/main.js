@@ -236,8 +236,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => glitchEffect(el), 500);
   });
   
-  // Initialize skills radar chart
-  initSkillsRadarChart();
+  // Initialize skills radar chart (wait for Chart.js to load)
+  if (typeof window.loadChartJS === 'function') {
+    window.loadChartJS().then(() => initSkillsRadarChart()).catch(() => initSkillsRadarChart());
+  } else {
+    initSkillsRadarChart();
+  }
 
   // Render dynamic content before widgets that snapshot the DOM.
   const tacticalData = await initializeTacticalData();
