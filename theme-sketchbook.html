@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark" data-accent="blue">
 
 <head>
@@ -35,17 +35,19 @@
     }
   </script>
 
+  <!-- Color Palette (shared across all themes) -->
+  <link href="css/color-palette.css" rel="stylesheet">
+  <link href="css/shared-components.css" rel="stylesheet">
+
   <style>
     /* THEME VARIABLES & OVERRIDES */
     :root {
       --bg: #FAF9F6;
-      /* Alabaster warm light background */
       --fg: #121212;
       --fg-dim: #3a3a3a;
       --muted: #7a7a7a;
-      --accent: #3b82f6;
-      /* Blue accent */
-      --accent-hover: #2563eb;
+      --accent: var(--pal-blue);
+      --accent-hover: var(--pal-blue-dim);
       --ink: rgba(18, 18, 18, 0.45);
       --ink-faint: rgba(18, 18, 18, 0.15);
       --border-color: rgba(18, 18, 18, 0.1);
@@ -53,47 +55,105 @@
 
     :root[data-theme="dark"] {
       --bg: #0F0F0F;
-      /* Deep charcoal dark background */
       --fg: #F5F5F5;
       --fg-dim: #C0C0C0;
       --muted: #6A6A6A;
-      --accent: #38bdf8;
-      /* Light blue accent */
-      --accent-hover: #0ea5e9;
+      --accent: var(--pal-blue-light);
+      --accent-hover: var(--pal-blue);
       --ink: rgba(245, 245, 245, 0.4);
       --ink-faint: rgba(245, 245, 245, 0.18);
       --border-color: rgba(245, 245, 245, 0.1);
     }
 
-    /* ACCENT OVERRIDES */
+    /* ACCENT OVERRIDES (consumed from color-palette.css) */
     :root[data-accent="green"] {
-      --accent: #22c55e;
-      --accent-hover: #16a34a;
+      --accent: var(--pal-green);
+      --accent-hover: var(--pal-green-dim);
+    }
+    :root[data-theme="dark"][data-accent="green"] {
+      --accent: var(--pal-green-light);
+      --accent-hover: var(--pal-green);
     }
 
     :root[data-accent="orange"] {
-      --accent: #f97316;
-      --accent-hover: #ea580c;
+      --accent: var(--pal-orange);
+      --accent-hover: var(--pal-orange-dim);
+    }
+    :root[data-theme="dark"][data-accent="orange"] {
+      --accent: var(--pal-orange-light);
+      --accent-hover: var(--pal-orange);
     }
 
     :root[data-accent="yellow"] {
-      --accent: #eab308;
-      --accent-hover: #ca8a04;
+      --accent: var(--pal-yellow);
+      --accent-hover: var(--pal-yellow-dim);
+    }
+    :root[data-theme="dark"][data-accent="yellow"] {
+      --accent: var(--pal-yellow-light);
+      --accent-hover: var(--pal-yellow);
     }
 
     :root[data-accent="blue"] {
-      --accent: #3b82f6;
-      --accent-hover: #2563eb;
+      --accent: var(--pal-blue);
+      --accent-hover: var(--pal-blue-dim);
     }
-
     :root[data-theme="dark"][data-accent="blue"] {
-      --accent: #38bdf8;
-      --accent-hover: #0ea5e9;
+      --accent: var(--pal-blue-light);
+      --accent-hover: var(--pal-blue);
     }
 
     :root[data-accent="red"] {
-      --accent: #ef4444;
-      --accent-hover: #dc2626;
+      --accent: var(--pal-red);
+      --accent-hover: var(--pal-red-dim);
+    }
+    :root[data-theme="dark"][data-accent="red"] {
+      --accent: var(--pal-red-light);
+      --accent-hover: var(--pal-red);
+    }
+
+    :root[data-accent="purple"] {
+      --accent: var(--pal-purple);
+      --accent-hover: var(--pal-purple-dim);
+    }
+    :root[data-theme="dark"][data-accent="purple"] {
+      --accent: var(--pal-purple-light);
+      --accent-hover: var(--pal-purple);
+    }
+
+    :root[data-accent="cyan"] {
+      --accent: var(--pal-cyan);
+      --accent-hover: var(--pal-cyan-dim);
+    }
+    :root[data-theme="dark"][data-accent="cyan"] {
+      --accent: var(--pal-cyan-light);
+      --accent-hover: var(--pal-cyan);
+    }
+
+    :root[data-accent="teal"] {
+      --accent: var(--pal-teal);
+      --accent-hover: var(--pal-teal-dim);
+    }
+    :root[data-theme="dark"][data-accent="teal"] {
+      --accent: var(--pal-teal-light);
+      --accent-hover: var(--pal-teal);
+    }
+
+    :root[data-accent="pink"] {
+      --accent: var(--pal-pink);
+      --accent-hover: var(--pal-pink-dim);
+    }
+    :root[data-theme="dark"][data-accent="pink"] {
+      --accent: var(--pal-pink-light);
+      --accent-hover: var(--pal-pink);
+    }
+
+    :root[data-accent="slate"] {
+      --accent: var(--pal-slate);
+      --accent-hover: var(--pal-slate-dim);
+    }
+    :root[data-theme="dark"][data-accent="slate"] {
+      --accent: var(--pal-slate-light);
+      --accent-hover: var(--pal-slate);
     }
 
     /* BASE STYLES */
@@ -675,21 +735,16 @@
       <div class="flex items-center gap-3">
         <!-- Color Swatches -->
         <div class="hidden sm:flex items-center gap-1.5 mx-2">
-          <button
-            class="color-swatch rounded-full w-4 h-4 bg-[#22c55e] border-0 cursor-pointer transition-transform hover:scale-110"
-            data-color="green" title="Green"></button>
-          <button
-            class="color-swatch rounded-full w-4 h-4 bg-[#f97316] border-0 cursor-pointer transition-transform hover:scale-110"
-            data-color="orange" title="Orange"></button>
-          <button
-            class="color-swatch rounded-full w-4 h-4 bg-[#eab308] border-0 cursor-pointer transition-transform hover:scale-110"
-            data-color="yellow" title="Yellow"></button>
-          <button
-            class="color-swatch rounded-full w-4 h-4 bg-[#3b82f6] border-0 cursor-pointer transition-transform hover:scale-110"
-            data-color="blue" title="Blue"></button>
-          <button
-            class="color-swatch rounded-full w-4 h-4 bg-[#ef4444] border-0 cursor-pointer transition-transform hover:scale-110"
-            data-color="red" title="Red"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="green" title="Green" style="background: var(--pal-green);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="orange" title="Orange" style="background: var(--pal-orange);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="yellow" title="Yellow" style="background: var(--pal-yellow);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="blue" title="Blue" style="background: var(--pal-blue);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="red" title="Red" style="background: var(--pal-red);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="purple" title="Purple" style="background: var(--pal-purple);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="cyan" title="Cyan" style="background: var(--pal-cyan);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="teal" title="Teal" style="background: var(--pal-teal);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="pink" title="Pink" style="background: var(--pal-pink);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="slate" title="Slate" style="background: var(--pal-slate);"></button>
         </div>
 
         <!-- Light/Dark Mode Button -->
@@ -978,19 +1033,11 @@
       document.body.setAttribute('data-theme', theme);
       if (themeToggleIcon) themeToggleIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     };
-    const applyAccent = (accent) => root.setAttribute('data-accent', accent);
-
     const savedTheme = localStorage.getItem('tactical-theme') || 'dark';
-    const savedAccent = localStorage.getItem('tactical-accent') || 'blue';
     applyTheme(savedTheme);
-    applyAccent(savedAccent);
 
-    document.querySelectorAll('.color-swatch').forEach(swatch => {
-      swatch.addEventListener('click', e => {
-        applyAccent(e.target.getAttribute('data-color'));
-        localStorage.setItem('tactical-accent', e.target.getAttribute('data-color'));
-      });
-    });
+    // Accent color switcher (shared module)
+    initAccentSwitcher({ defaultAccent: 'blue' });
 
     window.initThemeToggleWithRipple({
       buttonId: 'themeToggle',

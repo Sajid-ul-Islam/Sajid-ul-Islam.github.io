@@ -1,22 +1,22 @@
 :root {
-    /* --- BI Hacker HUD (Midnight Ops) --- */
-    --primary-color: #22c55e;
-    /* Neutral Matrix Green */
-    --primary-color-rgb: 34, 197, 94;
-    --primary-light: #4ade80;
-    --accent-color: #86efac;
+    /* --- Tactical Ops (Military Camo HUD) --- */
+    --primary-color: #4ade80;
+    /* Vibrant Military Green */
+    --primary-color-rgb: 74, 222, 128;
+    --primary-light: #86efac;
+    --accent-color: #bbf7d0;
 
-    --bg-page: #020617;
-    /* Deep Midnight Slate */
-    --bg-card: rgba(15, 23, 42, 0.85);
-    /* Translucent Slate */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    /* Soothing Slate Gray */
-    --text-highlight: #22c55e;
+    --bg-page: #0a0f08;
+    /* Deep Forest Black */
+    --bg-card: rgba(12, 20, 10, 0.82);
+    /* Camo-tinted Translucent */
+    --text-primary: #f0fdf4;
+    --text-secondary: #a3b89c;
+    /* Olive-tinted Gray */
+    --text-highlight: #4ade80;
 
     --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
-    --hud-blur: 20px;
+    --hud-blur: 24px;
 }
 
 /* --- TACTICAL SCROLLBAR --- */
@@ -39,87 +39,134 @@
 }
 
 [data-theme="light"] {
-    /* --- BI Analyst HUD (Research Ops / White Mood) --- */
-    --primary-color: #0f172a;
-    /* Sharp Slate for high-contrast */
-    --primary-light: #334155;
-    --accent-color: #64748b;
+    /* --- Tactical Ops Light (Field Ops) --- */
+    --primary-color: #15803d;
+    --primary-light: #22c55e;
+    --accent-color: #4ade80;
 
-    --bg-page: #ffffff;
-    /* Pure white for smooth feel */
-    --bg-card: rgba(248, 250, 252, 0.85);
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-highlight: #22c55e;
+    --bg-page: #f7fdf8;
+    --bg-card: rgba(240, 253, 244, 0.85);
+    --text-primary: #0f1a0a;
+    --text-secondary: #3d5a35;
+    --text-highlight: #16a34a;
 
-    --hud-blur: 10px;
+    --hud-blur: 12px;
 }
 
 [data-theme="light"],
 [data-theme="light"] body {
     background-image: none !important;
-    /* Final tactical purge of textures */
 }
 
-/* --- ACCENT COLORS --- */
-/* Green (Default) */
+/* --- ACCENT COLORS (consumed from color-palette.css) --- */
 :root[data-accent="green"] {
-    --primary-color: #22c55e;
-    --primary-color-rgb: 34, 197, 94;
-    --primary-light: #4ade80;
-    --accent-color: #86efac;
-    --text-highlight: #22c55e;
+    --primary-color: var(--pal-green);
+    --primary-color-rgb: var(--pal-green-rgb);
+    --primary-light: var(--pal-green-light);
+    --accent-color: var(--pal-green-light);
+    --text-highlight: var(--pal-green);
 }
 :root[data-theme="light"][data-accent="green"] {
-    --text-highlight: #16a34a;
+    --text-highlight: var(--pal-green-dim);
 }
 
-/* Orange */
 :root[data-accent="orange"] {
-    --primary-color: #f97316;
-    --primary-color-rgb: 249, 115, 22;
-    --primary-light: #fb923c;
-    --accent-color: #fdba74;
-    --text-highlight: #f97316;
+    --primary-color: var(--pal-orange);
+    --primary-color-rgb: var(--pal-orange-rgb);
+    --primary-light: var(--pal-orange-light);
+    --accent-color: var(--pal-orange-light);
+    --text-highlight: var(--pal-orange);
 }
 :root[data-theme="light"][data-accent="orange"] {
-    --text-highlight: #ea580c;
+    --text-highlight: var(--pal-orange-dim);
 }
 
-/* Yellow (Gold) */
 :root[data-accent="yellow"] {
-    --primary-color: #eab308;
-    --primary-color-rgb: 234, 179, 8;
-    --primary-light: #facc15;
-    --accent-color: #fef08a;
-    --text-highlight: #eab308;
+    --primary-color: var(--pal-yellow);
+    --primary-color-rgb: var(--pal-yellow-rgb);
+    --primary-light: var(--pal-yellow-light);
+    --accent-color: var(--pal-yellow-light);
+    --text-highlight: var(--pal-yellow);
 }
 :root[data-theme="light"][data-accent="yellow"] {
-    --text-highlight: #ca8a04;
+    --text-highlight: var(--pal-yellow-dim);
 }
 
-/* Blue */
 :root[data-accent="blue"] {
-    --primary-color: #3b82f6;
-    --primary-color-rgb: 59, 130, 246;
-    --primary-light: #60a5fa;
-    --accent-color: #93c5fd;
-    --text-highlight: #3b82f6;
+    --primary-color: var(--pal-blue);
+    --primary-color-rgb: var(--pal-blue-rgb);
+    --primary-light: var(--pal-blue-light);
+    --accent-color: var(--pal-blue-light);
+    --text-highlight: var(--pal-blue);
 }
 :root[data-theme="light"][data-accent="blue"] {
-    --text-highlight: #2563eb;
+    --text-highlight: var(--pal-blue-dim);
 }
 
-/* Red */
 :root[data-accent="red"] {
-    --primary-color: #ef4444;
-    --primary-color-rgb: 239, 68, 68;
-    --primary-light: #f87171;
-    --accent-color: #fca5a5;
-    --text-highlight: #ef4444;
+    --primary-color: var(--pal-red);
+    --primary-color-rgb: var(--pal-red-rgb);
+    --primary-light: var(--pal-red-light);
+    --accent-color: var(--pal-red-light);
+    --text-highlight: var(--pal-red);
 }
 :root[data-theme="light"][data-accent="red"] {
-    --text-highlight: #dc2626;
+    --text-highlight: var(--pal-red-dim);
+}
+
+:root[data-accent="purple"] {
+    --primary-color: var(--pal-purple);
+    --primary-color-rgb: var(--pal-purple-rgb);
+    --primary-light: var(--pal-purple-light);
+    --accent-color: var(--pal-purple-light);
+    --text-highlight: var(--pal-purple);
+}
+:root[data-theme="light"][data-accent="purple"] {
+    --text-highlight: var(--pal-purple-dim);
+}
+
+:root[data-accent="cyan"] {
+    --primary-color: var(--pal-cyan);
+    --primary-color-rgb: var(--pal-cyan-rgb);
+    --primary-light: var(--pal-cyan-light);
+    --accent-color: var(--pal-cyan-light);
+    --text-highlight: var(--pal-cyan);
+}
+:root[data-theme="light"][data-accent="cyan"] {
+    --text-highlight: var(--pal-cyan-dim);
+}
+
+:root[data-accent="teal"] {
+    --primary-color: var(--pal-teal);
+    --primary-color-rgb: var(--pal-teal-rgb);
+    --primary-light: var(--pal-teal-light);
+    --accent-color: var(--pal-teal-light);
+    --text-highlight: var(--pal-teal);
+}
+:root[data-theme="light"][data-accent="teal"] {
+    --text-highlight: var(--pal-teal-dim);
+}
+
+:root[data-accent="pink"] {
+    --primary-color: var(--pal-pink);
+    --primary-color-rgb: var(--pal-pink-rgb);
+    --primary-light: var(--pal-pink-light);
+    --accent-color: var(--pal-pink-light);
+    --text-highlight: var(--pal-pink);
+}
+:root[data-theme="light"][data-accent="pink"] {
+    --text-highlight: var(--pal-pink-dim);
+}
+
+:root[data-accent="slate"] {
+    --primary-color: var(--pal-slate);
+    --primary-color-rgb: var(--pal-slate-rgb);
+    --primary-light: var(--pal-slate-light);
+    --accent-color: var(--pal-slate-light);
+    --text-highlight: var(--pal-slate);
+}
+:root[data-theme="light"][data-accent="slate"] {
+    --text-highlight: var(--pal-slate-dim);
 }
 
 [data-theme="light"] .ai-chat-toggle {
@@ -131,23 +178,22 @@
 
 /* --- ENHANCED SYSTEM_STATUS_BAR (Titlebar) --- */
 .system-status-bar {
-    background: rgba(2, 6, 23, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--primary-color);
+    background: rgba(10, 15, 8, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(var(--primary-color-rgb), 0.5);
     padding: 10px 0;
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     z-index: 10002;
     position: relative;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 2px 10px rgba(var(--primary-color-rgb), 0.1);
 }
 
 [data-theme="light"] .system-status-bar {
-    background: #0f172a;
-    /* Keep it dark for tactical feel even in white mode */
-    border-bottom-color: var(--primary-color);
+    background: rgba(15, 23, 10, 0.95);
+    border-bottom-color: rgba(var(--primary-color-rgb), 0.4);
 }
 
 /* --- AI_BOT_ID_ENHANCEMENT --- */
@@ -166,7 +212,8 @@
 
 .card-glass:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(var(--primary-color-rgb), 0.12);
+    border-color: rgba(var(--primary-color-rgb), 0.35);
 }
 
 /* --- HUD Overlays --- */
@@ -201,10 +248,11 @@
     background: var(--bg-card);
     -webkit-backdrop-filter: blur(var(--hud-blur));
     backdrop-filter: blur(var(--hud-blur));
-    border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+    border: 1.5px solid rgba(var(--primary-color-rgb), 0.2);
     position: relative;
-    border-radius: 4px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 0 25px rgba(var(--primary-color-rgb), 0.06);
+    padding: 1.5rem;
 }
 
 /* Bracket styling for "Hacker" feel */
@@ -212,11 +260,11 @@
 .card-glass::after {
     content: '';
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     border-color: var(--primary-color);
     border-style: solid;
-    opacity: 0.5;
+    opacity: 0.6;
     pointer-events: none;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -224,81 +272,54 @@
 .card-glass::before {
     top: 10px;
     left: 10px;
-    border-width: 1px 0 0 1px;
+    border-width: 2px 0 0 2px;
 }
 
 .card-glass::after {
     bottom: 10px;
     right: 10px;
-    border-width: 0 1px 1px 0;
+    border-width: 0 2px 2px 0;
 }
 
 /* --- Animated Target Lock on Hover --- */
 .card-glass:hover::before {
     top: -2px;
     left: -2px;
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     opacity: 1;
 }
 
 .card-glass:hover::after {
     bottom: -2px;
     right: -2px;
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     opacity: 1;
 }
 
 /* --- Theme Toggle --- */
 .btn-theme-toggle {
-    background: rgba(var(--primary-color-rgb), 0.05);
-    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+    background: rgba(var(--primary-color-rgb), 0.1);
+    border: 1.5px solid rgba(var(--primary-color-rgb), 0.3);
     color: var(--primary-color);
-    padding: 6px 14px;
+    padding: 8px 18px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-radius: 3px;
 }
 
 .btn-theme-toggle:hover {
     background: var(--primary-color);
     color: var(--bg-page);
-    box-shadow: 0 0 15px var(--primary-color);
+    box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.5);
 }
 
-/* --- Project Filters --- */
-.project-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.1);
-    padding-bottom: 2rem;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
-    color: var(--text-secondary);
-    padding: 5px 12px;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: rgba(var(--primary-color-rgb), 0.15);
-    color: var(--primary-light);
-    border-color: var(--primary-color);
-}
+/* --- Project Filters (shared-components.css) --- */
 
 /* --- Skeleton --- */
 .skeleton {
@@ -364,7 +385,7 @@
 }
 
 [data-theme="light"] .text-secondary {
-    color: #475569 !important;
+    color: #3d5a35 !important;
 }
 
 [data-theme="light"] h1,
@@ -384,7 +405,7 @@
 [data-theme="light"] p,
 [data-theme="light"] .card-text,
 [data-theme="light"] .lead {
-    color: #334155 !important;
+    color: #2d4a25 !important;
 }
 
 [data-theme="light"] a:not(.btn):not(.nav-link) {
@@ -411,8 +432,8 @@
 }
 
 [data-theme="light"] .card-glass {
-    background: #fff !important;
-    border: 1px solid #e2e8f0 !important;
+    background: rgba(240, 253, 244, 0.9) !important;
+    border: 1.5px solid rgba(22, 163, 74, 0.2) !important;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
 }
 
@@ -648,8 +669,8 @@
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: var(--primary-color);
     color: var(--text-primary);
@@ -657,9 +678,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     z-index: 2000;
-    box-shadow: 0 0 20px rgba(22, 101, 52, 0.4);
+    box-shadow: 0 0 25px rgba(var(--primary-color-rgb), 0.45);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -668,6 +689,7 @@
     transform: scale(1.1);
     background: var(--primary-light);
     color: var(--bg-page);
+    box-shadow: 0 0 35px rgba(var(--primary-color-rgb), 0.5);
 }
 
 .ping-dot {
@@ -685,8 +707,8 @@
     position: fixed;
     bottom: 6rem;
     right: 2rem;
-    width: 350px;
-    height: 450px;
+    width: 380px;
+    height: 480px;
     z-index: 2000;
     display: flex;
     flex-direction: column;
@@ -694,7 +716,8 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid var(--primary-color);
+    border: 1.5px solid rgba(var(--primary-color-rgb), 0.4);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--primary-color-rgb), 0.1);
 }
 
 .ai-chat-container.active {
@@ -886,7 +909,7 @@
     padding: 10px 0;
     overflow-x: auto;
     scrollbar-width: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.1);
     margin-bottom: 5px;
 }
 
@@ -894,24 +917,7 @@
     display: none;
 }
 
-.suggestion-chip {
-    background: rgba(var(--primary-color-rgb), 0.05);
-    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
-    color: var(--primary-light);
-    padding: 4px 10px;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.suggestion-chip:hover {
-    background: var(--primary-color);
-    color: #fff;
-    box-shadow: 0 0 10px var(--primary-color);
-}
+/* --- Suggestion Chip (shared-components.css) --- */
 
 .ai-message.bot::before {
     content: "INTEL_FETCHED // RESPONSE_SECURE";
@@ -1251,54 +1257,62 @@ kbd {
     }
 }
 
-/* Adjustments for Status Bar & Bangladesh Army Woodland Camouflage Background (High Performance) */
+/* Adjustments for Status Bar & Military Camouflage Background */
 body {
     padding-top: 30px;
-    background-color: #050805; /* Dark military charcoal base */
+    background-color: #0a0f08;
     background-image:
-        /* 1. Dynamic Accent Glow (Single Fixed Layer) */
-        radial-gradient(circle 800px at 50% 20%, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 80%),
-        
-        /* 2. Technical Grid Overlay (20px scrollable) */
-        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.01) 1px, transparent 0),
-        
-        /* 3. Bangladesh Army Woodland Camo Blotches (Tiled 300px x 300px) */
-        /* Olive Drab (#4B5320) */
-        radial-gradient(circle at 30% 25%, rgba(75, 83, 32, 0.15) 18%, transparent 19%),
-        radial-gradient(circle at 80% 75%, rgba(75, 83, 32, 0.15) 20%, transparent 21%),
-        
-        /* Earth Brown (#4b382a) */
-        radial-gradient(circle at 20% 70%, rgba(75, 56, 42, 0.13) 16%, transparent 17%),
-        radial-gradient(circle at 75% 30%, rgba(75, 56, 42, 0.13) 18%, transparent 19%),
-        
-        /* Forest Green (#1b4332) */
-        radial-gradient(circle at 55% 45%, rgba(27, 67, 50, 0.14) 22%, transparent 23%),
-        radial-gradient(circle at 10% 10%, rgba(27, 67, 50, 0.14) 16%, transparent 17%),
-        radial-gradient(circle at 90% 90%, rgba(27, 67, 50, 0.14) 16%, transparent 17%),
-        
-        /* Khaki Tan (#8d8164) */
-        radial-gradient(circle at 45% 85%, rgba(141, 129, 100, 0.1) 12%, transparent 13%),
-        radial-gradient(circle at 90% 20%, rgba(141, 129, 100, 0.1) 10%, transparent 11%),
-        radial-gradient(circle at 10% 45%, rgba(141, 129, 100, 0.1) 11%, transparent 12%);
+        /* 1. Dynamic Accent Glow */
+        radial-gradient(circle 900px at 50% 15%, rgba(var(--primary-color-rgb), 0.04) 0%, transparent 70%),
+
+        /* 2. Fine Tactical Grid */
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.015) 1px, transparent 0),
+
+        /* 3. Military Camouflage Blotches (Tiled 350px) — Bolder, more saturated */
+        /* Olive Drab #4B5320 — large blobs */
+        radial-gradient(ellipse 120px 90px at 25% 20%, rgba(75, 83, 32, 0.22) 0%, transparent 100%),
+        radial-gradient(ellipse 140px 100px at 75% 70%, rgba(75, 83, 32, 0.20) 0%, transparent 100%),
+        radial-gradient(ellipse 100px 80px at 50% 50%, rgba(75, 83, 32, 0.18) 0%, transparent 100%),
+
+        /* Forest Green #1b4332 — medium blobs */
+        radial-gradient(ellipse 110px 95px at 15% 65%, rgba(27, 67, 50, 0.22) 0%, transparent 100%),
+        radial-gradient(ellipse 130px 85px at 85% 25%, rgba(27, 67, 50, 0.20) 0%, transparent 100%),
+        radial-gradient(ellipse 90px 110px at 60% 80%, rgba(27, 67, 50, 0.18) 0%, transparent 100%),
+
+        /* Earth Brown #4b382a — medium blobs */
+        radial-gradient(ellipse 100px 80px at 40% 75%, rgba(75, 56, 42, 0.18) 0%, transparent 100%),
+        radial-gradient(ellipse 120px 70px at 90% 55%, rgba(75, 56, 42, 0.16) 0%, transparent 100%),
+        radial-gradient(ellipse 80px 100px at 10% 35%, rgba(75, 56, 42, 0.14) 0%, transparent 100%),
+
+        /* Khaki Tan #8d8164 — small accent blobs */
+        radial-gradient(ellipse 70px 55px at 55% 30%, rgba(141, 129, 100, 0.14) 0%, transparent 100%),
+        radial-gradient(ellipse 60px 65px at 30% 90%, rgba(141, 129, 100, 0.12) 0%, transparent 100%),
+        radial-gradient(ellipse 80px 50px at 80% 10%, rgba(141, 129, 100, 0.11) 0%, transparent 100%),
+
+        /* Dark Moss #2d3a1e — deep accent blobs */
+        radial-gradient(ellipse 95px 75px at 70% 45%, rgba(45, 58, 30, 0.16) 0%, transparent 100%),
+        radial-gradient(ellipse 85px 90px at 20% 50%, rgba(45, 58, 30, 0.14) 0%, transparent 100%);
 
     background-size:
         100% 100%,
         20px 20px,
-        300px 300px, 300px 300px,
-        300px 300px, 300px 300px,
-        300px 300px, 300px 300px, 300px 300px,
-        300px 300px, 300px 300px, 300px 300px;
-        
+        350px 350px, 350px 350px, 350px 350px,
+        350px 350px, 350px 350px, 350px 350px,
+        350px 350px, 350px 350px, 350px 350px,
+        350px 350px, 350px 350px, 350px 350px,
+        350px 350px, 350px 350px;
+
     background-position:
         0 0,
         0 0,
-        0 0, 150px 150px,
-        50px 80px, 200px 220px,
-        120px 40px, 250px 180px, 0px 280px,
-        80px 180px, 220px 50px, 10px 120px;
-        
-    background-attachment: fixed, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll;
-    background-repeat: no-repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat;
+        0 0, 175px 175px, 80px 250px,
+        40px 100px, 220px 200px, 120px 300px,
+        60px 220px, 260px 80px, 10px 160px,
+        150px 40px, 30px 280px, 200px 120px,
+        100px 200px, 250px 30px;
+
+    background-attachment: fixed, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll, scroll;
+    background-repeat: no-repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat;
 }
 
 /* Animated background blobs matching Bangladesh Army Woodland colors */
@@ -1322,9 +1336,9 @@ body {
 .card-glass {
     -webkit-backdrop-filter: blur(25px) saturate(180%);
     backdrop-filter: blur(25px) saturate(180%);
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    background: rgba(12, 20, 10, 0.75);
+    border: 1.5px solid rgba(var(--primary-color-rgb), 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(var(--primary-color-rgb), 0.05);
 }
 
 @keyframes spin {
@@ -1395,9 +1409,9 @@ body {
     border: none;
     border-bottom: 2px solid transparent;
     color: #64748b;
-    padding: 6px 12px;
+    padding: 8px 16px;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s;
@@ -1635,16 +1649,7 @@ body {
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
-.tag-tactical {
-    font-size: 0.65rem;
-    font-family: var(--font-mono);
-    color: var(--primary-light);
-    background: rgba(var(--primary-color-rgb), 0.05);
-    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
-    padding: 3px 10px;
-    border-radius: 2px;
-    text-transform: uppercase;
-}
+/* --- Tag Tactical (shared-components.css) --- */
 
 /* --- ZEN MODE (HUD OFF) --- */
 .hud-off .scanlines,

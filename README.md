@@ -1,115 +1,161 @@
-# Sajid Islam || [TACTICAL_INTEL] Portfolio
+<h1 align="center">Hey, I'm Sajid Islam</h1>
 
-![Portfolio Preview](img/profile.jpg)
+<p align="center">
+  <img src="https://img.shields.io/badge/-Data%20Scientist-2563EB?style=flat-square&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/-Business%20Analyst-059669?style=flat-square&logo=googleanalytics&logoColor=white" />
+  <img src="https://img.shields.io/badge/-Bangladesh-006A4E?style=flat-square&logo=bangladesh&logoColor=white" />
+</p>
 
-A high-performance, modular portfolio for a **Data Scientist & Business Analyst** built with a "Tactical HUD" aesthetic. This project combines modern web technologies with a terminal-driven user experience.
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=Sajid-ul-Islam&color=2563EB&style=flat-square&label=Profile+Views" />
+</p>
 
-## 🚀 Key Features
+---
 
-- **PWA Ready**: Offline support and home screen installation via `sw.js`.
-- **Tactical Terminal**: An interactive CLI for system diagnostics, project browsing, and session management.
-- **Data-Driven Visualization**: Real-time session analytics and interactive skills radar charts.
-- **Secure Portfolio Bridge**: A HUD-style window to browse external projects without leaving the site.
-- **Modular Architecture**: Clean separation of concerns between structure (HTML), styling (CSS), and logic (JS).
-- **Responsive Resume**: Integrated `resume.html` with PDF-export support.
-- **AI-Powered Chatbot**: Local knowledge base with optional Gemini/OpenAI integration.
-- **Audio Engine**: Procedural sound effects for HUD interactions.
+<p align="center">
+  <b>Data & Business Analyst</b> turning complex datasets into strategic growth.<br/>
+  DataOps Lead at <b>DEEN Commerce</b> &middot; Ex-<b>Daraz (Alibaba Group)</b>
+</p>
 
-## 📁 Directory Structure
+<br/>
 
-```text
-├── css/                    # Modular CSS (HUD, Tactical, Enhancements)
-│   ├── modern-custom.css
-│   ├── tactical-hud.css
-│   ├── tactical-enhancements.css
-│   ├── floating-widgets.css
-│   ├── github-feed.css
-│   └── deep-black-terminal.css
-├── img/                    # Profile and project images
-├── js/                     # Modular JavaScript
-│   ├── data.js             # Local static backup data source
-│   ├── portfolio-data.js   # Global dynamic data hub (Google Sheets ingestion & fallback)
-│   ├── theme-switcher-ripple.js # Global teardrop ripple transition animation
-│   ├── audio-engine.js     # Procedural sound effects (extracted module)
-│   ├── tactical-core.js    # Core UI, theme management, skills globe
-│   ├── tactical-data.js    # Data rendering & mapping for Tactical HUD theme
-│   ├── tactical-enhancements.js # Audio, keyboard shortcuts, command palette
-│   ├── terminal.js         # Interactive CLI terminal
-│   ├── widgets.js          # UI widget utilities
-│   ├── ai-bot.js           # AI assistant (Gemini / local knowledge)
-│   ├── command-palette.js  # Quick command palette
-│   ├── portfolio-bridge.js # External project viewer
-│   ├── github-feed.js      # GitHub activity feed
-│   ├── floating-widgets.js # Floating HUD widgets
-│   ├── tactical-widgets.js # HUD stats & geospatial map
-│   ├── pwa-loader.js       # Service Worker registration
-│   ├── debug-widgets.js    # Development debugging tools
-│   └── theme.html          # Theme template
-├── scripts/                # Python & Data utility scripts
-├── scss/                   # SASS source files
-├── .github/                # GitHub Actions workflows
-├── sw.js                   # Service Worker (PWA offline support)
-├── manifest.json           # PWA manifest
-├── vite.config.js          # Vite build configuration
-├── eslint.config.js        # ESLint flat config
-├── .prettierrc             # Prettier formatting config
-├── main.js                 # Module load-order documentation
-├── index.html              # Theme Router (Gateway / Redirect Script)
-├── theme-sketchbook.html   # Sketchbook Ink theme (Tailwind HUD)
-├── theme-tactical.html     # Tactical HUD theme (Bootstrap HUD)
-├── theme-ironforge.html    # Ironforge Studio theme (Fitness Style HUD)
-├── resume.html             # Printable resume page
-└── THEMING_ARCHITECTURE.md # Multi-Page Routing & Dynamic Data architecture docs
+<p align="center">
+  <a href="https://www.linkedin.com/in/sajidislamchowdhury/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  <a href="https://github.com/Sajid-ul-Islam">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  <a href="https://huggingface.co/Sajid-ul-Islam">
+    <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" />
+  </a>
+  <a href="https://www.kaggle.com/saajiidi">
+    <img src="https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white" />
+  </a>
+  <a href="https://sajid-ul-islam.github.io/resume.html">
+    <img src="https://img.shields.io/badge/Resume-DA552F?style=for-the-badge&logo=readme&logoColor=white" />
+  </a>
+</p>
+
+<br/>
+
+---
+
+### What I Do
+
+| | |
+|---|---|
+| **BI & Analytics** | Power BI dashboards, automated funnel tracking, stakeholder reporting |
+| **Data Science** | ML pipelines, RAG systems, agentic workflows (LangGraph/CrewAI) |
+| **Automation** | Python scrapers, Streamlit apps, operational data tools |
+| **Business Strategy** | Marketplace growth, partner acquisition, CRM optimization |
+
+<br/>
+
+---
+
+### Tech Stack
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black" />
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pandas-DD00A1?style=flat&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=flat&logo=scikitlearn&logoColor=white" />
+  <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white" />
+  <img src="https://img.shields.io/badge/Excel-217346?style=flat&logo=microsoftexcel&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" />
+</p>
+
+<br/>
+
+---
+
+### Featured Projects
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3>Streamlit Prototype Hub</h3>
+      <p>Centralized command center for 10+ operational data apps — inventory trackers, sales dashboards, and automation tools.</p>
+      <p>
+        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
+        <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" />
+        <img src="https://img.shields.io/badge/Automation-059669?style=flat-square" />
+      </p>
+      <a href="https://share.streamlit.io/user/saajiidi">View Live</a>
+    </td>
+    <td width="50%">
+      <h3>EconVision (Hugging Face)</h3>
+      <p>Interactive global economic analytics — visual comparisons, macro-trend index insights, and pattern discovery.</p>
+      <p>
+        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
+        <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" />
+        <img src="https://img.shields.io/badge/Data%20Viz-2563EB?style=flat-square" />
+      </p>
+      <a href="https://huggingface.co/spaces/Sajid-ul-Islam/Global-Economical-Analytics">View Live</a>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+---
+
+### Experience
+
+```
+Business Analyst      @ DEEN Commerce         (Jun 2025 - Present)
+Co-Founder            @ Gear Master           (Jun 2024 - Present)
+IT Executive          @ NZ TEX GROUP          (Feb 2024 - May 2024)
+Associate – Sales     @ Thriving Skills       (Oct 2023 - Jan 2024)
+Jr. Executive         @ Daraz Bangladesh      (Jan 2020 - Jan 2022)
 ```
 
-> **Note:** Third-party libraries (Bootstrap 5.3, Font Awesome 6.4) are loaded via CDN — no local `vendor/` directory.
+<br/>
 
-## 🛠️ Development & Deployment
+---
 
-### Quick Start
-1. **Clone**: `git clone https://github.com/Sajid-ul-Islam/Sajid-ul-Islam.github.io.git`
-2. **Install**: `npm install` (requires Node.js)
-3. **Run**: `npm run dev` (opens Vite dev server on port 3000)
+### Learning Right Now
 
-### Available Scripts
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server with hot reload |
-| `npm run build` | Production build with Vite |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint on JS files |
-| `npm run lint:fix` | Auto-fix ESLint issues |
-| `npm run format` | Format code with Prettier |
+| Topic | Progress |
+|---|---|
+| Agentic Workflows (LangGraph/CrewAI) | `████████░░` 82% |
+| Advanced RAG & Vector DBs | `████████░░` 85% |
+| LLM Fine-Tuning (LoRA/QLoRA) | `███████░░░` 65% |
+| Modern Data Stack (dbt & Snowflake) | `███████░░░` 70% |
+| Real-Time Streaming Analytics | `██████░░░░` 60% |
+| MLOps & Model Deployment | `███████░░░` 75% |
 
-### Legacy Gulp Scripts (preserved for backward compatibility)
-| Command | Description |
-|---------|-------------|
-| `npm run legacy:start` | Gulp watch with BrowserSync |
-| `npm run legacy:build` | Gulp production build |
-| `npm run legacy:bundle` | Gulp CSS/JS bundling |
+<br/>
 
-### Performance Optimizations Implemented
-- **Preconnect hints**: DNS prefetch and preconnect to critical origins (fonts, CDNs)
-- **Deferred loading**: Non-critical JS loads with `defer` attribute
-- **Lazy-loaded Chart.js**: Chart library loads on-demand when skills section is visible
-- **Error boundaries**: Render functions have try-catch error handling with user-friendly error messages
-- **Modular AudioEngine**: Extracted to separate module to break circular dependencies
-- **Service Worker**: Network-first strategy for HTML, stale-while-revalidate for assets
+---
 
-### Static Data
-The `PortfolioData.xlsx` file in the `scripts/` folder contains the master copy of the portfolio data. Use `generate_spreadsheet.py` to regenerate values if needed.
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Sajid-ul-Islam&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" width="48%" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Sajid-ul-Islam&theme=tokyonight&hide_border=true" width="48%" />
+</p>
 
-## 🔑 AI Bot Configuration
-The AI Oracle chatbot works using local knowledge by default. To enable live AI responses:
-1. Click the **Terminal** icon to open the tactical terminal.
-2. Type `link_gemini YOUR_API_KEY` and press Enter.
-3. Your key is stored only in your browser's `localStorage` — it is never committed to the repo.
+<br/>
 
-## 🔒 Security
-- **No hardcoded API keys**: All AI provider keys are stored in browser `localStorage` only.
-- **Sandboxed iframes**: Portfolio Bridge uses sandboxed iframes for external project viewing.
-- **XSS awareness**: HTML template literals are used for rendering; consider DOM-based rendering for user-input contexts.
+---
 
-## 📝 License
-Copyright © 2025 Sajid Islam. Released under the MIT License.
-Based on the [Start Bootstrap Resume](https://startbootstrap.com/template-overviews/resume/) template.
+<p align="center">
+  <i>"Turning complex datasets into strategic growth."</i>
+</p>
+
+<p align="center">
+  <a href="https://sajid-ul-islam.github.io">
+    <img src="https://img.shields.io/badge/🌐%20Visit%20Portfolio-051410?style=for-the-badge&logo=vercel&logoColor=white" />
+  </a>
+  <a href="mailto:sajid.islam.chowdhury@gmail.com">
+    <img src="https://img.shields.io/badge/📧%20Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+  <a href="https://wa.me/+8801824526054">
+    <img src="https://img.shields.io/badge/💬%20WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
+  </a>
+</p>

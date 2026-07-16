@@ -1,0 +1,88 @@
+/**
+ * COLOR PALETTE — Single Source of Truth
+ *
+ * Defines all accent color options. Each theme consumes these via its own
+ * CSS variable bridge layer (e.g. --accent, --primary-color).
+ *
+ * Adding a new palette: define --pal-* variables below, then map them
+ * in each theme's `:root[data-accent="name"]` block.
+ *
+ * Naming convention:
+ *   --pal-{name}       = main color (hex)
+ *   --pal-{name}-rgb   = same color as R, G, B triplet (for rgba())
+ *   --pal-{name}-light = lighter variant
+ *   --pal-{name}-dim   = darker variant
+ *   --pal-{name}-glow  = rgba() with alpha for glow effects
+ */
+
+:root {
+  /* ── Green ─────────────────────────────────── */
+  --pal-green:        #22c55e;
+  --pal-green-rgb:    34, 197, 94;
+  --pal-green-light:  #4ade80;
+  --pal-green-dim:    #16a34a;
+  --pal-green-glow:   rgba(34, 197, 94, 0.45);
+
+  /* ── Orange ────────────────────────────────── */
+  --pal-orange:        #f97316;
+  --pal-orange-rgb:    249, 115, 22;
+  --pal-orange-light:  #fb923c;
+  --pal-orange-dim:    #ea580c;
+  --pal-orange-glow:   rgba(249, 115, 22, 0.45);
+
+  /* ── Yellow ────────────────────────────────── */
+  --pal-yellow:        #eab308;
+  --pal-yellow-rgb:    234, 179, 8;
+  --pal-yellow-light:  #facc15;
+  --pal-yellow-dim:    #ca8a04;
+  --pal-yellow-glow:   rgba(234, 179, 8, 0.45);
+
+  /* ── Blue ──────────────────────────────────── */
+  --pal-blue:        #3b82f6;
+  --pal-blue-rgb:    59, 130, 246;
+  --pal-blue-light:  #60a5fa;
+  --pal-blue-dim:    #2563eb;
+  --pal-blue-glow:   rgba(59, 130, 246, 0.45);
+
+  /* ── Red ───────────────────────────────────── */
+  --pal-red:        #ef4444;
+  --pal-red-rgb:    239, 68, 68;
+  --pal-red-light:  #f87171;
+  --pal-red-dim:    #dc2626;
+  --pal-red-glow:   rgba(239, 68, 68, 0.45);
+
+  /* ── Purple ────────────────────────────────── */
+  --pal-purple:        #a855f7;
+  --pal-purple-rgb:    168, 85, 247;
+  --pal-purple-light:  #c084fc;
+  --pal-purple-dim:    #9333ea;
+  --pal-purple-glow:   rgba(168, 85, 247, 0.45);
+
+  /* ── Cyan ──────────────────────────────────── */
+  --pal-cyan:        #06b6d4;
+  --pal-cyan-rgb:    6, 182, 212;
+  --pal-cyan-light:  #22d3ee;
+  --pal-cyan-dim:    #0891b2;
+  --pal-cyan-glow:   rgba(6, 182, 212, 0.45);
+
+  /* ── Teal ──────────────────────────────────── */
+  --pal-teal:        #14b8a6;
+  --pal-teal-rgb:    20, 184, 166;
+  --pal-teal-light:  #2dd4bf;
+  --pal-teal-dim:    #0d9488;
+  --pal-teal-glow:   rgba(20, 184, 166, 0.45);
+
+  /* ── Pink ──────────────────────────────────── */
+  --pal-pink:        #ec4899;
+  --pal-pink-rgb:    236, 72, 153;
+  --pal-pink-light:  #f472b6;
+  --pal-pink-dim:    #db2777;
+  --pal-pink-glow:   rgba(236, 72, 153, 0.45);
+
+  /* ── Slate ─────────────────────────────────── */
+  --pal-slate:        #94a3b8;
+  --pal-slate-rgb:    148, 163, 184;
+  --pal-slate-light:  #cbd5e1;
+  --pal-slate-dim:    #64748b;
+  --pal-slate-glow:   rgba(148, 163, 184, 0.45);
+}

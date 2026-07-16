@@ -14,10 +14,10 @@ This approach guarantees that:
 - On load, it instantly detects the user's active theme in `localStorage` (defaulting to `theme-sketchbook.html`) and redirects them using `window.location.replace()`.
 - This ensures direct entries to the site always land on the user's preferred layout.
 
-### 2. Unified Global Data (`js/portfolio-data.js`)
+### 2. Unified Global Data (`js/data/index.js`)
 - Exposes `window.PortfolioData` as the single source of truth for the entire portfolio.
 - Provides functions (`getInfo()`, `getExperiences()`, `getEducation()`, `getProjects()`, `getSkills()`) returning mapped, normalized data models.
-- Features an async `load()` function that fetches live data from Sajid's Google Sheet, normalizes schema differences, saves updates in local storage cache, and falls back to a robust local dataset if offline.
+- All data is sourced locally from exported constants — no external API calls or remote data fetching.
 
 ### 3. Global Teardrop Transition (`js/theme-switcher-ripple.js`)
 - Exposes a reusable helper `window.initThemeToggleWithRipple(options)`.
@@ -36,7 +36,7 @@ If a developer needs to add a new theme layout (e.g., `theme-cyberpunk.html`):
 1. **Create HTML**: Create the new HTML file in the root directory.
 2. **Import Libraries**: Load the global scripts in the `<head>`:
    ```html
-   <script src="js/portfolio-data.js"></script>
+   <script src="js/data/index.js"></script>
    <script src="js/theme-switcher-ripple.js"></script>
    ```
 3. **Add Navigation Switcher**: Put the Theme switcher dropdown/links in your navigation bar, referencing the separate HTML files:

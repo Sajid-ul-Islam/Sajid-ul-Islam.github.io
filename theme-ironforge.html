@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-accent="orange">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,8 @@
 <script type="module" src="js/theme-init.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="css/color-palette.css" rel="stylesheet">
+<link href="css/shared-components.css" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0a;
@@ -44,40 +46,75 @@
     --border-light: #d1d5db;
   }
 
-  /* ACCENT COLORS */
+  /* ACCENT COLORS (consumed from color-palette.css) */
   :root[data-accent="orange"] {
-    --accent: #FF5400;
-    --accent-bright: #FF7A33;
-    --accent-dim: #B33A00;
-    --accent-glow: rgba(255, 84, 0, 0.45);
+    --accent: var(--pal-orange);
+    --accent-bright: var(--pal-orange-light);
+    --accent-dim: var(--pal-orange-dim);
+    --accent-glow: var(--pal-orange-glow);
   }
-  
+
   :root[data-accent="green"] {
-    --accent: #22c55e;
-    --accent-bright: #4ade80;
-    --accent-dim: #16a34a;
-    --accent-glow: rgba(34, 197, 94, 0.45);
+    --accent: var(--pal-green);
+    --accent-bright: var(--pal-green-light);
+    --accent-dim: var(--pal-green-dim);
+    --accent-glow: var(--pal-green-glow);
   }
 
   :root[data-accent="yellow"] {
-    --accent: #eab308;
-    --accent-bright: #facc15;
-    --accent-dim: #ca8a04;
-    --accent-glow: rgba(234, 179, 8, 0.45);
+    --accent: var(--pal-yellow);
+    --accent-bright: var(--pal-yellow-light);
+    --accent-dim: var(--pal-yellow-dim);
+    --accent-glow: var(--pal-yellow-glow);
   }
 
   :root[data-accent="blue"] {
-    --accent: #3b82f6;
-    --accent-bright: #60a5fa;
-    --accent-dim: #2563eb;
-    --accent-glow: rgba(59, 130, 246, 0.45);
+    --accent: var(--pal-blue);
+    --accent-bright: var(--pal-blue-light);
+    --accent-dim: var(--pal-blue-dim);
+    --accent-glow: var(--pal-blue-glow);
   }
 
   :root[data-accent="red"] {
-    --accent: #ef4444;
-    --accent-bright: #f87171;
-    --accent-dim: #dc2626;
-    --accent-glow: rgba(239, 68, 68, 0.45);
+    --accent: var(--pal-red);
+    --accent-bright: var(--pal-red-light);
+    --accent-dim: var(--pal-red-dim);
+    --accent-glow: var(--pal-red-glow);
+  }
+
+  :root[data-accent="purple"] {
+    --accent: var(--pal-purple);
+    --accent-bright: var(--pal-purple-light);
+    --accent-dim: var(--pal-purple-dim);
+    --accent-glow: var(--pal-purple-glow);
+  }
+
+  :root[data-accent="cyan"] {
+    --accent: var(--pal-cyan);
+    --accent-bright: var(--pal-cyan-light);
+    --accent-dim: var(--pal-cyan-dim);
+    --accent-glow: var(--pal-cyan-glow);
+  }
+
+  :root[data-accent="teal"] {
+    --accent: var(--pal-teal);
+    --accent-bright: var(--pal-teal-light);
+    --accent-dim: var(--pal-teal-dim);
+    --accent-glow: var(--pal-teal-glow);
+  }
+
+  :root[data-accent="pink"] {
+    --accent: var(--pal-pink);
+    --accent-bright: var(--pal-pink-light);
+    --accent-dim: var(--pal-pink-dim);
+    --accent-glow: var(--pal-pink-glow);
+  }
+
+  :root[data-accent="slate"] {
+    --accent: var(--pal-slate);
+    --accent-bright: var(--pal-slate-light);
+    --accent-dim: var(--pal-slate-dim);
+    --accent-glow: var(--pal-slate-glow);
   }
   
   * { box-sizing: border-box; }
@@ -91,6 +128,19 @@
     margin: 0;
     -webkit-font-smoothing: antialiased;
   }
+
+  /* Light mode component overrides */
+  [data-theme="light"] body { background: var(--bg); color: var(--fg); }
+  [data-theme="light"] .bg-\\[\\#0a0a0a\\] { background: var(--bg-card) !important; }
+  [data-theme="light"] .bg-\\[\\#141414\\] { background: var(--bg-card) !important; }
+  [data-theme="light"] .bg-\\[\\#1a1a1a\\] { background: var(--bg-card-hover) !important; }
+  [data-theme="light"] .border-\\[\\#1f1f1f\\] { border-color: var(--border) !important; }
+  [data-theme="light"] .border-\\[\\#2a2a2a\\] { border-color: var(--border-light) !important; }
+  [data-theme="light"] .text-\\[\\#f5f5f5\\] { color: var(--fg) !important; }
+  [data-theme="light"] .text-\\[\\#c0c0c0\\] { color: var(--fg-dim) !important; }
+  [data-theme="light"] .text-\\[\\#6a6a6a\\] { color: var(--muted) !important; }
+  [data-theme="light"] .grain { opacity: 0.03; }
+  [data-theme="light"] .hero-section { background: var(--bg-darker); }
   
   /* Typography */
   .font-display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.005em; }
@@ -622,11 +672,16 @@
         
         <!-- Color Swatches -->
         <div class="hidden sm:flex items-center gap-1 mx-2">
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#22c55e] border-0 cursor-pointer" data-color="green" title="Green"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#f97316] border-0 cursor-pointer" data-color="orange" title="Orange"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#eab308] border-0 cursor-pointer" data-color="yellow" title="Yellow"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#3b82f6] border-0 cursor-pointer" data-color="blue" title="Blue"></button>
-          <button class="color-swatch rounded-full w-4 h-4 bg-[#ef4444] border-0 cursor-pointer" data-color="red" title="Red"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="green" title="Green" style="background: var(--pal-green);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="orange" title="Orange" style="background: var(--pal-orange);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="yellow" title="Yellow" style="background: var(--pal-yellow);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="blue" title="Blue" style="background: var(--pal-blue);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="red" title="Red" style="background: var(--pal-red);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="purple" title="Purple" style="background: var(--pal-purple);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="cyan" title="Cyan" style="background: var(--pal-cyan);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="teal" title="Teal" style="background: var(--pal-teal);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="pink" title="Pink" style="background: var(--pal-pink);"></button>
+          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="slate" title="Slate" style="background: var(--pal-slate);"></button>
         </div>
 
         <!-- Theme Switcher Dropdown -->
@@ -1145,6 +1200,7 @@
   </div>
   
   <script type="module">
+    import { initAccentSwitcher } from './js/theme-accent.js';
     // --- Lifecycle and Tracking ---
     localStorage.setItem('portfolio-active-theme', 'theme-ironforge.html');
 
@@ -1368,8 +1424,7 @@
     };
 
     const savedTheme = localStorage.getItem('tactical-theme') || 'dark';
-    const savedAccent = localStorage.getItem('tactical-accent') || 'orange'; // Ironforge defaults to orange
-    applyTheme(savedTheme, savedAccent);
+    applyTheme(savedTheme);
 
     // Initialize Teardrop ripple switcher
     window.initThemeToggleWithRipple({
@@ -1379,16 +1434,8 @@
       saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
     });
 
-    // --- Accent Color Switcher ---
-    const colorSwatches = document.querySelectorAll('.color-swatch');
-    colorSwatches.forEach(swatch => {
-        swatch.addEventListener('click', (e) => {
-            const newAccent = e.target.getAttribute('data-color');
-            const currentTheme = root.getAttribute('data-theme');
-            applyTheme(currentTheme, newAccent);
-            localStorage.setItem('tactical-accent', newAccent);
-        });
-    });
+    // Accent color switcher (shared module)
+    initAccentSwitcher({ defaultAccent: 'orange' });
 
     /* ==================================
        FUNCTION-BASED MODULAR DYNAMIC RENDERING

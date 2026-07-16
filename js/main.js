@@ -49,6 +49,9 @@ import {
 // ===== COMMAND PALETTE =====
 import { initCommandPalette, togglePalette } from './command-palette.js';
 
+// ===== SHARED ACCENT SWITCHER =====
+import { initAccentSwitcher } from './theme-accent.js';
+
 // ===== FLOATING WIDGETS =====
 import { FloatingWidget, initFloatingWidgets } from './floating-widgets.js';
 
@@ -210,11 +213,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.setAttribute('data-theme', theme);
     updateThemeIcon(theme);
   };
-  
+
   const savedTheme = localStorage.getItem('tactical-theme') || 'dark';
-  const savedAccent = localStorage.getItem('tactical-accent') || 'green';
-  applyTheme(savedTheme, savedAccent);
-  
+  applyTheme(savedTheme);
+
   // Initialize theme toggle with ripple
   if (typeof initThemeToggleWithRipple === 'function') {
     initThemeToggleWithRipple({
@@ -224,16 +226,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
     });
   }
-  
-  // Accent color switcher
-  document.querySelectorAll('.color-swatch').forEach(swatch => {
-    swatch.addEventListener('click', (e) => {
-      const newAccent = e.target.getAttribute('data-color');
-      const currentTheme = root.getAttribute('data-theme');
-      applyTheme(currentTheme, newAccent);
-      localStorage.setItem('tactical-accent', newAccent);
-    });
-  });
+
+  // Accent color switcher (shared module)
+  initAccentSwitcher({ defaultAccent: 'green' });
   
   // Glitch effect initializer
   document.querySelectorAll('.section-label, h2:not(.display-2)').forEach(el => {
@@ -286,7 +281,13 @@ function initSkillsRadarChart() {
   const skillMap = { 'PYTHON': 0, 'SQL': 1, 'POWER_BI': 2, 'TABLEAU': 2, 'EXCEL': 1, 'PYTHON_ML': 3, 'ML': 3, 'REACT': 4, 'NODE.JS': 4, 'GOOGLE_ANALYTICS': 5 };
   const baseData = [90, 85, 95, 70, 75, 80];
   window.chartBaseData = [...baseData];
-  
+
+  // Read accent color from CSS variables for Chart.js
+  const cs = getComputedStyle(document.documentElement);
+  const chartColor = cs.getPropertyValue('--primary-color').trim() || '#4ade80';
+  const chartColorRGB = cs.getPropertyValue('--primary-color-rgb').trim() || '74, 222, 128';
+  const textSec = cs.getPropertyValue('--text-secondary').trim() || '#a3b89c';
+
   if (canvas && typeof Chart !== 'undefined') {
     const ctx = canvas.getContext('2d');
     window.skillsRadarChart = new Chart(ctx, {
@@ -296,10 +297,10 @@ function initSkillsRadarChart() {
         datasets: [{
           label: '[SKILL_POWER_LEVEL]',
           data: [...baseData],
-          backgroundColor: 'rgba(163, 230, 53, 0.2)',
-          borderColor: '#a3e635',
+          backgroundColor: `rgba(${chartColorRGB}, 0.2)`,
+          borderColor: chartColor,
           borderWidth: 1,
-          pointBackgroundColor: '#a3e635'
+          pointBackgroundColor: chartColor
         }]
       },
       options: {
@@ -308,9 +309,9 @@ function initSkillsRadarChart() {
         animation: { duration: 400 },
         scales: {
           r: {
-            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-            pointLabels: { color: '#94a3b8', font: { family: 'JetBrains Mono' } },
+            angleLines: { color: `rgba(${chartColorRGB}, 0.1)` },
+            grid: { color: `rgba(${chartColorRGB}, 0.1)` },
+            pointLabels: { color: textSec, font: { family: 'JetBrains Mono' } },
             ticks: { display: false },
             suggestedMin: 0,
             suggestedMax: 100

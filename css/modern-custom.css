@@ -13,28 +13,28 @@
 }
 
 [data-theme="light"] {
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: 1px solid rgba(22, 101, 52, 0.2);
+    --glass-bg: rgba(240, 253, 244, 0.7);
+    --glass-border: 1px solid rgba(22, 163, 74, 0.2);
 }
 
 [data-theme="light"] body {
-    background-color: #fdfdfd !important;
-    background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0) !important;
-    color: #020617 !important;
+    background-color: #f7fdf8 !important;
+    background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0) !important;
+    color: #0f1a0a !important;
 }
 
 [data-theme="light"] .navbar {
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-bottom: 1px solid rgba(22, 101, 52, 0.1) !important;
+    background: rgba(247, 253, 248, 0.95) !important;
+    border-bottom: 1px solid rgba(22, 163, 74, 0.15) !important;
 }
 
 [data-theme="light"] .nav-link {
-    color: var(--text-secondary) !important;
+    color: #3d5a35 !important;
 }
 
 [data-theme="light"] .nav-link:hover,
 [data-theme="light"] .nav-link.active {
-    color: var(--primary-color) !important;
+    color: #15803d !important;
 }
 
 
@@ -78,7 +78,7 @@
 
 /* Base Tactical Styles */
 html {
-    font-size: 70%;
+    font-size: 72%;
 }
 
 body {
@@ -90,18 +90,17 @@ body {
     overflow-x: hidden;
     position: relative;
     padding: 0 !important;
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 1.05rem;
+    line-height: 1.7;
     /* Subtle Data Grid Background */
     background-image:
         radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.01) 1px, transparent 0);
     background-size: 20px 20px;
-    /* Smaller grid */
 }
 
 @media (max-width: 768px) {
     body {
-        font-size: 0.95rem;
+        font-size: 0.98rem;
     }
 }
 
@@ -288,8 +287,8 @@ p,
     width: 100%;
     aspect-ratio: 1/1;
     margin: 0 auto;
-    border: 1px solid rgba(163, 230, 53, 0.2);
-    box-shadow: 0 0 30px rgba(22, 101, 52, 0.1);
+    border: 1.5px solid rgba(var(--primary-color-rgb), 0.3);
+    box-shadow: 0 0 40px rgba(var(--primary-color-rgb), 0.12);
 }
 
 .scanner-line {
@@ -374,30 +373,7 @@ p,
     }
 }
 
-.section-label {
-    display: inline-block;
-    color: var(--primary-color);
-    font-size: 0.75rem;
-    font-weight: 700;
-    border: 1px solid var(--primary-color);
-    padding: 2px 10px;
-    margin-bottom: 1rem;
-    position: relative;
-}
-
-.section-label::before {
-    content: "[";
-    position: absolute;
-    left: -15px;
-    opacity: 0.5;
-}
-
-.section-label::after {
-    content: "]";
-    position: absolute;
-    right: -15px;
-    opacity: 0.5;
-}
+/* section-label, skill-pill-tactical, tech-chip → shared-components.css */
 
 .text-highlight {
     color: var(--text-highlight);
@@ -600,29 +576,7 @@ a:hover {
         margin-top: calc(-1 * var(--header-height));
     }
 
-    /* Modern Tech Chips - সাগর (Sagar) Style */
-    .tech-chip {
-        background: var(--glass-bg);
-        border: var(--glass-border);
-        border-radius: 12px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        height: 100%;
-    }
-
-    .tech-chip:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--primary-color);
-        transform: translateY(-5px);
-        box-shadow: var(--glass-shadow);
-    }
-
-    .tech-chip i {
-        transition: transform 0.3s ease;
-    }
-
-    .tech-chip:hover i {
-        transform: scale(1.1);
-    }
+    /* tech-chip → shared-components.css */
 
     .text-orange {
         color: #f97316;
@@ -637,16 +591,7 @@ a:hover {
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
-    /* Focused Section Labels */
-    .section-label {
-        font-weight: 700;
-        color: var(--primary-color);
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        font-size: 0.8rem;
-        display: block;
-        margin-bottom: 1.2rem;
-    }
+    /* section-label → shared-components.css */
 
     #sideNav .nav-link {
         font-weight: 500;
@@ -781,50 +726,7 @@ a:hover {
     text-shadow: 0 0 10px var(--accent-color);
 }
 
-/* Tactical Skill Pills */
-.skill-pill-tactical {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
-    background: rgba(15, 15, 15, 0.6);
-    border: 1px solid rgba(163, 230, 53, 0.1);
-    transition: var(--transition-standard);
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-}
-
-.skill-pill-tactical:hover {
-    background: rgba(22, 101, 52, 0.1);
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.skill-pill-tactical i {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.skill-pill-tactical:hover i {
-    transform: scale(1.2);
-}
-
-.skill-pill-tactical::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.skill-pill-tactical:hover::after {
-    width: 100%;
-}
+/* skill-pill-tactical → shared-components.css */
 
 /* Tactical Progress Bars */
 .progress-tactical {

@@ -98,10 +98,16 @@ export function initTelemetryOverlay() {
 export const SkillsGlobe = {
     canvas: null, ctx: null, tags: [],
     radius: 140, angleX: 0, angleY: 0,
+    _colorRGB: '74, 222, 128',
+    _refreshColor() {
+        const cs = getComputedStyle(document.documentElement);
+        this._colorRGB = cs.getPropertyValue('--primary-color-rgb').trim() || '74, 222, 128';
+    },
     init: function () {
         this.canvas = document.getElementById('skillCanvas');
         if (!this.canvas) return;
         this.ctx = this.canvas.getContext('2d');
+        this._refreshColor();
         const skillList = ["PYTHON", "SQL", "POWER_BI", "TABLEAU", "MACHINE_LEARNING", "NLP", "DEEP_LEARNING", "BUSINESS_OPS", "CHURN_ANALYSIS", "STREAMLIT", "EXCEL", "PANDAS", "DASHBOARDING", "DATA_OPS", "SCRUTINY", "VIZ"];
 
         this.tags = skillList.map((text, i) => {
@@ -160,7 +166,7 @@ export const SkillsGlobe = {
             if (scale > 0) {
                 projectedPoints.push({ x: x2, y: y2 });
                 const alpha = (scale - 0.5) / 1.5;
-                this.ctx.fillStyle = `rgba(34, 197, 94, ${alpha})`;
+                this.ctx.fillStyle = `rgba(${this._colorRGB}, ${alpha})`;
                 this.ctx.font = `${10 * scale}px "JetBrains Mono"`;
                 this.ctx.textAlign = "center";
                 this.ctx.fillText(tag.text, x2, y2);
@@ -177,7 +183,7 @@ export const SkillsGlobe = {
                 }
             }
         }
-        this.ctx.strokeStyle = 'rgba(34, 197, 94, 0.15)';
+        this.ctx.strokeStyle = `rgba(${this._colorRGB}, 0.15)`;
         this.ctx.lineWidth = 0.5;
         this.ctx.stroke();
 

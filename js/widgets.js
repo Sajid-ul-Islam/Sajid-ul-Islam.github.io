@@ -50,7 +50,9 @@ export function initScrollProgress() {
         const navbar = document.querySelector('.navbar');
         if (navbar) {
             if (scrollPosition > 50) {
-                navbar.style.background = 'rgba(5, 20, 16, 0.95)';
+                const cs = getComputedStyle(document.documentElement);
+                const bgCard = cs.getPropertyValue('--bg-card').trim() || 'rgba(12, 20, 10, 0.82)';
+                navbar.style.background = bgCard;
                 navbar.style.backdropFilter = 'blur(10px)';
             } else {
                 navbar.style.background = 'transparent';
@@ -223,7 +225,11 @@ export function initDataViz() {
     function drawChart() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.strokeStyle = 'rgba(163, 230, 53, 0.1)';
+        const cs = getComputedStyle(document.documentElement);
+        const chartRGB = cs.getPropertyValue('--primary-color-rgb').trim() || '74, 222, 128';
+        const chartColor = cs.getPropertyValue('--primary-color').trim() || '#4ade80';
+
+        ctx.strokeStyle = `rgba(${chartRGB}, 0.1)`;
         ctx.lineWidth = 1;
         for (let i = 0; i < canvas.width; i += 30) {
             ctx.beginPath();
@@ -232,7 +238,7 @@ export function initDataViz() {
             ctx.stroke();
         }
 
-        ctx.strokeStyle = '#a3e635';
+        ctx.strokeStyle = chartColor;
         ctx.lineWidth = 2;
         ctx.beginPath();
 

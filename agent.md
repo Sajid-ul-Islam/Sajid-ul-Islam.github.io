@@ -28,30 +28,34 @@ This is a high-performance, modular portfolio for a Data Scientist & Business An
 ## 2. Directory Structure
 
 ```
-Portfolio_Terminal/
-├── index.html                 # Main operative interface (Tactical HUD)
+Sajid-ul-Islam.github.io/
+├── index.html                 # Theme Router (gateway / redirect)
+├── theme-sketchbook.html      # Sketchbook Ink theme (Tailwind)
+├── theme-tactical.html        # Tactical HUD theme (Bootstrap)
+├── theme-ironforge.html       # Ironforge Studio theme
 ├── resume.html               # Printable resume page
-├── theme-ironforge.html      # Alternative Ironforge theme
 ├── sw.js                     # Service Worker (PWA offline support)
 ├── manifest.json             # PWA manifest
 ├── package.json              # NPM dependencies & build scripts
 ├── vite.config.js            # Vite build configuration
 ├── eslint.config.js          # ESLint flat config
 ├── .prettierrc               # Prettier formatting config
-├── gulpfile.js               # Legacy Gulp build (preserved)
 ├── main.js                   # Module load-order documentation
 │
 ├── css/                      # Stylesheets (modular architecture)
+│   ├── color-palette.css     # Shared accent color definitions (10 palettes)
 │   ├── modern-custom.css     # Core styles + Bootstrap overrides
 │   ├── tactical-hud.css      # HUD-specific components
 │   ├── tactical-enhancements.css # Advanced effects & animations
 │   ├── file-tree.css         # VS Code-style file explorer
 │   ├── floating-widgets.css  # HUD widget styling
 │   ├── github-feed.css       # GitHub integration styles
-│   └── deep-black-terminal.css # Terminal-specific styling
+│   ├── deep-black-terminal.css # Terminal-specific styling
+│   └── resume.css            # Resume page styles
 │
 ├── js/                       # JavaScript modules (tactical architecture)
-│   ├── data.js               # CENTRAL DATA SOURCE - All portfolio content
+│   ├── data/index.js         # Central data module (all portfolio content)
+│   ├── theme-accent.js       # Shared accent/theme switching logic
 │   ├── audio-engine.js       # Procedural sound effects (extracted module)
 │   ├── tactical-core.js      # Core UI, theme management, skills globe
 │   ├── tactical-data.js      # Data rendering & GitHub integration
@@ -109,34 +113,29 @@ Portfolio_Terminal/
 
 ## 4. Data Architecture
 
-### Central Data Source (`js/data.js`)
+### Central Data Source (`js/data/index.js`)
 
-All content is stored in a single `DATA` object exposed as `window.DATA`:
+All content is stored as exported constants and a `PortfolioData` provider:
 
 ```javascript
-const DATA = {
-  projects: [...],        // Portfolio projects with case studies
-  blogPosts: [...],        // Blog articles
-  learningItems: [...],    // Current learning track (ML, AI, etc.)
-  gaming: {...},           // Gaming stats & favorites
-  favoriteMedia: [...],    // Favorite movies/books
-  fileTreeData: [...],     // VS Code-style file explorer
-  socialLinks: [...],      // Social media links
-  skillGroups: [...],      // Skills with levels & categories
-  experiences: [...]       // Work history
-};
+export const PROFILE_INFO = { ... };
+export const EXPERIENCES = [...];
+export const EDUCATION = [...];
+export const PROJECTS = [...];
+export const SKILL_GROUPS = [...];
+// etc.
+export const PortfolioData = { load(), getInfo(), getExperiences(), ... };
 ```
 
 ### Data Flow
 
 ```
-1. data.js          → Exposes DATA object (window.DATA)
-2. tactical-data.js → Fetches Google Sheets data, falls back to DATA
-3. index.html       → Displays rendered content
+1. js/data/index.js → Exposes local constants & PortfolioData (window.PortfolioData)
+2. tactical-data.js → Reads PortfolioData, renders content
+3. theme HTML       → Displays rendered content
 ```
 
 ### External Data Integration
-- **Google Sheets API**: Live data sync via CSV export URL
 - **GitHub API**: `fetchGithubRepos()` pulls public repositories
 - **Browser APIs**: Battery, Memory, Speech Synthesis, Geolocation
 
@@ -294,20 +293,23 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 
 ## 9. Module Load Order
 
-Scripts load via `<script defer>` tags in `index.html`. The order matters:
+ES modules are imported via `import` statements. The tactical theme entry point is `js/main.js`:
 
-1. `data.js` → Exposes `window.DATA`
-2. `audio-engine.js` → Exposes `window.AudioEngine`
-3. `tactical-core.js` → Uses `AudioEngine` at call-time
-4. `tactical-data.js` → Uses `window.DATA` for rendering
-5. `pwa-loader.js` → Service Worker registration
-6. `tactical-widgets.js` → HUD stats & map
-7. `terminal.js` → CLI terminal
-8. `widgets.js` → UI utilities
-9. `ai-bot.js` → AI chatbot
-10. `tactical-enhancements.js` → Keyboard, palette, animations
-11. `floating-widgets.js` → Draggable widgets
-12. `github-feed.js` → GitHub activity
+1. `js/data/index.js` → Exports `DATA`, `PortfolioData`, and all data constants
+2. `js/audio-engine.js` → Exports `AudioEngine` (procedural sounds)
+3. `js/tactical-core.js` → Exports UI utilities, `SkillsGlobe`, `glitchEffect`
+4. `js/tactical-data.js` → Exports render functions for all sections
+5. `js/terminal.js` → Exports `initTerminal`, `toggleBottomTerminal`
+6. `js/command-palette.js` → Exports `initCommandPalette`
+7. `js/theme-accent.js` → Exports `initAccentSwitcher` (shared across themes)
+8. `js/tactical-enhancements.js` → Exports keyboard nav, counters, carousel
+9. `js/floating-widgets.js` → Exports `FloatingWidget` class
+10. `js/github-feed.js` → Exports `initGitHubFeed`
+11. `js/portfolio-bridge.js` → Exports iframe bridge controls
+12. `js/tactical-widgets.js` → Exports HUD stats & geospatial map
+13. `js/widgets.js` → Exports UI widget utilities
+14. `js/ai-bot.js` → Exports AI chatbot integration
+15. `js/pwa-loader.js` → Service Worker registration
 13. `portfolio-bridge.js` → External project viewer
 14. `command-palette.js` → VS Code-style palette
 
@@ -316,7 +318,7 @@ Scripts load via `<script defer>` tags in `index.html`. The order matters:
 ## 10. Extension Points
 
 ### Adding New Projects
-Edit `js/data.js` → `DATA.projects` array:
+Edit `js/data/index.js` → `PROJECTS` array:
 ```javascript
 {
   id: "unique-id",
@@ -353,7 +355,7 @@ See [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
 | **Speech Synthesis** | AI bot voice | `ai-bot.js` |
 | **AudioContext** | Procedural sound effects | `audio-engine.js` |
 | **LocalStorage** | Theme preference, API keys | `tactical-core.js`, `ai-bot.js` |
-| **Fetch API** | GitHub repos, Google Sheets | `github-feed.js`, `tactical-data.js` |
+| **Fetch API** | GitHub repos | `github-feed.js` |
 | **IntersectionObserver** | Scroll animations | `tactical-enhancements.js` |
 
 ---
