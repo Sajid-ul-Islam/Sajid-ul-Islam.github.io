@@ -99,4 +99,60 @@
   --pal-white-light:  #ffffff;
   --pal-white-dim:    #cbd5e1;
   --pal-white-glow:   rgba(248, 250, 252, 0.45);
+
+  /* ── Coral ────────────────────────────────── */
+  --pal-coral:        #ff6b6b;
+  --pal-coral-rgb:    255, 107, 107;
+  --pal-coral-light:  #ff8a8a;
+  --pal-coral-dim:    #ee5a5a;
+  --pal-coral-glow:   rgba(255, 107, 107, 0.45);
+
+  /* ── Indigo ───────────────────────────────── */
+  --pal-indigo:       #6366f1;
+  --pal-indigo-rgb:   99, 102, 241;
+  --pal-indigo-light: #818cf8;
+  --pal-indigo-dim:   #4f46e5;
+  --pal-indigo-glow:  rgba(99, 102, 241, 0.45);
+
+  /* ── Amber ────────────────────────────────── */
+  --pal-amber:        #f59e0b;
+  --pal-amber-rgb:    245, 158, 11;
+  --pal-amber-light:  #fbbf24;
+  --pal-amber-dim:    #d97706;
+  --pal-amber-glow:   rgba(245, 158, 11, 0.45);
+
+  /* ── Emerald ──────────────────────────────── */
+  --pal-emerald:      #10b981;
+  --pal-emerald-rgb:  16, 185, 129;
+  --pal-emerald-light:#34d399;
+  --pal-emerald-dim:  #059669;
+  --pal-emerald-glow: rgba(16, 185, 129, 0.45);
+
+  /* ── Rose ─────────────────────────────────── */
+  --pal-rose:         #f43f5e;
+  --pal-rose-rgb:     244, 63, 94;
+  --pal-rose-light:   #fb7185;
+  --pal-rose-dim:     #e11d48;
+  --pal-rose-glow:    rgba(244, 63, 94, 0.45);
+
+  /* ── Violet ───────────────────────────────── */
+  --pal-violet:       #8b5cf6;
+  --pal-violet-rgb:   139, 92, 246;
+  --pal-violet-light: #a78bfa;
+  --pal-violet-dim:   #7c3aed;
+  --pal-violet-glow:  rgba(139, 92, 246, 0.45);
+
+  /* ── Lime ─────────────────────────────────── */
+  --pal-lime:         #84cc16;
+  --pal-lime-rgb:     132, 204, 22;
+  --pal-lime-light:   #a3e635;
+  --pal-lime-dim:     #65a30d;
+  --pal-lime-glow:    rgba(132, 204, 22, 0.45);
+
+  /* ── Sky ──────────────────────────────────── */
+  --pal-sky:          #0ea5e9;
+  --pal-sky-rgb:      14, 165, 233;
+  --pal-sky-light:    #38bdf8;
+  --pal-sky-dim:      #0284c7;
+  --pal-sky-glow:     rgba(14, 165, 233, 0.45);
 }

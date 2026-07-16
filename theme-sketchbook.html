@@ -174,6 +174,33 @@
       --accent-hover: var(--pal-white);
     }
 
+    :root[data-accent="coral"] { --accent: var(--pal-coral); --accent-hover: var(--pal-coral-dim); }
+    :root[data-theme="dark"][data-accent="coral"] { --accent: var(--pal-coral-light); --accent-hover: var(--pal-coral); }
+
+    :root[data-accent="indigo"] { --accent: var(--pal-indigo); --accent-hover: var(--pal-indigo-dim); }
+    :root[data-theme="dark"][data-accent="indigo"] { --accent: var(--pal-indigo-light); --accent-hover: var(--pal-indigo); }
+
+    :root[data-accent="amber"] { --accent: var(--pal-amber); --accent-hover: var(--pal-amber-dim); }
+    :root[data-theme="dark"][data-accent="amber"] { --accent: var(--pal-amber-light); --accent-hover: var(--pal-amber); }
+
+    :root[data-accent="emerald"] { --accent: var(--pal-emerald); --accent-hover: var(--pal-emerald-dim); }
+    :root[data-theme="dark"][data-accent="emerald"] { --accent: var(--pal-emerald-light); --accent-hover: var(--pal-emerald); }
+
+    :root[data-accent="rose"] { --accent: var(--pal-rose); --accent-hover: var(--pal-rose-dim); }
+    :root[data-theme="dark"][data-accent="rose"] { --accent: var(--pal-rose-light); --accent-hover: var(--pal-rose); }
+
+    :root[data-accent="violet"] { --accent: var(--pal-violet); --accent-hover: var(--pal-violet-dim); }
+    :root[data-theme="dark"][data-accent="violet"] { --accent: var(--pal-violet-light); --accent-hover: var(--pal-violet); }
+
+    :root[data-accent="lime"] { --accent: var(--pal-lime); --accent-hover: var(--pal-lime-dim); }
+    :root[data-theme="dark"][data-accent="lime"] { --accent: var(--pal-lime-light); --accent-hover: var(--pal-lime); }
+
+    :root[data-accent="sky"] { --accent: var(--pal-sky); --accent-hover: var(--pal-sky-dim); }
+    :root[data-theme="dark"][data-accent="sky"] { --accent: var(--pal-sky-light); --accent-hover: var(--pal-sky); }
+      --accent: var(--pal-white-light);
+      --accent-hover: var(--pal-white);
+    }
+
     /* BASE STYLES */
     * {
       box-sizing: border-box;
@@ -752,20 +779,36 @@
       <!-- Action Panel -->
       <div class="flex items-center gap-3">
         <!-- Color Swatches -->
-        <div class="hidden sm:flex items-center gap-1.5 mx-2">
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="green" title="Green" style="background: var(--pal-green);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="orange" title="Orange" style="background: var(--pal-orange);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="yellow" title="Yellow" style="background: var(--pal-yellow);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="blue" title="Blue" style="background: var(--pal-blue);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="red" title="Red" style="background: var(--pal-red);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="purple" title="Purple" style="background: var(--pal-purple);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="cyan" title="Cyan" style="background: var(--pal-cyan);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="teal" title="Teal" style="background: var(--pal-teal);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="pink" title="Pink" style="background: var(--pal-pink);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="slate" title="Slate" style="background: var(--pal-slate);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="black" title="Black" style="background: var(--pal-black);"></button>
-          <button class="color-swatch rounded-full w-[18px] h-[18px] border-0 cursor-pointer transition-transform hover:scale-110" data-color="white" title="White" style="background: var(--pal-white);"></button>
-        </div>
+                  <div class="relative group">
+            <button class="font-mono text-xs tracking-wider uppercase text-[var(--fg)] border border-[var(--ink,#333)] px-3 py-2 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors flex items-center gap-2 rounded-md" title="Accent Color">
+              <span class="w-3 h-3 rounded-full bg-[var(--accent)] border border-white/20"></span> <i class="fas fa-palette text-[10px]"></i>
+            </button>
+            <div class="absolute right-0 mt-2 w-56 bg-[var(--bg)] border border-[var(--border-color,#333)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3">
+              <div class="font-mono text-[9px] text-[var(--muted)] tracking-widest uppercase mb-2">Accent Palette</div>
+              <div class="grid grid-cols-6 gap-2">
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="green" title="Green" style="background: var(--pal-green);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="orange" title="Orange" style="background: var(--pal-orange);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="yellow" title="Yellow" style="background: var(--pal-yellow);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="blue" title="Blue" style="background: var(--pal-blue);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="red" title="Red" style="background: var(--pal-red);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="purple" title="Purple" style="background: var(--pal-purple);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="cyan" title="Cyan" style="background: var(--pal-cyan);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="teal" title="Teal" style="background: var(--pal-teal);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="pink" title="Pink" style="background: var(--pal-pink);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="slate" title="Slate" style="background: var(--pal-slate);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="black" title="Black" style="background: var(--pal-black); border-color: rgba(255,255,255,0.15);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="white" title="White" style="background: var(--pal-white); border-color: rgba(255,255,255,0.15);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="coral" title="Coral" style="background: var(--pal-coral);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="indigo" title="Indigo" style="background: var(--pal-indigo);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="amber" title="Amber" style="background: var(--pal-amber);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="emerald" title="Emerald" style="background: var(--pal-emerald);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="rose" title="Rose" style="background: var(--pal-rose);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="violet" title="Violet" style="background: var(--pal-violet);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="lime" title="Lime" style="background: var(--pal-lime);"></button>
+                <button class="color-swatch w-7 h-7 rounded-full border-2 border-transparent hover:border-white/40 transition-all hover:scale-110 cursor-pointer" data-color="sky" title="Sky" style="background: var(--pal-sky);"></button>
+              </div>
+            </div>
+          </div>
 
         <!-- Light/Dark Mode Button -->
         <button type="button" id="themeToggle" aria-label="Switch theme"
