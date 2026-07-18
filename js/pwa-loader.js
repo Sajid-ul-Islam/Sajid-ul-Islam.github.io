@@ -20,7 +20,7 @@ export function initPWA() {
                         });
                     }
                 })
-                .catch(error => {
+                .catch(() => {
                     // SW registration failed
                 });
         });

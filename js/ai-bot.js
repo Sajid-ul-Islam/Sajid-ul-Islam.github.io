@@ -6,16 +6,16 @@
 
 const userTelemetry = { ip: "UNKNOWN", os: "DETECTION_FAILED" };
 
-async function fetchUserTelemetry() {
+(async function() {
     try {
         const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
         userTelemetry.ip = data.ip;
-    } catch (e) { /* IP fetch bypassed */ }
+    } catch { /* IP fetch bypassed */ }
 
     const osMatch = navigator.userAgent.match(/\(([^)]+)\)/);
     if (osMatch) userTelemetry.os = osMatch[1];
-}
+})();
 
 // SECURITY: No default API keys are stored here.
 const DEFAULT_GEMINI_KEY = null;
@@ -153,12 +153,6 @@ export const handleSuggestion = (text) => {
     }
 };
 
-function getThemeAccent() {
-    const root = document.documentElement;
-    const bg = getComputedStyle(root).getPropertyValue('--bg-page').trim();
-    if (bg && bg.startsWith('#f')) return 'light';
-    return 'dark';
-}
 
 export function initAiChat() {
     const toggle = document.getElementById('aiChatToggle');
@@ -342,7 +336,7 @@ export function initAiChat() {
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
                 return;
             }
-        } catch (err) { /* Gemini offline, trying OpenAI */ }
+        } catch { /* Gemini offline, trying OpenAI */ }
 
         // --- Try OpenAI Secondary ---
         try {
@@ -368,7 +362,7 @@ export function initAiChat() {
                 if (typeof AudioEngine !== 'undefined') AudioEngine.play('beep');
                 return;
             }
-        } catch (err) { /* OpenAI offline, showing fallback */ }
+        } catch { /* OpenAI offline, showing fallback */ }
 
         removeTypingIndicator();
         addMessage("I don't have a specific answer for that. Here are some things I can help with:", 'bot');

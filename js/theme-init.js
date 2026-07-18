@@ -16,20 +16,6 @@ function setText(selector, value) {
   document.querySelectorAll(selector).forEach(el => { el.textContent = value; });
 }
 
-/** Set href attribute on every element matching selector (if exists) */
-function setHref(selector, value) {
-  document.querySelectorAll(selector).forEach(el => { el.href = value; });
-}
-
-/** Set src attribute on every element matching selector (if exists) */
-function setSrc(selector, value) {
-  document.querySelectorAll(selector).forEach(el => { el.src = value; });
-}
-
-/** Set an attribute on every element matching selector */
-function setAttr(selector, attr, value) {
-  document.querySelectorAll(selector).forEach(el => { el.setAttribute(attr, value); });
-}
 
 // ── WhatsApp normalizer ───────────────────────────────────────────────────────
 function waLink(raw) {
@@ -220,7 +206,7 @@ function patchJSONLD() {
     }
     data.image = `https://sajid-ul-islam.github.io/${PROFILE_INFO.photo}`;
     jsonLD.textContent = JSON.stringify(data, null, 2);
-  } catch (e) { /* ignore malformed JSON-LD */ }
+  } catch { /* ignore malformed JSON-LD */ }
 }
 
 // ── Run all patches ───────────────────────────────────────────────────────────

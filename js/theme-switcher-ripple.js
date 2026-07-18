@@ -342,7 +342,7 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   if (useWebgl) {
     try {
       overlay.querySelector('#theme-warp-anim')?.beginElement();
-    } catch(err) {}
+    } catch {}
     tasks.push(renderWebGLRipple(overlay.querySelector('.theme-water'), startX, splashY, maxDist));
   }
 
@@ -413,7 +413,7 @@ const toggleThemeWithAnimation = (btnElement, nextTheme, getThemeCallback, apply
   activeTransition = activeObj;
   
   runTeardropTransition(activeObj, btnElement, nextTheme, applyThemeCallback)
-    .catch(err => {})
+    .catch(() => {})
     .then(() => {
       cleanupTransition(activeObj, getThemeCallback, applyThemeCallback);
     });
