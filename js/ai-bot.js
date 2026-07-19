@@ -4,6 +4,8 @@
  * SECURITY: All API keys are provided via localStorage only.
  */
 
+import { LOCAL_INTEL } from './data/index.js';
+
 const userTelemetry = { ip: "UNKNOWN", os: "DETECTION_FAILED" };
 
 (async function() {
@@ -22,52 +24,6 @@ const DEFAULT_GEMINI_KEY = null;
 const DEFAULT_OPENAI_KEY = null;
 
 // --- MISSION_INTEL_DOSSIER ---
-const LOCAL_INTEL = {
-    profile: "Sajid Islam. Data Scientist & Business Analyst based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.",
-    experience: [
-        "Business Analyst @ DEEN Commerce (Jun 2025 - Present) — CRM, Business Strategy, Dashboards",
-        "Co-Founder @ Gear Master (Jun 2024 - Present) — Retail Operations, Inventory, Multi-channel",
-        "IT Executive @ NZ TEX GROUP (Feb 2024 - May 2024) — R&D, Reporting",
-        "Associate @ Thriving Skills (Oct 2023 - Jan 2024) — Sales, CRM, Market Analysis",
-        "Jr. Executive Marketplace @ Daraz Bangladesh (Jan 2020 - Jan 2022) — 50% partner growth",
-        "Associate Home Kitchen @ HungryNaki (Jul 2021 - Jan 2022) — 25% network growth"
-    ],
-    education: [
-        "PGD in Data Science & Business Analytics @ Academy of Business Professionals (2025)",
-        "BSc in Computer Science & Engineering @ North South University (2019)",
-        "HSC (Science) @ BAF Shaheen College Dhaka (2013)",
-        "SSC (Science) @ Uttara High School & College (2011)"
-    ],
-    skills: "Python, SQL, Power BI, Pandas, NumPy, Plotly, Dash, Scikit-learn, LLMs, RAG, AI Agents, JavaScript, HTML/CSS, Git/GitHub, Docker, Linux, Flask, PostgreSQL, MySQL, SQLite.",
-    projects: [
-        "Streamlit Prototype Hub — Centralized command center for 10+ data apps",
-        "Hugging Face EconVision Space — Global economic analytics visualizer",
-        "E-Commerce Dashboards — BI visualization for retail analytics",
-        "Sheet2WhatsApp — Automated messaging tool",
-        "Sentinel Bangladesh — Data monitoring system",
-        "Customer Churn Analysis — ML-powered retention insights"
-    ],
-    certifications: "Data Science & Business Analytics (PGD), Python for Data Science, Power BI Desktop, SQL Fundamentals, Machine Learning Basics.",
-    learning: [
-        "Large Language Models (LLMs) — 78% progress",
-        "AI Agents & Agentic Workflows — 75% progress",
-        "Retrieval-Augmented Generation (RAG) — 80% progress",
-        "Product Analytics & Management — 70% progress",
-        "Cloud Technologies — 65% progress",
-        "System Design — 60% progress"
-    ],
-    contact: {
-        email: "sajid.islam.chowdhury@gmail.com",
-        whatsapp: "+880 182 452 6054",
-        telegram: "https://t.me/+8801824526054",
-        github: "https://github.com/Sajid-ul-Islam",
-        linkedin: "https://www.linkedin.com/in/sajidislamchowdhury/",
-        kaggle: "https://www.kaggle.com/saajiidi",
-        huggingface: "https://huggingface.co/Sajid-ul-Islam"
-    },
-    availability: "Available for full-time roles, freelance projects, consulting, and collaboration. Open to remote and on-site opportunities in Dhaka.",
-    gaming: "Favorite games: Red Dead Redemption 2, God of War Ragnarok, FC24/FIFA, Ghost of Tsushima. 2400+ hours logged."
-};
 
 const KNOWLEDGE_GROUPS = {
     "hi": {
@@ -318,9 +274,12 @@ export function initAiChat() {
             const geminiKey = localStorage.getItem('GEMINI_UPLINK_KEY') || DEFAULT_GEMINI_KEY;
             if (!geminiKey) throw new Error("NO_GEMINI_KEY");
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`, {
+            const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-goog-api-key': geminiKey
+                },
                 body: JSON.stringify({
                     contents: [{ parts: [{ text: `System Context: You are the AI Oracle for Sajid Islam. Profile: ${LOCAL_INTEL.profile}. Skills: ${LOCAL_INTEL.skills}. Respond in a professional, helpful tone. Keep responses concise. Query: ${text}` }] }]
                 })

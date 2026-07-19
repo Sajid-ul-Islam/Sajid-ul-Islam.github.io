@@ -156,16 +156,15 @@ async function initBootSequence() {
 
 
 // ===== MAKE GLOBALS AVAILABLE =====
-// Expose all needed globals for backward compatibility
+// Only expose globals required by inline onclick handlers in HTML templates,
+// or shared as cross-module state via window.*.
 window.DATA = DATA;
-window.STATS = STATS;
 window.AudioEngine = AudioEngine;
 window.MISSION_SECRETS = MISSION_SECRETS;
 window.PortfolioData = PortfolioData;
-window.projectsList = null;
-window.skillsRadarChart = null;
-window.chartBaseData = null;
-window.TACTICAL_INFO = null;
+window.projectsList = null;      // shared state: set by tactical-data.js, read by tactical-data.js
+window.skillsRadarChart = null;  // shared state: set by main.js, read by tactical-data.js
+window.chartBaseData = null;     // shared state: set by main.js, read by tactical-data.js
 window.TestimonialsCarousel = TestimonialsCarousel;
 window.replayProject = replayProject;
 window.decryptDossier = decryptDossier;
@@ -416,8 +415,8 @@ export {
   SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
   FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL,
   PortfolioData,
-  AudioEngine, glitchEffect, updateThemeIcon, updateSystemHealth,
-  copyEmail, initTelemetryOverlay, SkillsGlobe,
+  AudioEngine, glitchEffect,
+  copyEmail, SkillsGlobe,
   initializeTacticalData, renderInfo, renderExperience,
   renderEducation, renderSkillGroups,
   renderProjects, renderBlogs, renderLearning, renderGaming,

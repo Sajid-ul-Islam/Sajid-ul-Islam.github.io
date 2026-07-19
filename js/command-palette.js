@@ -15,7 +15,7 @@ export function initCommandPalette() {
     if (!palette || !input || !results) return;
 
     document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
+        if (e.ctrlKey && e.key === 'k') {
             e.preventDefault();
             togglePalette();
         }
@@ -50,7 +50,8 @@ export function initCommandPalette() {
         performSearch(query);
     });
 
-    setInterval(updateStationClock, 1000);
+    const clockInterval = setInterval(updateStationClock, 1000);
+    window.addEventListener('beforeunload', () => clearInterval(clockInterval));
 }
 
 export function togglePalette() {

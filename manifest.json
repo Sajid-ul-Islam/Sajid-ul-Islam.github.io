@@ -12,13 +12,14 @@
     {
       "src": "img/icon.png",
       "sizes": "140x140",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "img/profile.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
-      "purpose": "any"
+      "purpose": "maskable"
     }
   ],
   "categories": ["portfolio", "business", "data science"],

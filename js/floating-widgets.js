@@ -74,7 +74,7 @@ export class FloatingWidget {
 
         e.querySelector('.fw-min')  ?.addEventListener('click', () => this._minimize());
         e.querySelector('.fw-max')  ?.addEventListener('click', () => this._maximize());
-        e.querySelector('.fw-close')?.addEventListener('click', () => { e.style.display = 'none'; });
+        e.querySelector('.fw-close')?.addEventListener('click', () => this._destroy());
 
         e.addEventListener('mousedown', () => this._toFront());
 
@@ -137,6 +137,12 @@ export class FloatingWidget {
         }
         this._dragging = this._resizing = false;
         this._resizeDir = null;
+    }
+
+    _destroy() {
+        document.removeEventListener('mousemove', this._onMove);
+        document.removeEventListener('mouseup', this._onUp);
+        this.element.style.display = 'none';
     }
 
     _minimize() {

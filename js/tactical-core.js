@@ -83,7 +83,7 @@ export function initTelemetryOverlay() {
     const generateHex = () => Array.from({ length: 4 }, () => Math.random().toString(16).substr(2, 4).toUpperCase()).join(' ');
     const generateBin = () => Array.from({ length: 4 }, () => Math.random() > 0.5 ? '1011' : '0100').join(' ');
 
-    setInterval(() => {
+    const telemetryInterval = setInterval(() => {
         let leftText = '';
         let rightText = '';
         for (let i = 0; i < 35; i++) {
@@ -93,6 +93,8 @@ export function initTelemetryOverlay() {
         colLeft.textContent = leftText;
         colRight.textContent = rightText;
     }, 5000);
+
+    window.addEventListener('beforeunload', () => clearInterval(telemetryInterval));
 }
 
 export const SkillsGlobe = {
@@ -126,9 +128,13 @@ export const SkillsGlobe = {
         this.canvas.width = parent.offsetWidth;
         this.canvas.height = parent.offsetHeight;
 
-        window.addEventListener('resize', () => {
+        this._onResize = () => {
             this.canvas.width = parent.offsetWidth;
             this.canvas.height = parent.offsetHeight;
+        };
+        window.addEventListener('resize', this._onResize);
+        window.addEventListener('beforeunload', () => {
+            window.removeEventListener('resize', this._onResize);
         });
 
         this._paused = false;

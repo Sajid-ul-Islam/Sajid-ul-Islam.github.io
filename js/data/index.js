@@ -355,11 +355,24 @@ export const SOCIAL_LINKS = [
 
 // ===== AI BOT LOCAL INTEL =====
 export const LOCAL_INTEL = {
-  profile: `${PROFILE_INFO.role  } based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.`,
-  experience: EXPERIENCES.slice(0, 3).map(exp => `${exp.title} @ ${exp.company} (${exp.startDate} - Present)`),
-  education: EDUCATION.slice(0, 2).map(edu => `${edu.degree} @ ${edu.institution} (${edu.date})`),
-  skills: 'Python, SQL, Power BI, Machine Learning, Data Automation, Strategic Business Analysis.',
-  projects: PROJECTS.filter(p => p.featured).slice(0, 4).map(p => p.title).join(', ')
+  profile: `${PROFILE_INFO.name}. ${PROFILE_INFO.role} based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.`,
+  experience: EXPERIENCES.map(exp => `${exp.title} @ ${exp.company} (${exp.startDate} - ${exp.endDate || 'Present'}) — ${exp.highlights?.[0] || exp.description}`),
+  education: EDUCATION.map(edu => `${edu.degree} @ ${edu.institution} (${edu.date})`),
+  skills: SKILL_GROUPS.flatMap(g => g.skills.map(s => s.name)).join(', '),
+  projects: PROJECTS.map(p => `${p.title} — ${p.description}`),
+  certifications: 'Data Science & Business Analytics (PGD), Python for Data Science, Power BI Desktop, SQL Fundamentals, Machine Learning Basics.',
+  learning: LEARNING_ITEMS.map(l => `${l.name} — ${l.progress}% progress`),
+  contact: {
+    email: PROFILE_INFO.email,
+    whatsapp: PROFILE_INFO.whatsapp,
+    telegram: PROFILE_INFO.telegram,
+    github: PROFILE_INFO.github,
+    linkedin: PROFILE_INFO.linkedin,
+    kaggle: PROFILE_INFO.kaggle,
+    huggingface: PROFILE_INFO.huggingface
+  },
+  availability: 'Available for full-time roles, freelance projects, consulting, and collaboration. Open to remote and on-site opportunities in Dhaka.',
+  gaming: `Favorite games: ${GAMING.favorites.map(g => g.name).join(', ')}. ${GAMING.stats[0]?.value || '2400+'} hours logged.`
 };
 
 // ===== BACKWARD COMPATIBILITY =====

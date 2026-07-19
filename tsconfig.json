@@ -9,8 +9,9 @@
     "strict": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "noFallthroughCasesInSwitch": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"]
   },
-  "include": ["js/**/*.js"],
+  "include": ["js/**/*.js", "js/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

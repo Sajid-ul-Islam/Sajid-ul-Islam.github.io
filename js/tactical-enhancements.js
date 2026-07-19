@@ -78,9 +78,6 @@ export class KeyboardNavigator {
         } else if (e.key === 'G' || (e.key === 'g' && e.shiftKey)) {
             e.preventDefault();
             this.goToBottom();
-        } else if (e.key === '/') {
-            e.preventDefault();
-            if (typeof window.togglePalette === 'function') window.togglePalette();
         } else if (e.altKey && e.key === 't') {
             e.preventDefault();
             const term = document.getElementById('bottomTerminal');
@@ -252,10 +249,8 @@ export class TestimonialsCarousel {
             }
         ];
         
-        const current = 0;
-        
         const render = () => {
-            const t = testimonials[current];
+            const t = testimonials[this.current];
             container.innerHTML = `
                 <div class="testimonial-card card-glass">
                     <div class="testimonial-quote">"${t.quote}"</div>
@@ -266,7 +261,7 @@ export class TestimonialsCarousel {
                     <div class="testimonial-nav">
                         <button class="testimonial-btn" onclick="TestimonialsCarousel.prev()">◀</button>
                         <span class="testimonial-dots">
-                            ${testimonials.map((_, i) => `<span class="dot ${i === current ? 'active' : ''}"></span>`).join('')}
+                            ${testimonials.map((_, i) => `<span class="dot ${i === this.current ? 'active' : ''}"></span>`).join('')}
                         </span>
                         <button class="testimonial-btn" onclick="TestimonialsCarousel.next()">▶</button>
                     </div>
@@ -275,7 +270,7 @@ export class TestimonialsCarousel {
         };
         
         this.testimonials = testimonials;
-        this.current = current;
+        this.current = 0;
         this.render = render;
         render();
         

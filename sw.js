@@ -3,39 +3,21 @@
  * PWA Support for offline functionality with Network-First strategy for updates
  */
 
-const CACHE_NAME = 'tactical-intel-v4';
+const CACHE_NAME = 'tactical-intel-v5';
+
+// Only cache HTML entry points and the manifest.
+// Vite-bundled CSS/JS live under dist/assets/ with content-hashed filenames,
+// so we let stale-while-revalidate handle them dynamically.
 const STATIC_ASSETS = [
     '/',
     '/index.html',
+    '/theme-sketchbook.html',
+    '/theme-tactical.html',
+    '/theme-ironforge.html',
     '/resume.html',
-    '/css/modern-custom.css',
-    '/css/tactical-hud.css',
-    '/css/tactical-enhancements.css',
-    '/css/deep-black-terminal.css',
-    '/css/floating-widgets.css',
-    '/css/github-feed.css',
-    '/css/color-palette.css',
-    '/css/shared-components.css',
-    '/js/data/index.js',
-    '/js/audio-engine.js',
-    '/js/tactical-core.js',
-    '/js/tactical-data.js',
-    '/js/pwa-loader.js',
-    '/js/tactical-widgets.js',
-    '/js/tactical-enhancements.js',
-    '/js/widgets.js',
-    '/js/terminal.js',
-    '/js/ai-bot.js',
-    '/js/floating-widgets.js',
-    '/js/github-feed.js',
-    '/js/portfolio-bridge.js',
-    '/js/command-palette.js',
-    '/js/theme-accent.js',
-    '/js/theme-init.js',
-    '/js/theme-switcher-ripple.js',
-    '/img/profile.jpg',
     '/manifest.json',
-    '/sw.js'
+    '/img/profile.jpg',
+    '/img/icon.png'
 ];
 
 // Install: Cache static assets

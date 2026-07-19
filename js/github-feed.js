@@ -91,6 +91,8 @@ export async function initGitHubFeed() {
 
     container.innerHTML = `<div class="activity-item" style="color: var(--text-secondary); font-size:0.75rem;padding:8px 12px">Fetching commits...</div>`;
 
+    let usedFallback = false;
+
     try {
         const res = await fetch(GH_API, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
         if (!res.ok) throw new Error('API error');
@@ -114,24 +116,28 @@ export async function initGitHubFeed() {
         animateItems(container);
 
     } catch {
+        usedFallback = true;
         renderFallback(container);
     }
 
-    setInterval(() => {
-        const newEvents = [
-            { type: 'PushEvent',  repo: 'Sajid-ul-Islam.github.io', branch: 'main', msg: 'Minor fix',             sha: Math.random().toString(36).slice(2,9), ago: 'just now' },
-            { type: 'WatchEvent', repo: 'openai/openai-python', branch: '', msg: '',                         sha: '',                                      ago: 'just now' },
-            { type: 'PushEvent',  repo: 'e-com-dashboard',     branch: 'main', msg: 'Update dashboard data', sha: Math.random().toString(36).slice(2,9), ago: 'just now' }
-        ];
-        const pick = newEvents[Math.floor(Math.random() * newEvents.length)];
-        const newEl = document.createElement('div');
-        newEl.style.cssText = 'opacity:0;transform:translateX(-10px);transition:opacity 0.3s ease,transform 0.3s ease';
-        newEl.innerHTML = renderActivityItem(pick);
-        const child = newEl.firstElementChild;
-        if (child && container.firstChild) {
-            container.insertBefore(child, container.firstChild);
-            setTimeout(() => { child.style.opacity = '1'; child.style.transform = 'translateX(0)'; }, 50);
-        }
-        while (container.children.length > 10) container.removeChild(container.lastChild);
-    }, 30000);
+    // Only inject simulated events in fallback mode (real API unavailable)
+    if (usedFallback) {
+        setInterval(() => {
+            const newEvents = [
+                { type: 'PushEvent',  repo: 'Sajid-ul-Islam.github.io', branch: 'main', msg: 'Minor fix',             sha: Math.random().toString(36).slice(2,9), ago: 'just now' },
+                { type: 'WatchEvent', repo: 'openai/openai-python', branch: '', msg: '',                         sha: '',                                      ago: 'just now' },
+                { type: 'PushEvent',  repo: 'e-com-dashboard',     branch: 'main', msg: 'Update dashboard data', sha: Math.random().toString(36).slice(2,9), ago: 'just now' }
+            ];
+            const pick = newEvents[Math.floor(Math.random() * newEvents.length)];
+            const newEl = document.createElement('div');
+            newEl.style.cssText = 'opacity:0;transform:translateX(-10px);transition:opacity 0.3s ease,transform 0.3s ease';
+            newEl.innerHTML = renderActivityItem(pick);
+            const child = newEl.firstElementChild;
+            if (child && container.firstChild) {
+                container.insertBefore(child, container.firstChild);
+                setTimeout(() => { child.style.opacity = '1'; child.style.transform = 'translateX(0)'; }, 50);
+            }
+            while (container.children.length > 10) container.removeChild(container.lastChild);
+        }, 30000);
+    }
 }
