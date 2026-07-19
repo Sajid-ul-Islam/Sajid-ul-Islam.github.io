@@ -187,6 +187,26 @@ window.glitchEffect = glitchEffect;
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', async () => {
   initBootSequence(); // Initialize boot sequence first
+  
+  // Premium Scroll Reveal
+  if (typeof IntersectionObserver !== 'undefined') {
+    // Auto-add class to major structural elements
+    document.querySelectorAll('.card-glass, .resume-item, .timeline-wrapper, .skill-progress-item').forEach(el => {
+      if (!el.classList.contains('scroll-reveal')) {
+        el.classList.add('scroll-reveal');
+      }
+    });
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.scroll-reveal').forEach(el => scrollObserver.observe(el));
+  }
 
   // Core initialization
   updateSystemHealth();

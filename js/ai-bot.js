@@ -389,4 +389,64 @@ export function initAiChat() {
 
     if (sendBtn) sendBtn.addEventListener('click', sendMessage);
     if (input) input.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+    // Initialize IntersectionObserver for Context-Aware Chatbot
+    if (typeof IntersectionObserver !== 'undefined') {
+        const sections = document.querySelectorAll('.resume-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateChatbotSuggestions(entry.target.id);
+                }
+            });
+        }, { threshold: 0.5 });
+        sections.forEach(sec => observer.observe(sec));
+    }
+}
+
+export function updateChatbotSuggestions(sectionId) {
+    const sugContainer = document.getElementById('aiSuggestions');
+    if (!sugContainer) return;
+    
+    let html = '';
+    const wALink = `<a href="https://wa.me/+8801824526054?text=Hi%20Sajid%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener" class="suggestion-chip suggestion-wa"><i class="fab fa-whatsapp me-1"></i> [CONNECT]</a>`;
+
+    switch(sectionId) {
+        case 'about':
+            html = `
+                <button class="suggestion-chip" onclick="handleSuggestion('Who is Sajid?')">[SHOW_DOSSIER]</button>
+                <button class="suggestion-chip" onclick="handleSuggestion('What is his current role?')">[CURRENT_STATUS]</button>
+            `;
+            break;
+        case 'experience':
+            html = `
+                <button class="suggestion-chip" onclick="handleSuggestion('Tell me about his experience at Daraz')">[DARAZ_LOG]</button>
+                <button class="suggestion-chip" onclick="handleSuggestion('What does he do at DEEN Commerce?')">[DEEN_ROLE]</button>
+            `;
+            break;
+        case 'education':
+            html = `
+                <button class="suggestion-chip" onclick="handleSuggestion('Where did he study?')">[ACADEMICS]</button>
+                <button class="suggestion-chip" onclick="handleSuggestion('What certifications does he have?')">[CERTIFICATIONS]</button>
+            `;
+            break;
+        case 'skills':
+            html = `
+                <button class="suggestion-chip" onclick="handleSuggestion('What are his top technical skills?')">[TECH_STACK]</button>
+                <button class="suggestion-chip" onclick="handleSuggestion('Does he know Python and Power BI?')">[CORE_SKILLS]</button>
+            `;
+            break;
+        case 'projects':
+            html = `
+                <button class="suggestion-chip" onclick="handleSuggestion('Show me his latest projects')">[LATEST_PROJECTS]</button>
+                <button class="suggestion-chip" onclick="handleSuggestion('Explain the Streamlit Prototype Hub')">[STREAMLIT_HUB]</button>
+            `;
+            break;
+        default:
+            html = `
+                <button class="suggestion-chip" onclick="handleSuggestion('Who is Sajid?')">[SHOW_DOSSIER]</button>
+                <button class="suggestion-chip" onclick="handleSuggestion('What are his top technical skills?')">[TECH_STACK]</button>
+            `;
+    }
+    sugContainer.innerHTML = html + wALink;
 }

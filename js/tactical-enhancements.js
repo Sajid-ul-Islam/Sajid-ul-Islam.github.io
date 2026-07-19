@@ -312,3 +312,55 @@ export class ScanlinePulse {
     }
 }
 
+// Initialize Custom Tactical Cursor
+function initCustomCursor() {
+    const cursor = document.querySelector('.custom-cursor');
+    const follower = document.querySelector('.cursor-follower');
+    if (!cursor || !follower) return;
+
+    let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+    
+    // Smooth follower animation
+    function renderCursor() {
+        posX += (mouseX - posX) * 0.15;
+        posY += (mouseY - posY) * 0.15;
+        
+        cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        follower.style.transform = `translate(${posX}px, ${posY}px)`;
+        
+        requestAnimationFrame(renderCursor);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '1';
+        follower.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        follower.style.opacity = '0';
+    });
+
+    // Hover effect for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .cursor-pointer, .nav-link, input, textarea');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('hovering');
+            follower.classList.add('hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hovering');
+            follower.classList.remove('hovering');
+        });
+    });
+
+    renderCursor();
+}
+
+document.addEventListener('DOMContentLoaded', initCustomCursor);
+

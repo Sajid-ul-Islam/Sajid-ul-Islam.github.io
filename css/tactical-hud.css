@@ -2370,4 +2370,93 @@ body {
     .btn-theme-toggle:active {
         transform: scale(0.95) !important;
     }
+}
+
+/* --- TACTICAL HUD MOBILE OVERRIDES --- */
+@media (max-width: 991px) {
+    #sideNav {
+        padding: 0.5rem 1rem !important;
+        background: rgba(10, 16, 8, 0.98) !important;
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.3) !important;
+        z-index: 1040;
+    }
+
+    .navbar-toggler {
+        border: 1px solid rgba(var(--primary-color-rgb), 0.5) !important;
+        background: rgba(var(--primary-color-rgb), 0.1) !important;
+        padding: 0.4rem 0.6rem !important;
+        border-radius: 4px;
+        opacity: 1 !important;
+        display: block !important;
+    }
+    
+    .navbar-toggler-icon {
+        background-image: none !important;
+        background-color: var(--primary-color) !important;
+        -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center;
+        mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center;
+    }
+
+    #sideNav .navbar-nav {
+        background: rgba(5, 12, 6, 0.95) !important;
+        border: 1px solid rgba(var(--primary-color-rgb), 0.25) !important;
+        margin-top: 15px;
+        padding: 1rem !important;
+        border-radius: 8px;
+    }
+
+    #sideNav .navbar-nav .nav-item.dropdown {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: flex-start;
+        padding-top: 0.5rem;
+        border-top: 1px dashed rgba(var(--primary-color-rgb), 0.2);
+    }
+}
+
+/* --- PREMIUM CUSTOM TACTICAL CURSOR (DESKTOP) --- */
+@media (min-width: 992px) {
+    body, a, button, .nav-link, .cursor-pointer {
+        cursor: none !important;
+    }
+    
+    .custom-cursor {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 999999;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s, height 0.2s;
+    }
+
+    .cursor-follower {
+        position: fixed;
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(var(--primary-color-rgb), 0.5);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 999998;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+    }
+
+    .custom-cursor.hovering {
+        width: 10px;
+        height: 10px;
+        background: transparent;
+        border: 2px solid var(--primary-color);
+    }
+    
+    .cursor-follower.hovering {
+        width: 45px;
+        height: 45px;
+        background-color: rgba(var(--primary-color-rgb), 0.1);
+        border-color: rgba(var(--primary-color-rgb), 0.8);
+    }
 }

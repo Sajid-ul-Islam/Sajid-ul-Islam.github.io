@@ -103,6 +103,10 @@
 </head>
 
 <body id="page-top">
+  <!-- Custom Tactical Cursor -->
+  <div class="custom-cursor d-none d-lg-block"></div>
+  <div class="cursor-follower d-none d-lg-block"></div>
+
   <!-- Camo Cursor Reveal Canvas -->
   <canvas id="camoReveal" aria-hidden="true"></canvas>
 
@@ -167,6 +171,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#awards">[AWARDS]</a>
+          </li>
+          <li class="nav-item d-none" id="pwaInstallItem">
+            <button class="nav-link btn btn-outline-primary btn-sm ms-lg-2" id="pwaInstallBtn" style="padding: 2px 8px; margin-top: 5px; color: var(--primary-color);">[DEPLOY APP]</button>
           </li>
           <li class="nav-item dropdown ms-lg-3 d-flex align-items-center mt-3 mt-lg-0 gap-2">
             <!-- Theme Mode Toggle -->
