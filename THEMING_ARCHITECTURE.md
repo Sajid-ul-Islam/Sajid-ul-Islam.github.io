@@ -36,8 +36,8 @@ If a developer needs to add a new theme layout (e.g., `theme-cyberpunk.html`):
 1. **Create HTML**: Create the new HTML file in the root directory.
 2. **Import Libraries**: Load the global scripts in the `<head>`:
    ```html
-   <script src="js/data/index.js"></script>
-   <script src="js/theme-switcher-ripple.js"></script>
+   <script type="module" src="js/data/index.js"></script>
+   <script type="module" src="js/theme-switcher-ripple.js"></script>
    ```
 3. **Add Navigation Switcher**: Put the Theme switcher dropdown/links in your navigation bar, referencing the separate HTML files:
    - `theme-sketchbook.html`

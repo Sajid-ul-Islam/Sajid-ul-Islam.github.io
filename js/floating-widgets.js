@@ -32,7 +32,6 @@ export class FloatingWidget {
     }
 
     _setup() {
-        const el = this.opts;
         const e  = this.element;
 
         e.classList.add('floating-widget');

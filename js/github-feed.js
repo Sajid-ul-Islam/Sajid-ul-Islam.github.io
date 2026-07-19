@@ -99,7 +99,6 @@ export async function initGitHubFeed() {
         if (!Array.isArray(events) || events.length === 0) throw new Error('No events');
 
         const items = events.slice(0, 8).map(ev => {
-            const cfg    = TYPE_MAP[ev.type] || TYPE_MAP['WatchEvent'];
             const commits = ev.payload?.commits || [];
             return {
                 type:   ev.type,
@@ -114,7 +113,7 @@ export async function initGitHubFeed() {
         container.innerHTML = items.map(renderActivityItem).join('');
         animateItems(container);
 
-    } catch (_) {
+    } catch {
         renderFallback(container);
     }
 

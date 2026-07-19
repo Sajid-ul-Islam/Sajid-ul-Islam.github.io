@@ -34,7 +34,7 @@ export function openPortfolioBridge(e, url) {
         iframe.src = url;
         try {
            if (displayUrl) displayUrl.textContent = new URL(url).hostname;
-        } catch(err) { if (displayUrl) displayUrl.textContent = "EXTERNAL_NODE"; }
+        } catch { if (displayUrl) displayUrl.textContent = "EXTERNAL_NODE"; }
     }
     if (loader) loader.style.display = 'flex';
 

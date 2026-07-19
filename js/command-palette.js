@@ -98,7 +98,7 @@ function performSearch(query) {
         return;
     }
 
-    resultsDiv.innerHTML = filtered.map((item, idx) => `
+    resultsDiv.innerHTML = filtered.map((item, _idx) => `
         <div class="palette-result-item" onclick="executeCommand('${item.url}', '${item.id}')">
             <span><i class="fas fa-${item.icon} me-3 text-primary" style="width:15px"></i> ${item.label.toUpperCase()}</span>
             <span class="text-secondary small tracking-widest">[${item.type}]</span>

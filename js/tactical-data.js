@@ -4,12 +4,7 @@
  * Now exported as ES module.
  */
 
-import { 
-  DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS, 
-  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, 
-  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL,
-  PortfolioData
-} from './data/index.js';
+import { PROFILE_INFO, PortfolioData } from './data/index.js';
 
 const DEFAULT_INFO = PROFILE_INFO;
 
@@ -63,7 +58,7 @@ export function runTypewriter(info) {
 export async function initializeTacticalData() {
     runTypewriter(DEFAULT_INFO);
 
-    const data = await PortfolioData.load();
+    await PortfolioData.load();
     
     const info = PortfolioData.getInfo();
     const finalExperience = PortfolioData.getExperiences();
@@ -193,7 +188,7 @@ export function renderExperience(data) {
               </div>
             `);
         });
-    } catch (err) {
+    } catch {
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render experience</div>';
     }
 }
@@ -218,7 +213,7 @@ export function renderEducation(data) {
               </div>
             `);
         });
-    } catch (err) {
+    } catch {
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render education</div>';
     }
 }
@@ -314,7 +309,7 @@ export function decryptDossier(id, el, force = false) {
     }, 20);
 };
 
-export function toggleCaseStudy(id, btn) {
+export function toggleCaseStudy(id, _btn) {
     const el = document.getElementById(`case-${id}`);
     if (el) { el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
 }
@@ -369,7 +364,7 @@ export function renderMedia(data) {
                 </div>
             </div>
         `).join('');
-    } catch (err) {
+    } catch {
         container.innerHTML = '<div class="text-danger p-3">[ERROR] Failed to render media</div>';
     }
 }
@@ -393,7 +388,7 @@ export async function fetchGithubRepos(username) {
         const r = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=5`);
         const repos = await r.json();
         container.innerHTML = repos.map(repo => `<div class="p-2 border-bottom border-secondary border-opacity-10"><a href="${repo.html_url}" target="_blank" class="small text-primary">${repo.name.toUpperCase()}</a></div>`).join('');
-    } catch (e) { container.innerHTML = 'OFFLINE'; }
+    } catch { container.innerHTML = 'OFFLINE'; }
 }
 
 export function openCaseStudy(e, projectId) {
@@ -464,7 +459,7 @@ export function toggleMobileSidebar() {
     if (sidebar) sidebar.classList.toggle('open'); 
 }
 
-export function handleTreeClick(e, id) {
+export function handleTreeClick(e, _id) {
     const href = e.currentTarget.getAttribute('href');
     if (href && href.startsWith('#')) {
         e.preventDefault();

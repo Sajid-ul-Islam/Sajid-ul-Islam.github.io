@@ -130,7 +130,7 @@ export class AudioEngineClass {
               gain.gain.value = 0.6;
               source.connect(gain).connect(this.ctx.destination);
               source.start();
-            } catch (e) {}
+            } catch {}
           }
         });
       }

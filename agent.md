@@ -4,7 +4,7 @@
 > **Architecture**: Static Site with PWA capabilities  
 > **Aesthetic**: Tactical HUD / Terminal Interface  
 > **Primary Stack**: HTML5, CSS3, JavaScript (Vanilla), Bootstrap 5  
-> **Build Tool**: Vite (primary) / Gulp (legacy)  
+> **Build Tool**: Vite  
 > **Linting**: ESLint flat config + Prettier  
 > **Deployment**: GitHub Pages
 
@@ -41,21 +41,24 @@ Sajid-ul-Islam.github.io/
 ├── eslint.config.js          # ESLint flat config
 ├── .prettierrc               # Prettier formatting config
 ├── main.js                   # Module load-order documentation
+├── tsconfig.json             # TypeScript config for JS type checking
 │
 ├── css/                      # Stylesheets (modular architecture)
-│   ├── color-palette.css     # Shared accent color definitions (10 palettes)
+│   ├── color-palette.css     # Shared accent color definitions (20 palettes)
 │   ├── modern-custom.css     # Core styles + Bootstrap overrides
 │   ├── tactical-hud.css      # HUD-specific components
 │   ├── tactical-enhancements.css # Advanced effects & animations
-│   ├── file-tree.css         # VS Code-style file explorer
+│   ├── shared-components.css # Shared component styles across themes
 │   ├── floating-widgets.css  # HUD widget styling
 │   ├── github-feed.css       # GitHub integration styles
-│   ├── deep-black-terminal.css # Terminal-specific styling
-│   └── resume.css            # Resume page styles
+│   └── deep-black-terminal.css # Terminal-specific styling
 │
 ├── js/                       # JavaScript modules (tactical architecture)
 │   ├── data/index.js         # Central data module (all portfolio content)
+│   ├── main.js               # Tactical theme entry point (imports all modules)
+│   ├── theme-init.js         # Theme data patching (meta, title, JSON-LD)
 │   ├── theme-accent.js       # Shared accent/theme switching logic
+│   ├── theme-switcher-ripple.js # Teardrop light/dark mode transition
 │   ├── audio-engine.js       # Procedural sound effects (extracted module)
 │   ├── tactical-core.js      # Core UI, theme management, skills globe
 │   ├── tactical-data.js      # Data rendering & GitHub integration
@@ -68,13 +71,11 @@ Sajid-ul-Islam.github.io/
 │   ├── portfolio-bridge.js   # External project viewer
 │   ├── github-feed.js        # GitHub repo fetching
 │   ├── floating-widgets.js   # Floating HUD widgets
-│   ├── pwa-loader.js         # Service Worker registration
-│   └── debug-widgets.js      # Development debugging tools
+│   └── pwa-loader.js         # Service Worker registration
 │
 │   Note: Bootstrap 5.3 & Font Awesome 6.4 are loaded via CDN.
 │
 ├── img/                      # Portfolio images & assets
-├── scripts/                  # Python utility scripts
 ├── scss/                     # SASS source files
 └── .github/                  # GitHub Actions/workflows
 ```
@@ -96,8 +97,7 @@ Sajid-ul-Islam.github.io/
 ### Build & Development
 | Tool | Purpose |
 |------|---------|
-| **Vite** | Primary build tool & dev server (ESM-native, fast HMR) |
-| **Gulp** | Legacy build tool (preserved for backward compatibility) |
+| **Vite** | Build tool & dev server (ESM-native, fast HMR) |
 | **ESLint** | Code linting with flat config |
 | **Prettier** | Code formatting |
 | **GitHub Pages** | Static hosting & deployment |
@@ -186,8 +186,8 @@ exit           Terminate session (close terminal)
 
 ### 5.4 Portfolio Bridge (`js/portfolio-bridge.js`)
 - Opens external projects in HUD-styled modal
-- Sandboxed iframe with security controls
-- Blocked domain list for external redirects
+- Domain blocklist for restricted external sites
+- Blocked domains open in new tabs instead of the iframe
 
 ### 5.5 AI Bot (`js/ai-bot.js`)
 - Local knowledge-based responses (no API key required)
@@ -211,7 +211,7 @@ exit           Terminate session (close terminal)
 | `modern-custom.css` | Base styles, Bootstrap overrides, responsive utilities |
 | `tactical-hud.css` | HUD-specific: panels, borders, terminals, progress bars |
 | `tactical-enhancements.css` | Animations: glitch effects, scanlines, cyberpunk elements |
-| `file-tree.css` | VS Code file explorer styling |
+| `shared-components.css` | Shared component styles across themes |
 | `floating-widgets.css` | HUD overlay widgets |
 | `github-feed.css` | GitHub activity feed styling |
 | `deep-black-terminal.css` | Terminal-specific dark styling |
@@ -250,15 +250,6 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
   "lint": "eslint js/",       // Lint JS files
   "lint:fix": "eslint js/ --fix",
   "format": "prettier --write js/**/*.js"
-}
-```
-
-### Legacy Gulp Scripts (preserved)
-```json
-{
-  "legacy:start": "gulp watch",
-  "legacy:build": "gulp",
-  "legacy:bundle": "gulp bundle"
 }
 ```
 
@@ -310,8 +301,6 @@ ES modules are imported via `import` statements. The tactical theme entry point 
 13. `js/widgets.js` → Exports UI widget utilities
 14. `js/ai-bot.js` → Exports AI chatbot integration
 15. `js/pwa-loader.js` → Service Worker registration
-13. `portfolio-bridge.js` → External project viewer
-14. `command-palette.js` → VS Code-style palette
 
 ---
 
@@ -363,7 +352,7 @@ See [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
 ## 12. Security
 
 - **No hardcoded API keys**: All AI provider keys are stored in browser `localStorage` only.
-- **Sandboxed iframes**: Portfolio Bridge uses sandboxed iframes for external viewing.
+- **Domain blocklist**: Portfolio Bridge blocks restricted domains from loading in the iframe.
 - **Blocked domains**: WhatsApp, social media, and other restricted nodes open in new tabs.
 - **XSS awareness**: Template literals used for rendering from trusted data only.
 
@@ -429,11 +418,10 @@ npm run format
 
 - [ ] Blog content management system
 - [ ] Dynamic project loading from headless CMS
-- [ ] Migrate to ES modules (add `type="module"` to script tags)
 - [ ] WebGL particle background effects
 - [ ] Real-time GitHub contribution graph
 - [ ] Contact form with serverless backend
-- [ ] Convert to TypeScript for type safety
+- [ ] Centralize accent color mappings across themes
 
 ---
 
