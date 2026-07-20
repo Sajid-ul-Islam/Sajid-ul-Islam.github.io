@@ -919,7 +919,7 @@
 .ai-chat-container.active {
     transform: translateY(0);
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
 }
 
 .ai-chat-header {
@@ -1040,7 +1040,7 @@
 
 .portfolio-bridge-overlay.active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
 }
 
 .bridge-backdrop {
