@@ -8,18 +8,27 @@ export const GLITCH_CHARS = 'ABCDEFGHIKLMNOPQRSTUVWXYZ0123456789§$#@*&';
 
 export function glitchEffect(el) {
     if (!el) return;
-    const originalText = el.getAttribute('data-original') || el.innerText;
+    if (el._glitching) return;
+    el._glitching = true;
+
+    const originalText = el.getAttribute('data-original') || el.innerText.trim();
     if (!el.getAttribute('data-original')) el.setAttribute('data-original', originalText);
 
     let iterations = 0;
+    const step = Math.max(1, Math.ceil(originalText.length / 8));
     const interval = setInterval(() => {
         el.innerText = originalText.split('').map((char, index) => {
-            if (index < iterations) return char;
+            if (char === ' ' || char === '\n') return char;
+            if (index < iterations) return originalText[index];
             return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
         }).join('');
-        if (iterations >= originalText.length) clearInterval(interval);
-        iterations += 1 / 3;
-    }, 30);
+        if (iterations >= originalText.length) {
+            clearInterval(interval);
+            el.innerText = originalText;
+            el._glitching = false;
+        }
+        iterations += step;
+    }, 25);
 }
 
 export function updateThemeIcon(theme) {

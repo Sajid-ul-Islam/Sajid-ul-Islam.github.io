@@ -118,45 +118,68 @@ const bootMessages = [
   "ACCESS_GRANTED: Proceed with caution."
 ];
 
-async function typeWriter(bootLogElement, bootCursorElement, messages) {
+async function typeWriter(bootLogElement, bootCursorElement, messages, isSkippedRef) {
   for (let i = 0; i < messages.length; i++) {
+    if (isSkippedRef.skipped) break;
     const message = messages[i];
     const line = document.createElement('span');
     bootLogElement.appendChild(line);
     bootLogElement.scrollTop = bootLogElement.scrollHeight; // Auto-scroll
     for (let j = 0; j < message.length; j++) {
+      if (isSkippedRef.skipped) break;
       line.textContent += message[j];
-      await new Promise(resolve => setTimeout(resolve, Math.random() * 5 + 10)); // Fast typing speed
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 3 + 2)); // Ultra-fast tactical typing
     }
     bootLogElement.appendChild(document.createTextNode('\n')); // Add newline
-    await new Promise(resolve => setTimeout(resolve, 50)); // Delay between lines
+    await new Promise(resolve => setTimeout(resolve, 20)); // Brief pause between lines
   }
-  bootCursorElement.remove(); // Remove cursor after typing
-  await new Promise(resolve => setTimeout(resolve, 500)); // Short pause after all messages
+  if (bootCursorElement && bootCursorElement.parentNode) {
+    bootCursorElement.remove();
+  }
+  await new Promise(resolve => setTimeout(resolve, 200));
 }
 
 async function initBootSequence() {
   const bootSequence = document.getElementById('boot-sequence');
+  if (!bootSequence) return;
   const bootLog = bootSequence.querySelector('.boot-log');
   const bootCursor = bootSequence.querySelector('.boot-cursor');
 
   // Only run boot sequence on first visit of the session
   if (sessionStorage.getItem('bootSequencePlayed') === 'true') {
     bootSequence.classList.add('hidden');
+    bootSequence.remove();
     document.body.style.overflow = ''; // Restore scroll
     return;
   }
 
   document.body.style.overflow = 'hidden'; // Prevent scrolling during boot
-  await typeWriter(bootLog, bootCursor, bootMessages);
 
-  bootSequence.classList.add('hidden');
-  bootSequence.addEventListener('transitionend', () => {
-    bootSequence.remove();
-    document.body.style.overflow = ''; // Restore scroll after hidden
+  const isSkippedRef = { skipped: false };
+  const skipPrompt = document.createElement('div');
+  skipPrompt.className = 'boot-skip-hint';
+  skipPrompt.style.cssText = 'position: absolute; bottom: 20px; right: 20px; font-size: 0.72rem; color: #64748b; font-family: "JetBrains Mono", monospace; cursor: pointer; user-select: none;';
+  skipPrompt.innerHTML = '[Press <kbd style="color:var(--primary-color);background:rgba(255,255,255,0.06);padding:2px 5px;border-radius:3px;">ESC</kbd> or click to skip]';
+  bootSequence.appendChild(skipPrompt);
+
+  const completeBoot = () => {
+    if (isSkippedRef.skipped) return;
+    isSkippedRef.skipped = true;
+    bootSequence.classList.add('hidden');
+    setTimeout(() => {
+      bootSequence.remove();
+      document.body.style.overflow = '';
+    }, 300);
+    sessionStorage.setItem('bootSequencePlayed', 'true');
+  };
+
+  bootSequence.addEventListener('click', completeBoot);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') completeBoot();
   }, { once: true });
 
-  sessionStorage.setItem('bootSequencePlayed', 'true');
+  await typeWriter(bootLog, bootCursor, bootMessages, isSkippedRef);
+  completeBoot();
 }
 
 

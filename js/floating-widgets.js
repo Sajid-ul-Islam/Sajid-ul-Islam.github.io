@@ -225,17 +225,17 @@ export function initFloatingWidgets() {
     // Unified Command Center Widget
     const cmdCenter = document.getElementById('commandCenterWidget');
     if (cmdCenter) {
-        const isMobile = window.innerWidth < 768;
+        const isCollapsedByDef = window.innerWidth < 1400;
         new FloatingWidget(cmdCenter, {
             title: '[COMMAND_CENTER]',
-            defW: isMobile ? Math.min(280, window.innerWidth - 24) : 300,
-            defH: isMobile ? 320 : 400,
+            defW: Math.min(300, window.innerWidth - 24),
+            defH: 380,
             minW: 240, minH: 260,
-            defX: isMobile ? 12 : window.innerWidth - 340,
-            defY: isMobile ? 70 : 80,
+            defX: Math.max(12, window.innerWidth - 330),
+            defY: 180,
             zBase: 1500
         });
-        if (isMobile) {
+        if (isCollapsedByDef) {
             cmdCenter.style.display = 'none';
             cmdCenter.classList.add('fw-hidden');
         }

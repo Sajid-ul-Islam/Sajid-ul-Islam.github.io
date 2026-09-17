@@ -199,6 +199,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li id="pwaInstallItem" class="d-none"><button class="dropdown-item" id="pwaInstallBtn" style="padding: 4px 8px; color: var(--primary-color); width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: inherit;"><i class="fas fa-mobile-alt me-2"></i> [DEPLOY APP]</button></li>
+              <li><button class="dropdown-item" onclick="toggleTelemetryWidget()" style="padding: 4px 8px; color: var(--primary-color); width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: inherit;"><i class="fas fa-chart-line me-2"></i> Command Center Telemetry</button></li>
               <li><hr class="dropdown-divider"></li>
               <li><button class="dropdown-item" id="theme-toggle-inline" style="padding: 4px 8px; color: var(--primary-color); width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: inherit;" onclick="document.getElementById('theme-toggle')?.click()"><i class="fas fa-moon me-2"></i> Toggle Theme</button></li>
               <li><button class="dropdown-item" id="terminal-trigger-inline" style="padding: 4px 8px; color: var(--primary-color); width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: inherit;" onclick="toggleBottomTerminal()"><i class="fas fa-terminal me-2"></i> Open Terminal</button></li>
@@ -273,7 +274,7 @@
         <i class="fas fa-terminal me-1"></i> fde@tactical-ops-node-01: ~/portfolio (sh)
       </div>
       <div class="terminal-telemetry-pills">
-        <span class="telemetry-pill live"><span class="pill-dot"></span> LIVE TELEMETRY</span>
+        <span class="telemetry-pill live" onclick="toggleTelemetryWidget()" style="cursor: pointer;" title="Toggle Telemetry Stream"><span class="pill-dot"></span> LIVE TELEMETRY</span>
         <span class="telemetry-pill">NODE: BD-DHK-01</span>
         <span class="telemetry-pill">NET: ENCRYPTED</span>
       </div>

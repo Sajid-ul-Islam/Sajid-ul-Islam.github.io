@@ -5,7 +5,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: var(--color-black); /* Use a very dark background */
+    background-color: #040805; /* Solid mil-spec black background */
     color: var(--primary-color);
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.9em;
