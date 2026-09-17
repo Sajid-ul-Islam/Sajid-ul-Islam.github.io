@@ -9,45 +9,61 @@ const transitionStyles = `
   .theme-drop-overlay {
     z-index: 99999;
     pointer-events: none;
-    view-transition-name: theme-drop;
     position: fixed;
     inset: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+  .theme-drop-overlay:not([popover]) {
+    view-transition-name: theme-drop;
   }
   .theme-drop {
     will-change: transform;
-    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25));
+    filter: var(--drop-shadow, drop-shadow(0 3px 8px rgba(0,0,0,0.25)));
     width: 30px;
     height: 42px;
     position: absolute;
     top: 0;
   }
   .theme-drop path {
-    fill: var(--bg, #FAF9F6);
+    fill: var(--drop-color, var(--bg, #FAF9F6));
   }
   .theme-drop ellipse {
-    fill: #fff;
-    opacity: 0.35;
+    fill: var(--drop-highlight, #fff);
   }
   .theme-drop-bead {
-    background: var(--bg, #FAF9F6);
+    background: var(--drop-color, var(--bg, #FAF9F6));
     opacity: 0;
     border-radius: 50%;
     width: 10px;
     height: 10px;
     position: absolute;
-    box-shadow: inset 0 2px 2px rgba(255,255,255,0.6), inset 0 -1px 2px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
+    box-shadow: inset 0 2px 2px var(--drop-highlight, rgba(255,255,255,0.6)), inset 0 -1px 2px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
   }
   .theme-splash-drop {
     opacity: 0.95;
     position: absolute;
   }
   .theme-splash-drop i {
-    background: var(--bg, #FAF9F6);
+    background: var(--drop-color, var(--bg, #FAF9F6));
     border-radius: 50%;
     width: 100%;
     height: 100%;
     display: block;
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.65), inset 0 -1px 1px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 1px var(--drop-highlight, rgba(255,255,255,0.65)), inset 0 -1px 1px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .theme-fallback-ripple {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 2px var(--drop-color, #10b981), 0 0 40px var(--drop-color, #10b981);
+    opacity: 0.8;
   }
   .theme-water {
     width: 100%;
@@ -61,9 +77,13 @@ const transitionStyles = `
   @media (prefers-reduced-motion: no-preference) {
     ::view-transition-old(root) {
       animation: none;
+      mix-blend-mode: normal;
+      z-index: 1;
     }
     ::view-transition-new(root) {
       animation: 2.2s cubic-bezier(0.12, 0.72, 0.28, 1) both theme-ripple-reveal;
+      mix-blend-mode: normal;
+      z-index: 9999;
     }
     :root.theme-rippling::view-transition-new(root) {
       filter: url(#theme-water-warp);
@@ -73,6 +93,9 @@ const transitionStyles = `
     }
     ::view-transition-new(theme-drop) {
       animation: none;
+    }
+    ::view-transition-group(theme-drop) {
+      z-index: 10000;
     }
   }
   @keyframes theme-ripple-reveal {
@@ -241,11 +264,6 @@ const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
 };
 
 const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyThemeCallback) => {
-  // Apply the theme synchronously and INDEPENDENTLY of the animation so the
-  // dark/light swap ALWAYS happens even if the water-drop/WebGL animation fails,
-  // throws, or never resolves. The teardrop is purely cosmetic from here on.
-  try { applyThemeCallback(targetTheme); } catch {}
-
   const width = visualViewport?.width ?? innerWidth;
   const height = visualViewport?.height ?? innerHeight;
   const btnRect = btnElement.getBoundingClientRect();
@@ -262,9 +280,22 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   root.style.setProperty('--ripple-rx', `${maxDist}px`);
   root.style.setProperty('--ripple-ry', `${maxDist * flattenFactor}px`);
 
+  // Target theme specific teardrop color, glow, and shadows
+  const isTactical = document.getElementById('sideNav') !== null || document.body.id === 'page-top';
+  const dropColor = targetTheme === 'dark'
+    ? (isTactical ? '#080c06' : '#0F0F0F')
+    : (isTactical ? '#f5faf6' : '#FAF9F6');
+  const dropHighlight = targetTheme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.6)';
+  const dropShadow = targetTheme === 'dark'
+    ? 'drop-shadow(0 4px 12px rgba(0,0,0,0.5)) drop-shadow(0 0 2px rgba(255,255,255,0.2))'
+    : 'drop-shadow(0 4px 12px rgba(0,0,0,0.25)) drop-shadow(0 0 6px rgba(255,255,255,0.4))';
+
   const overlay = document.createElement('div');
   overlay.className = 'theme-drop-overlay';
   overlay.style.colorScheme = targetTheme;
+  overlay.style.setProperty('--drop-color', dropColor);
+  overlay.style.setProperty('--drop-highlight', dropHighlight);
+  overlay.style.setProperty('--drop-shadow', dropShadow);
   overlay.innerHTML = `
     <canvas class="theme-water" aria-hidden="true"></canvas>
     <svg class="theme-drop" viewBox="0 0 40 56" aria-hidden="true">
@@ -284,12 +315,23 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   document.body.appendChild(overlay);
   activeObj.overlay = overlay;
 
+  if (typeof overlay.showPopover === 'function') {
+    try {
+      overlay.popover = 'manual';
+      overlay.showPopover();
+    } catch {}
+  }
+
   const teardrop = /** @type {HTMLElement | null} */ (overlay.querySelector('.theme-drop'));
-  if (!teardrop) return;
+  if (!teardrop) {
+    applyThemeCallback(targetTheme);
+    return;
+  }
   teardrop.style.left = `${startX}px`;
   teardrop.style.transformOrigin = '50% 0%';
   const transformKeyframes = (yVal) => `translate(-50%, ${yVal}px)`;
   
+  // Phase 1: Teardrop forms at button (original theme remains active)
   await teardrop.animate([
     { transform: `${transformKeyframes(startY)} scale(0.25)`, opacity: 0 },
     { transform: `${transformKeyframes(startY)} scale(0.8, 0.66)`, opacity: 1, offset: 0.45 },
@@ -301,6 +343,7 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     fill: 'forwards'
   }).finished;
 
+  // Phase 2: Teardrop falls to splash height (original theme remains active)
   const endY = splashY - 42;
   const fallDistance = Math.max(60, endY - startY);
   teardrop.style.transformOrigin = '50% 100%';
@@ -315,6 +358,7 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     fill: 'forwards'
   }).finished;
 
+  // Phase 3: Impact & Splash (Audio + Splat)
   if (window.AudioEngine) {
     window.AudioEngine.play('waterDrop');
   }
@@ -332,19 +376,24 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     root.classList.add('theme-rippling');
   }
 
-  // Theme already applied synchronously at function entry (independent of the
-  // animation). The view-transition below is a purely cosmetic clip-path reveal.
+  // Phase 4: Theme Conversion (AFTER teardrop lands on water surface)
+  // View Transition API provides the expanding circular reveal if supported;
+  // otherwise fallback applies the theme directly with a ripple pulse.
   let transition;
   if (document.startViewTransition) {
     try {
-      transition = document.startViewTransition(() => {});
+      transition = document.startViewTransition(() => {
+        applyThemeCallback(targetTheme);
+      });
       activeObj.transition = transition;
       await transition.ready.catch(() => {});
     } catch {
+      applyThemeCallback(targetTheme);
       transition = { ready: Promise.resolve(), finished: Promise.resolve() };
       activeObj.transition = transition;
     }
   } else {
+    applyThemeCallback(targetTheme);
     transition = { ready: Promise.resolve(), finished: Promise.resolve() };
     activeObj.transition = transition;
   }
@@ -355,6 +404,25 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
       (/** @type {SVGAnimateElement | null} */ (overlay.querySelector('#theme-warp-anim')))?.beginElement();
     } catch {}
     tasks.push(renderWebGLRipple(overlay.querySelector('.theme-water'), startX, splashY, maxDist));
+  }
+
+  // Fallback visual ripple shockwave for browsers without View Transition support
+  if (!document.startViewTransition) {
+    const wave = document.createElement('div');
+    wave.className = 'theme-fallback-ripple';
+    wave.style.left = `${startX}px`;
+    wave.style.top = `${splashY}px`;
+    overlay.appendChild(wave);
+    tasks.push(
+      wave.animate([
+        { width: '0px', height: '0px', opacity: 0.9 },
+        { width: `${maxDist * 2}px`, height: `${maxDist * 2 * flattenFactor}px`, opacity: 0 }
+      ], {
+        duration: 1100,
+        easing: 'cubic-bezier(0.12, 0.72, 0.28, 1)',
+        fill: 'forwards'
+      }).finished
+    );
   }
 
   const splashConfigs = [
@@ -427,8 +495,11 @@ const toggleThemeWithAnimation = (btnElement, nextTheme, getThemeCallback, apply
   activeTransition = activeObj;
   
   runTeardropTransition(activeObj, btnElement, nextTheme, applyThemeCallback)
-    .catch(() => {})
-    .then(() => {
+    .catch((err) => {
+      console.warn('[THEME_SWITCHER_RIPPLE] Transition interrupted, applying fallback:', err);
+      try { applyThemeCallback(nextTheme); } catch {}
+    })
+    .finally(() => {
       cleanupTransition(activeObj, getThemeCallback, applyThemeCallback);
     });
 };

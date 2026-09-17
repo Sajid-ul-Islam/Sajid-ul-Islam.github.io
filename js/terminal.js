@@ -98,33 +98,83 @@ export function cleanupTerminal() {
 window.addEventListener('beforeunload', cleanupTerminal);
 
 const terminalCommands = {
-    help: () => `CMD_DIRECTORY:
-  neofetch       System summary & specs
+    help: () => `COMMAND DIRECTORY:
+  fde            Forward Deployed Engineer dossier & mission scope
+  neofetch       System hardware, OS & operator profile
+  whoami         Operative identity & clearance level
+  camo [style]   Switch camouflage (woodland, urban, stealth, desert)
+  projects       Catalog of deployed multi-agent & telemetry systems
+  experience     Mission logs & deployment history
+  skills         Technical arsenal & capability matrix
+  langgraph      Deep dive into LangGraph multi-agent StateGraph
+  cat [id]       Inspect specific project/secret dossier
   ls             List project archive nodes
-  cat [id]       Display project dossier
-  projects       Summary of deployed projects
-  langgraph      Deep dive on LangGraph multi-agent AI system
-  skills         Technical arsenal breakdown
-  contact        Operational comms matrix
-  whoami         Operative identification
-  status         System diagnostics
+  workbench      Analytical Python / SQL simulation engine
+  contact        Direct secure communication channels
+  status         Live system telemetry & latency
   clearance      Elevate security clearance
-  write [title]  Start blog editor mode
-  save           Commit buffer to Intel Reports
-  abort          Clear buffer & exit editor
-  workbench      Open analytical data science sandbox
-  echo [text]    Reflect input back to output
+  clear          Reset shell buffer
+  echo [text]    Print text to stdout
   pwd            Print working directory
-  clear          Reset shell
-  exit           Terminate session`,
+  exit           Close terminal console`,
+
+    fde: () => `[FORWARD DEPLOYED ENGINEER // OPERATIONAL MANIFESTO]:
+OPERATOR: Sajid Islam
+MISSION : Deploying autonomous AI workflows, distributed telemetry, and
+          resilient software infrastructure directly to frontline operations.
+
+CORE CAPABILITIES:
+  1. AUTONOMOUS AI & MULTI-AGENT OPS:
+     • Production StateGraphs with LangGraph (conditional feedback loops, reducers)
+     • High-availability LLMOps, RAG systems, and autonomous bot networks
+  2. REAL-TIME DATA TELEMETRY:
+     • Distributed ETL pipelines, SQL/PostgreSQL telemetry, and event stream alerts
+     • Automated business operations (slashed reporting overhead by 40%)
+  3. HARDENED PRODUCTION DEPLOYMENT:
+     • Linux CLI, Docker containerization, edge computing, and hybrid-cloud
+     • Rapid field prototyping hardened into 99.9%+ uptime mission-critical systems`,
+
+    camo: (args) => {
+        if (!args || args.length === 0) {
+            const current = (window.TacticalCamo && window.TacticalCamo.getStyle) ? window.TacticalCamo.getStyle() : 'woodland';
+            return `CAMOUFLAGE ENGINE:
+  Active Style: [${current.toUpperCase()}]
+  Available Styles:
+    • woodland : Digital Woodland (Olive / Foliage / Tan)
+    • urban    : Urban Night-Ops (Slate / Navy / Steel)
+    • stealth  : Stealth Black-Ops (Carbon / Graphite / Obsidian)
+    • desert   : Desert Operator (Coyote / Sand / Earth)
+
+  USAGE: camo [woodland | urban | stealth | desert]`;
+        }
+        const style = args[0].toLowerCase();
+        if (['woodland', 'urban', 'stealth', 'desert'].includes(style)) {
+            if (window.TacticalCamo && window.TacticalCamo.setStyle) {
+                window.TacticalCamo.setStyle(style);
+                return `[CAMO_UPDATED]: Background shifted to ${style.toUpperCase()} camouflage.`;
+            }
+            return `[CAMO_ENGINE]: Engine initializing.`;
+        }
+        return `[INVALID_STYLE]: Choose woodland, urban, stealth, or desert.`;
+    },
+
+    experience: () => {
+        const list = (window.DATA && window.DATA.experiences) ? window.DATA.experiences : [];
+        if (!list.length) return "NO_EXPERIENCES_LOADED";
+        return list.map(exp => `[MISSION: ${exp.startDate} - ${exp.endDate || 'PRESENT'}]\nTARGET : ${exp.company} (${exp.location})\nROLE   : ${exp.title}\nINTEL  : ${exp.description}\nTECH   : ${(exp.technologies || []).join(', ')}`).join('\n\n');
+    },
 
     neofetch: () => `
-    .---.      USER: Sajid Islam
-   /     \\     OS: Tactical HUD v5.2
-   | (O) |     UPTIME: ${Math.floor(performance.now() / 1000)}s
-   \\     /     MEMORY: 4.2GB / 16.0GB
-    '---'      RESOLUTION: ${window.innerWidth}x${window.innerHeight}
-               STATUS: MISSION_READY
+   ███████╗██████╗ ███████╗    OPERATOR : Sajid Islam
+   ██╔════╝██╔══██╗██╔════╝    ROLE     : Forward Deployed Engineer (FDE)
+   █████╗  ██║  ██║█████╗      MISSION  : Multi-Agent AI & Real-Time Telemetry
+   ██╔══╝  ██║  ██║██╔══╝      SYSTEM   : Tactical Field Terminal v6.0
+   ██║     ██████╔╝███████╗    KERNEL   : Linux 6.8.0-fde-hardened x86_64
+   ╚═╝     ╚═════╝ ╚══════╝    SHELL    : zsh 5.9 (tactical-prompt)
+                               UPTIME   : 4+ Years Operational Service
+                               MEMORY   : 6.4GB / 32.0GB (20% Load)
+                               CAMO     : ${(window.TacticalCamo && window.TacticalCamo.getStyle) ? window.TacticalCamo.getStyle().toUpperCase() : 'WOODLAND'} DIGITAL
+                               STATUS   : 🟢 ACTIVE_DUTY // DEPLOYED
     `,
 
     ls: (args) => {
@@ -162,7 +212,7 @@ const terminalCommands = {
         const list = (window.DATA && window.DATA.projects) ? window.DATA.projects : [];
         const lg = list.find(p => p.id === 'langgraph-demo') || list[0];
         if (!lg) return "LangGraph dossier not found.";
-        return `[FEATURED_AI_NODE]: ${lg.title}\nROLE: AI Engineer & Architect\nTECH: ${(lg.technologies || []).join(', ')}\nURL: ${lg.githubUrl || lg.liveUrl}\nINTEL: ${lg.description}\nARCHITECTURE: StateGraph (researcher -> writer -> reviewer with conditional loops)`;
+        return `[FEATURED_AI_NODE]: ${lg.title}\nROLE: Lead AI Systems Engineer & Architect\nTECH: ${(lg.technologies || []).join(', ')}\nURL: ${lg.githubUrl || lg.liveUrl}\nINTEL: ${lg.description}\nARCHITECTURE: StateGraph (researcher -> writer -> reviewer with conditional loop)`;
     },
 
     skills: () => {
@@ -181,9 +231,9 @@ const terminalCommands = {
   Kaggle:   https://www.kaggle.com/saajiidi`;
     },
 
-    whoami: () => "IDENTITY_CONFIRMED: Sajid Islam // ROLE: Operative_Data_Analyst // ID: SI-2025-DHAKA",
+    whoami: () => "IDENTITY_CONFIRMED: Sajid Islam // ROLE: Forward Deployed Engineer (FDE) // CLEARANCE: LVL_5_ADMIN // NODE: DHAKA-FOB-01",
     
-    status: () => `SYS_DIAG_v5: OK // NEURAL_LINK: STABLE // LATENCY: 14ms // UPTIME: ${Math.floor(performance.now()/1000)}s`,
+    status: () => `SYS_DIAG_v6: OK // NEURAL_LINK: STABLE // LATENCY: 12ms // UPTIME: ${Math.floor(performance.now()/1000)}s // ENCRYPTION: AES-256`,
 
     clearance: () => {
         const val = document.querySelector('.status-value');
@@ -197,7 +247,7 @@ const terminalCommands = {
         return "[SUCCESS]: Neural link established.";
     },
 
-    pwd: () => "C:\\Users\\Sajid\\Portfolio_Mission_Dashboard",
+    pwd: () => "/home/fde/deployments/sajid-fde-terminal",
     clear: () => "CLEAR",
 
     write: (args) => {
@@ -493,8 +543,8 @@ export function initTerminal() {
         });
     };
 
-    if (input && output) handleTerminalInput(input, output, "sajid@portfolio:~$");
-    if (bottomInput && bottomOutput) handleTerminalInput(bottomInput, bottomOutput, "PS C:\\Users\\Sajid>");
+    if (input && output) handleTerminalInput(input, output, "fde@tactical:~$");
+    if (bottomInput && bottomOutput) handleTerminalInput(bottomInput, bottomOutput, "fde@tactical:~$");
 }
 
 function escapeHtml(text) {

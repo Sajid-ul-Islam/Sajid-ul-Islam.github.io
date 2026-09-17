@@ -222,18 +222,18 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
   color: var(--fg-dim);
   text-decoration: none;
   transition: color 0.16s ease, border-color 0.16s ease, transform 0.16s cubic-bezier(0.23, 1, 0.32, 1);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  min-height: 44px;
+  font-size: 0.75rem;
+  min-height: 32px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 @media (hover: hover) and (pointer: fine) {

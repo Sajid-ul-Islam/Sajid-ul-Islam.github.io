@@ -1,7 +1,7 @@
 {
-  "name": "Sajid Islam - Tactical Intel",
-  "short_name": "Tactical Intel",
-  "description": "Data Scientist & Business Analyst Portfolio - Sajid Islam",
+  "name": "Sajid Islam - Forward Deployed Engineer",
+  "short_name": "FDE Terminal",
+  "description": "Forward Deployed Engineer (FDE) Portfolio - Sajid Islam",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#051410",
@@ -22,6 +22,6 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["portfolio", "business", "data science"],
+  "categories": ["portfolio", "engineering", "ai", "terminal"],
   "lang": "en"
 }

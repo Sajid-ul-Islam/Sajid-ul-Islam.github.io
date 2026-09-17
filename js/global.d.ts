@@ -52,6 +52,9 @@ interface Window {
   terminalBuffer?: string;
   isWritingMode?: boolean;
   webkitAudioContext?: typeof AudioContext;
+  TacticalCamo?: any;
+  CAMO_PALETTES?: any;
+  setTacticalCamo?: (style: string) => void;
 }
 
 /** AudioEngine loaded globally */

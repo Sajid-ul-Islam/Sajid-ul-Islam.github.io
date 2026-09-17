@@ -1,8 +1,9 @@
 <h1 align="center">Hey, I'm Sajid Islam</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/-Data%20Scientist-2563EB?style=flat-square&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/-Business%20Analyst-059669?style=flat-square&logo=googleanalytics&logoColor=white" />
+  <img src="https://img.shields.io/badge/-Forward%20Deployed%20Engineer-2563EB?style=flat-square&logo=linux&logoColor=white" />
+  <img src="https://img.shields.io/badge/-Autonomous%20AI%20%26%20Agents-059669?style=flat-square&logo=openai&logoColor=white" />
+  <img src="https://img.shields.io/badge/-Distributed%20Telemetry-D97706?style=flat-square&logo=grafana&logoColor=white" />
   <img src="https://img.shields.io/badge/-Bangladesh-006A4E?style=flat-square&logo=bangladesh&logoColor=white" />
 </p>
 
@@ -13,8 +14,8 @@
 ---
 
 <p align="center">
-  <b>Data & Business Analyst</b> turning complex datasets into strategic growth.<br/>
-  DataOps Lead at <b>DEEN Commerce</b> &middot; Ex-<b>Daraz (Alibaba Group)</b>
+  <b>Forward Deployed Engineer (FDE)</b> bridging cutting-edge autonomous AI (LangGraph, multi-agent systems) with mission-critical client infrastructure, real-time telemetry, and distributed systems.<br/>
+  Lead Forward Deployed Engineer &middot; Ex-<b>DEEN Commerce</b> &middot; Ex-<b>Daraz (Alibaba Group)</b>
 </p>
 
 <br/>
@@ -45,10 +46,10 @@
 
 | | |
 |---|---|
-| **BI & Analytics** | Power BI dashboards, automated funnel tracking, stakeholder reporting |
-| **Data Science** | ML pipelines, RAG systems, agentic workflows (LangGraph/CrewAI) |
-| **Automation** | Python scrapers, Streamlit apps, operational data tools |
-| **Business Strategy** | Marketplace growth, partner acquisition, CRM optimization |
+| **Autonomous AI & Agents** | Multi-agent stategraphs (LangGraph), deterministic human-in-the-loop flows, enterprise RAG |
+| **Forward Deployment & Infra** | Mission-critical client integrations, Docker, Linux systems engineering, CI/CD telemetry |
+| **Distributed Telemetry & Data** | Real-time smart grid telemetry (DESCO), streaming pipelines, enterprise monitoring |
+| **Tactical Systems & UI** | Mil-spec terminal interfaces, interactive CLI tools, low-latency client integrations |
 
 <br/>
 

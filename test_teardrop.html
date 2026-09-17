@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Teardrop Timing Verification</title>
+  <link rel="stylesheet" href="css/color-palette.css">
+  <link rel="stylesheet" href="css/shared-components.css">
+  <link rel="stylesheet" href="css/tactical-hud.css">
+  <style>
+    body {
+      background: var(--bg-page, #080c06);
+      color: var(--text-primary, #e2e8f0);
+      font-family: monospace;
+      padding: 40px;
+    }
+    #theme-toggle {
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
+      background: #166534;
+      color: #fff;
+      border: 1px solid #22c55e;
+      border-radius: 6px;
+    }
+    #logOutput {
+      margin-top: 30px;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border: 1px solid #333;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teardrop Dark/Light Transition Timing Test</h1>
+  <button id="theme-toggle" type="button"><i class="fas fa-moon"></i> Toggle Theme</button>
+  <div id="status">Status: Initializing</div>
+  <pre id="logOutput"></pre>
+
+  <script type="module">
+    import { initThemeToggleWithRipple } from './js/theme-switcher-ripple.js';
+
+    const root = document.documentElement;
+    const logEl = document.getElementById('logOutput');
+    const statusEl = document.getElementById('status');
+    const logs = [];
+
+    function log(msg) {
+      const entry = `[${(performance.now() - startTime).toFixed(1)}ms] ${msg}`;
+      logs.push(entry);
+      logEl.textContent = logs.join('\n');
+      console.log(entry);
+    }
+
+    const applyTheme = (t) => {
+      root.setAttribute('data-theme', t);
+      document.body.setAttribute('data-theme', t);
+      log(`applyTheme called -> theme is now: ${t}`);
+    };
+
+    initThemeToggleWithRipple({
+      buttonId: 'theme-toggle',
+      getTheme: () => root.getAttribute('data-theme') || 'dark',
+      applyTheme,
+      saveTheme: (t) => localStorage.setItem('test-theme', t)
+    });
+
+    let startTime = performance.now();
+
+    window.runTest = function() {
+      startTime = performance.now();
+      log('Starting test: Initial theme = ' + root.getAttribute('data-theme'));
+      const btn = document.getElementById('theme-toggle');
+      btn.click();
+      log('Button clicked!');
+
+      // Poll at interval to check theme and overlay status
+      const checkPoints = [50, 150, 300, 500, 700, 900, 1200, 1600, 2400];
+      checkPoints.forEach(t => {
+        setTimeout(() => {
+          const currentTheme = root.getAttribute('data-theme');
+          const overlay = document.querySelector('.theme-drop-overlay');
+          const teardrop = document.querySelector('.theme-drop');
+          const teardropY = teardrop ? teardrop.getBoundingClientRect().top.toFixed(1) : 'none';
+          log(`Sample at ${t}ms: theme="${currentTheme}", overlayPresent=${!!overlay}, teardropY=${teardropY}`);
+          if (t === 2400) {
+            statusEl.textContent = 'TEST COMPLETE: ' + (currentTheme === 'light' ? 'SUCCESS' : 'FAILED');
+            window.__TEST_DONE__ = true;
+            window.__TEST_LOGS__ = logs;
+          }
+        }, t);
+      });
+    };
+
+    // Auto-run after 200ms
+    setTimeout(window.runTest, 200);
+  </script>
+</body>
+</html>

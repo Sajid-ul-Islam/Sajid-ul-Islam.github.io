@@ -13,11 +13,15 @@
         "start": "vite",
         "typecheck": "tsc --noEmit"
     },
-    "description": "High-performance personal portfolio for Sajid Islam, Data Scientist & Business Analyst. Features a Tactical HUD aesthetic, interactive terminal, PWA support, and AI-powered chatbot. Now with ES module architecture.",
+    "description": "High-performance portfolio for Sajid Islam, Forward Deployed Engineer (FDE). Features an authentic Tactical Field Terminal with real camouflage background, interactive CLI, multi-agent workflows, PWA support, and modular ES architecture.",
     "keywords": [
         "portfolio",
-        "data-science",
-        "tactical-hud",
+        "forward-deployed-engineer",
+        "fde",
+        "tactical-terminal",
+        "camouflage",
+        "langgraph",
+        "multi-agent",
         "pwa",
         "terminal",
         "es-modules"

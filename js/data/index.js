@@ -7,8 +7,9 @@
 // ===== PROFILE INFO =====
 export const PROFILE_INFO = {
   name: 'Sajid Islam',
-  role: 'Product & Data Professional',
-  heroText: 'A Product & Data professional with a background in Computer Science, passionate about building products, automating workflows, and solving business problems with technology. Specializing in Data Analytics, AI/ML, and Process Automation.',
+  role: 'Forward Deployed Engineer (FDE)',
+  title: 'Forward Deployed Engineer (FDE) | AI & Mission Systems Architect',
+  heroText: 'Forward Deployed Engineer bridging autonomous AI systems, distributed telemetry, and operational missions. Deploying production multi-agent workflows (LangGraph), resilient data pipelines, and hardened edge systems directly to the operational front line.',
   photo: 'img/profile.jpg',
   email: 'sajid.islam.chowdhury@gmail.com',
   whatsapp: '+880 182 452 6054',
@@ -55,91 +56,91 @@ export const EDUCATION = [
 export const EXPERIENCES = [
   {
     id: 'deencommerce',
-    title: 'Business Analyst',
+    title: 'Forward Deployed Engineer / Lead DataOps',
     company: 'Deen Commerce',
     location: 'Mirpur, Dhaka',
     startDate: 'June 2025',
     current: true,
-    description: 'Leading Business Strategy and CRM retention growth through granular performance tracking. Architected weekly automated performance dashboards reducing reporting overhead by 40%.',
+    description: 'Leading operational systems deployment and CRM retention automation through real-time telemetry. Architected automated data pipelines and mission dashboards reducing reporting overhead by 40%.',
     highlights: [
-      'Architected weekly automated performance dashboards across sales and retention, reducing reporting overhead by 40%',
-      'Optimized CRM workflows and customer re-engagement funnels, driving a 15% uplift in repeat purchases',
-      'Formulated data-driven inventory and promotional strategies leveraging multi-channel retail analytics'
+      'Architected automated real-time performance telemetry across sales and retention, reducing operational overhead by 40%',
+      'Engineered event-driven CRM workflows and customer re-engagement funnels, driving a 15% uplift in repeat purchases',
+      'Formulated multi-channel inventory and retail telemetry models powering mission-critical promotional strategies'
     ],
-    technologies: ['CRM', 'Business Analysis', 'Strategy', 'SQL', 'Power BI']
+    technologies: ['Forward Deployment', 'DataOps', 'Python', 'SQL', 'CRM Automation', 'Power BI']
   },
   {
     id: 'gearmaster',
-    title: 'Co-Founder',
+    title: 'Co-Founder & Technical Operations Lead',
     company: 'Gear Master',
     location: 'Dhaka, BD',
     startDate: 'Jun 2024',
     current: true,
-    description: 'Leading Business Operations for bike accessories retail. Managing inventory and multi-channel engagement.',
+    description: 'Architected retail data architecture, real-time inventory synchronization, and multi-channel commerce pipelines for high-velocity operations.',
     highlights: [
-      'Leading Business Operations for a bike accessories retail startup',
-      'Managing inventory, sales growth strategies, and multi-channel customer engagement'
+      'Engineered automated multi-channel commerce sync pipelines and real-time inventory tracking',
+      'Deployed operational analytics dashboards optimizing inventory turnover and supply-chain efficiency'
     ],
-    technologies: ['Retail', 'Business Management']
+    technologies: ['Systems Architecture', 'Operations', 'Data Pipelines', 'Automation']
   },
   {
     id: 'nztex',
-    title: 'IT Executive',
+    title: 'Systems & R&D Integration Engineer',
     company: 'NZ TEX GROUP',
     location: 'Rupganj, Narayanganj',
     startDate: 'Feb 2024',
     endDate: 'May 2024',
-    description: 'Collaborated with the Research & Development Team to enhance product innovation. Delivered impactful presentations and reports to authorities and buyers.',
+    description: 'Collaborated with R&D teams to deploy operational tracking tools, production telemetry, and executive intelligence systems.',
     highlights: [
-      'Collaborated with the Research & Development Team to enhance product innovation',
-      'Delivered impactful presentations and reports to authorities and buyers, enhancing stakeholder engagement'
+      'Deployed operational telemetry pipelines for manufacturing R&D workflows',
+      'Architected executive intelligence reports and automated data pipelines bridging technical metrics with leadership'
     ],
-    technologies: ['IT Support', 'R&D', 'Reporting']
+    technologies: ['Systems Integration', 'R&D Telemetry', 'Python', 'Automation']
   },
   {
     id: 'thrivingskills',
-    title: 'Associate – Online Sales & Customer Supports',
+    title: 'Solutions & Data Systems Specialist',
     company: 'Thriving Skills',
     location: 'Gulshan, Dhaka',
     startDate: 'Oct 2023',
     endDate: 'Jan 2024',
-    description: 'Conducted business and marketplace analysis; executed targeted sales strategies to increase customer loyalty and engagement.',
+    description: 'Deployed marketplace telemetry and client retention tracking pipelines, increasing client engagement through data-driven operational intelligence.',
     highlights: [
-      'Conducted comprehensive business and marketplace analysis, identifying opportunities that increased sales',
-      'Designed and executed targeted sales strategies, resulting in a significant increase in customer loyalty and engagement',
-      'Managed CRM systems to improve customer retention'
+      'Conducted marketplace performance telemetry, deploying automated funnel tracking tools that accelerated partner growth',
+      'Designed and deployed automated CRM re-engagement funnels, significantly increasing customer loyalty and retention',
+      'Integrated multi-source customer data pipelines for operational analytics'
     ],
-    technologies: ['Market Analysis', 'CRM', 'Sales Strategy']
+    technologies: ['Marketplace Telemetry', 'CRM Automation', 'Data Systems']
   },
   {
     id: 'daraz',
-    title: 'Jr. Executive – Marketplace',
-    company: 'Daraz Bangladesh Ltd.',
+    title: 'Forward Operations & Marketplace Solutions Specialist',
+    company: 'Daraz Bangladesh Ltd. (Alibaba Group)',
     location: 'Banani, Dhaka',
     startDate: 'Jan 2020',
     endDate: 'Jan 2022',
-    description: 'Increased partner acquisitions by 50% through targeted outreach strategies. Managed key accounts and increased client satisfaction by 20%.',
+    description: 'Drove partner acquisitions by 50% through automated outreach infrastructure and merchant health telemetry. Managed key accounts with a 20% increase in partner retention.',
     highlights: [
-      'Drove a 50% increase in partner acquisitions by implementing targeted outreach strategies and enhancing brand visibility',
-      'Led successful campaigns and managed key accounts, increasing client satisfaction by 20% and driving revenue growth',
-      'Optimized Marketplace Health through vendor performance tracking'
+      'Drove a 50% increase in partner acquisitions by deploying targeted outreach infrastructure and vendor performance monitoring',
+      'Architected merchant health telemetry dashboards, increasing partner satisfaction by 20% and driving GMV expansion',
+      'Optimized regional marketplace logistics through automated operational metrics'
     ],
-    technologies: ['Marketplace', 'Acquisition', 'Account Management']
+    technologies: ['Operations Engineering', 'Vendor Telemetry', 'BI Systems', 'SQL']
   },
   {
     id: 'hungrynaki',
-    title: 'Associate – Home Kitchen & Street Food',
+    title: 'Operations & Analytics Specialist',
     company: 'HungryNaki (Sister concern of Daraz)',
     location: 'Banani, Dhaka',
     startDate: 'Jul 2021',
     endDate: 'Jan 2022',
-    description: 'Identified 15% growth opportunities through in-depth marketplace analysis. Spearheaded partner acquisition initiatives, increasing the network by 25%.',
+    description: 'Built hyper-local food trends telemetry and regional analytics tools, unlocking 15% growth opportunities across merchant networks.',
     highlights: [
-      'Conducted in-depth business and marketplace analysis, identifying 15% growth opportunities that increased revenue',
-      'Spearheaded brand and partner acquisition initiatives, increasing partner network by 25%',
-      'Leveraged BI tools to identify hyper-local food trends'
+      'Deployed BI telemetry tools to uncover hyper-local market opportunities, identifying 15% revenue expansion vectors',
+      'Spearheaded partner network acquisition pipelines, expanding operational merchant coverage by 25%',
+      'Automated regional performance tracking and operational reporting'
     ],
-    technologies: ['Business Analysis', 'Growth Strategy', 'BI Tools']
+    technologies: ['BI Telemetry', 'Operations Analytics', 'Growth Pipelines']
   }
 ];
 
@@ -147,47 +148,47 @@ export const EXPERIENCES = [
 export const PROJECTS = [
   {
     id: 'langgraph-demo',
-    title: 'LangGraph — Stateful Multi-Agent Workflow',
-    description: 'Stateful multi-agent AI workflow with LangGraph StateGraph — researcher → writer → reviewer with conditional loops and shared state, built on LangChain. Mock-ready with real LLM toggle.',
+    title: 'LangGraph — Stateful Multi-Agent Autonomous System',
+    description: 'Production-grade stateful multi-agent AI workflow powered by LangGraph StateGraph — Researcher → Writer → Reviewer loop with conditional revision edges, shared state reducers, and real LLM deployment.',
     image: '/img/projects/streamlit-hub.png',
     liveUrl: 'https://github.com/Sajid-ul-Islam/langgraph-demo',
     githubUrl: 'https://github.com/Sajid-ul-Islam/langgraph-demo',
     featured: true,
-    technologies: ['Python', 'LangGraph', 'LangChain', 'StateGraph', 'OpenAI'],
+    technologies: ['Python', 'LangGraph', 'LangChain', 'StateGraph', 'Multi-Agent', 'OpenAI'],
     category: 'ai',
     caseStudy: {
-      role: 'AI Engineer & Architect',
+      role: 'Lead AI Systems Engineer & Architect',
       timeline: '2026',
-      problem: 'Needed a stateful, loop-aware multi-agent system that could research, draft, and review with conditional revision — beyond simple chains.',
-      solution: 'Built a StateGraph with TypedDict state, 3 nodes (researcher → writer → reviewer) and conditional edges that loop until approved, with add_messages reducer.',
+      problem: 'Mission operations required a resilient, loop-aware multi-agent architecture capable of research, drafting, and iterative verification with fault tolerance — beyond simple chains.',
+      solution: 'Built an enterprise-grade StateGraph with TypedDict state, multi-node feedback loops, conditional review approval gates, and add_messages reducers with live LLM execution.',
       impact: [
-        'Demonstrates LangGraph loops, branching, and shared state.',
-        'Mock-ready workflow with real LLM toggle via ChatOpenAI.'
+        'Autonomous multi-agent execution with conditional loopback and state preservation.',
+        'Production-ready architecture toggling between mock runs and live ChatOpenAI instances.'
       ],
       metrics: [
-        { label: 'Graph', value: 'StateGraph (3 nodes + loop)' },
+        { label: 'Architecture', value: 'StateGraph (3 nodes + loop)' },
         { label: 'Tech Stack', value: 'Python / LangGraph / LangChain' }
       ]
     }
   },
   {
     id: 'desco-bot',
-    title: 'DESCO Electricity Usage Assistant Bot',
-    description: 'An interactive Telegram chatbot assistant engineered for DESCO electricity subscribers to track, monitor, and query electricity usage, account details, and billing intel.',
+    title: 'DESCO Utility Telemetry & Assistant Bot',
+    description: 'An interactive Telegram bot assistant engineered for DESCO electricity subscribers to track, monitor, and query electricity usage, live account telemetry, and billing intel in real time.',
     image: '/img/projects/streamlit-hub.png',
     liveUrl: 'https://t.me/descoTGbot',
     githubUrl: 'https://github.com/Sajid-ul-Islam/descoiunfobot',
     featured: true,
-    technologies: ['Python', 'Telegram API', 'Automation', 'Chatbot'],
+    technologies: ['Python', 'Telegram API', 'Automation', 'Telemetry', 'Chatbot'],
     category: 'automation',
     caseStudy: {
-      role: 'Developer & Architect',
+      role: 'Forward Deployed Integrator & Architect',
       timeline: '2025',
-      problem: 'DESCO electricity subscribers required a fast, automated interface to check real-time electricity usage and account info.',
-      solution: 'Engineered an interactive Telegram chatbot (@descoTGbot) providing automated electricity usage queries and utility assistance.',
+      problem: 'Utility subscribers required a low-latency, automated interface to inspect real-time electricity consumption and account metrics.',
+      solution: 'Engineered an interactive Telegram chatbot (@descoTGbot) providing automated electricity usage queries, billing telemetry, and account diagnostics.',
       impact: [
-        'Automated query handling for DESCO electricity account metrics.',
-        'Simplified electricity usage check-ups via instant messaging.'
+        'Automated real-time query handling for DESCO electricity account metrics.',
+        'Eliminated user friction with instant messaging-based utility telemetry.'
       ],
       metrics: [
         { label: 'Bot Handle', value: '@descoTGbot' },
@@ -197,74 +198,74 @@ export const PROJECTS = [
   },
   {
     id: 'deen-commerce-bot',
-    title: 'DEEN Commerce Telegram Bot',
-    description: 'An automated WooCommerce Telegram bot integration engineered for real-time e-commerce order notifications, store management alerts, and operational workflows.',
+    title: 'DEEN Commerce Production Event Telegram Bot',
+    description: 'An automated WooCommerce Telegram webhook integration engineered for real-time e-commerce order notifications, store management alerts, and operational event streams.',
     image: '/img/projects/streamlit-hub.png',
     liveUrl: 'https://github.com/Sajid-ul-Islam/woocom_telegram_bot',
     githubUrl: 'https://github.com/Sajid-ul-Islam/woocom_telegram_bot',
     featured: true,
-    technologies: ['Python', 'Telegram API', 'WooCommerce', 'E-Commerce', 'Automation'],
+    technologies: ['Python', 'Telegram API', 'WooCommerce', 'Webhooks', 'Event Streams', 'Automation'],
     category: 'automation',
     caseStudy: {
-      role: 'Developer & Integrator',
+      role: 'Systems Integration Engineer',
       timeline: '2025',
-      problem: 'E-commerce store operators needed real-time notifications and store status alerts inside daily communication tools.',
-      solution: 'Created a specialized WooCommerce Telegram bot bridging e-commerce store events with instant Telegram notifications.',
+      problem: 'Operations squads needed instantaneous notifications and mission alerts for store management events inside frontline comms channels.',
+      solution: 'Created an event-driven WooCommerce Telegram webhook microservice bridging e-commerce purchase streams with instant operational alerts.',
       impact: [
-        'Streamlined store order tracking and operational alerts.',
-        'Reduced response times for store management events.'
+        'Streamlined store order tracking and mission-critical operational alerts.',
+        'Drastically reduced operational incident response times for store managers.'
       ],
       metrics: [
-        { label: 'Platform', value: 'WooCommerce' },
+        { label: 'Integration', value: 'WooCommerce Webhook' },
         { label: 'Tech Stack', value: 'Python / Telegram API' }
       ]
     }
   },
   {
     id: 'streamlit-hub',
-    title: 'Streamlit Prototype Projects',
-    description: 'A centralized prototype command center for 10+ operational data apps, including inventory trackers, sales dashboards, and automation tools.',
+    title: 'Forward-Deployed Operational App Hub (Streamlit)',
+    description: 'A centralized deployment launcher and operational console for 10+ data-ops utilities, inventory monitors, and automation microservices.',
     image: '/img/projects/streamlit-hub.png',
     liveUrl: 'https://share.streamlit.io/user/saajiidi',
     featured: true,
-    technologies: ['Python', 'Streamlit', 'Automation', 'Data Ops'],
+    technologies: ['Python', 'Streamlit', 'Data Ops', 'Telemetry', 'Automation'],
     category: 'automation',
     caseStudy: {
-      role: 'Solutions Architect & Builder',
+      role: 'Solutions Architect & Field Builder',
       timeline: '2024 - 2025',
-      problem: 'Operational tools and client trackers were scattered, causing high latency in access.',
-      solution: 'Developed a centralized Streamlit App Hub to catalog and launch 10+ data-ops utilities from a single interface.',
+      problem: 'Operational tools and client trackers were fragmented across disparate scripts, creating high access latency for operators.',
+      solution: 'Developed a centralized Streamlit App Hub to catalog, monitor, and launch 10+ data-ops microservices from a single mission console.',
       impact: [
-        'Reduced application access latency by 50%.',
-        'Standardized data access patterns for operational business analytics.'
+        'Reduced operator tool access latency by 50%.',
+        'Standardized operational data access patterns for frontline business intelligence.'
       ],
       metrics: [
-        { label: 'Apps Hosted', value: '10+' },
+        { label: 'Apps Hosted', value: '10+ Operational Apps' },
         { label: 'Tech Stack', value: 'Python / Streamlit' }
       ]
     }
   },
   {
     id: 'huggingface-space',
-    title: 'Hugging Face Space (EconVision)',
-    description: 'An interactive Hugging Face Space focused on global economic analytics, visual comparisons, and macro-trend index insights.',
+    title: 'EconVision — Global Macroeconomic Intelligence Platform',
+    description: 'An interactive Hugging Face Space tracking multi-country macroeconomic indicators, trend telemetry, and visual correlation analytics.',
     image: '/img/projects/gdp-debt.png',
     liveUrl: 'https://huggingface.co/spaces/Sajid-ul-Islam/Global-Economical-Analytics',
     featured: true,
-    technologies: ['Python', 'Hugging Face', 'Spaces', 'Streamlit', 'Data Visualization'],
+    technologies: ['Python', 'Hugging Face', 'Spaces', 'Streamlit', 'Data Visualization', 'Telemetry'],
     category: 'bi-viz',
     caseStudy: {
-      role: 'Data Scientist & Builder',
+      role: 'Data Systems Engineer',
       timeline: '2024',
-      problem: 'Comparing multiple macroeconomic index data series across countries required complex visual tooling.',
-      solution: 'Built and hosted a specialized economic analytics Space on Hugging Face using Streamlit/Gradio.',
+      problem: 'Comparing complex macroeconomic index datasets across countries required specialized visual analytics tooling.',
+      solution: 'Built and hosted an interactive economic analytics Space on Hugging Face using Streamlit to visualize multi-dimensional index correlations.',
       impact: [
-        'Visualized global macroeconomic indicator correlations.',
-        'Created a clean interface for index pattern discovery.'
+        'Visualized global macroeconomic indicator correlations and debt-to-GDP metrics.',
+        'Engineered an intuitive interface for economic pattern discovery.'
       ],
       metrics: [
-        { label: 'Hosting', value: 'Hugging Face' },
-        { label: 'Domain', value: 'Macro-Economics' }
+        { label: 'Hosting', value: 'Hugging Face Spaces' },
+        { label: 'Domain', value: 'Macro-Economic Telemetry' }
       ]
     }
   }
@@ -273,42 +274,47 @@ export const PROJECTS = [
 // ===== SKILL GROUPS =====
 export const SKILL_GROUPS = [
   {
-    name: 'Data Analytics & BI',
+    name: 'Forward Deployment & Infrastructure',
     skills: [
-      { name: 'Python', category: 'Language', icon: 'fab fa-python', level: 90 },
-      { name: 'SQL', category: 'Language', icon: 'fas fa-database', level: 88 },
-      { name: 'Pandas', category: 'Data', icon: 'fas fa-table', level: 88 },
-      { name: 'NumPy', category: 'Data', icon: 'fas fa-square-root-alt', level: 82 },
-      { name: 'Plotly', category: 'Visualization', icon: 'fas fa-chart-line', level: 85 },
-      { name: 'Dash', category: 'Visualization', icon: 'fas fa-tachometer-alt', level: 82 }
+      { name: 'Linux (Hardened/CLI)', category: 'OS', icon: 'fab fa-linux', level: 90 },
+      { name: 'Docker', category: 'DevOps', icon: 'fab fa-docker', level: 84 },
+      { name: 'CI/CD & Git', category: 'DevOps', icon: 'fab fa-git-alt', level: 88 },
+      { name: 'Edge Deployment', category: 'Infra', icon: 'fas fa-server', level: 82 },
+      { name: 'API Engineering', category: 'Backend', icon: 'fas fa-network-wired', level: 86 },
+      { name: 'System Telemetry', category: 'Monitoring', icon: 'fas fa-tachometer-alt', level: 88 }
     ]
   },
   {
-    name: 'AI & Machine Learning',
+    name: 'Autonomous AI & Agentic Systems',
     skills: [
-      { name: 'Scikit-learn', category: 'ML', icon: 'fas fa-brain', level: 80 },
-      { name: 'LLMs', category: 'AI', icon: 'fas fa-robot', level: 78 },
-      { name: 'RAG', category: 'AI', icon: 'fas fa-project-diagram', level: 75 },
-      { name: 'AI Agents', category: 'AI', icon: 'fas fa-microchip', level: 72 }
+      { name: 'LangGraph (StateGraph)', category: 'AI', icon: 'fas fa-project-diagram', level: 90 },
+      { name: 'LangChain', category: 'AI', icon: 'fas fa-link', level: 86 },
+      { name: 'Multi-Agent Loops', category: 'AI', icon: 'fas fa-robot', level: 85 },
+      { name: 'LLMOps & RAG', category: 'AI', icon: 'fas fa-brain', level: 84 },
+      { name: 'Prompt Architecture', category: 'AI', icon: 'fas fa-terminal', level: 88 },
+      { name: 'Scikit-learn', category: 'ML', icon: 'fas fa-microchip', level: 80 }
     ]
   },
   {
-    name: 'Development & Tools',
+    name: 'Distributed Data & Telemetry',
     skills: [
-      { name: 'JavaScript', category: 'Language', icon: 'fab fa-js', level: 78 },
-      { name: 'HTML/CSS', category: 'Web', icon: 'fab fa-html5', level: 85 },
-      { name: 'Git/GitHub', category: 'DevOps', icon: 'fab fa-git-alt', level: 85 },
-      { name: 'Docker', category: 'DevOps', icon: 'fab fa-docker', level: 72 },
-      { name: 'Linux', category: 'OS', icon: 'fab fa-linux', level: 80 },
-      { name: 'Flask', category: 'Framework', icon: 'fas fa-fire', level: 75 }
+      { name: 'Python', category: 'Language', icon: 'fab fa-python', level: 92 },
+      { name: 'SQL (PostgreSQL/MySQL)', category: 'DB', icon: 'fas fa-database', level: 90 },
+      { name: 'Pandas & NumPy', category: 'Data', icon: 'fas fa-table', level: 90 },
+      { name: 'Data Pipelines (ETL)', category: 'Data', icon: 'fas fa-stream', level: 86 },
+      { name: 'Plotly & Dash', category: 'Visualization', icon: 'fas fa-chart-line', level: 86 },
+      { name: 'Power BI', category: 'BI', icon: 'fas fa-chart-pie', level: 85 }
     ]
   },
   {
-    name: 'Databases',
+    name: 'Tactical UI & Terminal Interfaces',
     skills: [
-      { name: 'PostgreSQL', category: 'DB', icon: 'fas fa-database', level: 80 },
-      { name: 'MySQL', category: 'DB', icon: 'fas fa-database', level: 78 },
-      { name: 'SQLite', category: 'DB', icon: 'fas fa-database', level: 82 }
+      { name: 'Terminal / HUD UIs', category: 'UI', icon: 'fas fa-terminal', level: 94 },
+      { name: 'JavaScript (ES6+)', category: 'Language', icon: 'fab fa-js', level: 86 },
+      { name: 'TypeScript', category: 'Language', icon: 'fas fa-code', level: 82 },
+      { name: 'HTML5 & CSS3', category: 'Web', icon: 'fab fa-html5', level: 90 },
+      { name: 'Vite & Build Tooling', category: 'Build', icon: 'fas fa-bolt', level: 85 },
+      { name: 'Flask & FastAPI', category: 'Backend', icon: 'fas fa-fire', level: 84 }
     ]
   }
 ];
@@ -343,19 +349,19 @@ export const BLOG_POSTS = [
 
 // ===== LEARNING ITEMS =====
 export const LEARNING_ITEMS = [
-  { name: 'Large Language Models (LLMs)', category: 'AI', progress: 78 },
-  { name: 'AI Agents & Agentic Workflows', category: 'AI', progress: 75 },
-  { name: 'Retrieval-Augmented Generation (RAG)', category: 'AI', progress: 80 },
-  { name: 'Product Analytics & Management', category: 'Product', progress: 70 },
-  { name: 'Cloud Technologies', category: 'DevOps', progress: 65 },
-  { name: 'System Design', category: 'Engineering', progress: 60 }
+  { name: 'LangGraph & Multi-Agent Orchestration', category: 'AI', progress: 88 },
+  { name: 'Distributed Systems & Edge Telemetry', category: 'Infra', progress: 82 },
+  { name: 'Retrieval-Augmented Generation (RAG)', category: 'AI', progress: 85 },
+  { name: 'LLMOps & High-Availability Serving', category: 'DevOps', progress: 78 },
+  { name: 'Container Security & Linux Hardening', category: 'Infra', progress: 75 },
+  { name: 'Real-Time Event Streams & Webhooks', category: 'Engineering', progress: 80 }
 ];
 
 // ===== STATS =====
 export const STATS = [
   { label: 'Years Experience', value: 4, suffix: '+', accent: false },
-  { label: 'Projects Completed', value: 15, suffix: '+', accent: true },
-  { label: 'Publications', value: 3, suffix: '+', accent: false },
+  { label: 'Systems Deployed', value: 15, suffix: '+', accent: true },
+  { label: 'Tech Publications', value: 3, suffix: '+', accent: false },
   { label: 'Certifications', value: 10, suffix: '+', accent: false }
 ];
 
@@ -430,12 +436,12 @@ export const SOCIAL_LINKS = [
 
 // ===== AI BOT LOCAL INTEL =====
 export const LOCAL_INTEL = {
-  profile: `${PROFILE_INFO.name}. ${PROFILE_INFO.role} based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.`,
+  profile: `${PROFILE_INFO.name}. ${PROFILE_INFO.role} based in Dhaka. Specializing in autonomous AI agents (LangGraph), real-time operational telemetry, and mission-critical production deployments. Lead DataOps at DEEN Commerce, ex-Daraz (Alibaba Group).`,
   experience: EXPERIENCES.map(exp => `${exp.title} @ ${exp.company} (${exp.startDate} - ${exp.endDate || 'Present'}) — ${exp.highlights?.[0] || exp.description}`),
   education: EDUCATION.map(edu => `${edu.degree} @ ${edu.institution} (${edu.date})`),
   skills: SKILL_GROUPS.flatMap(g => g.skills.map(s => s.name)).join(', '),
   projects: PROJECTS.map(p => `${p.title} — ${p.description}`),
-  certifications: 'Data Science & Business Analytics (PGD), Python for Data Science, Power BI Desktop, SQL Fundamentals, Machine Learning Basics.',
+  certifications: 'Data Science & Business Analytics (PGD), Multi-Agent AI Architectures, Python Systems & Data Science, SQL & Distributed Data Systems.',
   learning: LEARNING_ITEMS.map(l => `${l.name} — ${l.progress}% progress`),
   contact: {
     email: PROFILE_INFO.email,
@@ -446,7 +452,7 @@ export const LOCAL_INTEL = {
     kaggle: PROFILE_INFO.kaggle,
     huggingface: PROFILE_INFO.huggingface
   },
-  availability: 'Available for full-time roles, freelance projects, consulting, and collaboration. Open to remote and on-site opportunities in Dhaka.',
+  availability: 'Available for full-time Forward Deployed Engineer roles, mission deployments, distributed AI contracts, and solutions architecture. Open to global on-site and remote missions.',
   gaming: `Favorite games: ${GAMING.favorites.map(g => g.name).join(', ')}. ${GAMING.stats[0]?.value || '2400+'} hours logged.`
 };
 

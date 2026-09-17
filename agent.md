@@ -12,12 +12,14 @@
 
 ## 1. Executive Summary
 
-This is a high-performance, modular portfolio for a Data Scientist & Business Analyst. The design follows a "Tactical HUD" aesthetic inspired by military command interfaces and terminal UIs. It features an interactive CLI terminal, PWA support, real-time session analytics, and a modular JavaScript architecture.
+This is a high-performance, modular portfolio showcasing a **Forward Deployed Engineer (FDE)** specializing in autonomous AI multi-agent systems (LangGraph), mission-critical client deployments, real-time telemetry, and distributed data infrastructure. The design follows an authentic **Terminal on Tactical Camouflage** aesthetic featuring mil-spec window chrome, live Fastfetch dossier, procedural digital camouflage background engine, interactive CLI terminal, PWA support, and modular ES architecture.
 
 **Key Value Propositions:**
+- Authentic terminal chassis with window chrome (`[ ● ● ● ]`), Fastfetch system telemetry dossier, and section command headers (`fde@tactical:~$ ...`)
+- Procedural multi-pattern military camouflage background engine (`Digital Woodland`, `Urban Night-Ops`, `Stealth Black-Ops`, `Desert Operator`) with interactive radar sweep telemetry
 - PWA-ready with offline support via Service Worker
-- Interactive tactical terminal with command palette
-- Data-driven visualization with skill radar charts
+- Interactive tactical terminal with command palette and FDE commands (`fde`, `camo`, `langgraph`, `neofetch`, `workbench`)
+- Data-driven visualization with skill radar charts and live KPI streaming
 - Secure portfolio bridge for external projects
 - Responsive resume with PDF export capability
 - AI-powered chatbot with local knowledge base
@@ -58,10 +60,12 @@ Sajid-ul-Islam.github.io/
 │   ├── floating-widgets.css  # HUD widget styling
 │   ├── github-feed.css       # GitHub integration styles
 │   ├── projects.css          # Projects showcase styling
+│   ├── terminal-camo.css     # Terminal field chassis & camouflage overlay styling
 │   └── deep-black-terminal.css # Terminal-specific styling
 │
 ├── js/                       # JavaScript modules (tactical architecture)
 │   ├── data/index.js         # Central data module (all portfolio content)
+│   ├── tactical-camo.js      # Procedural military camouflage & radar telemetry engine
 │   ├── main.js               # Tactical theme entry point (imports all modules)
 │   ├── theme-init.js         # Theme data patching (meta, title, JSON-LD)
 │   ├── theme-accent.js       # Shared accent/theme switching logic

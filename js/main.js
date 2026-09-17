@@ -83,6 +83,9 @@ import { initThemeToggleWithRipple } from './theme-switcher-ripple.js';
 // ===== PWA LOADER =====
 import { initPWA } from './pwa-loader.js';
 
+// ===== TACTICAL CAMOUFLAGE ENGINE =====
+import { TacticalCamo, CAMO_PALETTES } from './tactical-camo.js';
+
 // ===== AI CHAT =====
 import { initAiChat, handleSuggestion } from './ai-bot.js';
 
@@ -191,6 +194,8 @@ window.togglePalette = togglePalette;
 window.copyEmail = copyEmail;
 window.handleSuggestion = handleSuggestion;
 window.glitchEffect = glitchEffect;
+window.TacticalCamo = TacticalCamo;
+window.CAMO_PALETTES = CAMO_PALETTES;
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', async () => {
