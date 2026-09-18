@@ -100,6 +100,8 @@
 body {
     cursor: crosshair;
 }
+/* ===== 2. TACTICAL HUD POINTER STYLING ===== */
+/* Handled adaptively by tactical-hud.css and tactical-enhancements.js */
 
 a, button, .nav-link, .btn, .card-glass, .social-link, .filter-btn {
     cursor: crosshair;

@@ -117,6 +117,8 @@
   <!-- Custom Tactical Cursor -->
   <div class="custom-cursor d-none d-lg-block"></div>
   <div class="cursor-follower d-none d-lg-block"></div>
+  <div class="custom-cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" aria-hidden="true"></div>
 
   <!-- Tactical Camo Canvas & Vignette Overlay -->
   <canvas id="camoReveal" aria-hidden="true"></canvas>
@@ -343,6 +345,7 @@
     <section class="resume-section p-3 p-lg-5" id="about">
       <div class="terminal-cmd-header">
         <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/operator</span>$ <span class="prompt-cmd">fastfetch --profile fde-dossier</span>
+        <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/operator</span>$</span> <span class="prompt-cmd">fastfetch --profile fde-dossier</span>
       </div>
       <div class="row align-items-center g-5">
         <div class="col-lg-8 hero-content order-2 order-lg-1 text-center text-lg-start">
@@ -394,6 +397,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/experience</span>$ <span class="prompt-cmd">cat deployments.log</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/experience</span>$</span> <span class="prompt-cmd">cat deployments.log</span>
         </div>
         <span class="section-label">COMMAND_HISTORY</span>
         <h2 class="mb-5">Work History & Deployments</h2>
@@ -408,6 +412,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/academics</span>$ <span class="prompt-cmd">cat credentials.txt</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/academics</span>$</span> <span class="prompt-cmd">cat credentials.txt</span>
         </div>
         <span class="section-label">ACADEMIC_INTEL</span>
         <h2 class="mb-5">Education</h2>
@@ -421,6 +426,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/skills</span>$ <span class="prompt-cmd">sys-probe --matrix --all</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/skills</span>$</span> <span class="prompt-cmd">sys-probe --matrix --all</span>
         </div>
         <div class="d-flex align-items-center gap-3 mb-4">
           <span class="section-label mb-0">TECH_STACK_CORE</span>
@@ -532,6 +538,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/deployments</span>$ <span class="prompt-cmd">ls -la --sort=production-impact</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/deployments</span>$</span> <span class="prompt-cmd">ls -la --sort=production-impact</span>
         </div>
         <span class="section-label">OPERATIONS_LOG</span>
         <h2 class="mb-4">Mission Deployments & Projects</h2>
@@ -561,6 +568,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/dispatch</span>$ <span class="prompt-cmd">tail -n 10 field_notes.md</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/dispatch</span>$</span> <span class="prompt-cmd">tail -n 10 field_notes.md</span>
         </div>
         <span class="section-label">INTEL_REPORTS</span>
         <h2 class="mb-5">Latest Field Notes & Dispatch</h2>
@@ -576,6 +584,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/intel-track</span>$ <span class="prompt-cmd">git status --untracked-files</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/intel-track</span>$</span> <span class="prompt-cmd">git status --untracked-files</span>
         </div>
         <span class="section-label">SKILL_ACQUISITION</span>
         <h2 class="mb-5">Current Learning Track</h2>
@@ -594,6 +603,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/telemetry</span>$ <span class="prompt-cmd">query-station-logs --off-duty</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/telemetry</span>$</span> <span class="prompt-cmd">query-station-logs --off-duty</span>
         </div>
         <span class="section-label">OFF_DUTY_LOGS</span>
         <h2 class="mb-5">Hobbies & Interests</h2>
@@ -626,6 +636,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/comm-uplink</span>$ <span class="prompt-cmd">netcat -vv uplink.field-ops.net 443</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/comm-uplink</span>$</span> <span class="prompt-cmd">netcat -vv uplink.field-ops.net 443</span>
         </div>
         <div class="d-flex align-items-center gap-3 mb-4">
           <span class="section-label mb-0">COMM_UPLINK</span>
@@ -669,6 +680,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/citations</span>$ <span class="prompt-cmd">cat honors.gpg | gpg --decrypt</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/citations</span>$</span> <span class="prompt-cmd">cat honors.gpg | gpg --decrypt</span>
         </div>
         <span class="section-label">HONORARY_LOGS</span>
         <h2 class="mb-5">Awards & Certifications</h2>
@@ -704,6 +716,7 @@
       <div class="w-100">
         <div class="terminal-cmd-header">
           <span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/field-reports</span>$ <span class="prompt-cmd">stream-transcripts --verified</span>
+          <span class="prompt-prefix"><span class="prompt-user">fde@tactical</span>:<span class="prompt-path">~/field-reports</span>$</span> <span class="prompt-cmd">stream-transcripts --verified</span>
         </div>
         <span class="section-label">FIELD_REPORTS</span>
         <h2 class="mb-5">Testimonials</h2>

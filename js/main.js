@@ -26,6 +26,8 @@ import {
   ScrollGlitchEffect, KeyboardNavigator,
   AnimatedCounters, SkillProgressBars,
   TestimonialsCarousel, ScanlinePulse
+  TestimonialsCarousel, ScanlinePulse,
+  initCustomCursor
 } from './tactical-enhancements.js';
 
 // ===== TACTICAL DATA =====
@@ -248,6 +250,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateSystemHealth();
   SkillsGlobe.init();
   initTelemetryOverlay();
+  initCustomCursor();
   
   // Audio
   const musicBtn = document.getElementById('musicToggle');

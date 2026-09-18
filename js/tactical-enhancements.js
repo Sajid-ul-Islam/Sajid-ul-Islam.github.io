@@ -311,6 +311,15 @@ export class ScanlinePulse {
 
 // Initialize Custom Tactical Cursor
 function initCustomCursor() {
+// Initialize Custom Tactical Pointer Engine
+export function initCustomCursor() {
+    if (typeof window === 'undefined' || !window.document) return;
+    
+    // Check if touch-only device or mobile viewport (< 992px)
+    const isTouchOnly = window.matchMedia && window.matchMedia('(pointer: coarse) and (hover: none)').matches;
+    const isMobileWidth = window.innerWidth < 992;
+    if (isTouchOnly || isMobileWidth) return;
+
     const cursor = /** @type {HTMLElement | null} */ (document.querySelector('.custom-cursor'));
     const follower = /** @type {HTMLElement | null} */ (document.querySelector('.cursor-follower'));
     if (!cursor || !follower) return;
@@ -318,6 +327,31 @@ function initCustomCursor() {
     let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
     
     // Smooth follower animation
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lerpFactor = prefersReducedMotion ? 1.0 : 0.22;
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let posX = -100;
+    let posY = -100;
+    let isVisible = false;
+    let isInitialized = false;
+
+    // Dynamically toggle custom cursor on/off based on screen width and input type
+    function updateCursorEligibility() {
+        const isTouch = window.matchMedia && window.matchMedia('(pointer: coarse) and (hover: none)').matches;
+        const isDesktop = window.innerWidth >= 992 && !isTouch;
+        document.body.classList.toggle('has-custom-cursor', isDesktop);
+        if (!isDesktop) {
+            isVisible = false;
+            if (cursor) cursor.style.opacity = '0';
+            if (follower) follower.style.opacity = '0';
+        }
+    }
+    updateCursorEligibility();
+    window.addEventListener('resize', updateCursorEligibility, { passive: true });
+
+    // Smooth follower animation loop
     function renderCursor() {
         posX += (mouseX - posX) * 0.15;
         posY += (mouseY - posY) * 0.15;
@@ -325,20 +359,113 @@ function initCustomCursor() {
         cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
         follower.style.transform = `translate(${posX}px, ${posY}px)`;
         
+        if (isVisible && cursor && follower) {
+            posX += (mouseX - posX) * lerpFactor;
+            posY += (mouseY - posY) * lerpFactor;
+
+            // Pixel-perfect centering with hardware-accelerated translate3d
+            cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+            follower.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
+        }
         requestAnimationFrame(renderCursor);
     }
 
     document.addEventListener('mousemove', (e) => {
+    // Pointer move handling with dynamic target detection (Event Delegation)
+    window.addEventListener('pointermove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
+
+        if (!isInitialized) {
+            posX = mouseX;
+            posY = mouseY;
+            isInitialized = true;
+        }
+
+        if (!isVisible) {
+            isVisible = true;
+            cursor.style.opacity = '1';
+            follower.style.opacity = '1';
+        }
+
+        const target = /** @type {HTMLElement | null} */ (e.target);
+        if (!target) return;
+
+        // 1. Text input / code editor mode
+        if (target.closest('input, textarea, select, [contenteditable="true"]')) {
+            cursor.classList.add('text-mode');
+            follower.classList.add('text-mode');
+            cursor.classList.remove('hovering', 'drag-mode');
+            follower.classList.remove('hovering', 'drag-mode');
+            return;
+        }
+
+        // 2. Drag handle mode (Floating window headers)
+        if (target.closest('.fw-header, .drag-handle')) {
+            cursor.classList.remove('text-mode', 'hovering');
+            follower.classList.remove('text-mode', 'hovering');
+            cursor.classList.add('drag-mode');
+            follower.classList.add('drag-mode');
+            return;
+        }
+
+        // 3. Interactive targeting lock mode (Links, buttons, chips, cards)
+        const interactive = target.closest(
+            'a, button, [role="button"], .btn, .nav-link, .filter-btn, .social-link, ' +
+            '.terminal-cmd-btn, .camo-style-option, .clickable, .cursor-pointer, ' +
+            '[data-interactive], .fw-btn, #decryptAllBtn, .skill-pill-tactical, .tech-chip'
+        );
+
+        if (interactive) {
+            cursor.classList.remove('text-mode', 'drag-mode');
+            follower.classList.remove('text-mode', 'drag-mode');
+            cursor.classList.add('hovering');
+            follower.classList.add('hovering');
+            return;
+        }
+
+        // Default state
+        cursor.classList.remove('hovering', 'text-mode', 'drag-mode');
+        follower.classList.remove('hovering', 'text-mode', 'drag-mode');
+    }, { passive: true });
+
+    // Tactile Click / Recoil Feedback
+    window.addEventListener('pointerdown', () => {
+        cursor.classList.add('active');
+        follower.classList.add('active');
+    }, { passive: true });
+
+    window.addEventListener('pointerup', () => {
+        cursor.classList.remove('active');
+        follower.classList.remove('active');
+    }, { passive: true });
+
+    window.addEventListener('pointercancel', () => {
+        cursor.classList.remove('active');
+        follower.classList.remove('active');
+    }, { passive: true });
+
+    // Handle cursor leaving and entering window
+    document.documentElement.addEventListener('pointerleave', () => {
+        isVisible = false;
+        cursor.style.opacity = '0';
+        follower.style.opacity = '0';
     });
 
     document.addEventListener('mouseenter', () => {
         cursor.style.opacity = '1';
         follower.style.opacity = '1';
+    document.documentElement.addEventListener('pointerenter', () => {
+        if (isInitialized) {
+            isVisible = true;
+            cursor.style.opacity = '1';
+            follower.style.opacity = '1';
+        }
     });
 
     document.addEventListener('mouseleave', () => {
+    window.addEventListener('blur', () => {
+        isVisible = false;
         cursor.style.opacity = '0';
         follower.style.opacity = '0';
     });
@@ -360,4 +487,12 @@ function initCustomCursor() {
 }
 
 document.addEventListener('DOMContentLoaded', initCustomCursor);
+// Auto-run safe initialization
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCustomCursor);
+    } else {
+        initCustomCursor();
+    }
+}
 

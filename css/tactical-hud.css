@@ -2742,6 +2742,191 @@ body {
 @media (min-width: 992px) {
     body, a, button, .nav-link, .cursor-pointer {
         cursor: none !important;
+/* --- PREMIUM MODERN TACTICAL HUD CURSOR --- */
+.custom-cursor,
+.cursor-follower {
+    display: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 999999;
+}
+
+body.has-custom-cursor {
+    cursor: none !important;
+}
+
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor .btn,
+body.has-custom-cursor .nav-link,
+body.has-custom-cursor .filter-btn,
+body.has-custom-cursor .social-link,
+body.has-custom-cursor .terminal-cmd-btn,
+body.has-custom-cursor .camo-style-option,
+body.has-custom-cursor .cursor-pointer,
+body.has-custom-cursor .card-glass {
+    cursor: none !important;
+}
+
+/* Never hide native cursor for text selection or typing */
+body.has-custom-cursor input,
+body.has-custom-cursor textarea,
+body.has-custom-cursor select,
+body.has-custom-cursor [contenteditable="true"] {
+    cursor: text !important;
+}
+
+/* Floating widget drag and resize cursors */
+body.has-custom-cursor .fw-header {
+    cursor: grab !important;
+}
+body.has-custom-cursor .fw-header:active {
+    cursor: grabbing !important;
+}
+body.has-custom-cursor .fw-resize-n  { cursor: n-resize !important; }
+body.has-custom-cursor .fw-resize-s  { cursor: s-resize !important; }
+body.has-custom-cursor .fw-resize-e  { cursor: e-resize !important; }
+body.has-custom-cursor .fw-resize-w  { cursor: w-resize !important; }
+body.has-custom-cursor .fw-resize-nw { cursor: nw-resize !important; }
+body.has-custom-cursor .fw-resize-ne { cursor: ne-resize !important; }
+body.has-custom-cursor .fw-resize-sw { cursor: sw-resize !important; }
+body.has-custom-cursor .fw-resize-se { cursor: se-resize !important; }
+
+/* Tactical Pointer Central Dot */
+body.has-custom-cursor .custom-cursor {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-color, #4ade80);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    will-change: transform, width, height, opacity;
+    box-shadow: 0 0 8px var(--primary-color, #4ade80), 0 0 16px rgba(var(--primary-color-rgb, 74, 222, 128), 0.45);
+    opacity: 0;
+    transition: opacity 0.2s ease, width 0.18s ease, height 0.18s ease, background 0.18s ease, border-radius 0.18s ease;
+}
+
+/* Tactical Follower Reticle */
+body.has-custom-cursor .cursor-follower {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(var(--primary-color-rgb, 74, 222, 128), 0.45);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999998;
+    will-change: transform, width, height, opacity;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb, 74, 222, 128), 0.15);
+    transition: opacity 0.25s ease, width 0.22s cubic-bezier(0.16, 1, 0.3, 1), height 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+/* Precision Crosshair Ticks on Follower */
+body.has-custom-cursor .cursor-follower::before,
+body.has-custom-cursor .cursor-follower::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    background: var(--primary-color, #4ade80);
+    opacity: 0.5;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+/* Horizontal tick */
+body.has-custom-cursor .cursor-follower::before {
+    top: 50%;
+    left: -3px;
+    right: -3px;
+    height: 1px;
+    transform: translateY(-50%) scaleX(0.4);
+}
+/* Vertical tick */
+body.has-custom-cursor .cursor-follower::after {
+    left: 50%;
+    top: -3px;
+    bottom: -3px;
+    width: 1px;
+    transform: translateX(-50%) scaleY(0.4);
+}
+
+/* Target Acquisition Mode (Hovering interactive elements) */
+body.has-custom-cursor .custom-cursor.hovering {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    border: 2px solid var(--primary-color, #4ade80);
+    box-shadow: 0 0 12px var(--primary-color, #4ade80);
+}
+
+body.has-custom-cursor .cursor-follower.hovering {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(var(--primary-color-rgb, 74, 222, 128), 0.08);
+    border-color: var(--primary-color, #4ade80);
+    box-shadow: 0 0 20px rgba(var(--primary-color-rgb, 74, 222, 128), 0.35), inset 0 0 12px rgba(var(--primary-color-rgb, 74, 222, 128), 0.12);
+}
+body.has-custom-cursor .cursor-follower.hovering::before {
+    transform: translateY(-50%) scaleX(0.75);
+    opacity: 0.85;
+}
+body.has-custom-cursor .cursor-follower.hovering::after {
+    transform: translateX(-50%) scaleY(0.75);
+    opacity: 0.85;
+}
+
+/* Active / Click Impact (Tactile snap & recoil) */
+body.has-custom-cursor .custom-cursor.active {
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    box-shadow: 0 0 16px #ffffff, 0 0 24px var(--primary-color, #4ade80);
+}
+
+body.has-custom-cursor .cursor-follower.active {
+    width: 22px;
+    height: 22px;
+    border-width: 2px;
+    border-color: #ffffff;
+    background-color: rgba(var(--primary-color-rgb, 74, 222, 128), 0.25);
+    box-shadow: 0 0 25px var(--primary-color, #4ade80);
+}
+
+/* Text Editing Mode (Over inputs, textareas) */
+body.has-custom-cursor .custom-cursor.text-mode {
+    width: 2px;
+    height: 18px;
+    border-radius: 1px;
+    background: var(--primary-color, #4ade80);
+    box-shadow: 0 0 8px var(--primary-color, #4ade80);
+}
+body.has-custom-cursor .cursor-follower.text-mode {
+    opacity: 0 !important;
+}
+
+/* Draggable Window Mode */
+body.has-custom-cursor .cursor-follower.drag-mode {
+    border-radius: 4px;
+    border-style: dashed;
+    width: 42px;
+    height: 42px;
+    border-color: var(--primary-color, #4ade80);
+}
+
+/* Mobile & Touch Viewport Fallback (Hides custom cursor, restores native cursors) */
+@media (max-width: 991.98px), (pointer: coarse) and (hover: none) {
+    .custom-cursor,
+    .cursor-follower,
+    body.has-custom-cursor .custom-cursor,
+    body.has-custom-cursor .cursor-follower {
+        display: none !important;
     }
     
     .custom-cursor {
@@ -2754,8 +2939,24 @@ body {
         z-index: 999999;
         transform: translate(-50%, -50%);
         transition: width 0.2s, height 0.2s;
+    body.has-custom-cursor,
+    body.has-custom-cursor a,
+    body.has-custom-cursor button,
+    body.has-custom-cursor .btn,
+    body.has-custom-cursor .nav-link,
+    body.has-custom-cursor .filter-btn,
+    body.has-custom-cursor .social-link,
+    body.has-custom-cursor .terminal-cmd-btn,
+    body.has-custom-cursor .camo-style-option,
+    body.has-custom-cursor .cursor-pointer,
+    body.has-custom-cursor .card-glass {
+        cursor: auto !important;
     }
+}
 
+/* Reduced Motion Safety */
+@media (prefers-reduced-motion: reduce) {
+    .custom-cursor,
     .cursor-follower {
         position: fixed;
         width: 32px;
@@ -2766,6 +2967,8 @@ body {
         z-index: 999998;
         transform: translate(-50%, -50%);
         transition: width 0.2s, height 0.2s, background-color 0.2s;
+        transition: none !important;
+        animation: none !important;
     }
 
     .custom-cursor.hovering {
@@ -2838,4 +3041,4 @@ body {
         min-width: 44px;
         min-height: 44px;
     }
-}
+}
