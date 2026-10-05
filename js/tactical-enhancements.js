@@ -294,7 +294,10 @@ export class TestimonialsCarousel {
     this.render = render;
     render();
 
-    setInterval(() => this.next(), 5000);
+    setInterval(() => {
+        if (document.hidden) return; // Don't advance while tab is hidden
+        this.next();
+    }, 5000);
   }
 
   static next() {

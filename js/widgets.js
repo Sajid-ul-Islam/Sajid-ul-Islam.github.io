@@ -9,10 +9,9 @@ export function initDigitalClock() {
   if (!clockContainer) return;
 
   const hoursMinutesSpan = clockContainer.querySelector('.clock-hours-minutes');
-  const secondsSpan = clockContainer.querySelector('.clock-seconds');
-
-  function update() {
-    const now = new Date();
+  const secondsSpan = clockContainer.querySelector('.clock-seconds');    function update() {
+        if (document.hidden) return; // Skip work while tab is hidden
+        const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
@@ -264,10 +263,9 @@ export function initDataViz() {
 
     const elapsed = Math.floor((Date.now() - startTime) / 60000);
     if (activeTimeEl) activeTimeEl.textContent = `${elapsed}m`;
-  }
-
-  const chartInterval = setInterval(() => {
-    dataPoints.shift();
+  }    const chartInterval = setInterval(() => {
+        if (document.hidden) return; // Skip work while tab is hidden
+        dataPoints.shift();
     dataPoints.push(Math.random() * 80 + 20);
     drawChart();
   }, 2000);

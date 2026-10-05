@@ -90,7 +90,7 @@
         const text = btn.dataset.copy;
         try {
           await navigator.clipboard.writeText(text);
-        } catch (e) {
+        } catch {
           const ta = document.createElement('textarea');
           ta.value = text;
           ta.style.position = 'fixed';
@@ -99,7 +99,7 @@
           ta.select();
           try {
             document.execCommand('copy');
-          } catch (err) {
+          } catch {
             /* ignore */
           }
           ta.remove();
@@ -124,7 +124,7 @@
       }
       ctx.putImageData(img, 0, 0);
       document.documentElement.style.setProperty('--grain-img', `url(${c.toDataURL('image/png')})`);
-    } catch (e) {
+    } catch {
       /* grain is decorative */
     }
   }
@@ -138,6 +138,7 @@
       minute: '2-digit',
     });
     const tick = () => {
+      if (document.hidden) return; // Skip work while tab is hidden
       el.textContent = fmt.format(new Date());
     };
     tick();
@@ -252,14 +253,14 @@
     } else {
       const markets = ['WEB', 'APP', 'API', 'DATA', 'AI'];
       body =
-        markets
+        `${markets
           .map((m, i) => {
             const ny = 22 + i * 38;
             return `<path class="mc-line" d="M60,${ny} C160,${ny} 170,100 250,100"/>
           <circle class="mc-node" cx="52" cy="${ny}" r="7"/><text class="mc-text" x="18" y="${ny + 4}">${m}</text>`;
           })
-          .join('') +
-        `<circle class="mc-hub" cx="258" cy="100" r="11"/><text class="mc-text mc-text--amber" x="276" y="104">DEEN</text>`;
+          .join('') 
+        }<circle class="mc-hub" cx="258" cy="100" r="11"/><text class="mc-text mc-text--amber" x="276" y="104">DEEN</text>`;
     }
     return `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">${defs}${grid}${body}</svg>`;
   }
@@ -1101,7 +1102,7 @@
   }
 
   const scrubOf = (sel) => {
-    const v = $(sel + ' .scrub-seq, ' + sel + ' .scrub-video');
+    const v = $(`${sel  } .scrub-seq, ${  sel  } .scrub-video`);
     return v && v._scrub ? v._scrub : { set() {} };
   };
 
@@ -1308,7 +1309,7 @@
         scrollTrigger: {
           trigger: hero,
           start: 'top top',
-          end: () => '+=' + innerHeight * len,
+          end: () => `+=${  innerHeight * len}`,
           pin: true,
           scrub: true,
           anticipatePin: 1,
@@ -1489,7 +1490,7 @@
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: () => '+=' + dist(),
+          end: () => `+=${  dist()}`,
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
@@ -1498,7 +1499,7 @@
             const idx = Math.min(3, Math.floor(self.progress * 3) + 1);
             if (idx !== lastIdx) {
               lastIdx = idx;
-              count.textContent = '0' + idx;
+              count.textContent = `0${  idx}`;
             }
           },
         },
@@ -1514,7 +1515,7 @@
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: () => '+=' + dist(),
+            end: () => `+=${  dist()}`,
             scrub: true,
             invalidateOnRefresh: true,
           },
@@ -1765,18 +1766,18 @@
         const zy = top + (H - top - bottom - u.h * Z) / 2 - u.y * Z;
         const set = (k, v) => cta.style.setProperty(k, v);
         set('--z', Z);
-        set('--zx', zx + 'px');
-        set('--zy', zy + 'px');
+        set('--zx', `${zx  }px`);
+        set('--zy', `${zy  }px`);
         // Display panel lives inside the zoomed media layer: unzoomed coordinates
-        set('--ux', u.x + 'px');
-        set('--uy', u.y + 'px');
-        set('--uw', u.w + 'px');
-        set('--uh', u.h + 'px');
+        set('--ux', `${u.x  }px`);
+        set('--uy', `${u.y  }px`);
+        set('--uw', `${u.w  }px`);
+        set('--uh', `${u.h  }px`);
         // Text sits outside it: final, zoomed coordinates
-        set('--sx', u.x * Z + zx + 'px');
-        set('--sy', u.y * Z + zy + 'px');
-        set('--sw', u.w * Z + 'px');
-        set('--sh', u.h * Z + 'px');
+        set('--sx', `${u.x * Z + zx  }px`);
+        set('--sy', `${u.y * Z + zy  }px`);
+        set('--sw', `${u.w * Z  }px`);
+        set('--sh', `${u.h * Z  }px`);
       }
     };
 
@@ -2007,7 +2008,7 @@
   function initThemeSwitcher() {
     try {
       localStorage.setItem('portfolio-active-theme', 'index.html');
-    } catch (_e) {
+    } catch {
       /* ignore */
     }
 
@@ -2043,7 +2044,7 @@
         if (href && (href.startsWith('theme-') || href === 'index.html' || href === '/')) {
           try {
             localStorage.setItem('portfolio-active-theme', href);
-          } catch (_e) {
+          } catch {
             /* ignore */
           }
         }

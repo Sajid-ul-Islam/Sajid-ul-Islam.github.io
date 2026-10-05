@@ -4,22 +4,7 @@
  */
 
 // ===== DATA IMPORTS =====
-import {
-  DATA,
-  PROFILE_INFO,
-  EXPERIENCES,
-  EDUCATION,
-  PROJECTS,
-  SKILL_GROUPS,
-  BLOG_POSTS,
-  LEARNING_ITEMS,
-  GAMING,
-  STATS,
-  FILE_TREE,
-  SOCIAL_LINKS,
-  LOCAL_INTEL,
-  PortfolioData,
-} from './data/index.js';
+import { DATA, PortfolioData } from './data/index.js';
 
 // ===== AUDIO ENGINE =====
 import { AudioEngine } from './audio-engine.js';
@@ -47,28 +32,17 @@ import {
 } from './tactical-enhancements.js';
 
 // ===== TACTICAL DATA =====
+// Render functions are invoked inside initializeTacticalData(); only the
+// inline-handler entry points need importing here.
 import {
   initializeTacticalData,
-  renderInfo,
-  renderExperience,
-  renderEducation,
-  renderSkillGroups,
-  renderProjects,
-  renderBlogs,
-  renderLearning,
-  renderGaming,
-  renderMedia,
-  renderFileTree,
-  fetchGithubRepos,
   decryptDossier,
   toggleCaseStudy,
-  initializeProjectFilters,
   openCaseStudy,
   closeCaseStudy,
   toggleTreeSection,
   toggleMobileSidebar,
   handleTreeClick,
-  runTypewriter,
 } from './tactical-data.js';
 
 // ===== TERMINAL =====
@@ -76,8 +50,6 @@ import {
   toggleBottomTerminal,
   minimizeBottomTerminal,
   switchTerminalTab,
-  startTelemetryStreams,
-  cleanupTerminal,
   initTerminal,
 } from './terminal.js';
 
@@ -88,7 +60,7 @@ import { initCommandPalette, togglePalette } from './command-palette.js';
 import { initAccentSwitcher } from './theme-accent.js';
 
 // ===== FLOATING WIDGETS =====
-import { FloatingWidget, initFloatingWidgets } from './floating-widgets.js';
+import { initFloatingWidgets } from './floating-widgets.js';
 
 // ===== GITHUB FEED =====
 import { initGitHubFeed } from './github-feed.js';
@@ -97,11 +69,6 @@ import { initGitHubFeed } from './github-feed.js';
 import {
   openPortfolioBridge as openBridge,
   closePortfolioBridge as closeBridge,
-  minimizePortfolioBridge,
-  restorePortfolioBridge,
-  toggleMaximizeBridge,
-  initResizableBridge,
-  EXTERNAL_BLOCK_LIST,
 } from './portfolio-bridge.js';
 
 // ===== WIDGETS =====
@@ -157,21 +124,25 @@ const bootMessages = [
   'ACCESS_GRANTED: Proceed with caution.',
 ];
 
-async function typeWriter(bootLogElement, bootCursorElement, messages) {
+async function typeWriter(bootLogElement, bootCursorElement, messages, shouldSkip) {
   for (let i = 0; i < messages.length; i++) {
+    if (shouldSkip && shouldSkip()) break;
     const message = messages[i];
     const line = document.createElement('span');
     bootLogElement.appendChild(line);
     bootLogElement.scrollTop = bootLogElement.scrollHeight; // Auto-scroll
-    for (let j = 0; j < message.length; j++) {
-      line.textContent += message[j];
+    for (let j = 1; j <= message.length; j++) {
+      line.textContent = message.slice(0, j); // Slice instead of += to avoid O(n^2) concat
       await new Promise((resolve) => setTimeout(resolve, Math.random() * 5 + 10)); // Fast typing speed
+      if (shouldSkip && shouldSkip()) break;
     }
     bootLogElement.appendChild(document.createTextNode('\n')); // Add newline
     await new Promise((resolve) => setTimeout(resolve, 50)); // Delay between lines
   }
   bootCursorElement.remove(); // Remove cursor after typing
-  await new Promise((resolve) => setTimeout(resolve, 500)); // Short pause after all messages
+  if (!shouldSkip || !shouldSkip()) {
+    await new Promise((resolve) => setTimeout(resolve, 500)); // Short pause after all messages
+  }
 }
 
 async function initBootSequence() {
@@ -187,18 +158,29 @@ async function initBootSequence() {
     return;
   }
 
+  // Skip support: reduced-motion users auto-skip; anyone can click or press a key
+  let skipRequested = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const requestSkip = () => {
+    skipRequested = true;
+  };
+  const shouldSkip = () => skipRequested;
+  bootSequence.addEventListener('click', requestSkip);
+  document.addEventListener('keydown', requestSkip);
+
   document.body.style.overflow = 'hidden'; // Prevent scrolling during boot
-  await typeWriter(bootLog, bootCursor, bootMessages);
+  await typeWriter(bootLog, bootCursor, bootMessages, shouldSkip);
+
+  bootSequence.removeEventListener('click', requestSkip);
+  document.removeEventListener('keydown', requestSkip);
 
   bootSequence.classList.add('hidden');
-  bootSequence.addEventListener(
-    'transitionend',
-    () => {
-      bootSequence.remove();
-      document.body.style.overflow = ''; // Restore scroll after hidden
-    },
-    { once: true },
-  );
+  const finishBoot = () => {
+    bootSequence.remove();
+    document.body.style.overflow = ''; // Restore scroll after hidden
+  };
+  bootSequence.addEventListener('transitionend', finishBoot, { once: true });
+  // Safety net: if no CSS transition runs (e.g. reduced motion), finish anyway
+  setTimeout(finishBoot, 700);
 
   sessionStorage.setItem('bootSequencePlayed', 'true');
 }

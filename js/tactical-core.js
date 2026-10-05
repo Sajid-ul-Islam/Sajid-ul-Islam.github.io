@@ -97,10 +97,9 @@ export function initTelemetryOverlay() {
       ' ',
     );
   const generateBin = () =>
-    Array.from({ length: 4 }, () => (Math.random() > 0.5 ? '1011' : '0100')).join(' ');
-
-  const telemetryInterval = setInterval(() => {
-    let leftText = '';
+    Array.from({ length: 4 }, () => (Math.random() > 0.5 ? '1011' : '0100')).join(' ');    const telemetryInterval = setInterval(() => {
+        if (document.hidden) return; // Skip work while tab is hidden
+        let leftText = '';
     let rightText = '';
     for (let i = 0; i < 35; i++) {
       leftText += `[SYS_${Math.floor(Math.random() * 99)}] 0x${generateHex()}\n`;

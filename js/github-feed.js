@@ -164,9 +164,9 @@ export async function initGitHubFeed() {
   }
 
   // Only inject simulated events in fallback mode (real API unavailable)
-  if (usedFallback) {
-    setInterval(() => {
-      const newEvents = [
+  if (usedFallback) {        setInterval(() => {
+            if (document.hidden) return; // Skip work while tab is hidden
+            const newEvents = [
         {
           type: 'PushEvent',
           repo: 'Sajid-ul-Islam.github.io',

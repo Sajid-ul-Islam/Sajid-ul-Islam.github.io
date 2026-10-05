@@ -42,10 +42,9 @@ export function startTelemetryStreams() {
   if (!debug || !output) return;
 
   telemetryIntervals.forEach((interval) => clearInterval(interval));
-  telemetryIntervals = [];
-
-  const debugInterval = setInterval(() => {
-    if (Math.random() > 0.7) {
+  telemetryIntervals = [];    const debugInterval = setInterval(() => {
+        if (document.hidden) return; // Skip work while tab is hidden
+        if (Math.random() > 0.7) {
       const logs = [
         `[${new Date().toLocaleTimeString()}] SYST_PING: ${Math.floor(Math.random() * 20)}ms`,
         `[${new Date().toLocaleTimeString()}] NEURAL_LINK: STABLE`,
@@ -60,10 +59,9 @@ export function startTelemetryStreams() {
       debug.scrollTop = debug.scrollHeight;
     }
   }, 2000);
-  telemetryIntervals.push(debugInterval);
-
-  const outputInterval = setInterval(() => {
-    if (Math.random() > 0.9) {
+  telemetryIntervals.push(debugInterval);    const outputInterval = setInterval(() => {
+        if (document.hidden) return; // Skip work while tab is hidden
+        if (Math.random() > 0.9) {
       const updates = [
         '> git fetch origin master --silent',
         '> local_assets optimized (1.4s)',

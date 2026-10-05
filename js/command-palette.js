@@ -151,10 +151,9 @@ window.executeCommand = function (url, id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
-};
-
-function updateStationClock() {
-  const node = document.getElementById('stationTime');
+};function updateStationClock() {
+    if (document.hidden) return; // Skip work while tab is hidden
+    const node = document.getElementById('stationTime');
   if (!node) return;
 
   const now = new Date();
