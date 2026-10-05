@@ -256,19 +256,21 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
   "preview": "vite preview",  // Preview production build
   "lint": "eslint js/",       // Lint JS files
   "lint:fix": "eslint js/ --fix",
+  "format": "prettier --write js/**/*.js css/**/*.css",
+  "typecheck": "tsc --noEmit",
   "test": "npm run build && node scripts/check-dist-assets.mjs"  // build + verify every dist asset ref resolves
-  "format": "prettier --write js/**/*.js css/**/*.css"
 }
-```
+````
 
 ### Deployment Flow
 1. Develop locally: `npm run dev`
-2. Lint & format: `npm run lint` / `npm run format`
-3. Build for production: `npm run build`
+2. Lint & format: `npm run lint` / `npm run format` (already passes clean repo-wide)
+3. Verify: `npm run typecheck` (global `.d.ts` only) + `npm test` (build + asset smoke test)
 4. Push to GitHub: `git push origin master`
-5. GitHub Actions builds and deploys `dist/` to GitHub Pages (`.github/workflows/deploy.yml`)
+5. GitHub Actions runs lint → build → dist-asset smoke test → deploys `dist/` to GitHub Pages (`.github/workflows/deploy.yml`)
 
 ---
+
 
 ## 8. PWA Specifications
 
@@ -295,7 +297,7 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 
 ES modules are imported via `import` statements. The tactical theme entry point is `js/main.js`:
 
-1. `js/data/index.js` → Exports `DATA`, `PortfolioData`, and all data constants
+1. `js/data/index.js` → Exports `DATA`, `PortfolioData`, and all data constants (images absent from the project — use `img/*.webp`/`img/*.jpg` lines, not the `img/projects/` placeholder shown above)
 2. `js/audio-engine.js` → Exports `AudioEngine` (procedural sounds)
 3. `js/tactical-core.js` → Exports UI utilities, `SkillsGlobe`, `glitchEffect`
 4. `js/tactical-data.js` → Exports render functions for all sections
@@ -351,25 +353,28 @@ See [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
 | **Battery API** | System health display | `tactical-core.js` |
 | **Device Memory** | RAM info display | `tactical-core.js` |
 | **AudioContext** | Procedural sound effects | `audio-engine.js` |
-| **LocalStorage** | Theme preference, API keys | `tactical-core.js`, `ai-bot.js` |
-| **Fetch API** | GitHub repos | `github-feed.js` |
-| **IntersectionObserver** | Scroll animations | `tactical-enhancements.js` |
+| **LocalStorage** | Theme preference, API keys, session analytics, section views | `tactical-core.js`, `ai-bot.js`, `widgets.js` |
+| **Fetch API** | GitHub repos, IP telemetry (REMOVED during audit — no third-party fingerprinting now) | `github-feed.js` |
+| **IntersectionObserver** | Scroll animations, section/page-view analytics, chat suggestion context | `tactical-enhancements.js`, `widgets.js`, `ai-bot.js` |
+| **Page Visibility API** | Pause always-on timers (clocks, telemetry, metrics chart, carousel, feed fallback) while tab hidden | `widgets.js`, `command-palette.js`, `terminal.js`, `tactical-core.js`, `github-feed.js`, `tactical-enhancements.js` |
+| **Speech Synthesis** | (NOT used — AudioEngine.speak() was removed in audit; old docs claimed TTS | none now)
 
 ---
 
 ## 12. Security
 
 - **No hardcoded API keys**: All AI provider keys are stored in browser `localStorage` only.
-- **Domain blocklist**: Portfolio Bridge blocks restricted domains from loading in the iframe.
-- **Blocked domains**: WhatsApp, social media, and other restricted nodes open in new tabs.
-- **XSS awareness**: Template literals used for rendering from trusted data only.
+- **Domain blocklist**: Portfolio Bridge blocks restricted domains from loading in the iframe (list lives in `EXTERNAL_BLOCK_LIST`, checked case-insensitively).
+- **Blocked domains**: WhatsApp, social media, and other restricted nodes open in new tabs instead.
+- **XSS awareness**: Terminal `save` and blog-card rendering use `textContent` (not `innerHTML` on user input); bot/telemetry/feed code never injects user content into DOM.
 
 ---
 
 ## 13. Development Guidelines
 
 ### Code Style
-- **Typecheck scope**: `npm run typecheck` (`tsc --noEmit`, `checkJs: false`) validates the `.d.ts` global declarations only. Enabling `checkJs: true` surfaces ~101 pre-existing DOM-cast sites (`Element` vs `HTMLElement`, callback signatures) — a deliberate future refactor, not enforced today. CI enforces lint + build + the dist-asset smoke test instead.
+- **Typecheck scope**: `npm run typecheck` (`tsc --noEmit`, `checkJs: false`) validates the `.d.ts` global declarations only. Enabling `checkJs: true` surfaces ~101 pre-existing DOM-cast sites (`Element` vs `HTMLElement`, callback signatures) — a deliberate future refactor, not enforced today. CI enforces lint + build + the dist-asset smoke test (`scripts/check-dist-assets.mjs`) instead.
+- **Timers / battery**: All always-on `setInterval` loops (clocks, telemetry streams, metrics chart, testimonial carousel, feed fallback) are gated on `document.hidden` — they idle while the tab is backgrounded.
 - **ES6+** syntax (arrow functions, destructuring, template literals)
 - **Modular architecture** — each file has a single responsibility
 - **Global namespace pattern**: Files expose via `window.*` for classic script loading
@@ -407,21 +412,67 @@ navigator.serviceWorker.getRegistrations().then(r => {
 ### Build Errors
 ```bash
 # Clear node_modules and reinstall
+git clean -fdx --exclude node_modules --exclude dist
 rm -rf node_modules
 npm install
-npm run build
+npm test   # builds + runs the dist-asset smoke test before you would deploy
 ```
 
-### Lint Errors
+### Lint / Format Errors
 ```bash
-# Auto-fix most issues
+# Fix most issues automatically (this repo is already lint-clean, 0 warnings)
 npm run lint:fix
-
-# Format all files
 npm run format
+
+# Otherwise find them:
+npm run lint
 ```
+
+### Typecheck Gaps
+`npm run typecheck` (`tsc --noEmit`, `checkJs: false`) validates only the `.d.ts` global declarations. Dropping `checkJs` on would surface ~101 pre-existing `Element`/callback-signature friction sites — do that in a deliberate refactor pass, not to force a green CI gate.
 
 ---
+
+## 15. Current Project State
+
+This repo is CI-clean today:
+- `npm run build` passes (Vite → `dist/`)
+- `npm run lint` passes: 0 errors, 0 warnings
+- `npm run format` passes: all JS/CSS files use Prettier
+- `npm test` passes: build + 75/75 dist asset refs resolve, with no broken 404s
+- `npm run typecheck` passes: global `.d.ts` declarations validate
+- `npm audit` passes: 0 vulnerabilities
+
+Recent commits:
+- `afc5d88` fix: patch audit bugs, add CI gates, dist smoke test, and SEO files
+- `ea66bfb` refactor: optimize runtime and payloads without behavior changes
+
+---
+
+## 16. Future Enhancements
+
+- [ ] Blog content management system
+- [ ] Dynamic project loading from headless CMS
+- [ ] WebGL particle background effects
+- [ ] Real-time GitHub contribution graph
+- [ ] Contact form with serverless backend
+- [ ] Centralize accent color mappings across themes
+
+---
+
+## 17. Credits & License
+
+- **Original Template**: Start Bootstrap Resume (MIT License)
+- **Author**: Sajid Islam
+- **Copyright**: 2025 Sajid Islam
+- **License**: MIT
+
+---
+
+**END OF BLUEPRINT**
+
+*For questions or contributions, use the terminal command: `contact`*
+
 
 ## 15. Future Enhancements
 

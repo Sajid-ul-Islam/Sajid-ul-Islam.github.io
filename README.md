@@ -1,6 +1,7 @@
 <h1 align="center">Hey, I'm Sajid Islam</h1>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/-Forward%20Deployed%20Engineer-10B981?style=flat-square&logo=vercel&logoColor=white" />
   <img src="https://img.shields.io/badge/-Data%20Scientist-2563EB?style=flat-square&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/-Business%20Analyst-059669?style=flat-square&logo=googleanalytics&logoColor=white" />
   <img src="https://img.shields.io/badge/-Bangladesh-006A4E?style=flat-square&logo=bangladesh&logoColor=white" />
