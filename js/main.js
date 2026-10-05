@@ -415,28 +415,3 @@ function initSkillsRadarChart() {
     });
   }
 }
-
-// ===== EXPORT FOR MODULE USAGE =====
-export {
-  DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS,
-  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
-  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL,
-  PortfolioData,
-  AudioEngine, glitchEffect,
-  copyEmail, SkillsGlobe,
-  initializeTacticalData, renderInfo, renderExperience,
-  renderEducation, renderSkillGroups,
-  renderProjects, renderBlogs, renderLearning, renderGaming,
-  renderMedia, renderFileTree, fetchGithubRepos,
-  decryptDossier, toggleCaseStudy, initializeProjectFilters,
-  openCaseStudy, closeCaseStudy,
-  toggleBottomTerminal, minimizeBottomTerminal, switchTerminalTab, startTelemetryStreams,
-  cleanupTerminal, initTerminal, initCommandPalette, togglePalette,
-  FloatingWidget, initFloatingWidgets, initGitHubFeed,
-  openBridge, closeBridge, minimizePortfolioBridge, restorePortfolioBridge,
-  toggleMaximizeBridge, initResizableBridge, EXTERNAL_BLOCK_LIST,
-  initDigitalClock, initScrollProgress, initSystemStatus,
-  initLiveSearch, initPdfFab, initZenMode, initDataViz,
-  initSectionAnalytics, TacticalWidgets, initThemeToggleWithRipple,
-  initPWA, initAiChat, runTypewriter
-};
