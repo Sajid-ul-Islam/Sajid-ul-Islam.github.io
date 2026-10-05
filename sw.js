@@ -18,7 +18,9 @@ const STATIC_ASSETS = [
     '/resume.html',
     '/manifest.json',
     '/img/profile.jpg',
-    '/img/icon.png'
+    '/img/icon-192.png',
+    '/img/icon-512.png',
+    '/img/icon-512-maskable.png'
 ];
 
 // Install: Cache static assets

@@ -4,46 +4,81 @@
  */
 
 // ===== DATA IMPORTS =====
-import { 
-  DATA, PROFILE_INFO, EXPERIENCES, EDUCATION, PROJECTS, 
-  SKILL_GROUPS, BLOG_POSTS, LEARNING_ITEMS, GAMING, STATS,
-  FILE_TREE, SOCIAL_LINKS, LOCAL_INTEL,
-  PortfolioData
+import {
+  DATA,
+  PROFILE_INFO,
+  EXPERIENCES,
+  EDUCATION,
+  PROJECTS,
+  SKILL_GROUPS,
+  BLOG_POSTS,
+  LEARNING_ITEMS,
+  GAMING,
+  STATS,
+  FILE_TREE,
+  SOCIAL_LINKS,
+  LOCAL_INTEL,
+  PortfolioData,
 } from './data/index.js';
 
 // ===== AUDIO ENGINE =====
 import { AudioEngine } from './audio-engine.js';
 
 // ===== TACTICAL CORE =====
-import { 
-  glitchEffect, updateThemeIcon, updateSystemHealth, 
-  copyEmail, initTelemetryOverlay, SkillsGlobe,
-  replayProject, MISSION_SECRETS 
+import {
+  glitchEffect,
+  updateThemeIcon,
+  updateSystemHealth,
+  copyEmail,
+  initTelemetryOverlay,
+  SkillsGlobe,
+  replayProject,
+  MISSION_SECRETS,
 } from './tactical-core.js';
 
 // ===== TACTICAL ENHANCEMENTS =====
-import { 
-  ScrollGlitchEffect, KeyboardNavigator,
-  AnimatedCounters, SkillProgressBars,
-  TestimonialsCarousel, ScanlinePulse
+import {
+  ScrollGlitchEffect,
+  KeyboardNavigator,
+  AnimatedCounters,
+  SkillProgressBars,
+  TestimonialsCarousel,
+  ScanlinePulse,
 } from './tactical-enhancements.js';
 
 // ===== TACTICAL DATA =====
-import { 
-  initializeTacticalData, renderInfo, renderExperience, 
-  renderEducation, renderSkillGroups,
-  renderProjects, renderBlogs, renderLearning, renderGaming,
-  renderMedia, renderFileTree, fetchGithubRepos,
-  decryptDossier, toggleCaseStudy, initializeProjectFilters,
-  openCaseStudy, closeCaseStudy,
-  toggleTreeSection, toggleMobileSidebar, handleTreeClick,
-  runTypewriter
+import {
+  initializeTacticalData,
+  renderInfo,
+  renderExperience,
+  renderEducation,
+  renderSkillGroups,
+  renderProjects,
+  renderBlogs,
+  renderLearning,
+  renderGaming,
+  renderMedia,
+  renderFileTree,
+  fetchGithubRepos,
+  decryptDossier,
+  toggleCaseStudy,
+  initializeProjectFilters,
+  openCaseStudy,
+  closeCaseStudy,
+  toggleTreeSection,
+  toggleMobileSidebar,
+  handleTreeClick,
+  runTypewriter,
 } from './tactical-data.js';
 
 // ===== TERMINAL =====
-import { 
-  toggleBottomTerminal, minimizeBottomTerminal, switchTerminalTab, startTelemetryStreams,
-  cleanupTerminal, initTerminal
+import {
+  toggleBottomTerminal,
+  minimizeBottomTerminal,
+  switchTerminalTab,
+  startTelemetryStreams,
+  cleanupTerminal,
+  initTerminal,
 } from './terminal.js';
 
 // ===== COMMAND PALETTE =====
@@ -59,17 +94,26 @@ import { FloatingWidget, initFloatingWidgets } from './floating-widgets.js';
 import { initGitHubFeed } from './github-feed.js';
 
 // ===== PORTFOLIO BRIDGE (iframe uplink) =====
-import { 
-  openPortfolioBridge as openBridge, closePortfolioBridge as closeBridge,
-  minimizePortfolioBridge, restorePortfolioBridge, toggleMaximizeBridge,
-  initResizableBridge, EXTERNAL_BLOCK_LIST
+import {
+  openPortfolioBridge as openBridge,
+  closePortfolioBridge as closeBridge,
+  minimizePortfolioBridge,
+  restorePortfolioBridge,
+  toggleMaximizeBridge,
+  initResizableBridge,
+  EXTERNAL_BLOCK_LIST,
 } from './portfolio-bridge.js';
 
 // ===== WIDGETS =====
-import { 
-  initDigitalClock, initScrollProgress, initSystemStatus,
-  initLiveSearch, initPdfFab, initZenMode, initDataViz,
-  initSectionAnalytics
+import {
+  initDigitalClock,
+  initScrollProgress,
+  initSystemStatus,
+  initLiveSearch,
+  initPdfFab,
+  initZenMode,
+  initDataViz,
+  initSectionAnalytics,
 } from './widgets.js';
 
 // ===== TACTICAL WIDGETS =====
@@ -86,31 +130,31 @@ import { initAiChat, handleSuggestion } from './ai-bot.js';
 
 // ===== BOOT SEQUENCE LOGIC =====
 const bootMessages = [
-  "BIOS: Initializing boot sequence...",
-  "CPU: Intel Core i9-12900K @ 5.2GHz [OK]",
-  "MEM: 64GB DDR5-5600MHz [OK]",
-  "GPU: NVIDIA RTX 4090 [OK]",
-  "STORAGE: NVMe SSD 4TB [OK]",
-  "NET: Ethernet 2.5G [OK]",
-  "OS: Tactical-OS v5.1.0 (Build 2077) booting...",
-  "STATUS: All systems nominal.",
-  "LOADING_MODULE: Core data structures...",
-  "LOADING_MODULE: UI framework components...",
-  "LOADING_MODULE: Neural network interface...",
-  "LOADING_MODULE: Skill matrix visualization...",
-  "LOADING_MODULE: Encrypted comms protocols...",
-  "LOADING_MODULE: AI Oracle uplink...",
-  "INIT: Portfolio rendering engine...",
-  "INIT: User authentication module...",
-  "INIT: Local telemetry services...",
-  "INIT: Experience timeline processing...",
-  "INIT: Project analysis algorithms...",
-  "INIT: Blog content parser...",
-  "INIT: Learning path optimizer...",
-  "INIT: Gamification engine...",
-  "INIT: Social link encryption...",
-  "BOOT_COMPLETE: Welcome, Operative. Mission environment initialized.",
-  "ACCESS_GRANTED: Proceed with caution."
+  'BIOS: Initializing boot sequence...',
+  'CPU: Intel Core i9-12900K @ 5.2GHz [OK]',
+  'MEM: 64GB DDR5-5600MHz [OK]',
+  'GPU: NVIDIA RTX 4090 [OK]',
+  'STORAGE: NVMe SSD 4TB [OK]',
+  'NET: Ethernet 2.5G [OK]',
+  'OS: Tactical-OS v5.1.0 (Build 2077) booting...',
+  'STATUS: All systems nominal.',
+  'LOADING_MODULE: Core data structures...',
+  'LOADING_MODULE: UI framework components...',
+  'LOADING_MODULE: Neural network interface...',
+  'LOADING_MODULE: Skill matrix visualization...',
+  'LOADING_MODULE: Encrypted comms protocols...',
+  'LOADING_MODULE: AI Oracle uplink...',
+  'INIT: Portfolio rendering engine...',
+  'INIT: User authentication module...',
+  'INIT: Local telemetry services...',
+  'INIT: Experience timeline processing...',
+  'INIT: Project analysis algorithms...',
+  'INIT: Blog content parser...',
+  'INIT: Learning path optimizer...',
+  'INIT: Gamification engine...',
+  'INIT: Social link encryption...',
+  'BOOT_COMPLETE: Welcome, Operative. Mission environment initialized.',
+  'ACCESS_GRANTED: Proceed with caution.',
 ];
 
 async function typeWriter(bootLogElement, bootCursorElement, messages) {
@@ -121,17 +165,18 @@ async function typeWriter(bootLogElement, bootCursorElement, messages) {
     bootLogElement.scrollTop = bootLogElement.scrollHeight; // Auto-scroll
     for (let j = 0; j < message.length; j++) {
       line.textContent += message[j];
-      await new Promise(resolve => setTimeout(resolve, Math.random() * 5 + 10)); // Fast typing speed
+      await new Promise((resolve) => setTimeout(resolve, Math.random() * 5 + 10)); // Fast typing speed
     }
     bootLogElement.appendChild(document.createTextNode('\n')); // Add newline
-    await new Promise(resolve => setTimeout(resolve, 50)); // Delay between lines
+    await new Promise((resolve) => setTimeout(resolve, 50)); // Delay between lines
   }
   bootCursorElement.remove(); // Remove cursor after typing
-  await new Promise(resolve => setTimeout(resolve, 500)); // Short pause after all messages
+  await new Promise((resolve) => setTimeout(resolve, 500)); // Short pause after all messages
 }
 
 async function initBootSequence() {
   const bootSequence = document.getElementById('boot-sequence');
+  if (!bootSequence) return; // Page has no boot screen (e.g. non-tactical themes)
   const bootLog = bootSequence.querySelector('.boot-log');
   const bootCursor = bootSequence.querySelector('.boot-cursor');
 
@@ -146,14 +191,17 @@ async function initBootSequence() {
   await typeWriter(bootLog, bootCursor, bootMessages);
 
   bootSequence.classList.add('hidden');
-  bootSequence.addEventListener('transitionend', () => {
-    bootSequence.remove();
-    document.body.style.overflow = ''; // Restore scroll after hidden
-  }, { once: true });
+  bootSequence.addEventListener(
+    'transitionend',
+    () => {
+      bootSequence.remove();
+      document.body.style.overflow = ''; // Restore scroll after hidden
+    },
+    { once: true },
+  );
 
   sessionStorage.setItem('bootSequencePlayed', 'true');
 }
-
 
 // ===== MAKE GLOBALS AVAILABLE =====
 // Only expose globals required by inline onclick handlers in HTML templates,
@@ -162,9 +210,9 @@ window.DATA = DATA;
 window.AudioEngine = AudioEngine;
 window.MISSION_SECRETS = MISSION_SECRETS;
 window.PortfolioData = PortfolioData;
-window.projectsList = null;      // shared state: set by tactical-data.js, read by tactical-data.js
-window.skillsRadarChart = null;  // shared state: set by main.js, read by tactical-data.js
-window.chartBaseData = null;     // shared state: set by main.js, read by tactical-data.js
+window.projectsList = null; // shared state: set by tactical-data.js, read by tactical-data.js
+window.skillsRadarChart = null; // shared state: set by main.js, read by tactical-data.js
+window.chartBaseData = null; // shared state: set by main.js, read by tactical-data.js
 window.TestimonialsCarousel = TestimonialsCarousel;
 window.replayProject = replayProject;
 window.decryptDossier = decryptDossier;
@@ -187,52 +235,59 @@ window.glitchEffect = glitchEffect;
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', async () => {
   initBootSequence(); // Initialize boot sequence first
-  
+
   // Premium Scroll Reveal
   if (typeof IntersectionObserver !== 'undefined') {
     // Auto-add class to major structural elements
-    document.querySelectorAll('.card-glass, .resume-item, .timeline-wrapper, .skill-progress-item').forEach(el => {
-      if (!el.classList.contains('scroll-reveal')) {
-        el.classList.add('scroll-reveal');
-      }
-    });
-
-    const scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          scrollObserver.unobserve(entry.target);
+    document
+      .querySelectorAll('.card-glass, .resume-item, .timeline-wrapper, .skill-progress-item')
+      .forEach((el) => {
+        if (!el.classList.contains('scroll-reveal')) {
+          el.classList.add('scroll-reveal');
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.scroll-reveal').forEach(el => scrollObserver.observe(el));
+
+    const scrollObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            scrollObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+    );
+    document.querySelectorAll('.scroll-reveal').forEach((el) => scrollObserver.observe(el));
   }
 
   // Core initialization
   updateSystemHealth();
   SkillsGlobe.init();
   initTelemetryOverlay();
-  
+
   // Audio
   const musicBtn = document.getElementById('musicToggle');
   if (musicBtn) musicBtn.addEventListener('click', () => AudioEngine.toggleMusic());
-  
+
   // Speech synthesis
   if (window.speechSynthesis) {
     window.speechSynthesis.getVoices();
   }
-  
+
   // Theme management
   localStorage.setItem('portfolio-active-theme', 'theme-tactical.html');
-  document.querySelectorAll('a[href^="theme-"], a[href="index.html"], a[href="/"]').forEach(link => {
-    link.addEventListener('click', () => {
-      const href = link.getAttribute('href');
-      if (href) localStorage.setItem('portfolio-active-theme', href);
+  document
+    .querySelectorAll('a[href^="theme-"], a[href="index.html"], a[href="/"]')
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (href) localStorage.setItem('portfolio-active-theme', href);
+      });
     });
-  });
-  
+
   const root = document.documentElement;
-  
+
   const applyTheme = (theme, accent) => {
     root.setAttribute('data-theme', theme);
     if (accent) root.setAttribute('data-accent', accent);
@@ -249,7 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       buttonId: 'theme-toggle',
       getTheme: () => root.getAttribute('data-theme') || 'dark',
       applyTheme: (theme) => applyTheme(theme, root.getAttribute('data-accent')),
-      saveTheme: (theme) => localStorage.setItem('tactical-theme', theme)
+      saveTheme: (theme) => localStorage.setItem('tactical-theme', theme),
     });
   }
 
@@ -261,25 +316,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (typeof window.updateChartColors === 'function') {
         window.updateChartColors();
       }
-    }
+    },
   });
-  
+
   // Glitch effect initializer
-  document.querySelectorAll('.section-label, h2:not(.display-2)').forEach(el => {
+  document.querySelectorAll('.section-label, h2:not(.display-2)').forEach((el) => {
     el.addEventListener('mouseenter', () => glitchEffect(el));
     setTimeout(() => glitchEffect(el), 500);
   });
-  
+
   // Initialize skills radar chart (wait for Chart.js to load)
   if (typeof window.loadChartJS === 'function') {
-    window.loadChartJS().then(() => initSkillsRadarChart()).catch(() => initSkillsRadarChart());
+    window
+      .loadChartJS()
+      .then(() => initSkillsRadarChart())
+      .catch(() => initSkillsRadarChart());
   } else {
     initSkillsRadarChart();
   }
 
   // Render dynamic content before widgets that snapshot the DOM.
   const tacticalData = await initializeTacticalData();
-  
+
   // Initialize all widget modules
   initTerminal();
   initCommandPalette();
@@ -291,7 +349,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initZenMode();
   initDataViz();
   initSectionAnalytics();
-  
+
   // Initialize floating widgets (handles drag + resize)
   setTimeout(initFloatingWidgets, 500);
 
@@ -300,13 +358,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Initialize tactical widgets
   TacticalWidgets.init();
-  
+
   // Initialize PWA
   initPWA();
 
   // Initialize AI chat
   initAiChat();
-  
+
   // Initialize enhancement classes
   new KeyboardNavigator();
   new ScrollGlitchEffect().init();
@@ -319,7 +377,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ===== SKILLS RADAR CHART =====
 function initSkillsRadarChart() {
   const canvas = document.getElementById('skillsChart');
-  const skillMap = { 'PYTHON': 0, 'SQL': 1, 'PANDAS': 2, 'SCIKIT-LEARN': 3, 'JAVASCRIPT': 4, 'AI/RAG': 5 };
+  const skillMap = { PYTHON: 0, SQL: 1, PANDAS: 2, 'SCIKIT-LEARN': 3, JAVASCRIPT: 4, 'AI/RAG': 5 };
   const baseData = [90, 88, 88, 80, 78, 78];
   window.chartBaseData = [...baseData];
 
@@ -334,14 +392,16 @@ function initSkillsRadarChart() {
       type: 'radar',
       data: {
         labels: ['Python', 'SQL', 'Pandas', 'ML', 'JavaScript', 'AI/RAG'],
-        datasets: [{
-          label: '[SKILL_POWER_LEVEL]',
-          data: [...baseData],
-          backgroundColor: `rgba(${initRGB}, 0.2)`,
-          borderColor: initColor,
-          borderWidth: 1,
-          pointBackgroundColor: initColor
-        }]
+        datasets: [
+          {
+            label: '[SKILL_POWER_LEVEL]',
+            data: [...baseData],
+            backgroundColor: `rgba(${initRGB}, 0.2)`,
+            borderColor: initColor,
+            borderWidth: 1,
+            pointBackgroundColor: initColor,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -354,15 +414,15 @@ function initSkillsRadarChart() {
             pointLabels: { color: initText, font: { family: 'JetBrains Mono' } },
             ticks: { display: false },
             suggestedMin: 0,
-            suggestedMax: 100
-          }
+            suggestedMax: 100,
+          },
         },
-        plugins: { legend: { display: false } }
-      }
+        plugins: { legend: { display: false } },
+      },
     });
 
     // Expose update function for accent changes
-    window.updateChartColors = function() {
+    window.updateChartColors = function () {
       const chart = window.skillsRadarChart;
       if (!chart) return;
       const cs = getComputedStyle(document.documentElement);
@@ -381,7 +441,7 @@ function initSkillsRadarChart() {
 
     // Initial color read
     window.updateChartColors();
-    
+
     // Gamify connections using Event Delegation
     document.addEventListener('mouseover', (e) => {
       const badge = e.target.closest('.skill-pill-tactical, .tech-chip');
@@ -389,22 +449,22 @@ function initSkillsRadarChart() {
         badge.style.cursor = 'pointer';
         const skill = badge.textContent.trim().toUpperCase();
         let index = skillMap[skill];
-        
+
         if (index === undefined) {
-          const labels = window.skillsRadarChart.data.labels.map(l => l.toUpperCase());
+          const labels = window.skillsRadarChart.data.labels.map((l) => l.toUpperCase());
           index = labels.indexOf(skill);
         }
-        
+
         if (index !== undefined && index !== -1) {
           const currentData = window.chartBaseData || baseData;
-          const newData = currentData.map((v, i) => i === index ? 100 : v * 0.4);
+          const newData = currentData.map((v, i) => (i === index ? 100 : v * 0.4));
           window.skillsRadarChart.data.datasets[0].data = newData;
           window.skillsRadarChart.update('none');
           badge.classList.add('pulse');
         }
       }
     });
-    
+
     document.addEventListener('mouseout', (e) => {
       const badge = e.target.closest('.skill-pill-tactical, .tech-chip');
       if (badge && window.skillsRadarChart) {

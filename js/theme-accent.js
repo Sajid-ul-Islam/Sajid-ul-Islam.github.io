@@ -28,7 +28,7 @@ export function initAccentSwitcher({ defaultAccent = 'green', onChange } = {}) {
   const saved = getSavedAccent(defaultAccent);
   setAccent(saved);
 
-  document.querySelectorAll('.color-swatch').forEach(btn => {
+  document.querySelectorAll('.color-swatch').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       const name = e.currentTarget.getAttribute('data-color');
       if (!name) return;

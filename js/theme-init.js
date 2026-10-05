@@ -13,9 +13,10 @@ import { PROFILE_INFO, SOCIAL_LINKS, STATS } from './data/index.js';
 
 /** Set text content on every element matching selector (if exists) */
 function setText(selector, value) {
-  document.querySelectorAll(selector).forEach(el => { el.textContent = value; });
+  document.querySelectorAll(selector).forEach((el) => {
+    el.textContent = value;
+  });
 }
-
 
 // ── WhatsApp normalizer ───────────────────────────────────────────────────────
 function waLink(raw) {
@@ -27,28 +28,36 @@ function waLink(raw) {
 function patchMeta() {
   // description
   const desc = document.querySelector('meta[name="description"]');
-  if (desc) desc.setAttribute('content', `${PROFILE_INFO.name} — ${PROFILE_INFO.role} specializing in Python, SQL, Power BI, and machine learning.`);
+  if (desc)
+    desc.setAttribute(
+      'content',
+      `${PROFILE_INFO.name} — ${PROFILE_INFO.role} specializing in Python, SQL, Power BI, and machine learning.`,
+    );
 
   // author
   const author = document.querySelector('meta[name="author"]');
   if (author) author.setAttribute('content', PROFILE_INFO.name);
 
   // OG / Twitter image
-  ['og:image', 'twitter:image'].forEach(prop => {
+  ['og:image', 'twitter:image'].forEach((prop) => {
     const el = document.querySelector(`meta[property="${prop}"]`);
     if (el) el.setAttribute('content', `https://sajid-ul-islam.github.io/${PROFILE_INFO.photo}`);
   });
 
   // OG / Twitter description
-  ['og:description', 'twitter:description'].forEach(prop => {
+  ['og:description', 'twitter:description'].forEach((prop) => {
     const el = document.querySelector(`meta[property="${prop}"]`);
-    if (el) el.setAttribute('content', `${PROFILE_INFO.role} specializing in Python, SQL, Power BI, and machine learning.`);
+    if (el)
+      el.setAttribute(
+        'content',
+        `${PROFILE_INFO.role} specializing in Python, SQL, Power BI, and machine learning.`,
+      );
   });
 }
 
 // ── Patch profile image(s) ────────────────────────────────────────────────────
 function patchProfilePhoto() {
-  document.querySelectorAll('img[alt="Sajid Islam"], img[alt="Profile"]').forEach(img => {
+  document.querySelectorAll('img[alt="Sajid Islam"], img[alt="Profile"]').forEach((img) => {
     img.src = PROFILE_INFO.photo;
     img.alt = PROFILE_INFO.name;
   });
@@ -64,7 +73,10 @@ function patchName() {
 
   // Tactical specific: status bar identity & navbar brand
   setText('.data-name', PROFILE_INFO.name.toUpperCase());
-  setText('.status-value[data-field="identity"]', PROFILE_INFO.name.toUpperCase().replace(' ', '_'));
+  setText(
+    '.status-value[data-field="identity"]',
+    PROFILE_INFO.name.toUpperCase().replace(' ', '_'),
+  );
 }
 
 // ── Patch social / contact links ──────────────────────────────────────────────
@@ -72,46 +84,59 @@ function patchLinks() {
   const wa = waLink(PROFILE_INFO.whatsapp);
 
   // WhatsApp — href on any wa.me links or .footer-whatsapp
-  document.querySelectorAll('a[href*="wa.me"], a.footer-whatsapp').forEach(a => { a.href = wa; });
+  document.querySelectorAll('a[href*="wa.me"], a.footer-whatsapp').forEach((a) => {
+    a.href = wa;
+  });
 
   // Telegram — href on any t.me links
   if (PROFILE_INFO.telegram) {
-    document.querySelectorAll('a[href*="t.me"]').forEach(a => { a.href = PROFILE_INFO.telegram; });
+    document.querySelectorAll('a[href*="t.me"]').forEach((a) => {
+      a.href = PROFILE_INFO.telegram;
+    });
   }
 
   // Email — mailto: links or .footer-email
-  document.querySelectorAll('a[href^="mailto:"], a.footer-email').forEach(a => { a.href = `mailto:${PROFILE_INFO.email}`; });
+  document.querySelectorAll('a[href^="mailto:"], a.footer-email').forEach((a) => {
+    a.href = `mailto:${PROFILE_INFO.email}`;
+  });
 
   // Email text spans
-  document.querySelectorAll('[data-field="email"]').forEach(el => { el.textContent = PROFILE_INFO.email; });
-  document.querySelectorAll('[data-field="whatsapp"]').forEach(el => { el.textContent = PROFILE_INFO.whatsapp; });
+  document.querySelectorAll('[data-field="email"]').forEach((el) => {
+    el.textContent = PROFILE_INFO.email;
+  });
+  document.querySelectorAll('[data-field="whatsapp"]').forEach((el) => {
+    el.textContent = PROFILE_INFO.whatsapp;
+  });
 
   // GitHub links
-  document.querySelectorAll('a[href*="github.com"]').forEach(a => {
-    if (a.href.includes('Sajid') || a.href === '#' && a.title === 'GitHub') a.href = PROFILE_INFO.github;
+  document.querySelectorAll('a[href*="github.com"]').forEach((a) => {
+    if (a.href.includes('Sajid') || (a.href === '#' && a.title === 'GitHub'))
+      a.href = PROFILE_INFO.github;
   });
   // GitHub icon links with title
-  document.querySelectorAll('a[title="GitHub"]').forEach(a => { a.href = PROFILE_INFO.github; });
+  document.querySelectorAll('a[title="GitHub"]').forEach((a) => {
+    a.href = PROFILE_INFO.github;
+  });
 
   // LinkedIn links
-  document.querySelectorAll('a[href*="linkedin.com"], a[title="LinkedIn"]').forEach(a => {
+  document.querySelectorAll('a[href*="linkedin.com"], a[title="LinkedIn"]').forEach((a) => {
     a.href = PROFILE_INFO.linkedin;
   });
 
   // Kaggle links
-  document.querySelectorAll('a[href*="kaggle.com"], a[title="Kaggle"]').forEach(a => {
+  document.querySelectorAll('a[href*="kaggle.com"], a[title="Kaggle"]').forEach((a) => {
     a.href = PROFILE_INFO.kaggle;
   });
 
   // Hugging Face links
-  document.querySelectorAll('a[href*="huggingface.co"]').forEach(a => {
+  document.querySelectorAll('a[href*="huggingface.co"]').forEach((a) => {
     a.href = PROFILE_INFO.huggingface;
   });
 }
 
 // ── Patch inline email in copyEmail() button calls ────────────────────────────
 function patchCopyEmailButtons() {
-  document.querySelectorAll('button[onclick*="copyEmail"]').forEach(btn => {
+  document.querySelectorAll('button[onclick*="copyEmail"]').forEach((btn) => {
     const current = btn.getAttribute('onclick');
     const patched = current.replace(/'[^']+@[^']+'/g, `'${PROFILE_INFO.email}'`);
     btn.setAttribute('onclick', patched);
@@ -121,14 +146,17 @@ function patchCopyEmailButtons() {
   });
 
   // Static <span> showing email (tactical contact modal)
-  document.querySelectorAll('span').forEach(span => {
-    if (span.textContent.trim().match(/^[\w.]+@[\w.]+$/) && span.textContent.includes('@gmail.com')) {
+  document.querySelectorAll('span').forEach((span) => {
+    if (
+      span.textContent.trim().match(/^[\w.]+@[\w.]+$/) &&
+      span.textContent.includes('@gmail.com')
+    ) {
       span.textContent = PROFILE_INFO.email;
     }
   });
 
   // Static <span> showing phone
-  document.querySelectorAll('span').forEach(span => {
+  document.querySelectorAll('span').forEach((span) => {
     if (span.textContent.trim().match(/^\+880/)) {
       span.textContent = PROFILE_INFO.whatsapp;
     }
@@ -141,12 +169,12 @@ function patchFooter() {
   const slug = PROFILE_INFO.name.toUpperCase().replace(' ', '-');
 
   // Class-targeted copyright (sketchbook)
-  document.querySelectorAll('.footer-copyright').forEach(p => {
+  document.querySelectorAll('.footer-copyright').forEach((p) => {
     p.textContent = `\u00a9 ${year} ${slug}`;
   });
 
   // Fallback: any <p> containing copyright year pattern
-  document.querySelectorAll('p').forEach(p => {
+  document.querySelectorAll('p').forEach((p) => {
     if (p.textContent.match(/©\s*20\d\d\s+SAJID/i)) {
       p.textContent = `\u00a9 ${year} ${slug}`;
     }
@@ -206,7 +234,9 @@ function patchJSONLD() {
     }
     data.image = `https://sajid-ul-islam.github.io/${PROFILE_INFO.photo}`;
     jsonLD.textContent = JSON.stringify(data, null, 2);
-  } catch { /* ignore malformed JSON-LD */ }
+  } catch {
+    /* ignore malformed JSON-LD */
+  }
 }
 
 // ── Run all patches ───────────────────────────────────────────────────────────

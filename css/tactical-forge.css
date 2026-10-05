@@ -37,17 +37,33 @@
 }
 
 @keyframes forgeKenBurns {
-  0% { transform: scale(1.05) translate(0, 0); }
-  50% { transform: scale(1.15) translate(-1.5%, -1%); }
-  100% { transform: scale(1.22) translate(-2.5%, -2%); }
+  0% {
+    transform: scale(1.05) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.15) translate(-1.5%, -1%);
+  }
+  100% {
+    transform: scale(1.22) translate(-2.5%, -2%);
+  }
 }
 
 .forge-reel-overlay {
   position: absolute;
   inset: 0;
-  background: 
-    linear-gradient(180deg, rgba(11, 15, 25, 0.96) 0%, rgba(11, 15, 25, 0.6) 35%, rgba(11, 15, 25, 0.75) 70%, rgba(11, 15, 25, 0.98) 100%),
-    radial-gradient(ellipse at 80% 20%, rgba(var(--primary-rgb, 56, 189, 248), 0.12) 0%, transparent 60%);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 15, 25, 0.96) 0%,
+      rgba(11, 15, 25, 0.6) 35%,
+      rgba(11, 15, 25, 0.75) 70%,
+      rgba(11, 15, 25, 0.98) 100%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(var(--primary-rgb, 56, 189, 248), 0.12) 0%,
+      transparent 60%
+    );
   pointer-events: none;
 }
 
@@ -77,8 +93,13 @@
 }
 
 @keyframes forgeBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
 }
 
 .forge-reel-hud {
@@ -136,8 +157,12 @@
 }
 
 @keyframes forgeTicker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* ── 3. Tactical 3D Flip Cards (Experience & Roles) ── */
@@ -185,7 +210,9 @@
   background: rgba(15, 23, 42, 0.65);
   border: 1px solid rgba(56, 189, 248, 0.25);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .tactical-flip-card:hover .tactical-flip-front {

@@ -9,9 +9,10 @@
         "preview": "vite preview",
         "lint": "eslint js/",
         "lint:fix": "eslint js/ --fix",
-        "format": "prettier --write js/**/*.js css/**/*.css scss/**/*.scss",
+        "format": "prettier --write js/**/*.js css/**/*.css",
         "start": "vite",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "test": "npm run build && node scripts/check-dist-assets.mjs"
     },
     "description": "High-performance personal portfolio for Sajid Islam, Data Scientist & Business Analyst. Features a Tactical HUD aesthetic, interactive terminal, PWA support, and AI-powered chatbot. Now with ES module architecture.",
     "keywords": [

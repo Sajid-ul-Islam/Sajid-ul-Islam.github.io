@@ -5,187 +5,212 @@
  */
 
 export class FloatingWidget {
-    constructor(element, options = {}) {
-        if (!element) return;
-        this.element = element;
-        this.opts = Object.assign({
-            title: 'Widget',
-            minW: 220, minH: 150,
-            maxW: Math.min(window.innerWidth  * 0.9, 860),
-            maxH: Math.min(window.innerHeight * 0.9, 700),
-            defW: 320,  defH: 380,
-            defX: null, defY: null,
-            zBase: 1500
-        }, options);
+  constructor(element, options = {}) {
+    if (!element) return;
+    this.element = element;
+    this.opts = Object.assign(
+      {
+        title: 'Widget',
+        minW: 220,
+        minH: 150,
+        maxW: Math.min(window.innerWidth * 0.9, 860),
+        maxH: Math.min(window.innerHeight * 0.9, 700),
+        defW: 320,
+        defH: 380,
+        defX: null,
+        defY: null,
+        zBase: 1500,
+      },
+      options,
+    );
 
-        this._dragging  = false;
-        this._resizing  = false;
-        this._resizeDir = null;
-        this._dsx = 0; this._dsy = 0;
-        this._del = 0; this._det = 0;
-        this._rsw = 0; this._rsh = 0;
-        this._rsl = 0; this._rst = 0;
+    this._dragging = false;
+    this._resizing = false;
+    this._resizeDir = null;
+    this._dsx = 0;
+    this._dsy = 0;
+    this._del = 0;
+    this._det = 0;
+    this._rsw = 0;
+    this._rsh = 0;
+    this._rsl = 0;
+    this._rst = 0;
 
-        this._onMove = this._move.bind(this);
-        this._onUp   = this._up.bind(this);
-        this._setup();
-    }
+    this._onMove = this._move.bind(this);
+    this._onUp = this._up.bind(this);
+    this._setup();
+  }
 
-    _setup() {
-        const e  = this.element;
+  _setup() {
+    const e = this.element;
 
-        e.classList.add('floating-widget');
+    e.classList.add('floating-widget');
 
-        if (!e.querySelector('.fw-header')) {
-            const h = document.createElement('div');
-            h.className = 'fw-header';
-            h.innerHTML = `
+    if (!e.querySelector('.fw-header')) {
+      const h = document.createElement('div');
+      h.className = 'fw-header';
+      h.innerHTML = `
                 <span class="fw-title">${this.opts.title}</span>
                 <span class="fw-controls">
                     <button class="fw-btn fw-min"   title="Minimize">−</button>
                     <button class="fw-btn fw-max"   title="Maximize">□</button>
                     <button class="fw-btn fw-close" title="Close">×</button>
                 </span>`;
-            e.insertBefore(h, e.firstChild);
-        }
+      e.insertBefore(h, e.firstChild);
+    }
 
-        ['nw','n','ne','e','se','s','sw','w'].forEach(d => {
-            const r = document.createElement('div');
-            r.className = `fw-resize fw-resize-${d}`;
-            r.dataset.dir = d;
-            e.appendChild(r);
-            r.addEventListener('mousedown', ev => this._startResize(ev));
-        });
+    ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'].forEach((d) => {
+      const r = document.createElement('div');
+      r.className = `fw-resize fw-resize-${d}`;
+      r.dataset.dir = d;
+      e.appendChild(r);
+      r.addEventListener('mousedown', (ev) => this._startResize(ev));
+    });
 
-        e.style.cssText += `
+    e.style.cssText += `
             position: fixed !important;
             width:  ${this.opts.defW}px;
             height: ${this.opts.defH}px;
-            left: ${this.opts.defX !== null ? this.opts.defX : Math.max(0, window.innerWidth  - this.opts.defW - 24)}px;
+            left: ${this.opts.defX !== null ? this.opts.defX : Math.max(0, window.innerWidth - this.opts.defW - 24)}px;
             top:  ${this.opts.defY !== null ? this.opts.defY : Math.max(0, window.innerHeight - this.opts.defH - 110)}px;
             z-index: ${this.opts.zBase};
             overflow: hidden;
         `;
 
-        const header = e.querySelector('.fw-header');
-        if (header) {
-            header.addEventListener('mousedown', ev => this._startDrag(ev));
-        }
-
-        e.querySelector('.fw-min')  ?.addEventListener('click', () => this._minimize());
-        e.querySelector('.fw-max')  ?.addEventListener('click', () => this._maximize());
-        e.querySelector('.fw-close')?.addEventListener('click', () => this._destroy());
-
-        e.addEventListener('mousedown', () => this._toFront());
-
-        document.addEventListener('mousemove', this._onMove);
-        document.addEventListener('mouseup',   this._onUp);
+    const header = e.querySelector('.fw-header');
+    if (header) {
+      header.addEventListener('mousedown', (ev) => this._startDrag(ev));
     }
 
-    _startDrag(e) {
-        if (e.target.closest('.fw-controls')) return;
-        this._dragging = true;
-        this._dsx = e.clientX;
-        this._dsy = e.clientY;
-        this._del = parseInt(this.element.style.left) || 0;
-        this._det = parseInt(this.element.style.top)  || 0;
-        this.element.querySelector('.fw-header').style.cursor = 'grabbing';
-        e.preventDefault();
+    e.querySelector('.fw-min')?.addEventListener('click', () => this._minimize());
+    e.querySelector('.fw-max')?.addEventListener('click', () => this._maximize());
+    e.querySelector('.fw-close')?.addEventListener('click', () => this._destroy());
+
+    e.addEventListener('mousedown', () => this._toFront());
+
+    document.addEventListener('mousemove', this._onMove);
+    document.addEventListener('mouseup', this._onUp);
+  }
+
+  _startDrag(e) {
+    if (e.target.closest('.fw-controls')) return;
+    this._dragging = true;
+    this._dsx = e.clientX;
+    this._dsy = e.clientY;
+    this._del = parseInt(this.element.style.left) || 0;
+    this._det = parseInt(this.element.style.top) || 0;
+    this.element.querySelector('.fw-header').style.cursor = 'grabbing';
+    e.preventDefault();
+  }
+
+  _startResize(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this._resizing = true;
+    this._resizeDir = e.target.dataset.dir;
+    this._dsx = e.clientX;
+    this._dsy = e.clientY;
+    this._rsw = parseInt(this.element.style.width) || this.opts.defW;
+    this._rsh = parseInt(this.element.style.height) || this.opts.defH;
+    this._rsl = parseInt(this.element.style.left) || 0;
+    this._rst = parseInt(this.element.style.top) || 0;
+  }
+
+  _move(e) {
+    if (this._dragging) {
+      const dx = e.clientX - this._dsx;
+      const dy = e.clientY - this._dsy;
+      this.element.style.left = `${Math.max(0, this._del + dx)}px`;
+      this.element.style.top = `${Math.max(0, this._det + dy)}px`;
     }
+    if (this._resizing) {
+      const { minW, minH, maxW, maxH } = this.opts;
+      const dx = e.clientX - this._dsx;
+      const dy = e.clientY - this._dsy;
+      const d = this._resizeDir;
+      let w = this._rsw,
+        h = this._rsh,
+        l = this._rsl,
+        t = this._rst;
 
-    _startResize(e) {
-        e.preventDefault(); e.stopPropagation();
-        this._resizing  = true;
-        this._resizeDir = e.target.dataset.dir;
-        this._dsx  = e.clientX; this._dsy = e.clientY;
-        this._rsw  = parseInt(this.element.style.width)  || this.opts.defW;
-        this._rsh  = parseInt(this.element.style.height) || this.opts.defH;
-        this._rsl  = parseInt(this.element.style.left)   || 0;
-        this._rst  = parseInt(this.element.style.top)    || 0;
+      if (d.includes('e')) w = Math.min(maxW, Math.max(minW, this._rsw + dx));
+      if (d.includes('s')) h = Math.min(maxH, Math.max(minH, this._rsh + dy));
+      if (d.includes('w')) {
+        w = Math.min(maxW, Math.max(minW, this._rsw - dx));
+        l = this._rsl + (this._rsw - w);
+      }
+      if (d.includes('n')) {
+        h = Math.min(maxH, Math.max(minH, this._rsh - dy));
+        t = this._rst + (this._rsh - h);
+      }
+
+      this.element.style.width = `${w}px`;
+      this.element.style.height = `${h}px`;
+      this.element.style.left = `${l}px`;
+      this.element.style.top = `${t}px`;
     }
+  }
 
-    _move(e) {
-        if (this._dragging) {
-            const dx = e.clientX - this._dsx;
-            const dy = e.clientY - this._dsy;
-            this.element.style.left = `${Math.max(0, this._del + dx)  }px`;
-            this.element.style.top  = `${Math.max(0, this._det + dy)  }px`;
-        }
-        if (this._resizing) {
-            const { minW, minH, maxW, maxH } = this.opts;
-            const dx = e.clientX - this._dsx;
-            const dy = e.clientY - this._dsy;
-            const d  = this._resizeDir;
-            let w = this._rsw, h = this._rsh, l = this._rsl, t = this._rst;
-
-            if (d.includes('e')) w = Math.min(maxW, Math.max(minW, this._rsw + dx));
-            if (d.includes('s')) h = Math.min(maxH, Math.max(minH, this._rsh + dy));
-            if (d.includes('w')) { w = Math.min(maxW, Math.max(minW, this._rsw - dx)); l = this._rsl + (this._rsw - w); }
-            if (d.includes('n')) { h = Math.min(maxH, Math.max(minH, this._rsh - dy)); t = this._rst + (this._rsh - h); }
-
-            this.element.style.width  = `${w  }px`;
-            this.element.style.height = `${h  }px`;
-            this.element.style.left   = `${l  }px`;
-            this.element.style.top    = `${t  }px`;
-        }
+  _up() {
+    if (this._dragging) {
+      const h = this.element.querySelector('.fw-header');
+      if (h) h.style.cursor = 'grab';
     }
+    this._dragging = this._resizing = false;
+    this._resizeDir = null;
+  }
 
-    _up() {
-        if (this._dragging) {
-            const h = this.element.querySelector('.fw-header');
-            if (h) h.style.cursor = 'grab';
-        }
-        this._dragging = this._resizing = false;
-        this._resizeDir = null;
-    }
+  _destroy() {
+    document.removeEventListener('mousemove', this._onMove);
+    document.removeEventListener('mouseup', this._onUp);
+    this.element.style.display = 'none';
+  }
 
-    _destroy() {
-        document.removeEventListener('mousemove', this._onMove);
-        document.removeEventListener('mouseup', this._onUp);
-        this.element.style.display = 'none';
-    }
+  _minimize() {
+    this.element.classList.toggle('fw-minimized');
+    const isMin = this.element.classList.contains('fw-minimized');
+    this.element.querySelectorAll(':scope > *:not(.fw-header):not(.fw-resize)').forEach((el) => {
+      el.style.display = isMin ? 'none' : '';
+    });
+  }
 
-    _minimize() {
-        this.element.classList.toggle('fw-minimized');
-        const isMin = this.element.classList.contains('fw-minimized');
-        this.element.querySelectorAll(':scope > *:not(.fw-header):not(.fw-resize)').forEach(el => {
-            el.style.display = isMin ? 'none' : '';
-        });
+  _maximize() {
+    if (this.element.classList.contains('fw-maximized')) {
+      this.element.classList.remove('fw-maximized');
+      this.element.style.width = `${this.opts.defW}px`;
+      this.element.style.height = `${this.opts.defH}px`;
+      this.element.style.left = `${window.innerWidth - this.opts.defW - 24}px`;
+      this.element.style.top = `${window.innerHeight - this.opts.defH - 110}px`;
+    } else {
+      this.element.classList.add('fw-maximized');
+      Object.assign(this.element.style, { width: '88vw', height: '85vh', left: '6vw', top: '8vh' });
     }
+  }
 
-    _maximize() {
-        if (this.element.classList.contains('fw-maximized')) {
-            this.element.classList.remove('fw-maximized');
-            this.element.style.width  = `${this.opts.defW  }px`;
-            this.element.style.height = `${this.opts.defH  }px`;
-            this.element.style.left   = `${window.innerWidth  - this.opts.defW - 24  }px`;
-            this.element.style.top    = `${window.innerHeight - this.opts.defH - 110  }px`;
-        } else {
-            this.element.classList.add('fw-maximized');
-            Object.assign(this.element.style, { width:'88vw', height:'85vh', left:'6vw', top:'8vh' });
-        }
-    }
-
-    _toFront() {
-        document.querySelectorAll('.floating-widget').forEach(w => w.style.zIndex = this.opts.zBase);
-        this.element.style.zIndex = this.opts.zBase + 10;
-    }
+  _toFront() {
+    document
+      .querySelectorAll('.floating-widget')
+      .forEach((w) => (w.style.zIndex = this.opts.zBase));
+    this.element.style.zIndex = this.opts.zBase + 10;
+  }
 }
 
 export function initFloatingWidgets() {
-    if (window._fwDone) return;
-    window._fwDone = true;
+  if (window._fwDone) return;
+  window._fwDone = true;
 
-    // Unified Command Center Widget
-    const cmdCenter = document.getElementById('commandCenterWidget');
-    if (cmdCenter) {
-        new FloatingWidget(cmdCenter, {
-            title: '[COMMAND_CENTER]',
-            defW: 300, defH: 400,
-            minW: 260, minH: 300,
-            defX: window.innerWidth - 340,
-            defY: 80,
-            zBase: 1500
-        });
-    }
+  // Unified Command Center Widget
+  const cmdCenter = document.getElementById('commandCenterWidget');
+  if (cmdCenter) {
+    new FloatingWidget(cmdCenter, {
+      title: '[COMMAND_CENTER]',
+      defW: 300,
+      defH: 400,
+      minW: 260,
+      minH: 300,
+      defX: window.innerWidth - 340,
+      defY: 80,
+      zBase: 1500,
+    });
+  }
 }

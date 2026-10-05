@@ -7,7 +7,7 @@ function copyStaticAssetsPlugin() {
     name: 'copy-static-assets',
     closeBundle() {
       const distDir = path.resolve(process.cwd(), 'dist');
-      const itemsToCopy = ['assets', 'img', 'sounds', 'manifest.json', 'sw.js'];
+      const itemsToCopy = ['assets', 'img', 'sounds', 'manifest.json', 'sw.js', 'robots.txt', 'sitemap.xml', '404.html'];
       for (const item of itemsToCopy) {
         const srcPath = path.resolve(process.cwd(), item);
         const destPath = path.resolve(distDir, item);

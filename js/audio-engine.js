@@ -29,19 +29,19 @@ export class AudioEngineClass {
   async _loadWaterDropSound() {
     this._ensureContext();
     if (!this.ctx || this.waterDropPromise) return this.waterDropPromise;
-    
+
     this.waterDropPromise = fetch('sounds/water-drop.m4a')
-      .then(res => res.arrayBuffer())
-      .then(arrayBuffer => this.ctx.decodeAudioData(arrayBuffer))
-      .then(buffer => {
+      .then((res) => res.arrayBuffer())
+      .then((arrayBuffer) => this.ctx.decodeAudioData(arrayBuffer))
+      .then((buffer) => {
         this.waterDropBuffer = buffer;
         return buffer;
       })
-      .catch(err => {
+      .catch((err) => {
         console.warn('[AudioEngine] Failed to load water drop sound:', err);
         this.waterDropPromise = null;
       });
-      
+
     return this.waterDropPromise;
   }
 
@@ -105,7 +105,7 @@ export class AudioEngineClass {
       if (!this.enabled) return;
       this._ensureContext();
       if (!this.ctx) return;
-      
+
       if (this.waterDropBuffer) {
         try {
           if (this.ctx.state === 'suspended') this.ctx.resume();

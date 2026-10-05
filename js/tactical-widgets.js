@@ -6,15 +6,15 @@
  */
 
 export class TacticalWidgets {
-    static init() {
-        this.renderImpactMap();
-    }
+  static init() {
+    this.renderImpactMap();
+  }
 
-    static renderImpactMap() {
-        const container = document.getElementById('geospatial-impact');
-        if (!container) return;
+  static renderImpactMap() {
+    const container = document.getElementById('geospatial-impact');
+    if (!container) return;
 
-        const svgMap = `
+    const svgMap = `
             <div class="impact-map-container mt-5">
                 <label class="section-label mb-4">GEOSPATIAL_OPERATIONAL_IMPACT</label>
                 <div class="card-glass p-0 overflow-hidden" style="height: 400px; position: relative;">
@@ -59,6 +59,6 @@ export class TacticalWidgets {
                 </div>
             </div>
         `;
-        container.innerHTML = svgMap;
-    }
+    container.innerHTML = svgMap;
+  }
 }

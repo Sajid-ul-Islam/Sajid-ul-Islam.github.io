@@ -93,7 +93,8 @@ document.head.appendChild(styleEl);
 // 2. Shader & Animation Core
 const isReduced = matchMedia('(prefers-reduced-motion: reduce)');
 const ua = navigator.userAgent;
-const isIOS = /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isIOS =
+  /iP(hone|ad|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const isSafari = /AppleWebKit/.test(ua) && !/Chrome|CriOS|FxiOS|Edg/.test(ua);
 const useWebgl = !isIOS && !isSafari && !/Firefox|FxiOS/.test(ua);
 
@@ -106,8 +107,10 @@ const bezierControl = { x1: 0.12, y1: 0.72, x2: 0.28, y2: 1 };
 const solveBezier = (t) => {
   if (t <= 0) return 0;
   if (t >= 1) return 1;
-  const getPt = (p, p1, p2) => 3 * (1 - p) * (1 - p) * p * p1 + 3 * (1 - p) * p * p * p2 + p * p * p;
-  let left = 0, right = 1;
+  const getPt = (p, p1, p2) =>
+    3 * (1 - p) * (1 - p) * p * p1 + 3 * (1 - p) * p * p * p2 + p * p * p;
+  let left = 0,
+    right = 1;
   for (let i = 0; i < 24; i++) {
     const mid = (left + right) / 2;
     if (getPt(mid, bezierControl.x1, bezierControl.x2) < t) {
@@ -173,10 +176,10 @@ const fragmentShaderSrc = `
 `;
 
 const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
     if (!gl) return resolve();
-    
+
     const ratio = Math.min(devicePixelRatio || 1, isIOS ? 1 : 1.5);
     canvas.width = Math.round(innerWidth * ratio);
     canvas.height = Math.round(innerHeight * ratio);
@@ -197,16 +200,16 @@ const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
     gl.useProgram(prog);
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    
+
     const positionLoc = gl.getAttribLocation(prog, 'p');
     gl.enableVertexAttribArray(positionLoc);
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
-    
+
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-    const getUniform = name => gl.getUniformLocation(prog, name);
+    const getUniform = (name) => gl.getUniformLocation(prog, name);
     gl.uniform2f(getUniform('u_res'), canvas.width, canvas.height);
     gl.uniform2f(getUniform('u_center'), cX * ratio, cY * ratio);
     gl.uniform1f(getUniform('u_spread'), maxRadius * ratio);
@@ -215,21 +218,24 @@ const renderWebGLRipple = (canvas, cX, cY, maxRadius) => {
     const uFront = getUniform('u_front');
     const uTime = getUniform('u_time');
     const uFade = getUniform('u_fade');
-    
+
     const durationTotal = 4200;
     const start = performance.now();
-    
+
     const frame = (now) => {
       const elapsed = now - start;
       gl.uniform1f(uFront, solveBezier(elapsed / durationRipple) * maxRadius * ratio);
       gl.uniform1f(uTime, elapsed / 1000);
-      const fadeVal = elapsed < durationRipple ? 1 : Math.max(0, 1 - (elapsed - durationRipple) / (durationTotal - durationRipple));
+      const fadeVal =
+        elapsed < durationRipple
+          ? 1
+          : Math.max(0, 1 - (elapsed - durationRipple) / (durationTotal - durationRipple));
       gl.uniform1f(uFade, fadeVal * fadeVal);
-      
+
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      
+
       if (elapsed < durationTotal) {
         requestAnimationFrame(frame);
       } else {
@@ -244,12 +250,16 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   const width = visualViewport?.width ?? innerWidth;
   const height = visualViewport?.height ?? innerHeight;
   const btnRect = btnElement.getBoundingClientRect();
-  
+
   const startX = btnRect.left + btnRect.width / 2;
   const startY = btnRect.bottom - 8;
-  
+
   const splashY = Math.min(Math.max(height * 0.42, startY + 180), height - 60);
-  const maxDist = Math.hypot(Math.max(startX, width - startX), Math.max(splashY, height - splashY) / flattenFactor) + 40;
+  const maxDist =
+    Math.hypot(
+      Math.max(startX, width - startX),
+      Math.max(splashY, height - splashY) / flattenFactor,
+    ) + 40;
 
   const root = document.documentElement;
   root.style.setProperty('--ripple-x', `${startX}px`);
@@ -283,44 +293,53 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
   teardrop.style.left = `${startX}px`;
   teardrop.style.transformOrigin = '50% 0%';
   const transformKeyframes = (yVal) => `translate(-50%, ${yVal}px)`;
-  
-  await teardrop.animate([
-    { transform: `${transformKeyframes(startY)} scale(0.25)`, opacity: 0 },
-    { transform: `${transformKeyframes(startY)} scale(0.8, 0.66)`, opacity: 1, offset: 0.45 },
-    { transform: `${transformKeyframes(startY)} scale(1.06, 0.9)`, offset: 0.75 },
-    { transform: `${transformKeyframes(startY)} scale(1)` }
-  ], {
-    duration: 340,
-    easing: 'cubic-bezier(0.25, 0, 0.3, 1)',
-    fill: 'forwards'
-  }).finished;
+
+  await teardrop.animate(
+    [
+      { transform: `${transformKeyframes(startY)} scale(0.25)`, opacity: 0 },
+      { transform: `${transformKeyframes(startY)} scale(0.8, 0.66)`, opacity: 1, offset: 0.45 },
+      { transform: `${transformKeyframes(startY)} scale(1.06, 0.9)`, offset: 0.75 },
+      { transform: `${transformKeyframes(startY)} scale(1)` },
+    ],
+    {
+      duration: 340,
+      easing: 'cubic-bezier(0.25, 0, 0.3, 1)',
+      fill: 'forwards',
+    },
+  ).finished;
 
   const endY = splashY - 42;
   const fallDistance = Math.max(60, endY - startY);
   teardrop.style.transformOrigin = '50% 100%';
-  
-  await teardrop.animate([
-    { transform: `${transformKeyframes(startY)} scale(1)` },
-    { transform: `${transformKeyframes(startY + 10)} scale(0.93, 1.12)`, offset: 0.14 },
-    { transform: `${transformKeyframes(endY)} scale(0.95, 1.1)` }
-  ], {
-    duration: Math.max(360, Math.sqrt(fallDistance) * 27),
-    easing: 'cubic-bezier(0.33, 0, 0.67, 0.33)',
-    fill: 'forwards'
-  }).finished;
+
+  await teardrop.animate(
+    [
+      { transform: `${transformKeyframes(startY)} scale(1)` },
+      { transform: `${transformKeyframes(startY + 10)} scale(0.93, 1.12)`, offset: 0.14 },
+      { transform: `${transformKeyframes(endY)} scale(0.95, 1.1)` },
+    ],
+    {
+      duration: Math.max(360, Math.sqrt(fallDistance) * 27),
+      easing: 'cubic-bezier(0.33, 0, 0.67, 0.33)',
+      fill: 'forwards',
+    },
+  ).finished;
 
   if (window.AudioEngine) {
     window.AudioEngine.play('waterDrop');
   }
 
-  teardrop.animate([
-    { transform: `${transformKeyframes(endY)} scale(0.95, 1.1)`, opacity: 1 },
-    { transform: `${transformKeyframes(endY)} scale(1.9, 0.2)`, opacity: 0 }
-  ], {
-    duration: 170,
-    easing: 'cubic-bezier(0.15, 0.6, 0.4, 1)',
-    fill: 'forwards'
-  });
+  teardrop.animate(
+    [
+      { transform: `${transformKeyframes(endY)} scale(0.95, 1.1)`, opacity: 1 },
+      { transform: `${transformKeyframes(endY)} scale(1.9, 0.2)`, opacity: 0 },
+    ],
+    {
+      duration: 170,
+      easing: 'cubic-bezier(0.15, 0.6, 0.4, 1)',
+      fill: 'forwards',
+    },
+  );
 
   if (useWebgl) {
     root.classList.add('theme-rippling');
@@ -352,7 +371,7 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     { dx: -8, rise: 30, size: 4, duration: 600 },
     { dx: 9, rise: 28, size: 5, duration: 580 },
     { dx: 22, rise: 23, size: 4, duration: 540 },
-    { dx: 35, rise: 16, size: 3, duration: 490 }
+    { dx: 35, rise: 16, size: 3, duration: 490 },
   ];
 
   for (const cfg of splashConfigs) {
@@ -366,34 +385,62 @@ const runTeardropTransition = async (activeObj, btnElement, targetTheme, applyTh
     overlay.appendChild(drop);
 
     tasks.push(
-      drop.animate([
-        { transform: 'translateX(0)' },
-        { transform: `translateX(${cfg.dx}px)` }
-      ], { duration: cfg.duration, easing: 'linear', fill: 'both' }).finished,
-      
-      drop.firstElementChild.animate([
-        { transform: 'translateY(0) scale(1)', opacity: 0.95, easing: 'cubic-bezier(0.2, 0.7, 0.4, 1)' },
-        { transform: `translateY(${-cfg.rise}px) scale(0.8)`, opacity: 0.95, offset: 0.52, easing: 'cubic-bezier(0.6, 0, 0.85, 0.45)' },
-        { transform: 'translateY(5px) scale(0.4)', opacity: 0 }
-      ], { duration: cfg.duration, fill: 'both' }).finished
+      drop.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${cfg.dx}px)` }], {
+        duration: cfg.duration,
+        easing: 'linear',
+        fill: 'both',
+      }).finished,
+
+      drop.firstElementChild.animate(
+        [
+          {
+            transform: 'translateY(0) scale(1)',
+            opacity: 0.95,
+            easing: 'cubic-bezier(0.2, 0.7, 0.4, 1)',
+          },
+          {
+            transform: `translateY(${-cfg.rise}px) scale(0.8)`,
+            opacity: 0.95,
+            offset: 0.52,
+            easing: 'cubic-bezier(0.6, 0, 0.85, 0.45)',
+          },
+          { transform: 'translateY(5px) scale(0.4)', opacity: 0 },
+        ],
+        { duration: cfg.duration, fill: 'both' },
+      ).finished,
     );
   }
 
   const bead = overlay.querySelector('.theme-drop-bead');
   bead.style.left = `${startX}px`;
   bead.style.top = `${splashY - 5}px`;
-  
+
   tasks.push(
-    bead.animate([
-      { transform: 'translate(-50%, 0) scale(1)', opacity: 0.9, easing: 'cubic-bezier(0.2, 0.8, 0.4, 1)' },
-      { transform: 'translate(-50%, -46px) scale(0.7)', opacity: 0.9, offset: 0.5, easing: 'cubic-bezier(0.55, 0, 0.8, 0.4)' },
-      { transform: 'translate(-50%, 4px) scale(0.45)', opacity: 0 }
-    ], { delay: 90, duration: 480, fill: 'both' }).finished
+    bead.animate(
+      [
+        {
+          transform: 'translate(-50%, 0) scale(1)',
+          opacity: 0.9,
+          easing: 'cubic-bezier(0.2, 0.8, 0.4, 1)',
+        },
+        {
+          transform: 'translate(-50%, -46px) scale(0.7)',
+          opacity: 0.9,
+          offset: 0.5,
+          easing: 'cubic-bezier(0.55, 0, 0.8, 0.4)',
+        },
+        { transform: 'translate(-50%, 4px) scale(0.45)', opacity: 0 },
+      ],
+      { delay: 90, duration: 480, fill: 'both' },
+    ).finished,
   );
 
-  transition.finished.then(() => activeObj.revealed = true, () => activeObj.revealed = true);
+  transition.finished.then(
+    () => (activeObj.revealed = true),
+    () => (activeObj.revealed = true),
+  );
   tasks.push(transition.finished);
-  
+
   await Promise.allSettled(tasks);
 };
 
@@ -411,7 +458,7 @@ const cleanupTransition = (activeObj, getThemeCallback, applyThemeCallback) => {
 const toggleThemeWithAnimation = (btnElement, nextTheme, getThemeCallback, applyThemeCallback) => {
   const activeObj = { next: nextTheme };
   activeTransition = activeObj;
-  
+
   runTeardropTransition(activeObj, btnElement, nextTheme, applyThemeCallback)
     .catch(() => {})
     .then(() => {
@@ -424,7 +471,7 @@ export function initThemeToggleWithRipple({
   buttonId = 'theme-toggle',
   getTheme = () => document.documentElement.getAttribute('data-theme') || 'dark',
   applyTheme = () => {},
-  saveTheme = () => {}
+  saveTheme = () => {},
 }) {
   // Look for button elements with either ID (theme-toggle or themeToggle)
   let btn = document.getElementById(buttonId);
@@ -434,7 +481,10 @@ export function initThemeToggleWithRipple({
     btn = document.getElementById(alternativeId);
   }
   if (!btn) {
-    btn = document.querySelector('.btn-theme-toggle') || document.querySelector('#themeToggle') || document.querySelector('#theme-toggle');
+    btn =
+      document.querySelector('.btn-theme-toggle') ||
+      document.querySelector('#themeToggle') ||
+      document.querySelector('#theme-toggle');
   }
   if (!btn) {
     return;
@@ -483,4 +533,3 @@ export function initThemeToggleWithRipple({
 if (typeof window !== 'undefined') {
   window.initThemeToggleWithRipple = initThemeToggleWithRipple;
 }
-

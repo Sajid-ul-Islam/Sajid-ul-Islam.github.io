@@ -41,7 +41,6 @@ Sajid-ul-Islam.github.io/
 ├── vite.config.js            # Vite build configuration
 ├── eslint.config.js          # ESLint flat config
 ├── .prettierrc               # Prettier formatting config
-├── main.js                   # Module load-order documentation
 ├── tsconfig.json             # TypeScript config for JS type checking
 │
 ├── assets/                   # High-fidelity media assets
@@ -199,9 +198,9 @@ exit           Terminate session (close terminal)
 
 ### 5.5 AI Bot (`js/ai-bot.js`)
 - Local knowledge-based responses (no API key required)
-- Optional Gemini/OpenAI integration via `link_gemini` / `link_openai`
+- Optional Gemini integration via the `link_gemini` terminal command (model: `gemini-2.0-flash`); OpenAI key can be set in `localStorage` as `OPENAI_UPLINK_KEY`
 - **Security**: All API keys stored in `localStorage` only — never hardcoded
-- TTS (Text-to-Speech) integration via Web Speech API
+- Typewriter output effect for bot replies
 
 ### 5.6 Command Palette (`js/command-palette.js`)
 - VS Code-style quick navigation (Ctrl+K or `/`)
@@ -257,7 +256,8 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
   "preview": "vite preview",  // Preview production build
   "lint": "eslint js/",       // Lint JS files
   "lint:fix": "eslint js/ --fix",
-  "format": "prettier --write js/**/*.js"
+  "test": "npm run build && node scripts/check-dist-assets.mjs"  // build + verify every dist asset ref resolves
+  "format": "prettier --write js/**/*.js css/**/*.css"
 }
 ```
 
@@ -266,7 +266,7 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 2. Lint & format: `npm run lint` / `npm run format`
 3. Build for production: `npm run build`
 4. Push to GitHub: `git push origin master`
-5. GitHub Pages auto-deploys from `master` branch
+5. GitHub Actions builds and deploys `dist/` to GitHub Pages (`.github/workflows/deploy.yml`)
 
 ---
 
@@ -275,7 +275,7 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 ### Service Worker Strategy (`sw.js`)
 
 **Cache Configuration:**
-- Cache Name: `tactical-intel-v4`
+- Cache Name: `tactical-intel-v8`
 - Static Assets: Core HTML, CSS, JS, images
 
 **Fetch Strategies:**
@@ -283,10 +283,11 @@ The project supports full-page UX/UI replacements via distinct HTML files. For d
 - **Static Assets**: Stale-While-Revalidate → fast load + background update
 
 ### Manifest (`manifest.json`)
-- App Name: "Tactical Intel Portfolio"
-- Short Name: "Tactical Intel"
-- Theme: Dark (#051410)
+- App Name: "Sajid Islam — Forward Deployed Engineer"
+- Short Name: "Sajid Islam"
+- Theme: Dark (#07090C)
 - Display: Standalone
+- Icons: `img/icon-192.png`, `img/icon-512.png`, `img/icon-512-maskable.png`
 
 ---
 
@@ -349,7 +350,6 @@ See [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
 | **Cache API** | PWA offline storage | `sw.js` |
 | **Battery API** | System health display | `tactical-core.js` |
 | **Device Memory** | RAM info display | `tactical-core.js` |
-| **Speech Synthesis** | AI bot voice | `ai-bot.js` |
 | **AudioContext** | Procedural sound effects | `audio-engine.js` |
 | **LocalStorage** | Theme preference, API keys | `tactical-core.js`, `ai-bot.js` |
 | **Fetch API** | GitHub repos | `github-feed.js` |
@@ -369,6 +369,7 @@ See [THEMING_ARCHITECTURE.md](./THEMING_ARCHITECTURE.md).
 ## 13. Development Guidelines
 
 ### Code Style
+- **Typecheck scope**: `npm run typecheck` (`tsc --noEmit`, `checkJs: false`) validates the `.d.ts` global declarations only. Enabling `checkJs: true` surfaces ~101 pre-existing DOM-cast sites (`Element` vs `HTMLElement`, callback signatures) — a deliberate future refactor, not enforced today. CI enforces lint + build + the dist-asset smoke test instead.
 - **ES6+** syntax (arrow functions, destructuring, template literals)
 - **Modular architecture** — each file has a single responsibility
 - **Global namespace pattern**: Files expose via `window.*` for classic script loading
