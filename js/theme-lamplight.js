@@ -2,6 +2,8 @@
    Sajid Islam — "Lamplight & Signal"
    Vanilla JS · GSAP + ScrollTrigger + Lenis
    ========================================================================== */
+import { buildCaseChart, attachCaseChart } from './lamplight-charts.js';
+
 (() => {
   'use strict';
 
@@ -215,56 +217,6 @@
   /* ------------------------------------------------------------------------
      Mini charts (case files)
      ------------------------------------------------------------------------ */
-  function chartSVG(type) {
-    const defs =
-      '<defs><linearGradient id="mcGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5CC6E8" stop-opacity=".55"/><stop offset="1" stop-color="#5CC6E8" stop-opacity="0"/></linearGradient></defs>';
-    const grid = [40, 80, 120, 160]
-      .map((y) => `<line class="mc-grid" x1="0" x2="320" y1="${y}" y2="${y}"/>`)
-      .join('');
-    let body = '';
-    if (type === 'drop') {
-      const vals = [240, 180, 120, 60, 20];
-      const bars = vals
-        .map((v, i) => {
-          const h = (v / 240) * 130;
-          const x = 24 + i * 60;
-          return `<rect class="mc-bar${i === vals.length - 1 ? ' mc-bar--hot' : ''}" x="${x}" y="${170 - h}" width="36" height="${h}" rx="3"/>`;
-        })
-        .join('');
-      const pts = vals.map((v, i) => `${42 + i * 60},${170 - (v / 240) * 130 - 8}`).join(' ');
-      body = `${bars}<polyline class="mc-line mc-line--amber" points="${pts}"/>
-        <text class="mc-text" x="24" y="190">10 HRS/WK</text><text class="mc-text mc-text--amber" x="264" y="190">6 HRS/WK</text>`;
-    } else if (type === 'aging') {
-      const vals = [30, 38, 52, 80, 110, 140, 158];
-      const pts = vals.map((v, i) => `${10 + i * 50},${v}`);
-      body = `<path class="mc-area" d="M${pts.join(' L')} L310,170 L10,170 Z"/>
-        <polyline class="mc-line" points="${pts.join(' ')}"/>
-        <circle class="mc-dot" cx="310" cy="158" r="5"/>
-        <text class="mc-text" x="10" y="190">MARKETPLACE PARTNERS</text><text class="mc-text mc-text--amber" x="200" y="146">+50% ACQUIRED</text>`;
-    } else if (type === 'margin') {
-      const vals = [0, 2.5, 5, 7, 9, 11, 13, 15];
-      const y = (v) => 100 - v * 4;
-      const pts = vals.map((v, i) => `${14 + i * 42},${y(v)}`).join(' ');
-      body = `<line class="mc-axis" x1="0" x2="320" y1="100" y2="100"/>
-        <polyline class="mc-line mc-line--amber" points="${pts}"/>
-        <circle class="mc-node" cx="14" cy="${y(0)}" r="5"/><circle class="mc-dot" cx="308" cy="${y(15)}" r="5"/>
-        <text class="mc-text" x="286" y="94">0%</text><text class="mc-text" x="24" y="${y(0) + 4}">0%</text>
-        <text class="mc-text mc-text--amber" x="266" y="${y(15) - 12}">+15%</text>`;
-    } else {
-      const markets = ['WEB', 'APP', 'API', 'DATA', 'AI'];
-      body =
-        `${markets
-          .map((m, i) => {
-            const ny = 22 + i * 38;
-            return `<path class="mc-line" d="M60,${ny} C160,${ny} 170,100 250,100"/>
-          <circle class="mc-node" cx="52" cy="${ny}" r="7"/><text class="mc-text" x="18" y="${ny + 4}">${m}</text>`;
-          })
-          .join('') 
-        }<circle class="mc-hub" cx="258" cy="100" r="11"/><text class="mc-text mc-text--amber" x="276" y="104">DEEN</text>`;
-    }
-    return `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">${defs}${grid}${body}</svg>`;
-  }
-
   function drawLines(container) {
     if (!hasGSAP || reduceMotion) return;
     $$('.mc-line', container).forEach((p) => {
@@ -285,14 +237,21 @@
   function initCases() {
     const cases = $$('.case');
     cases.forEach((c) => {
-      $('.case__chart', c).innerHTML = chartSVG(c.dataset.chart);
+      const panel = $('.case__chart', c);
+      const chart = buildCaseChart(c.dataset.chart);
+      panel.innerHTML = chart.html;
+      attachCaseChart(panel, chart);
+      // The detail region collapses to 0fr, so a focusable chart inside it would be
+      // reachable by Tab while invisible. Only the open case accepts focus.
+      panel.tabIndex = c.classList.contains('is-open') ? 0 : -1;
       const row = $('.case__row', c);
       row.dataset.cursorLabel = 'View';
       row.addEventListener('click', () => {
         const open = !c.classList.contains('is-open');
         c.classList.toggle('is-open', open);
         row.setAttribute('aria-expanded', String(open));
-        if (open) drawLines($('.case__chart', c));
+        panel.tabIndex = open ? 0 : -1;
+        if (open) drawLines(panel);
         if (hasGSAP) setTimeout(() => ScrollTrigger.refresh(), 850);
       });
     });
@@ -312,7 +271,7 @@
       if (shown === c) return;
       shown = c;
       if (current !== c) {
-        inner.innerHTML = chartSVG(c.dataset.chart);
+        inner.innerHTML = buildCaseChart(c.dataset.chart, { compact: true }).html;
         drawLines(inner);
         current = c;
       }

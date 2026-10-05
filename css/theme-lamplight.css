@@ -2220,7 +2220,6 @@ body {
   stroke: var(--amber);
 }
 .mc-area {
-  fill: url(#mcGrad);
   opacity: 0.5;
 }
 .mc-dot {
@@ -2234,14 +2233,52 @@ body {
 .mc-hub {
   fill: var(--amber);
 }
-.mc-text {
+
+/* Axis labels, units and the in-plot outcome badge. Values are printed from the
+   same spec that draws the shape, so the two can never disagree. */
+.mc-ylabel,
+.mc-xlabel {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  fill: var(--mist);
+}
+.mc-unit {
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  fill: rgba(236, 231, 223, 0.45);
+}
+.mc-delta {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  fill: var(--amber);
+}
+
+/* Hover / keyboard readout for the evidence panels */
+.mc-cross {
+  stroke: rgba(236, 231, 223, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+.mc-readout-bg {
+  fill: rgba(7, 9, 12, 0.92);
+  stroke: rgba(92, 198, 232, 0.45);
+  stroke-width: 1;
+}
+.mc-readout-txt {
   font-family: var(--f-mono);
   font-size: 10px;
-  fill: var(--mist);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
+  fill: #ece7df;
 }
-.mc-text--amber {
-  fill: var(--amber);
+.mc-off {
+  display: none;
+}
+.case__chart:focus-visible {
+  outline: 2px solid var(--teal-glow);
+  outline-offset: 3px;
 }
 
 /* ==========================================================================
