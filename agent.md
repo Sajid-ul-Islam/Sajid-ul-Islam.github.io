@@ -32,8 +32,8 @@ Sajid-ul-Islam.github.io/
 ├── index.html                 # Default primary theme (Lamplight & Signal) & site entry point
 ├── theme-lamplight.html       # Lamplight & Signal theme entry / alias
 ├── theme-sketchbook.html      # Sketchbook Ink theme (Tailwind)
-├── theme-tactical.html        # Tactical HUD theme (Bootstrap)
-├── theme-ironforge.html       # Ironforge Studio theme
+├── theme-tactical.html        # Tactical Forge theme (Bootstrap + Ironforge Studio reels/flip cards)
+├── theme-ironforge.html       # Legacy Ironforge Studio gateway (redirects to Tactical Forge)
 ├── resume.html               # Printable resume page
 ├── sw.js                     # Service Worker (PWA offline support)
 ├── manifest.json             # PWA manifest
@@ -54,6 +54,7 @@ Sajid-ul-Islam.github.io/
 │   ├── color-palette.css     # Shared accent color definitions (20 palettes)
 │   ├── modern-custom.css     # Core styles + Bootstrap overrides
 │   ├── tactical-hud.css      # HUD-specific components
+│   ├── tactical-forge.css    # Unified Tactical Forge reels, 3D flip cards & athletic styling
 │   ├── tactical-enhancements.css # Advanced effects & animations
 │   ├── shared-components.css # Shared component styles across themes
 │   ├── floating-widgets.css  # HUD widget styling

@@ -106,7 +106,7 @@ const terminalCommands = {
 
     neofetch: () => `
     .---.      USER: Sajid Islam
-   /     \\     OS: Tactical HUD v5.2
+   /     \\     OS: Tactical Forge v6.0
    | (O) |     UPTIME: ${Math.floor(performance.now() / 1000)}s
    \\     /     MEMORY: 4.2GB / 16.0GB
     '---'      RESOLUTION: ${window.innerWidth}x${window.innerHeight}

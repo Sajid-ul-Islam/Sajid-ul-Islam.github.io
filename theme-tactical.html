@@ -7,12 +7,12 @@
   <meta name="description"
     content="Sajid Islam - Data Scientist & Business Analyst specializing in Python, SQL, Power BI, and machine learning.">
   <meta name="author" content="Sajid Islam">
-  <title>Sajid Islam || [TACTICAL_INTEL]</title>
+  <title>Sajid Islam || [TACTICAL_FORGE // STUDIO_HUD]</title>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sajid-ul-islam.github.io/">
-  <meta property="og:title" content="Sajid Islam || [TACTICAL_INTEL]">
+  <meta property="og:title" content="Sajid Islam || [TACTICAL_FORGE // STUDIO_HUD]">
   <meta property="og:description"
     content="Data Scientist & Business Analyst specializing in Python, SQL, Power BI, and machine learning.">
   <meta property="og:image" content="https://sajid-ul-islam.github.io/img/profile.jpg">
@@ -75,6 +75,7 @@
   <link href="css/tactical-hud.css" rel="stylesheet">
   <link href="css/tactical-enhancements.css" rel="stylesheet">
   <link href="css/deep-black-terminal.css" rel="stylesheet">
+  <link href="css/tactical-forge.css" rel="stylesheet">
 
   <!-- Non-critical CSS: preload async, apply on load -->
   <link rel="preload" href="css/floating-widgets.css" as="style" onload="this.rel='stylesheet'">
@@ -143,8 +144,9 @@
 
   <nav class="navbar navbar-expand-lg fixed-top" id="sideNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <a class="navbar-brand js-scroll-trigger d-flex align-items-center" href="#page-top">
         <span class="data-name">SAJID ISLAM</span>
+        <span class="badge bg-primary bg-opacity-20 text-primary border border-primary border-opacity-30 font-mono ms-2" style="font-size: 10px; letter-spacing: 0.15em;">TACTICAL FORGE</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,9 +223,8 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="themeDropdown" style="background: rgba(15,23,42,0.95); border: 1px solid var(--primary-color);">
                 <li><a class="dropdown-item text-primary font-mono small" href="index.html" style="color: var(--primary-color) !important;"><i class="fas fa-lightbulb me-2"></i> Lamplight &amp; Signal (Default)</a></li>
-                <li><a class="dropdown-item text-primary font-mono small" href="theme-tactical.html" style="color: var(--primary-color) !important;"><i class="fas fa-terminal me-2"></i> Tactical HUD</a></li>
-                <li><a class="dropdown-item text-primary font-mono small" href="theme-ironforge.html" style="color: var(--primary-color) !important;"><i class="fas fa-fire me-2"></i> Ironforge Studio</a></li>
                 <li><a class="dropdown-item text-primary font-mono small" href="theme-sketchbook.html" style="color: var(--primary-color) !important;"><i class="fas fa-pen-nib me-2"></i> Sketchbook Ink</a></li>
+                <li><a class="dropdown-item active font-mono small" href="theme-tactical.html" style="background: var(--primary-color) !important; color: #000 !important; font-weight: bold;"><i class="fas fa-bolt me-2"></i> Tactical Forge (Merged HUD + Studio)</a></li>
               </ul>
             </div>
           </li>
@@ -234,9 +235,45 @@
 
 <main class="main-content-wrapper">
     <div class="container-fluid p-0">
-    <section class="resume-section p-3 p-lg-5" id="about">
-      <div class="row align-items-center g-5">
+    <section class="resume-section p-3 p-lg-5 position-relative overflow-hidden" id="about">
+      <!-- Ironforge Hero Reel Frames & Tactical Overlay -->
+      <div class="forge-reel-container" id="reelContainer">
+        <div class="forge-reel-frame active">
+          <img src="assets/img/bg-leader.webp" alt="Tactical Lead">
+        </div>
+        <div class="forge-reel-frame">
+          <img src="assets/img/bg-analyst.webp" alt="Data Operations">
+        </div>
+        <div class="forge-reel-frame">
+          <img src="assets/img/bg-scene3.webp" alt="Amber Command">
+        </div>
+        <div class="forge-reel-frame">
+          <img src="assets/img/og-image.jpg" alt="Mission Control">
+        </div>
+        <div class="forge-reel-frame">
+          <img src="assets/img/portrait-circle.jpg" alt="Sajid Islam">
+        </div>
+      </div>
+      <div class="forge-reel-overlay"></div>
+
+      <div class="row align-items-center g-5 position-relative" style="z-index: 2;">
         <div class="col-lg-8 hero-content order-2 order-lg-1 text-center text-lg-start">
+          
+          <!-- Reel HUD Telemetry Header -->
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between gap-3 mb-4">
+            <div class="forge-reel-badge">
+              <span class="forge-rec-dot"></span>
+              <span>REEL · LIVE TELEMETRY</span>
+            </div>
+            <div class="forge-reel-hud">
+              <span class="font-mono text-secondary small"><span id="chapterNum" class="text-primary fw-bold">01</span> / 05</span>
+              <div class="forge-reel-progress">
+                <div class="forge-reel-progress-fill" id="reelProgress"></div>
+              </div>
+              <span class="font-mono text-primary small tracking-widest">[FORGE_STUDIO]</span>
+            </div>
+          </div>
+
           <div class="mb-4">
             <h1 class="display-2 fw-bold mb-3 stealth-start"><span id="typewriter-h1"></span></h1>
             <p class="lead text-secondary max-w-700 stealth-start">
@@ -273,11 +310,31 @@
             <div class="frame-corner corner-tr"></div>
             <div class="frame-corner corner-bl"></div>
             <div class="frame-corner corner-br"></div>
-            <img class="img-fluid profile-image" src="img/profile.jpg" alt="Sajid Islam">
+            <img class="img-fluid profile-image" src="assets/img/portrait-circle.jpg" alt="Sajid Islam">
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Athletic Marquee Ticker -->
+    <div class="forge-ticker-wrap">
+      <div class="forge-ticker-track">
+        <span class="px-4">TACTICAL HUD</span> <span class="opacity-50">///</span>
+        <span class="px-4">IRONFORGE STUDIO</span> <span class="opacity-50">///</span>
+        <span class="px-4">FULL-STACK &amp; FDE</span> <span class="opacity-50">///</span>
+        <span class="px-4">CYBRCRAFT CO-FOUNDER</span> <span class="opacity-50">///</span>
+        <span class="px-4">DEEN MOBILE ECOSYSTEM</span> <span class="opacity-50">///</span>
+        <span class="px-4">AI AGENTS &amp; RAG</span> <span class="opacity-50">///</span>
+        <span class="px-4">LIVE TELEMETRY STREAM</span> <span class="opacity-50">///</span>
+        <span class="px-4">TACTICAL HUD</span> <span class="opacity-50">///</span>
+        <span class="px-4">IRONFORGE STUDIO</span> <span class="opacity-50">///</span>
+        <span class="px-4">FULL-STACK &amp; FDE</span> <span class="opacity-50">///</span>
+        <span class="px-4">CYBRCRAFT CO-FOUNDER</span> <span class="opacity-50">///</span>
+        <span class="px-4">DEEN MOBILE ECOSYSTEM</span> <span class="opacity-50">///</span>
+        <span class="px-4">AI AGENTS &amp; RAG</span> <span class="opacity-50">///</span>
+        <span class="px-4">LIVE TELEMETRY STREAM</span> <span class="opacity-50">///</span>
+      </div>
+    </div>
 
     <hr class="m-0 border-secondary opacity-10">
 

@@ -83,6 +83,7 @@ export async function initializeTacticalData() {
       Email: info.email
     });
 
+    initHeroReel();
     if (finalExperience.length > 0) renderExperience(finalExperience);
     if (finalEducation.length > 0) renderEducation(finalEducation);
     
@@ -171,6 +172,45 @@ export function renderInfo(info) {
     }
 }
 
+export function initHeroReel() {
+    const frames = document.querySelectorAll('.forge-reel-frame');
+    const chapterNum = document.getElementById('chapterNum');
+    const reelProgress = document.getElementById('reelProgress');
+    if (!frames || frames.length === 0) return;
+
+    let currentFrame = 0;
+    const frameDuration = 5500;
+    let frameTimer = 0;
+    let lastTime = performance.now();
+
+    function showFrame(idx) {
+        frames.forEach((f, i) => f.classList.toggle('active', i === idx));
+        if (chapterNum) chapterNum.textContent = String(idx + 1).padStart(2, '0');
+    }
+
+    function tickReel(now) {
+        const delta = now - lastTime;
+        lastTime = now;
+        frameTimer += delta;
+
+        if (reelProgress) {
+            const progress = Math.min((frameTimer / frameDuration) * 100, 100);
+            reelProgress.style.width = `${progress}%`;
+        }
+
+        if (frameTimer >= frameDuration) {
+            frameTimer = 0;
+            currentFrame = (currentFrame + 1) % frames.length;
+            showFrame(currentFrame);
+        }
+
+        requestAnimationFrame(tickReel);
+    }
+
+    showFrame(0);
+    requestAnimationFrame(tickReel);
+}
+
 export function renderExperience(data) {
     const container = document.getElementById('experience-list');
     if (!container) return;
@@ -180,18 +220,51 @@ export function renderExperience(data) {
     }
     container.innerHTML = '';
     try {
-        data.forEach(item => {
-            const highlights = item.highlights ? item.highlights.map(h => `<li class="mb-2"><i class="fas fa-microchip text-primary me-2"></i> ${h}</li>`).join('') : '';
+        data.forEach((item, idx) => {
+            const highlights = item.highlights ? item.highlights.map(h => `<li class="mb-2 d-flex align-items-start gap-2"><i class="fas fa-check-circle text-primary mt-1 small"></i><span>${h}</span></li>`).join('') : '';
+            const isLatest = idx === 0;
+            const badgeClass = isLatest ? 'bg-primary text-dark' : 'bg-dark text-primary border border-primary border-opacity-30';
+            const badgeLabel = isLatest ? '[ACTIVE_DEPLOYMENT]' : `[MISSION // 0${idx + 1}]`;
+
             container.insertAdjacentHTML('beforeend', `
-              <div class="timeline-item">
+              <div class="timeline-item mb-4">
                 <div class="timeline-dot"></div>
-                <div class="resume-item mb-5">
-                  <div class="resume-content">
-                    <h3 class="mb-1 text-light">${item.title || item.Role}</h3>
-                    <div class="subheading mb-3 text-primary">${item.company || item.Company}</div>
-                    <ul class="list-unstyled text-secondary">${highlights}</ul>
+                <div class="tactical-flip-card" data-idx="${idx}">
+                  <div class="tactical-flip-inner">
+                    <div class="tactical-flip-front p-4">
+                      <div>
+                        <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+                          <span class="badge ${badgeClass} font-mono px-2 py-1">${badgeLabel}</span>
+                          <span class="font-mono text-secondary small">${item.startDate || item.Date}${item.endDate ? ` — ${item.endDate}` : ' — PRESENT'}</span>
+                        </div>
+                        <h3 class="h4 mb-1 text-light fw-bold">${item.title || item.Role}</h3>
+                        <div class="font-mono text-primary mb-3">${item.company || item.Company}</div>
+                        <p class="text-secondary small mb-0">${(item.highlights && item.highlights[0]) || ''}</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center pt-3 mt-3 border-top border-secondary border-opacity-20">
+                        <span class="font-mono small text-secondary"><i class="fas fa-map-marker-alt me-1 text-primary"></i> ${item.location || 'DHAKA, BD'}</span>
+                        <button type="button" class="btn btn-sm btn-outline-primary font-mono flip-btn" onclick="this.closest('.tactical-flip-card').classList.toggle('flipped')">
+                          <i class="fas fa-sync-alt me-1"></i> DECRYPT_INTEL [FLIP]
+                        </button>
+                      </div>
+                    </div>
+                    <div class="tactical-flip-back p-4">
+                      <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-primary border-opacity-20">
+                        <span class="font-mono text-primary small text-uppercase tracking-widest">[MISSION_INTEL // ${item.company || item.Company}]</span>
+                        <button type="button" class="btn btn-sm btn-outline-secondary font-mono flip-back-btn" onclick="this.closest('.tactical-flip-card').classList.toggle('flipped')">
+                          <i class="fas fa-undo me-1"></i> RETURN
+                        </button>
+                      </div>
+                      <h4 class="h6 text-light font-mono mb-3 text-uppercase">Key Operational Impacts:</h4>
+                      <ul class="list-unstyled text-secondary small mb-0 flex-grow-1">
+                        ${highlights}
+                      </ul>
+                      <div class="pt-3 mt-3 border-top border-secondary border-opacity-20 d-flex justify-content-between align-items-center font-mono small text-secondary">
+                        <span>STATUS: VERIFIED</span>
+                        <span class="text-primary">${item.startDate || item.Date} → ${item.endDate || 'NOW'}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="resume-date"><span>${item.startDate || item.Date}${item.endDate ? ` — ${item.endDate}` : ''}</span></div>
                 </div>
               </div>
             `);

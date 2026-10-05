@@ -44,11 +44,10 @@
 
 ### Portfolio Themes & Experiences
 
-Experience the portfolio across multiple tailored designs:
+Experience the portfolio across tailored designs:
 - 💡 [**Lamplight & Signal (Default)**](https://sajid-ul-islam.github.io/) — Cinematic scroll-driven story, WebP frame scrubbing, procedural canvas, and KPI impact dashboard.
 - ✒️ [**Sketchbook Ink**](https://sajid-ul-islam.github.io/theme-sketchbook.html) — Hand-drawn aesthetic with SVG displacement ink filters.
-- ⚡ [**Tactical HUD**](https://sajid-ul-islam.github.io/theme-tactical.html) — Deep dark terminal interface with system telemetry and command palette.
-- 🔥 [**Ironforge Studio**](https://sajid-ul-islam.github.io/theme-ironforge.html) — Bold athletic strength design with interactive reels and 3D card flips.
+- ⚡ [**Tactical Forge**](https://sajid-ul-islam.github.io/theme-tactical.html) — High-energy unified theme merging Tactical HUD and Ironforge Studio with terminal CLI, cyber telemetry HUD, audio engine, hero visual reels, and 3D flip cards.
 - 📄 [**Interactive Resume**](https://sajid-ul-islam.github.io/resume.html) — Clean printable and customizable resume builder.
 
 <br/>
