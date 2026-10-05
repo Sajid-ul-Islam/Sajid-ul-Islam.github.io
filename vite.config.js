@@ -1,9 +1,29 @@
 import { defineConfig } from 'vite';
+import fs from 'node:fs';
+import path from 'node:path';
+
+function copyStaticAssetsPlugin() {
+  return {
+    name: 'copy-static-assets',
+    closeBundle() {
+      const distDir = path.resolve(process.cwd(), 'dist');
+      const itemsToCopy = ['assets', 'img', 'sounds', 'manifest.json', 'sw.js'];
+      for (const item of itemsToCopy) {
+        const srcPath = path.resolve(process.cwd(), item);
+        const destPath = path.resolve(distDir, item);
+        if (fs.existsSync(srcPath)) {
+          fs.cpSync(srcPath, destPath, { recursive: true, force: true });
+        }
+      }
+    }
+  };
+}
 
 export default defineConfig({
   root: '.',
   publicDir: false,
   plugins: [
+    copyStaticAssetsPlugin(),
     {
       name: 'disable-stdin-shortcuts',
       configureServer(server) {
@@ -28,6 +48,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        themeLamplight: 'theme-lamplight.html',
         themeTactical: 'theme-tactical.html',
         themeIronforge: 'theme-ironforge.html',
         themeSketchbook: 'theme-sketchbook.html',

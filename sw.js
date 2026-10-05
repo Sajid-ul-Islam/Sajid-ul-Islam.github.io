@@ -3,7 +3,7 @@
  * PWA Support for offline functionality with Network-First strategy for updates
  */
 
-const CACHE_NAME = 'tactical-intel-v5';
+const CACHE_NAME = 'tactical-intel-v7';
 
 // Only cache HTML entry points and the manifest.
 // Vite-bundled CSS/JS live under dist/assets/ with content-hashed filenames,
@@ -11,6 +11,7 @@ const CACHE_NAME = 'tactical-intel-v5';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
+    '/theme-lamplight.html',
     '/theme-sketchbook.html',
     '/theme-tactical.html',
     '/theme-ironforge.html',

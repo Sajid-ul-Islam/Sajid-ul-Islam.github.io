@@ -9,10 +9,10 @@ This approach guarantees that:
 
 ## Core Theming Components
 
-### 1. The Theme Router (`index.html`)
-- `index.html` is now a lightweight gateway page.
-- On load, it instantly detects the user's active theme in `localStorage` (defaulting to `theme-sketchbook.html`) and redirects them using `window.location.replace()`.
-- This ensures direct entries to the site always land on the user's preferred layout.
+### 1. Default Primary Theme (`index.html`)
+- `index.html` directly serves the primary **Lamplight & Signal** cinematic theme with zero redirect delays, full SEO metadata, and instant rendering.
+- `theme-lamplight.html` is maintained as a seamless entry point and alias.
+- Users can switch to any other theme (Tactical HUD, Sketchbook Ink, Ironforge Studio) at any time via the persistent Theme Switcher header menu.
 
 ### 2. Unified Global Data (`js/data/index.js`)
 - Exposes `window.PortfolioData` as the single source of truth for the entire portfolio.
@@ -25,6 +25,7 @@ This approach guarantees that:
 - Any theme (present or future) can link this file, provide selector references and theme toggling callbacks, and get the beautiful teardrop light/dark mode transition out-of-the-box.
 
 ## Current Themes
+- **Lamplight & Signal** (`theme-lamplight.html`): Cinematic scroll-driven story with WebP scrubbed image sequences, procedural canvas motes/bars, live KPI impact dashboard, and case files.
 - **Sketchbook Ink** (`theme-sketchbook.html`): High-aesthetic hand-drawn sketch dashboard built using Tailwind and SVG filters.
 - **Tactical HUD** (`theme-tactical.html`): Dark terminal hacker grid style built with Bootstrap and canvas telemetry.
 - **Ironforge Studio** (`theme-ironforge.html`): Premium athletic strength style with card flipping, custom reels, and bold headers.

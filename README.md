@@ -13,8 +13,9 @@
 ---
 
 <p align="center">
-  <b>Data & Business Analyst</b> turning complex datasets into strategic growth.<br/>
-  DataOps Lead at <b>DEEN Commerce</b> &middot; Ex-<b>Daraz (Alibaba Group)</b>
+  <b>Co-Founder @ CybrCraft &middot; Forward Deployed Engineer</b><br/>
+  Turning ambiguous requirements into shipped software &middot; Modern Web, Cloud &amp; AI Solutions<br/>
+  Co-Founder at <a href="https://cybrcraft.com/"><b>CybrCraft</b></a> &middot; Ex-<b>DEEN Commerce</b> &middot; Ex-<b>Daraz (Alibaba Group)</b>
 </p>
 
 <br/>
@@ -36,6 +37,19 @@
     <img src="https://img.shields.io/badge/Resume-DA552F?style=for-the-badge&logo=readme&logoColor=white" />
   </a>
 </p>
+
+<br/>
+
+---
+
+### Portfolio Themes & Experiences
+
+Experience the portfolio across multiple tailored designs:
+- 💡 [**Lamplight & Signal (Default)**](https://sajid-ul-islam.github.io/) — Cinematic scroll-driven story, WebP frame scrubbing, procedural canvas, and KPI impact dashboard.
+- ✒️ [**Sketchbook Ink**](https://sajid-ul-islam.github.io/theme-sketchbook.html) — Hand-drawn aesthetic with SVG displacement ink filters.
+- ⚡ [**Tactical HUD**](https://sajid-ul-islam.github.io/theme-tactical.html) — Deep dark terminal interface with system telemetry and command palette.
+- 🔥 [**Ironforge Studio**](https://sajid-ul-islam.github.io/theme-ironforge.html) — Bold athletic strength design with interactive reels and 3D card flips.
+- 📄 [**Interactive Resume**](https://sajid-ul-islam.github.io/resume.html) — Clean printable and customizable resume builder.
 
 <br/>
 
@@ -80,36 +94,46 @@
 <table>
   <tr>
     <td width="50%">
-      <h3>📺 Deakho — Live TV & Entertainment Platform</h3>
-      <p>A modern Live TV & Entertainment streaming platform with a Telegram Mini App for channel browsing, scheduling, and notifications.</p>
+      <h3>📱 DEEN Mobile App — Cross-Platform E-Commerce</h3>
+      <p>Full-featured cross-platform mobile e-commerce application for iOS and Android with catalog browsing, cart, checkout, order tracking, and push notifications.</p>
       <p>
-        <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" />
+        <img src="https://img.shields.io/badge/React%20Native-61DAFB?style=flat-square&logo=react&logoColor=black" />
         <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" />
-        <img src="https://img.shields.io/badge/Telegram-26A5E4?style=flat-square&logo=telegram&logoColor=white" />
-        <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
+        <img src="https://img.shields.io/badge/Mobile%20E--Commerce-2563EB?style=flat-square" />
       </p>
-      <a href="https://deakho.vercel.app/">Web App</a> &bull; <a href="https://t.me/deakhoBot">Telegram Bot (@deakhoBot)</a> &bull; <a href="https://github.com/Sajid-ul-Islam/Deakho">GitHub Repo</a>
+      <a href="https://github.com/Sajid-ul-Islam/Cross_Ecom_Apps">GitHub Repo (Cross_Ecom_Apps)</a>
     </td>
     <td width="50%">
-      <h3>⚡ DESCO Electricity Usage Assistant Bot</h3>
-      <p>Interactive Telegram chatbot for DESCO electricity subscribers to track electricity usage, account details, and billing intel.</p>
+      <h3>⚡ DEEN Mobile App Lite — Capacitor Native</h3>
+      <p>High-speed, lightweight Capacitor-powered mobile application designed for instant loading, minimal battery/memory footprint, and optimized device distribution.</p>
+      <p>
+        <img src="https://img.shields.io/badge/Capacitor-119EFF?style=flat-square&logo=capacitor&logoColor=white" />
+        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" />
+        <img src="https://img.shields.io/badge/PWA-5A0FC8?style=flat-square&logo=pwa&logoColor=white" />
+      </p>
+      <a href="https://github.com/Sajid-ul-Islam/deen-cap-app">GitHub Repo (deen-cap-app)</a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>📊 DEEN BI Intel & Ops Automation</h3>
+      <p>Executive business intelligence suite and automated operational pipelines: weekly reporting (−40% overhead) and CRM retention models (+15% repeat purchases).</p>
       <p>
         <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-        <img src="https://img.shields.io/badge/Telegram-26A5E4?style=flat-square&logo=telegram&logoColor=white" />
-        <img src="https://img.shields.io/badge/Chatbot-059669?style=flat-square" />
+        <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white" />
+        <img src="https://img.shields.io/badge/BI%20Automation-059669?style=flat-square" />
       </p>
-      <a href="https://t.me/descoTGbot">Bot (@descoTGbot)</a> &bull; <a href="https://github.com/Sajid-ul-Islam/descoiunfobot">GitHub Repo</a>
+      <span>Operational Intelligence & Telemetry</span>
     </td>
     <td width="50%">
-      <h3>🛒 DEEN Commerce Telegram Bot</h3>
-      <p>Automated WooCommerce Telegram bot integration for real-time order alerts, store notifications, and workflow automation.</p>
+      <h3>🎓 Thriving Skills Mobile App — Learning Platform</h3>
+      <p>Dedicated mobile e-learning application empowering learners with on-the-go course discovery, interactive skill training modules, and progress tracking.</p>
       <p>
-        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-        <img src="https://img.shields.io/badge/Telegram-26A5E4?style=flat-square&logo=telegram&logoColor=white" />
-        <img src="https://img.shields.io/badge/WooCommerce-96588A?style=flat-square&logo=woocommerce&logoColor=white" />
+        <img src="https://img.shields.io/badge/Mobile%20App-10B981?style=flat-square" />
+        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" />
+        <img src="https://img.shields.io/badge/EdTech-6366F1?style=flat-square" />
       </p>
-      <a href="https://github.com/Sajid-ul-Islam/woocom_telegram_bot">GitHub Repo</a>
+      <a href="https://github.com/Sajid-ul-Islam/thrivingskill.app">GitHub Repo (thrivingskill.app)</a>
     </td>
   </tr>
   <tr>
@@ -143,6 +167,7 @@
 ### Experience
 
 ```
+Co-Founder            @ CybrCraft             (2026 - Present)
 Business Analyst      @ DEEN Commerce         (Jun 2025 - Present)
 Co-Founder            @ Gear Master           (Jun 2024 - Present)
 IT Executive          @ NZ TEX GROUP          (Feb 2024 - May 2024)

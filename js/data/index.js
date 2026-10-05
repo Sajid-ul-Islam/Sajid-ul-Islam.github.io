@@ -7,8 +7,8 @@
 // ===== PROFILE INFO =====
 export const PROFILE_INFO = {
   name: 'Sajid Islam',
-  role: 'Product & Data Professional',
-  heroText: 'A Product & Data professional with a background in Computer Science, passionate about building products, automating workflows, and solving business problems with technology. Specializing in Data Analytics, AI/ML, and Process Automation.',
+  role: 'Co-Founder at CybrCraft & Forward Deployed Engineer',
+  heroText: 'Co-Founder at CybrCraft. Turning ambiguous requirements into shipped software: modern web architectures, cloud infrastructure, AI solutions, and automated business workflows.',
   photo: 'img/profile.jpg',
   email: 'sajid.islam.chowdhury@gmail.com',
   whatsapp: '+880 182 452 6054',
@@ -54,19 +54,36 @@ export const EDUCATION = [
 // ===== EXPERIENCES =====
 export const EXPERIENCES = [
   {
+    id: 'cybrcraft',
+    title: 'Co-Founder',
+    company: 'CybrCraft',
+    url: 'https://cybrcraft.com/',
+    location: 'Dhaka, BD / Remote',
+    startDate: '2026',
+    current: true,
+    description: 'Co-founded CybrCraft to deliver high-performance web applications, cloud infrastructure, AI-powered automation, and digital craftsmanship for high-growth businesses.',
+    highlights: [
+      'Co-founded digital engineering and technology agency specializing in modern web, AI, and scalable cloud solutions',
+      'Architecting resilient web platforms, bespoke client digital experiences, and automated business workflows',
+      'Directing product roadmap, engineering standards, technical client delivery, and strategic growth'
+    ],
+    technologies: ['Web Engineering', 'Cloud & DevOps', 'AI Solutions', 'System Architecture', 'Product Strategy']
+  },
+  {
     id: 'deencommerce',
-    title: 'Business Analyst',
+    title: 'Business Analyst & Product Engineer',
     company: 'Deen Commerce',
     location: 'Mirpur, Dhaka',
     startDate: 'June 2025',
     current: true,
-    description: 'Leading Business Strategy and CRM growth through granular performance tracking. Architecting weekly performance dashboards.',
+    description: 'Leading product engineering, cross-platform mobile apps, and business analytics. Architected the DEEN Mobile App, lightweight DEEN Mobile App Lite, and DEEN BI Intel & Ops Automation suite.',
     highlights: [
-      'CRM Improvisation',
-      'Business Strategy',
-      'Architecting weekly performance dashboards for stakeholder reporting'
+      'Architected & shipped DEEN Mobile App (https://github.com/Sajid-ul-Islam/Cross_Ecom_Apps) — full-stack cross-platform e-commerce app with catalog, cart, checkout, and push notifications',
+      'Built DEEN Mobile App Lite (https://github.com/Sajid-ul-Islam/deen-cap-app) using Capacitor for instant loading and minimal resource consumption',
+      'Engineered DEEN BI Intel & Ops Automation — weekly executive KPI dashboards and automated exception reporting pipelines that slashed reporting overhead by 40%',
+      'CRM Improvisation & Retention Strategy — lifted repeat purchases by +15% through data-driven re-engagement campaigns'
     ],
-    technologies: ['CRM', 'Business Analysis', 'Strategy']
+    technologies: ['React Native', 'Cross-Platform Mobile', 'Capacitor', 'Python', 'BI Dashboards', 'CRM', 'Process Automation']
   },
   {
     id: 'gearmaster',
@@ -103,13 +120,13 @@ export const EXPERIENCES = [
     location: 'Gulshan, Dhaka',
     startDate: 'Oct 2023',
     endDate: 'Jan 2024',
-    description: 'Conducted business and marketplace analysis; executed targeted sales strategies to increase customer loyalty and engagement.',
+    description: 'Spearheaded development of the Thriving Skills Mobile App and drove data-driven sales strategies to scale learner acquisition and retention.',
     highlights: [
-      'Conducted comprehensive business and marketplace analysis, identifying opportunities that increased sales',
-      'Designed and executed targeted sales strategies, resulting in a significant increase in customer loyalty and engagement',
-      'Managed CRM systems to improve customer retention'
+      'Engineered the Thriving Skills Mobile App (https://github.com/Sajid-ul-Islam/thrivingskill.app) to expand e-learning course discovery and mobile learner engagement',
+      'Conducted comprehensive business and marketplace analysis, identifying high-demand curriculum opportunities that increased sales',
+      'Designed and executed targeted sales strategies and CRM retention workflows, improving learner lifetime engagement'
     ],
-    technologies: ['Market Analysis', 'CRM', 'Sales Strategy']
+    technologies: ['Mobile App', 'JavaScript', 'Market Analysis', 'CRM', 'Sales Strategy', 'E-Learning']
   },
   {
     id: 'daraz',
@@ -146,78 +163,108 @@ export const EXPERIENCES = [
 // ===== PROJECTS =====
 export const PROJECTS = [
   {
-    id: 'deakho',
-    title: 'Deakho — Live TV & Entertainment Platform',
-    description: 'A modern Live TV & Entertainment streaming platform featuring a Telegram Mini App for channel browsing, scheduling, and notifications. Built with React, TypeScript, and Node.js.',
+    id: 'deen-mobile-app',
+    title: 'DEEN Mobile App — Cross-Platform E-Commerce',
+    description: 'Full-featured cross-platform mobile e-commerce application engineered for iOS and Android. Features complete catalog browsing, search & filter, cart, checkout, order tracking, and push notifications.',
+    company: 'DEEN Commerce',
     image: '/img/projects/streamlit-hub.png',
-    liveUrl: 'https://deakho.vercel.app/',
-    telegramUrl: 'https://t.me/deakhoBot',
-    githubUrl: 'https://github.com/Sajid-ul-Islam/Deakho',
+    liveUrl: 'https://github.com/Sajid-ul-Islam/Cross_Ecom_Apps',
+    githubUrl: 'https://github.com/Sajid-ul-Islam/Cross_Ecom_Apps',
     featured: true,
-    technologies: ['React', 'TypeScript', 'Node.js', 'Telegram Mini App', 'Vercel'],
+    technologies: ['React Native', 'Cross-Platform Mobile', 'TypeScript', 'E-Commerce', 'REST API'],
     category: 'web-app',
     caseStudy: {
-      role: 'Full-Stack Developer & Architect',
+      role: 'Lead Mobile Architect & Developer',
       timeline: '2025',
-      problem: 'Users needed a seamless way to browse live TV channels, schedules, and receive notifications — all within their messaging platform.',
-      solution: 'Built a cross-platform live TV & entertainment platform with a Telegram Mini App frontend, enabling channel discovery, scheduling, and real-time notifications.',
+      company: 'DEEN Commerce',
+      problem: 'DEEN Commerce needed a unified, high-performing mobile shopping experience across both Android and iOS devices to improve mobile conversions.',
+      solution: 'Architected and built a cross-platform mobile e-commerce application with intuitive catalog navigation, resilient state management, and real-time order lifecycle tracking.',
       impact: [
-        'Provided instant access to live TV channels via Telegram.',
-        'Delivered an intuitive Mini App interface for browsing and scheduling.'
+        'Delivered complete cross-platform mobile e-commerce experience for Android & iOS.',
+        'Streamlined customer checkout flow with secure order placement and order history.'
       ],
       metrics: [
-        { label: 'Platform', value: 'Web + Telegram' },
-        { label: 'Tech Stack', value: 'React / TypeScript / Node.js' }
+        { label: 'Platform', value: 'Android & iOS' },
+        { label: 'Repository', value: 'Cross_Ecom_Apps' }
       ]
     }
   },
   {
-    id: 'desco-bot',
-    title: 'DESCO Electricity Usage Assistant Bot',
-    description: 'An interactive Telegram chatbot assistant engineered for DESCO electricity subscribers to track, monitor, and query electricity usage, account details, and billing intel.',
+    id: 'deen-mobile-app-lite',
+    title: 'DEEN Mobile App Lite — Capacitor Native Runtime',
+    description: 'High-speed, lightweight Capacitor-powered mobile application designed for instant load times, minimal memory consumption, and smooth distribution across modern mobile devices.',
+    company: 'DEEN Commerce',
     image: '/img/projects/streamlit-hub.png',
-    liveUrl: 'https://t.me/descoTGbot',
-    githubUrl: 'https://github.com/Sajid-ul-Islam/descoiunfobot',
+    liveUrl: 'https://github.com/Sajid-ul-Islam/deen-cap-app',
+    githubUrl: 'https://github.com/Sajid-ul-Islam/deen-cap-app',
     featured: true,
-    technologies: ['Python', 'Telegram API', 'Automation', 'Chatbot'],
-    category: 'automation',
+    technologies: ['Capacitor', 'JavaScript', 'Mobile PWA', 'HTML5/CSS3', 'E-Commerce'],
+    category: 'web-app',
     caseStudy: {
-      role: 'Developer & Architect',
+      role: 'Mobile Engineer & Performance Specialist',
       timeline: '2025',
-      problem: 'DESCO electricity subscribers required a fast, automated interface to check real-time electricity usage and account info.',
-      solution: 'Engineered an interactive Telegram chatbot (@descoTGbot) providing automated electricity usage queries and utility assistance.',
+      company: 'DEEN Commerce',
+      problem: 'Shoppers on entry-level smartphones and slower mobile networks needed an ultra-lightweight, rapid-loading storefront experience.',
+      solution: 'Engineered DEEN Mobile App Lite using Capacitor, bridging lightweight web assets with native mobile capabilities and instant caching.',
       impact: [
-        'Automated query handling for DESCO electricity account metrics.',
-        'Simplified electricity usage check-ups via instant messaging.'
+        'Slashed app launch latency and reduced memory footprint for budget devices.',
+        'Enabled frictionless browsing and swift purchase flows on constrained networks.'
       ],
       metrics: [
-        { label: 'Bot Handle', value: '@descoTGbot' },
-        { label: 'Tech Stack', value: 'Python / Telegram API' }
+        { label: 'Framework', value: 'Capacitor' },
+        { label: 'Repository', value: 'deen-cap-app' }
       ]
     }
   },
   {
-    id: 'deen-commerce-bot',
-    title: 'DEEN Commerce Telegram Bot',
-    description: 'An automated WooCommerce Telegram bot integration engineered for real-time e-commerce order notifications, store management alerts, and operational workflows.',
+    id: 'deen-bi-intel',
+    title: 'DEEN BI Intel & Ops Automation',
+    description: 'Executive business intelligence suite and automated operational workflow pipelines. Features weekly KPI dashboards, CRM customer retention models, and automated order exception alerts.',
+    company: 'DEEN Commerce',
     image: '/img/projects/streamlit-hub.png',
-    liveUrl: 'https://github.com/Sajid-ul-Islam/woocom_telegram_bot',
-    githubUrl: 'https://github.com/Sajid-ul-Islam/woocom_telegram_bot',
     featured: true,
-    technologies: ['Python', 'Telegram API', 'WooCommerce', 'E-Commerce', 'Automation'],
+    technologies: ['Python', 'SQL', 'Business Intelligence', 'CRM Analytics', 'Automation'],
     category: 'automation',
     caseStudy: {
-      role: 'Developer & Integrator',
+      role: 'DataOps & Automation Architect',
       timeline: '2025',
-      problem: 'E-commerce store operators needed real-time notifications and store status alerts inside daily communication tools.',
-      solution: 'Created a specialized WooCommerce Telegram bot bridging e-commerce store events with instant Telegram notifications.',
+      company: 'DEEN Commerce',
+      problem: 'Operational performance tracking and customer retention analysis required repetitive manual data pulls and disparate reporting.',
+      solution: 'Engineered an end-to-end BI intelligence pipeline and operational notification engine that automatically syncs and visualizes weekly business metrics.',
       impact: [
-        'Streamlined store order tracking and operational alerts.',
-        'Reduced response times for store management events.'
+        'Cut manual weekly reporting overhead by 40%.',
+        'Lifted customer repeat purchase rate by +15% via CRM re-engagement insights.'
       ],
       metrics: [
-        { label: 'Platform', value: 'WooCommerce' },
-        { label: 'Tech Stack', value: 'Python / Telegram API' }
+        { label: 'Reporting Overhead', value: '−40%' },
+        { label: 'Repeat Purchases', value: '+15%' }
+      ]
+    }
+  },
+  {
+    id: 'thriving-skills-app',
+    title: 'Thriving Skills Mobile App — Learning Platform',
+    description: 'Dedicated mobile e-learning application empowering learners with on-the-go course discovery, interactive skill development modules, and structured student progress tracking.',
+    company: 'Thriving Skills',
+    image: '/img/projects/streamlit-hub.png',
+    liveUrl: 'https://github.com/Sajid-ul-Islam/thrivingskill.app',
+    githubUrl: 'https://github.com/Sajid-ul-Islam/thrivingskill.app',
+    featured: true,
+    technologies: ['Mobile App', 'JavaScript', 'E-Learning', 'UI/UX', 'REST API'],
+    category: 'web-app',
+    caseStudy: {
+      role: 'Mobile Developer & Product Associate',
+      timeline: '2023 - 2024',
+      company: 'Thriving Skills',
+      problem: 'Learners needed a dedicated mobile interface to access training courses, track course milestones, and engage with learning content on the go.',
+      solution: 'Developed the Thriving Skills Mobile App, providing a clean mobile learning interface with structured modules and learner profile dashboards.',
+      impact: [
+        'Expanded online training reach to mobile-first students.',
+        'Enhanced student engagement and course completion tracking.'
+      ],
+      metrics: [
+        { label: 'Domain', value: 'EdTech' },
+        { label: 'Repository', value: 'thrivingskill.app' }
       ]
     }
   },
@@ -431,7 +478,7 @@ export const SOCIAL_LINKS = [
 
 // ===== AI BOT LOCAL INTEL =====
 export const LOCAL_INTEL = {
-  profile: `${PROFILE_INFO.name}. ${PROFILE_INFO.role} based in Dhaka. DataOps Lead at DEEN Commerce, ex-Daraz (Alibaba). Expert in strategic growth via BI & ML.`,
+  profile: `${PROFILE_INFO.name}. Co-Founder at CybrCraft & Forward Deployed Engineer based in Dhaka. Co-founder of CybrCraft (https://cybrcraft.com/ - modern web, cloud, and AI solutions agency), ex-DEEN Commerce, ex-Daraz (Alibaba). Expert in modern web architecture, cloud systems, and AI automation.`,
   experience: EXPERIENCES.map(exp => `${exp.title} @ ${exp.company} (${exp.startDate} - ${exp.endDate || 'Present'}) — ${exp.highlights?.[0] || exp.description}`),
   education: EDUCATION.map(edu => `${edu.degree} @ ${edu.institution} (${edu.date})`),
   skills: SKILL_GROUPS.flatMap(g => g.skills.map(s => s.name)).join(', '),

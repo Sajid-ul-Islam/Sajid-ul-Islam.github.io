@@ -35,6 +35,9 @@ export default [
         glitchEffect: 'writable',
         executeCommand: 'writable',
         Chart: 'readonly',
+        gsap: 'readonly',
+        ScrollTrigger: 'readonly',
+        Lenis: 'readonly',
       },
     },
     rules: {

@@ -767,14 +767,17 @@
           </div>
 
         <!-- Theme Switcher Dropdown -->
-        <div class="relative group">
-          <button class="font-heading text-xs tracking-[0.2em] uppercase text-[var(--fg)] border border-[var(--accent)] px-4 py-2 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors flex items-center gap-2">
+        <div class="relative group" id="forgeThemeWrapper">
+          <button id="forgeThemeBtn" type="button" aria-expanded="false"
+            class="font-heading text-xs tracking-[0.2em] uppercase text-[var(--fg)] border border-[var(--accent)] px-4 py-2 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors flex items-center gap-2">
             <i class="fas fa-layer-group"></i> THEMES
           </button>
-          <div class="absolute right-0 mt-2 w-48 bg-[var(--bg-card)] border border-[var(--accent)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg">
-            <a href="theme-tactical.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-terminal w-5"></i> Tactical HUD</a>
-            <a href="theme-ironforge.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-fire w-5"></i> Ironforge Studio</a>
-            <a href="theme-sketchbook.html" class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
+          <div id="forgeThemeDropdown"
+            class="absolute right-0 mt-2 w-48 bg-[var(--bg-card)] border border-[var(--accent)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+            <a href="index.html" class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-lightbulb w-5"></i> Lamplight &amp; Signal (Default)</a>
+            <a href="theme-tactical.html" class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-terminal w-5"></i> Tactical HUD</a>
+            <a href="theme-ironforge.html" class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-fire w-5"></i> Ironforge Studio</a>
+            <a href="theme-sketchbook.html" class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)]"><i class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
           </div>
         </div>
       </div>
@@ -1285,8 +1288,37 @@
     import { initAccentSwitcher } from './js/theme-accent.js';
     import { initAiChat, handleSuggestion } from './js/ai-bot.js';
     window.handleSuggestion = handleSuggestion;
-    // --- Lifecycle and Tracking ---
     localStorage.setItem('portfolio-active-theme', 'theme-ironforge.html');
+
+    // Theme Switcher dropdown toggle & persistence
+    const forgeThemeBtn = document.getElementById('forgeThemeBtn');
+    const forgeThemeDropdown = document.getElementById('forgeThemeDropdown');
+    const forgeThemeWrapper = document.getElementById('forgeThemeWrapper');
+    if (forgeThemeBtn && forgeThemeDropdown) {
+      forgeThemeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = forgeThemeDropdown.classList.contains('!opacity-100');
+        if (isOpen) {
+          forgeThemeDropdown.classList.remove('!opacity-100', '!visible');
+          forgeThemeBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          forgeThemeDropdown.classList.add('!opacity-100', '!visible');
+          forgeThemeBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      document.addEventListener('click', (e) => {
+        if (!forgeThemeWrapper?.contains(e.target)) {
+          forgeThemeDropdown.classList.remove('!opacity-100', '!visible');
+          forgeThemeBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      forgeThemeDropdown.querySelectorAll('.theme-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          const href = link.getAttribute('href');
+          if (href) localStorage.setItem('portfolio-active-theme', href);
+        });
+      });
+    }
 
     const frames = document.querySelectorAll('.reel-frame');
     const chapterNum = document.getElementById('chapterNum');

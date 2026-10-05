@@ -224,6 +224,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   // Theme management
   localStorage.setItem('portfolio-active-theme', 'theme-tactical.html');
+  document.querySelectorAll('a[href^="theme-"], a[href="index.html"], a[href="/"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href');
+      if (href) localStorage.setItem('portfolio-active-theme', href);
+    });
+  });
   
   const root = document.documentElement;
   

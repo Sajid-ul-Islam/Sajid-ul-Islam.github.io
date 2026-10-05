@@ -846,21 +846,24 @@
         </button>
 
         <!-- Theme Switcher Dropdown -->
-        <div class="relative group">
-          <button
+        <div class="relative group" id="sketchThemeWrapper">
+          <button id="sketchThemeBtn" type="button" aria-expanded="false"
             class="font-mono text-xs tracking-wider uppercase text-[var(--fg)] border border-[var(--ink)] px-4 py-2 hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors flex items-center gap-2 rounded-lg btn-sketch">
             <i class="fas fa-layer-group"></i> THEMES
           </button>
-          <div
-            class="absolute right-0 mt-2 w-48 bg-[var(--bg)] border border-[var(--ink)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg rounded-lg overflow-hidden">
+          <div id="sketchThemeDropdown"
+            class="absolute right-0 mt-2 w-48 bg-[var(--bg)] border border-[var(--ink)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col z-50 shadow-lg rounded-lg overflow-hidden before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3">
+            <a href="index.html"
+              class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+                class="fas fa-lightbulb w-5"></i> Lamplight &amp; Signal (Default)</a>
             <a href="theme-tactical.html"
-              class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+              class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
                 class="fas fa-terminal w-5"></i> Tactical HUD</a>
             <a href="theme-ironforge.html"
-              class="px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+              class="theme-link px-4 py-3 text-xs font-mono text-[var(--fg)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
                 class="fas fa-fire w-5"></i> Ironforge Studio</a>
             <a href="theme-sketchbook.html"
-              class="px-4 py-3 text-xs font-mono text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
+              class="theme-link px-4 py-3 text-xs font-mono text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-colors"><i
                 class="fas fa-pen-nib w-5"></i> Sketchbook Ink</a>
           </div>
         </div>
@@ -1185,6 +1188,36 @@
 
     // Accent color switcher (shared module)
     initAccentSwitcher({ defaultAccent: 'blue' });
+
+    // Theme Switcher dropdown toggle & persistence
+    const sketchThemeBtn = document.getElementById('sketchThemeBtn');
+    const sketchThemeDropdown = document.getElementById('sketchThemeDropdown');
+    const sketchThemeWrapper = document.getElementById('sketchThemeWrapper');
+    if (sketchThemeBtn && sketchThemeDropdown) {
+      sketchThemeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = sketchThemeDropdown.classList.contains('!opacity-100');
+        if (isOpen) {
+          sketchThemeDropdown.classList.remove('!opacity-100', '!visible');
+          sketchThemeBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          sketchThemeDropdown.classList.add('!opacity-100', '!visible');
+          sketchThemeBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      document.addEventListener('click', (e) => {
+        if (!sketchThemeWrapper?.contains(e.target)) {
+          sketchThemeDropdown.classList.remove('!opacity-100', '!visible');
+          sketchThemeBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      sketchThemeDropdown.querySelectorAll('.theme-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          const href = link.getAttribute('href');
+          if (href) localStorage.setItem('portfolio-active-theme', href);
+        });
+      });
+    }
 
     window.initThemeToggleWithRipple({
       buttonId: 'themeToggle',

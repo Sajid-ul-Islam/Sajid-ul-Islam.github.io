@@ -1,11 +1,11 @@
 {
-  "name": "Sajid Islam - Tactical Intel",
-  "short_name": "Tactical Intel",
-  "description": "Data Scientist & Business Analyst Portfolio - Sajid Islam",
+  "name": "Sajid Islam — Forward Deployed Engineer",
+  "short_name": "Sajid Islam",
+  "description": "Portfolio of Sajid Islam — Co-Founder at CybrCraft & Forward Deployed Engineer",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#051410",
-  "theme_color": "#166534",
+  "background_color": "#07090C",
+  "theme_color": "#07090C",
   "orientation": "portrait-primary",
   "scope": "/",
   "icons": [

@@ -29,7 +29,8 @@ This is a high-performance, modular portfolio for a Data Scientist & Business An
 
 ```
 Sajid-ul-Islam.github.io/
-├── index.html                 # Theme Router (gateway / redirect)
+├── index.html                 # Default primary theme (Lamplight & Signal) & site entry point
+├── theme-lamplight.html       # Lamplight & Signal theme entry / alias
 ├── theme-sketchbook.html      # Sketchbook Ink theme (Tailwind)
 ├── theme-tactical.html        # Tactical HUD theme (Bootstrap)
 ├── theme-ironforge.html       # Ironforge Studio theme
@@ -42,6 +43,12 @@ Sajid-ul-Islam.github.io/
 ├── .prettierrc               # Prettier formatting config
 ├── main.js                   # Module load-order documentation
 ├── tsconfig.json             # TypeScript config for JS type checking
+│
+├── assets/                   # High-fidelity media assets
+│   ├── frames/               # WebP scroll-scrubbed sequences (hero, pillars, cta)
+│   ├── img/                  # High-res stills & fallbacks
+│   ├── docs/                 # Downloadable resumes
+│   └── icons/                # Favicon and SVGs
 │
 ├── css/                      # Stylesheets (modular architecture)
 │   ├── color-palette.css     # Shared accent color definitions (20 palettes)
